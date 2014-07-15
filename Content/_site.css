@@ -1,0 +1,41 @@
+﻿body, select, button, input, textarea,
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Microsoft JhengHei','微軟正黑體';
+}
+
+/* ul.ul-padding-vertical-05 */
+ul.ul-padding-vertical-05 {
+    margin: 0.5em 0;
+}
+
+    ul.ul-padding-vertical-05 > li {
+        padding: 0.5em 0;
+    }
+
+/* 手機 */
+@media (max-width: 767px) {
+    .mobile-hide {
+        display: none;
+    }
+
+    blockquote.mobile-no-padding-left {
+        padding-left: 0;
+    }
+}
+
+@media (min-width: 768px) {
+    .mobile-show {
+        display: none;
+    }
+}
+
+/* 這樣的搭配，上下的padding太大了，設成沒有吧 */
+.btn.btn-link {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* 顯示現在時間的div */
+#div-dateNow {
+    float: right;
+}

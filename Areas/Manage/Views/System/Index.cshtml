@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "系統參數";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <script src="/Areas/Manage/Scripts/ctrls/SystemCtrl.js"></script>
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div>
+    <form id="area-form">
+        <div class="form-group">
+            <h2><small><label class="col-sm-2 control-label">區域</label></small></h2>
+            <div class="col-sm-4">
+                <input id="ares" name="ares" class="form-control required" placeholder="區域" required />
+            </div>
+            <button id="btnAddArea" type="button" class="btn btn-primary">新增</button>
+        </div>
+    </form>
+    <div class="form-group">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>序號</th>
+                    <th>帳號</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: areas">
+                <tr>
+                    <td><a href='#' data-bind="click: $root.removeAddress">移除</a></td>
+                    <td><span data-bind="text: Id"></span></td>
+                    <td><span data-bind="text: Word"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

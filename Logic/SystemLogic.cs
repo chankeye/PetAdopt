@@ -56,6 +56,7 @@ namespace PetAdopt.Logic
                 .SingleOrDefault();
             if (area == null)
             {
+                result.IsSuccess = false;
                 result.ErrorMessage = "找不到此區域";
                 return result;
             }
@@ -137,6 +138,7 @@ namespace PetAdopt.Logic
                 .SingleOrDefault();
             if (status == null)
             {
+                result.IsSuccess = false;
                 result.ErrorMessage = "找不到此送養狀態";
                 return result;
             }
@@ -218,6 +220,7 @@ namespace PetAdopt.Logic
                 .SingleOrDefault();
             if (clas == null)
             {
+                result.IsSuccess = false;
                 result.ErrorMessage = "找不到此動物種類";
                 return result;
             }

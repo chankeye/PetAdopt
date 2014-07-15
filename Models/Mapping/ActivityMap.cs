@@ -17,14 +17,12 @@ namespace PetAdopt.Models.Mapping
 
             this.Property(t => t.Message)
                 .IsRequired()
-                .HasMaxLength(500);
+                .HasMaxLength(1000);
 
             this.Property(t => t.Address)
-                .IsRequired()
                 .HasMaxLength(30);
 
             this.Property(t => t.CoverPoto)
-                .IsRequired()
                 .HasMaxLength(100);
 
             // Table & Column Mappings
@@ -38,7 +36,7 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.CoverPoto).HasColumnName("CoverPoto");
 
             // Relationships
-            this.HasRequired(t => t.Area)
+            this.HasOptional(t => t.Area)
                 .WithMany(t => t.Activities)
                 .HasForeignKey(d => d.AreaId);
             this.HasRequired(t => t.OperationInfo)

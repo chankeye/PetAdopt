@@ -32,8 +32,8 @@
                 },
                 success: function (data) {
                     $btn.button("reset");
-                    if (data.isSuccess === false) {
-                        alert(data.errorMessage);
+                    if (data.IsSuccess === false) {
+                        alert(data.ErrorMessage);
                         return;
                     }
                     alert("您的密碼已變更成功，請立即以新密碼重新登入");

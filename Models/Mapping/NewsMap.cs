@@ -17,13 +17,12 @@ namespace PetAdopt.Models.Mapping
 
             this.Property(t => t.Message)
                 .IsRequired()
-                .HasMaxLength(500);
+                .HasMaxLength(1000);
 
             this.Property(t => t.Url)
                 .HasMaxLength(100);
 
             this.Property(t => t.CoverPoto)
-                .IsRequired()
                 .HasMaxLength(100);
 
             // Table & Column Mappings

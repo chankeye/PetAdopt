@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using PetAdopt.Controllers;
+﻿using PetAdopt.Controllers;
 using PetAdopt.Logic;
+using System.Web.Mvc;
 
 namespace PetAdopt.Areas.Manage.Controllers
 {
     [Authorize]
     public class SystemController : _BaseController
     {
-        #region _userLogic
+        #region _systemLogic
         /// <summary>
-        /// UserLogic
+        /// SystemLogic
         /// </summary>
         SystemLogic _systemLogic
         {
@@ -25,9 +21,8 @@ namespace PetAdopt.Areas.Manage.Controllers
             }
         }
         SystemLogic @systemLogic;
-        #endregion //_userLogic
+        #endregion //_systemLogic
 
-        // GET: Manage/Home
         public ActionResult Index()
         {
             return View();

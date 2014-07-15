@@ -52,3 +52,14 @@ C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\PetAdopt\bin\Sy
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\PetAdopt\obj\Debug\PetAdopt.dll
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\PetAdopt\obj\Debug\PetAdopt.pdb
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\NLog.config
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\PetAdopt.dll.config
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\PetAdopt.dll
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\PetAdopt.pdb
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\EntityFramework.xml
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\EntityFramework.SqlServer.xml
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\Newtonsoft.Json.xml
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\NLog.xml
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\obj\Debug\PetAdopt.dll
+C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\obj\Debug\PetAdopt.pdb

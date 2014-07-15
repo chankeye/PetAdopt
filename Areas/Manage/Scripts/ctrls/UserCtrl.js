@@ -5,6 +5,10 @@
 
     self.removeUser = function (user) {
         if (confirm('確定要刪除？')) {
+
+            if (user.IsDisable == true)
+                return;
+
             $.ajax({
                 type: 'post',
                 url: '/Manage/User/DeleteUser',
@@ -14,6 +18,8 @@
                 success: function (data) {
                     if (data.IsSuccess) {
                         self.userlist.remove(user);
+                        user.IsDisable = true;
+                        self.userlist.push(user);
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -46,12 +52,7 @@ $(function () {
             }
 
             $btn.button("loading");
-            var isAdmin;
-            if ($("#isAdmin").checked > 0) {
-                isAdmin = true;
-            } else {
-                isAdmin = false;
-            }
+
             $.ajax({
                 type: 'post',
                 url: '/Manage/User/AddUser',
@@ -60,7 +61,7 @@ $(function () {
                     Display: $("#display").val(),
                     Mobile: $("#mobile").val(),
                     Email: $("#email").val(),
-                    IsAdmin: isAdmin
+                    IsAdmin: $("#checkbox").prop("checked")
                 },
                 success: function (data) {
                     $btn.button("reset");
@@ -70,7 +71,7 @@ $(function () {
                         $("#display").val('');
                         $("#mobile").val('');
                         $("#email").val('');
-                        $("#isAdmin").attr("checked", '');
+                        $("#checkbox").prop("checked", '');
                         alert("新增成功");
                     } else {
                         alert(data.ErrorMessage);
@@ -86,7 +87,7 @@ $(function () {
         $("#display").val('');
         $("#mobile").val('');
         $("#email").val('');
-        $("#isAdmin").attr("checked", '');
+        $("#checkbox").prop("checked", '');
     });
 
     ko.applyBindings(vm);

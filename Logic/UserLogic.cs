@@ -239,7 +239,8 @@ namespace PetAdopt.Logic
             if (Regex.IsMatch(data.Email, Constant.patternEmail) == false)
                 return new IsSuccessResult<UserItem>("請輸入正確的Email");
 
-            var isAny = PetContext.Users.Any(r => r.Account == data.Account);
+            var isAny = PetContext.Users
+                .Any(r => r.Account == data.Account);
             if (isAny)
                 return new IsSuccessResult<UserItem>(string.Format("已經有 {0} 這個帳號了", data.Account));
 

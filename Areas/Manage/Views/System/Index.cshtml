@@ -9,32 +9,87 @@
 <div class="page-header">
     <h2>@ViewBag.Title</h2>
 </div>
+<!--地區-->
 <div>
     <form id="area-form">
-        <div class="form-group">
-            <h2><small><label class="col-sm-2 control-label">區域</label></small></h2>
-            <div class="col-sm-4">
-                <input id="ares" name="ares" class="form-control required" placeholder="區域" required />
-            </div>
-            <button id="btnAddArea" type="button" class="btn btn-primary">新增</button>
+        <h2><small><label class="col-sm-2 control-label">地區</label></small></h2>
+        <div class="col-sm-4">
+            <input id="ares" name="ares" class="form-control required" placeholder="地區(ex:台中市)" required />
         </div>
+        <button id="btnAddArea" type="button" class="btn btn-primary">新增</button>
     </form>
-    <div class="form-group">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>序號</th>
-                    <th>帳號</th>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: areas">
-                <tr>
-                    <td><a href='#' data-bind="click: $root.removeAddress">移除</a></td>
-                    <td><span data-bind="text: Id"></span></td>
-                    <td><span data-bind="text: Word"></span></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序號</th>
+                <th>地區</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: areas">
+            <tr>
+                <td><a href='#' data-bind="click: $root.removeArea">移除</a></td>
+                <td><span data-bind="text: Id"></span></td>
+                <td><span data-bind="text: Word"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr />
+
+<!--狀態-->
+<div>
+    <form id="status-form">
+        <h2><small><label class="col-sm-2 control-label">狀態</label></small></h2>
+        <div class="col-sm-4">
+            <input id="status" name="status" class="form-control required" placeholder="狀態(ex:已送養)" required />
+        </div>
+        <button id="btnAddStatus" type="button" class="btn btn-primary">新增</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序號</th>
+                <th>狀態</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: statuses">
+            <tr>
+                <td><a href='#' data-bind="click: $root.removeStatus">移除</a></td>
+                <td><span data-bind="text: Id"></span></td>
+                <td><span data-bind="text: Word"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr />
+
+<!--動物種類-->
+<div>
+    <form id="class-form">
+        <h2><small><label class="col-sm-2 control-label">種類</label></small></h2>
+        <div class="col-sm-4">
+            <input id="class" name="class" class="form-control required" placeholder="種類(ex:狗)" required />
+        </div>
+        <button id="btnAddClass" type="button" class="btn btn-primary">新增</button>
+    </form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序號</th>
+                <th>種類</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: classes">
+            <tr>
+                <td><a href='#' data-bind="click: $root.removeClass">移除</a></td>
+                <td><span data-bind="text: Id"></span></td>
+                <td><span data-bind="text: Word"></span></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

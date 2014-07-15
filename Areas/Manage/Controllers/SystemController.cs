@@ -53,5 +53,47 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             return Json(result);
         }
+
+        public ActionResult GetStatusList()
+        {
+            var statuses = _systemLogic.GetStatusList();
+
+            return Json(statuses);
+        }
+
+        public ActionResult DeleteStatus(int id)
+        {
+            var result = _systemLogic.DeleteStatus(id);
+
+            return Json(result);
+        }
+
+        public ActionResult AddStatus(string word)
+        {
+            var result = _systemLogic.AddStatus(word);
+
+            return Json(result);
+        }
+
+        public ActionResult GetClassList()
+        {
+            var classes = _systemLogic.GetClassList();
+
+            return Json(classes);
+        }
+
+        public ActionResult DeleteClass(int id)
+        {
+            var result = _systemLogic.DeleteClass(id);
+
+            return Json(result);
+        }
+
+        public ActionResult AddClass(string word)
+        {
+            var result = _systemLogic.AddClass(word);
+
+            return Json(result);
+        }
     }
 }

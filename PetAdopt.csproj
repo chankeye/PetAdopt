@@ -137,7 +137,7 @@
     <Compile Include="DTO\IsSuccessResult.cs" />
     <Compile Include="DTO\LoginInfo.cs" />
     <Compile Include="DTO\Operation.cs" />
-    <Compile Include="DTO\System\LoginInfo.cs" />
+    <Compile Include="DTO\System\SystemInfo.cs" />
     <Compile Include="DTO\UserInfo.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

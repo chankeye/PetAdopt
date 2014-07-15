@@ -15,4 +15,13 @@
         /// </summary>
         public string Account { get; set; }
     }
+
+    public class UserItem
+    {
+        public int Id { get; set; }
+
+        public string Account { get; set; }
+
+        public bool  IsDisable { get; set; }
+    }
 }

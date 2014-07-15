@@ -94,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\UserCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\NewsCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\SystemCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AccountChangePasswordCtrl.js" />
@@ -129,6 +130,7 @@
     <Content Include="Scripts\ckeditor\ckeditor.php" />
     <Content Include="Scripts\ckeditor\ckeditor.pack" />
     <Content Include="Areas\Manage\Views\Activity\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\User\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -481,6 +483,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Manage\Controllers\ActivityController.cs" />
+    <Compile Include="Areas\Manage\Controllers\UserController.cs" />
     <Compile Include="Areas\Manage\Controllers\NewsController.cs" />
     <Compile Include="Areas\Manage\Controllers\SystemController.cs" />
     <Compile Include="Areas\Manage\Controllers\HomeController.cs" />
@@ -496,7 +499,8 @@
     <Compile Include="DTO\News\NewsListInfo.cs" />
     <Compile Include="DTO\Operation.cs" />
     <Compile Include="DTO\System\SystemInfo.cs" />
-    <Compile Include="DTO\UserInfo.cs" />
+    <Compile Include="DTO\User\UserInfo.cs" />
+    <Compile Include="DTO\User\CreateUser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -559,6 +563,7 @@
     <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\Constant.cs" />
     <Compile Include="Utilities\Cryptography.cs" />
   </ItemGroup>
   <ItemGroup>

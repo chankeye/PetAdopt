@@ -1,4 +1,6 @@
-﻿using PetAdopt.DTO;
+﻿using System.Text.RegularExpressions;
+using PetAdopt.DTO;
+using PetAdopt.Models;
 using PetAdopt.Utilities;
 using NLog;
 using System;
@@ -149,6 +151,129 @@ namespace PetAdopt.Logic
             log.Info("使用者帳號\"{0}\"變更密碼成功", user.Account);
 
             return new IsSuccessResult(); ;
+        }
+
+        /// <summary>
+        /// 取得使用者列表
+        /// </summary>
+        /// <returns></returns>
+        public List<UserItem> GetUserList()
+        {
+            var log = GetLogger();
+            log.Debug("GetUserList in");
+
+            var users = PetContext
+                .Users
+                .Select(r => new UserItem
+                {
+                    Id = r.Id,
+                    Account = r.Account,
+                    IsDisable = r.IsDisable
+                })
+                .ToList();
+
+            return users;
+        }
+
+        /// <summary>
+        /// 刪除使用者
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult DeleteUser(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var result = new IsSuccessResult();
+            var user = PetContext
+                .Users
+                .Where(r => r.Id == id)
+                .SingleOrDefault();
+            if (user == null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "找不到此使用者";
+                return result;
+            }
+
+            try
+            {
+                user.IsDisable = true;
+                PetContext.SaveChanges();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                result.IsSuccess = false;
+                result.ErrorMessage = "發生不明錯誤，請稍候再試";
+                return result;
+            }
+        }
+
+        /// <summary>
+        /// 新增使用者
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<UserItem> AddUser(CreateUser data)
+        {
+            var log = GetLogger();
+            log.Debug("account: {0}, display: {1}, mobile:{2}, email:{3}, isAdmin:{4}", data.Account, data.Display, data.Mobile,
+                data.Email, data.IsAdmin);
+
+            if (string.IsNullOrWhiteSpace(data.Account))
+                return new IsSuccessResult<UserItem>("請輸入帳號");
+            data.Account = data.Account.Trim();
+            if (Regex.IsMatch(data.Account, Constant.PatternAccount) == false)
+                return new IsSuccessResult<UserItem>("帳號必須以英文字母開頭，並且只接受英文、數字與底線");
+
+            if (string.IsNullOrWhiteSpace(data.Display))
+                return new IsSuccessResult<UserItem>("請輸入暱稱");
+            data.Display = data.Display.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Email))
+                return new IsSuccessResult<UserItem>("請輸入Email");
+            data.Email = data.Email.Trim();
+
+            if (Regex.IsMatch(data.Email, Constant.patternEmail) == false)
+                return new IsSuccessResult<UserItem>("請輸入正確的Email");
+
+            var isAny = PetContext.Users.Any(r => r.Account == data.Account);
+            if (isAny)
+                return new IsSuccessResult<UserItem>(string.Format("已經有 {0} 這個帳號了", data.Account));
+
+            try
+            {
+                var user = PetContext.Users.Add(new User
+                {
+                    Account = data.Account,
+                    Password = Cryptography.EncryptBySHA1(Constant.DefaultPassword),
+                    Display = data.Display,
+                    Mobile = data.Mobile,
+                    Email = data.Email,
+                    IsAdmin = data.IsAdmin,
+                    Date = DateTime.Now,
+                    IsDisable = false
+                });
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult<UserItem>
+                {
+                    ReturnObject = new UserItem
+                    {
+                        Id = user.Id,
+                        Account = user.Account,
+                        IsDisable = user.IsDisable
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult<UserItem>("發生不明錯誤，請稍候再試");
+            }
         }
     }
 }

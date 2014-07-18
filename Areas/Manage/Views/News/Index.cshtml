@@ -1,6 +1,12 @@
-﻿@{
+﻿@using System.Runtime.InteropServices
+@using MvcFileUploader.HtmlHelper
+@using MvcFileUploader.Models
+@using PetAdopt.Models
+@{
     ViewBag.Title = "最新消息";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_MvcFileUploaderLayout.cshtml";
+
 }
 @section Scripts
 {
@@ -15,6 +21,16 @@
             <i class="fa fa-check"></i>
             新增消息
         </legend>
+        <div class="container">
+            <div class="well">
+                <legend>上傳圖片</legend>
+                <p class="help-block">只限副檔名 jpg / png 最大5 MB, 只能上傳一張圖片</p>
+                <a class="btn btn-large btn-primary" data-target="#dlgFileUpload" data-toggle="modal" href="/MvcFileUpload/UploadDialog?FileTypes=%2F%28%5C.%7C%5C%2F%29%28jpe%3Fg%7Cpng%29%24%2Fi&amp;MaxFileSizeInBytes=5000000&amp;MaxNumberOfFiles=1&amp;DisableImagePreview=False&amp;UploadUrl=%2FMvcUploaderTest%2FUploadFile&amp;UIStyle=Bootstrap&amp;ReturnUrl=%23&amp;RenderSharedScript=True&amp;ShowPopUpClose=True&amp;postValues%5b0%5d.Key=entityId&amp;postValues%5b0%5d.Value=1234" role="button">Upload</a>
+            </div>
+            <!-- file upload modal dialog -->
+            <div class="modal fade" id="dlgFileUpload" tabindex="-1" role="dialog" aria-hidden="true">
+            </div><!-- /.modal -->
+        </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">標題</label>
             <div class="col-sm-4">

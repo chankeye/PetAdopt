@@ -31,6 +31,7 @@
   background: url("../images/loading.gif") center no-repeat;
   background-size: contain;
 }
+
 .files audio,
 .files video {
   max-width: 300px;

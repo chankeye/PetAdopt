@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity.Validation;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Web.Helpers;
 using System.Web.Util;
@@ -52,16 +53,19 @@ namespace PetAdopt.Logic
             log.Debug("id: {0}", id);
 
             var result = new IsSuccessResult();
-            var news = PetContext
-                .News
-                .Where(r => r.Id == id)
-                .SingleOrDefault();
+            var news = PetContext.News.SingleOrDefault(r => r.Id == id);
             if (news == null)
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此消息";
                 return result;
             }
+
+            // 有上傳圖片，就把圖片刪掉
+            //if (string.IsNullOrWhiteSpace(news.CoverPoto) ==false)
+            //{
+            //    File.Delete(Server.MapPath("~/Content/uploads") + "//" + news.CoverPoto);
+            //}
 
             try
             {

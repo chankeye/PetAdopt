@@ -4,9 +4,9 @@ using System.Web.Mvc;
 using MvcFileUploader;
 using MvcFileUploader.Models;
 
-namespace PetAdopt.Areas.Manage.Controllers
+namespace PetAdopt.Controllers
 {
-     public class MvcUploaderTestController : Controller
+    public class MvcUploaderTestController : Controller
     {
         //
         // GET: /MvcUploaderTest/Demo
@@ -16,29 +16,52 @@ namespace PetAdopt.Areas.Manage.Controllers
             return View(inline);
         }
 
-		public ActionResult UploadFile(int? entityId) // optionally receive values specified with Html helper
-        {            
+        public ActionResult UploadFile(int? entityId) // optionally receive values specified with Html helper
+        {
             // here we can send in some extra info to be included with the delete url 
             var statuses = new List<ViewDataUploadFileResult>();
             for (var i = 0; i < Request.Files.Count; i++)
             {
+                // §PÂ_ÀÉ¦W¬O§_­«ÂÐ
+                var path = Server.MapPath("~/Content/uploads");
+                var potoName = Request.Files[i].FileName;
+                var fullpotoPath = path + "\\" + Request.Files[i].FileName;
+
+                if (System.IO.File.Exists(fullpotoPath))
+                {
+                    var my_counter = 2;
+                    string tempfileName = "";
+                    string tempPotoName = "";
+                    while (System.IO.File.Exists(fullpotoPath))
+                    {
+                        tempfileName = path + "\\" + my_counter.ToString() + "_" + potoName;
+                        fullpotoPath = tempfileName;
+                        my_counter = my_counter + 1;
+                        tempPotoName = my_counter.ToString() + "_" + potoName;
+                    }
+                    potoName = tempPotoName;
+                }
+
                 var st = FileSaver.StoreFile(x =>
                 {
                     x.File = Request.Files[i];
                     //note how we are adding an additional value to be posted with delete request
                     //and giving it the same value posted with upload
                     x.DeleteUrl = Url.Action("DeleteFile", new { entityId = entityId });
-                    x.StorageDirectory = Server.MapPath("~/Content/uploads");
+                    x.StorageDirectory = path;
                     x.UrlPrefix = "/Content/uploads";// this is used to generate the relative url of the file
 
 
+
                     //overriding defaults
-                    x.FileName = Request.Files[i].FileName;// default is filename suffixed with filetimestamp
+                    x.FileName = potoName;// default is filename suffixed with filetimestamp
                     x.ThrowExceptions = true;//default is false, if false exception message is set in error property
                 });
 
+                st.Title = potoName;
+                st.name = potoName;
                 statuses.Add(st);
-            }            
+            }
 
             //statuses contains all the uploaded files details (if error occurs then check error property is not null or empty)
             //todo: add additional code to generate thumbnail for videos, associate files with entities etc
@@ -63,10 +86,10 @@ namespace PetAdopt.Areas.Manage.Controllers
                 });
             }
 
-            var viewresult = Json(new {files = statuses});
+            var viewresult = Json(new { files = statuses });
             //for IE8 which does not accept application/json
             if (Request.Headers["Accept"] != null && !Request.Headers["Accept"].Contains("application/json"))
-                viewresult.ContentType = "text/plain";            
+                viewresult.ContentType = "text/plain";
 
             return viewresult;
         }
@@ -87,7 +110,7 @@ namespace PetAdopt.Areas.Manage.Controllers
             var viewresult = Json(new { error = String.Empty });
             //for IE8 which does not accept application/json
             if (Request.Headers["Accept"] != null && !Request.Headers["Accept"].Contains("application/json"))
-                viewresult.ContentType = "text/plain"; 
+                viewresult.ContentType = "text/plain";
 
             return viewresult; // trigger success
         }

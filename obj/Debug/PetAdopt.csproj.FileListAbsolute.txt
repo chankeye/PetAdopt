@@ -56,7 +56,6 @@ C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\NLog.config
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\PetAdopt.dll.config
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\PetAdopt.dll
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\PetAdopt.pdb
-C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\obj\Debug\PetAdopt.dll
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\obj\Debug\PetAdopt.pdb
 C:\Users\chankeye\Documents\Visual Studio 2013\Projects\PetAdopt\bin\MvcFileUploader.dll

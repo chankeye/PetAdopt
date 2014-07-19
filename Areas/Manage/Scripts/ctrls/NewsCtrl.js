@@ -55,6 +55,8 @@ $(function () {
     $("#btn1").click(
         function () {
             var $btn = $("#btn1");
+            var $uploadfile = $(".table-striped .name a");
+            var poto = $uploadfile.text();
 
             if ($("#commentForm").valid() == false) {
                 return;
@@ -77,7 +79,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/News/AddNews',
                 data: {
-                    Poto: '',
+                    Poto: poto,
                     Title: $("#title").val(),
                     Message: oEditor.getData(),
                     Url: $("#source").val(),

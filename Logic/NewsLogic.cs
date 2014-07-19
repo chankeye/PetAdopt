@@ -47,7 +47,7 @@ namespace PetAdopt.Logic
         /// 刪除最新消息
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteNews(int id)
+        public IsSuccessResult DeleteNews(string path,int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
@@ -62,10 +62,10 @@ namespace PetAdopt.Logic
             }
 
             // 有上傳圖片，就把圖片刪掉
-            //if (string.IsNullOrWhiteSpace(news.CoverPoto) ==false)
-            //{
-            //    File.Delete(Server.MapPath("~/Content/uploads") + "//" + news.CoverPoto);
-            //}
+            if (string.IsNullOrWhiteSpace(news.CoverPoto) ==false)
+            {
+                File.Delete(path + "//" + news.CoverPoto);
+            }
 
             try
             {

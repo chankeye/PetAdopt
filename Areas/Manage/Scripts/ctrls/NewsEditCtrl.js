@@ -1,49 +1,29 @@
 ﻿function MyViewModel() {
     var self = this;
 
-    self.newslist = ko.observableArray();
     self.areas = ko.observableArray();
-
-    self.removeNews = function (news) {
-        if (confirm('確定要刪除？')) {
-            $.ajax({
-                type: 'post',
-                url: '/Manage/News/Delete',
-                data: {
-                    id: news.Id,
-                },
-                success: function (data) {
-                    if (data.IsSuccess) {
-                        self.newslist.remove(news);
-                    } else {
-                        alert(data.ErrorMessage);
-                    }
-                }
-            });
-        }
-    }
-
-    self.editNews = function (news) {
-        $.ajax({
-            type: 'get',
-            url: '/Manage/News/Edit',
-            data: {
-                id: news.Id
-            }
-        });
-    }
+    self.poto = ko.observable();
+    self.title = ko.observable();
+    self.message = ko.observable();
+    self.areaId = ko.observable();
+    self.url = ko.observable();
 };
 
 $(function () {
 
     var vm = new MyViewModel();
 
-    // 取得消息列表
+    // 取得最新消息
     $.ajax({
         type: 'post',
-        url: '/Manage/News/GetNewsList',
+        url: '/Manage/News/EditInit',
         success: function (data) {
-            vm.newslist(data);
+            if (data.IsSuccess) {
+                vm.poto
+            } else {
+                alert(data.ErrorMessage);
+            }
+
         }
     });
 
@@ -115,10 +95,7 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        $("#title").val('');
-        CKEDITOR.instances.content.setData('');
-        $("#source").val('');
-        $("#selOptions option:first").attr("selected", true);
+        window.location = '/Manage/News/Index';
     });
 
     ko.applyBindings(vm);

@@ -47,7 +47,7 @@ namespace PetAdopt.Logic
         /// 刪除最新消息
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteNews(string path,int id)
+        public IsSuccessResult DeleteNews(string path, int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
@@ -62,7 +62,7 @@ namespace PetAdopt.Logic
             }
 
             // 有上傳圖片，就把圖片刪掉
-            if (string.IsNullOrWhiteSpace(news.CoverPoto) ==false)
+            if (string.IsNullOrWhiteSpace(news.CoverPoto) == false)
             {
                 File.Delete(path + "//" + news.CoverPoto);
             }
@@ -81,6 +81,32 @@ namespace PetAdopt.Logic
                 result.ErrorMessage = "發生不明錯誤，請稍候再試";
                 return result;
             }
+        }
+
+        /// <summary>
+        /// 取得最新消息
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<CreateNews> GetNews(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var news = PetContext.News.SingleOrDefault(r => r.Id == id);
+            if (news == null)
+                return new IsSuccessResult<CreateNews>("找不到此消息");
+
+            return new IsSuccessResult<CreateNews>
+            {
+                ReturnObject = new CreateNews
+                {
+                    Poto = news.CoverPoto,
+                    Title = news.Title,
+                    Message = news.Message,
+                    AreaId = news.AreaId,
+                    Url = news.Url
+                }
+            };
         }
 
         /// <summary>

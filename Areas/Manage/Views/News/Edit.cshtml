@@ -3,14 +3,13 @@
 @using MvcFileUploader.Models
 @using PetAdopt.Models
 @{
-    ViewBag.Title = "最新消息";
+    ViewBag.Title = "修改最新消息";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
-    //Layout = "~/Views/Shared/_MvcFileUploaderLayout.cshtml";
 
 }
 @section Scripts
 {
-    <script src="/Areas/Manage/Scripts/ctrls/NewsCtrl.js"></script>
+    <script src="/Areas/Manage/Scripts/ctrls/NewsEditCtrl.js"></script>
 }
 <div class="page-header">
     <h2>@ViewBag.Title</h2>
@@ -58,33 +57,9 @@
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
-                <button id="btn2" type="button" class="btn btn-default">清除</button>
+                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">修改</button>
+                <button id="btn2" type="button" class="btn btn-default">取消</button>
             </div>
         </div>
     </form>
-
-    <hr />
-
-    <legend class="text-info">
-        <i class="fa fa-check"></i>
-        消息管理
-    </legend>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th></th>
-                <th>序號</th>
-                <th>標題</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: newslist">
-            <tr>
-                <td><a href='#' data-bind="click: $root.removeNews">移除</a></td>
-                <td><a href='#' data-bind="click: $root.editNews">編輯</a></td>
-                <td><span data-bind="text: Id"></span></td>
-                <td><span data-bind="text: Title"></span></td>
-            </tr>
-        </tbody>
-    </table>
 </div>

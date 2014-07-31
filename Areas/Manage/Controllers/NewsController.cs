@@ -36,9 +36,23 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(newslist);
         }
 
-        public ActionResult DeleteNews(int id)
+        public ActionResult Delete(int id)
         {
             var result = _newsLogic.DeleteNews(Server.MapPath("~/Content/uploads"),id);
+
+            return Json(result);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            ViewBag.Id = id;
+
+            return View();
+        }
+
+        public ActionResult EditInit()
+        {
+            var result = _newsLogic.GetNews(ViewBag.Id);
 
             return Json(result);
         }

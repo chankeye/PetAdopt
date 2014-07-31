@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\NewsEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\UserCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\NewsCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\SystemCtrl.js" />
@@ -210,6 +211,7 @@
     <Content Include="Content\mvcfileupload\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\mvcfileupload\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\mvcfileupload\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Manage\Views\News\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />

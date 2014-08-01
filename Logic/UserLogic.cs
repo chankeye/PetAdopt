@@ -236,7 +236,7 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult<UserItem>("請輸入Email");
             data.Email = data.Email.Trim();
 
-            if (Regex.IsMatch(data.Email, Constant.patternEmail) == false)
+            if (Regex.IsMatch(data.Email, Constant.PatternEmail) == false)
                 return new IsSuccessResult<UserItem>("請輸入正確的Email");
 
             var isAny = PetContext.Users

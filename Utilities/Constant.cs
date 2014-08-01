@@ -12,6 +12,8 @@
         /// </summary>
         public const string PatternAccount = @"^[A-Za-z]{1}\w{1,}$";
 
-        public const string patternEmail = @"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$";
+        public const string PatternEmail = @"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$";
+
+        public const string PatternUrl = @"^http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?$";
     }
 }

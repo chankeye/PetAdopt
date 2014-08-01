@@ -135,8 +135,7 @@ namespace PetAdopt.Logic
             {
                 data.Url = data.Url.Trim();
 
-                var pattern = @"^http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?$";
-                if (Regex.IsMatch(data.Url, pattern) == false)
+                if (Regex.IsMatch(data.Url, Constant.PatternEmail) == false)
                     return new IsSuccessResult<NewsItem>("資料來源請輸入正確網址");
             }
 
@@ -182,6 +181,77 @@ namespace PetAdopt.Logic
                 log.Error(ex);
 
                 return new IsSuccessResult<NewsItem>("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        /// <summary>
+        /// 修改最新消息
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult EditNews(int id, CreateNews data)
+        {
+            var log = GetLogger();
+            log.Debug("poto: {0}, title: {1}, message:{2}, areaId:{3}, url:{4}, id:{5}", data.Poto, data.Title, data.Message,
+                data.AreaId, data.Url, id);
+
+            var news = PetContext.News.SingleOrDefault(r => r.Id == id);
+            if (news == null)
+                return new IsSuccessResult("找不到此最新消息");
+
+            if (string.IsNullOrWhiteSpace(data.Title))
+                return new IsSuccessResult("標題請勿傳入空值");
+            data.Title = data.Title.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Message))
+                return new IsSuccessResult("內容請勿傳入空值");
+            data.Message = data.Message.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Poto) == false)
+                data.Poto = data.Poto.Trim();
+
+            // Url驗證
+            if (string.IsNullOrWhiteSpace(data.Url) == false)
+            {
+                data.Url = data.Url.Trim();
+
+                if (Regex.IsMatch(data.Url, Constant.PatternEmail) == false)
+                    return new IsSuccessResult("資料來源請輸入正確網址");
+            }
+
+            var isAny = PetContext.News.Any(r => r.Title == data.Title && r.Id != id);
+            if (isAny)
+                return new IsSuccessResult(string.Format("已經有 {0} 這個最新消息了", data.Title));
+
+            if (data.AreaId.HasValue)
+            {
+                var hasArea = PetContext.Areas.Any(r => r.Id == data.AreaId);
+                if (hasArea == false)
+                    return new IsSuccessResult("請選擇正確的地區");
+            }
+
+            if (news.CoverPoto == data.Poto && news.Title == data.Title && news.Message == data.Message &&
+                news.Url == data.Url && news.AreaId == data.AreaId)
+            {
+                return new IsSuccessResult();
+            }
+
+            try
+            {
+                news.CoverPoto = data.Poto;
+                news.Title = data.Title;
+                news.Message = data.Message;
+                news.Url = data.Url;
+                news.AreaId = data.AreaId;
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
     }

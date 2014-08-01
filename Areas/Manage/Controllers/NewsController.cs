@@ -1,4 +1,5 @@
-﻿using PetAdopt.Controllers;
+﻿using System;
+using PetAdopt.Controllers;
 using PetAdopt.DTO;
 using PetAdopt.Logic;
 using System.Web.Mvc;
@@ -43,16 +44,14 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit()
         {
-            ViewBag.Id = id;
-
             return View();
         }
 
-        public ActionResult EditInit()
+        public ActionResult EditInit(int id)
         {
-            var result = _newsLogic.GetNews(ViewBag.Id);
+            var result = _newsLogic.GetNews(id);
 
             return Json(result);
         }
@@ -61,6 +60,14 @@ namespace PetAdopt.Areas.Manage.Controllers
         public ActionResult AddNews(CreateNews data)
         {
             var result = _newsLogic.AddNews(data);
+
+            return Json(result);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult EditNews(int id, CreateNews data)
+        {
+            var result = _newsLogic.EditNews(id, data);
 
             return Json(result);
         }

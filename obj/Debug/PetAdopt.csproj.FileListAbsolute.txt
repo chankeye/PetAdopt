@@ -70,3 +70,12 @@ C:\Users\Chankeye Chen\Documents\GitHub\PetAdopt\bin\MvcFileUploader.pdb
 C:\Users\Chankeye Chen\Documents\GitHub\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
 C:\Users\Chankeye Chen\Documents\GitHub\PetAdopt\obj\Debug\PetAdopt.dll
 C:\Users\Chankeye Chen\Documents\GitHub\PetAdopt\obj\Debug\PetAdopt.pdb
+C:\Users\chankeye\Documents\GitHub\PetAdopt\obj\Debug\PetAdopt.dll
+C:\Users\chankeye\Documents\GitHub\PetAdopt\obj\Debug\PetAdopt.pdb
+C:\Users\chankeye\Documents\GitHub\PetAdopt\bin\NLog.config
+C:\Users\chankeye\Documents\GitHub\PetAdopt\bin\PetAdopt.dll.config
+C:\Users\chankeye\Documents\GitHub\PetAdopt\bin\PetAdopt.dll
+C:\Users\chankeye\Documents\GitHub\PetAdopt\bin\PetAdopt.pdb
+C:\Users\chankeye\Documents\GitHub\PetAdopt\bin\MvcFileUploader.dll
+C:\Users\chankeye\Documents\GitHub\PetAdopt\bin\MvcFileUploader.pdb
+C:\Users\chankeye\Documents\GitHub\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache

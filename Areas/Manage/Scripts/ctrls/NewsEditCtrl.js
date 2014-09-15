@@ -2,11 +2,6 @@
     var self = this;
 
     self.areas = ko.observableArray();
-    //self.poto = ko.observable();
-    //self.title = ko.observable();
-    //self.message = ko.observable();
-    //self.areaId = ko.observable();
-    //self.url = ko.observable();
 };
 
 
@@ -25,6 +20,10 @@ $(function () {
             urlParams[d(e[1])] = d(e[2]);
         }
     })();
+
+    // 沒有輸入id直接導回
+    if (urlParams["id"] == null)
+        window.location = '/Manage/News';
 
     // 取得最新消息
     $.ajax({

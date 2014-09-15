@@ -97,13 +97,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\ActivityEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AskCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\BlogCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\HelpCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\KnowledgeCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\ShelterEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\ShelterCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\NewsEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\UserCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\NewsCtrl.js" />

@@ -25,7 +25,7 @@ $(function () {
     if (urlParams["id"] == null)
         window.location = '/Manage/User';
 
-    // 取得最新消息
+    // 取得使用者
     var account;
     $.ajax({
         type: 'post',

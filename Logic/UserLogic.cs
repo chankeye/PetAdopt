@@ -383,27 +383,5 @@ namespace PetAdopt.Logic
                 PetContext.SaveChanges();
             }
         }
-
-        public void HasAnyUser()
-        {
-            var isAny = PetContext.Users.Any();
-
-            if (isAny == false)
-            {
-                PetContext.Users.Add(new User
-                {
-                    Account = "admin",
-                    Password = Cryptography.EncryptBySHA1(Constant.DefaultPassword),
-                    Display = "管理者",
-                    Mobile = "Mobile",
-                    Email = "Email",
-                    IsAdmin = true,
-                    Date = DateTime.Now,
-                    IsDisable = false
-                });
-
-                PetContext.SaveChanges();
-            }
-        }
     }
 }

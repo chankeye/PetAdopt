@@ -24,14 +24,7 @@
     }
 
     self.editNews = function (news) {
-        window.location = "/Manage/News/Edit?id="+news.Id+"";
-        //$.ajax({
-        //    type: 'get',
-        //    url: '/Manage/News/Edit',
-        //    data: {
-        //        id: news.Id
-        //    }
-        //});
+        window.location = "/Manage/News/Edit?id=" + news.Id;
     }
 };
 

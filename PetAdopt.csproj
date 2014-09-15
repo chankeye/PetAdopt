@@ -97,11 +97,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\ActivityEditCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\AskCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\BlogCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\HelpCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\KnowledgeCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\ShelterEditCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\ShelterCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\NewsEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\UserCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\NewsCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\SystemCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AccountChangePasswordCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\UserEditCtrl.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -212,6 +220,11 @@
     <Content Include="Content\mvcfileupload\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\mvcfileupload\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Areas\Manage\Views\News\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Ask\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Blog\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Help\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Knowledge\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\User\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -579,6 +592,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Manage\Controllers\ActivityController.cs" />
+    <Compile Include="Areas\Manage\Controllers\AskController.cs" />
+    <Compile Include="Areas\Manage\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Manage\Controllers\HelpController.cs" />
+    <Compile Include="Areas\Manage\Controllers\KnowledgeController.cs" />
     <Compile Include="Areas\Manage\Controllers\UserController.cs" />
     <Compile Include="Areas\Manage\Controllers\NewsController.cs" />
     <Compile Include="Areas\Manage\Controllers\SystemController.cs" />
@@ -588,7 +605,11 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
+    <Compile Include="DTO\Ask\AskItem.cs" />
+    <Compile Include="DTO\Blog\BlogItem.cs" />
+    <Compile Include="DTO\Help\HelpItem.cs" />
     <Compile Include="DTO\IsSuccessResult.cs" />
+    <Compile Include="DTO\Knowledge\KnowledgeItem.cs" />
     <Compile Include="DTO\LoginInfo.cs" />
     <Compile Include="DTO\Activity\CreateActivity.cs" />
     <Compile Include="DTO\Activity\ActivitiesInfo.cs" />
@@ -602,6 +623,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Logic\ActivityLogic.cs" />
+    <Compile Include="Logic\AskLogic.cs" />
+    <Compile Include="Logic\BlogLogic.cs" />
+    <Compile Include="Logic\HelpLogic.cs" />
+    <Compile Include="Logic\KnowledgeLogic.cs" />
     <Compile Include="Logic\NewsLogic.cs" />
     <Compile Include="Logic\SystemLogic.cs" />
     <Compile Include="Logic\UserLogic.cs" />
@@ -688,6 +713,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Manage\Views\Animal\" />
     <Folder Include="Content\Views\" />
     <Folder Include="Scripts\ctrls\" />
   </ItemGroup>

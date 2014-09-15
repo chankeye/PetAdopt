@@ -11,7 +11,7 @@
 
             $.ajax({
                 type: 'post',
-                url: '/Manage/User/DeleteUser',
+                url: '/Manage/User/Delete',
                 data: {
                     id: user.Id,
                 },
@@ -27,7 +27,11 @@
             });
         }
     }
-};
+
+    self.editUser = function (user) {
+        window.location = "/Manage/User/Edit?id=" + user.Id;
+    };
+}
 
 $(function () {
 

@@ -176,6 +176,32 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得使用者資訊
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<CreateUser> GetUser(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == id);
+            if (user == null)
+                return new IsSuccessResult<CreateUser>("找不到此使用者");
+
+            return new IsSuccessResult<CreateUser>
+            {
+                ReturnObject = new CreateUser
+                {
+                    Account = user.Account,
+                    Display = user.Display,
+                    Mobile = user.Mobile,
+                    Email = user.Email,
+                    IsAdmin = user.IsAdmin
+                }
+            };
+        }
+
+        /// <summary>
         /// 刪除使用者
         /// </summary>
         /// <returns></returns>
@@ -274,6 +300,87 @@ namespace PetAdopt.Logic
                 log.Error(ex);
 
                 return new IsSuccessResult<UserItem>("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        /// <summary>
+        /// 修改使用者資訊
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult EditUser(int id, CreateUser data)
+        {
+            var log = GetLogger();
+            log.Debug("account: {0}, display: {1}, mobile:{2}, email:{3}, isadmin:{4}, id:{5}",
+                data.Account, data.Display, data.Mobile, data.Email, data.IsAdmin, id);
+
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == id);
+            if (user == null)
+                return new IsSuccessResult("找不到此使用者");
+
+            if (data.Account != user.Account)
+                return new IsSuccessResult("使用者帳號不正確，請稍候再試");
+
+            if (string.IsNullOrWhiteSpace(data.Display))
+                return new IsSuccessResult("請輸入暱稱");
+            data.Display = data.Display.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Email))
+                return new IsSuccessResult<UserItem>("請輸入Email");
+            data.Email = data.Email.Trim();
+
+            if (Regex.IsMatch(data.Email, Constant.PatternEmail) == false)
+                return new IsSuccessResult<UserItem>("請輸入正確的Email");
+
+            if (string.IsNullOrWhiteSpace(data.Mobile) == false)
+                data.Mobile = data.Mobile.Trim();
+
+            if (user.Mobile == data.Mobile && user.Display == data.Display &&
+                user.Email == data.Email && user.IsAdmin == data.IsAdmin)
+            {
+                return new IsSuccessResult();
+            }
+
+            try
+            {
+                user.Display = data.Display;
+                user.Mobile = data.Mobile;
+                user.Email = data.Email;
+                user.IsAdmin = data.IsAdmin;
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        /// <summary>
+        /// 判斷資料庫裡有沒有使用者，沒有就新增一個admin
+        /// </summary>
+        public void HasAnyUser()
+        {
+            var isAny = PetContext.Users.Any();
+
+            if (isAny == false)
+            {
+                PetContext.Users.Add(new User
+                {
+                    Account = "admin",
+                    Password = Cryptography.EncryptBySHA1(Constant.DefaultPassword),
+                    Display = "管理者",
+                    Mobile = "Mobile",
+                    Email = "Email",
+                    IsAdmin = true,
+                    Date = DateTime.Now,
+                    IsDisable = false
+                });
+
+                PetContext.SaveChanges();
             }
         }
 

@@ -36,9 +36,21 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(newslist);
         }
 
-        public ActionResult DeleteUser(int id)
+        public ActionResult Delete(int id)
         {
             var result = _userLogic.DeleteUser(id);
+
+            return Json(result);
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        public ActionResult EditInit(int id)
+        {
+            var result = _userLogic.GetUser(id);
 
             return Json(result);
         }
@@ -46,6 +58,13 @@ namespace PetAdopt.Areas.Manage.Controllers
         public ActionResult AddUser(CreateUser data)
         {
             var result = _userLogic.AddUser(data);
+
+            return Json(result);
+        }
+
+        public ActionResult EditUser(int id, CreateUser data)
+        {
+            var result = _userLogic.EditUser(id, data);
 
             return Json(result);
         }

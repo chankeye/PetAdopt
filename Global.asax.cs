@@ -1,5 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
+using PetAdopt.DTO;
+using PetAdopt.Logic;
 
 namespace PetAdopt
 {
@@ -9,6 +11,7 @@ namespace PetAdopt
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            new UserLogic(new Operation { Display = "_guest" }).HasAnyUser();
         }
     }
 }

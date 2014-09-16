@@ -39,7 +39,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = _newsLogic.DeleteNews(Server.MapPath("~/Content/uploads"),id);
+            var result = _newsLogic.DeleteNews(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }

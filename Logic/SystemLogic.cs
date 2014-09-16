@@ -1,4 +1,5 @@
-﻿using System.Web.Helpers;
+﻿using System.IO;
+using System.Web.Helpers;
 using System.Web.Util;
 using PetAdopt.DTO;
 using PetAdopt.Models;
@@ -263,6 +264,16 @@ namespace PetAdopt.Logic
                     Word = clas.Word
                 }
             };
+        }
+
+        /// <summary>
+        /// 把圖片刪掉
+        /// </summary>
+        /// <param name="path">根目錄</param>
+        /// <param name="photo">圖片名</param>
+        public void DeletePhoto(string path, string photo)
+        {
+            File.Delete(path + "//" + photo);
         }
     }
 }

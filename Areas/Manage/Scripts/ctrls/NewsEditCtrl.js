@@ -73,8 +73,17 @@ $(function () {
         function () {
             var $btn = $("#btn1");
             var $uploadfile = $(".table-striped .name a");
-            if ($uploadfile.text() != "")
+            if ($uploadfile.text() != "") {
+                $.ajax({
+                    type: 'post',
+                    url: '/Manage/System/DeletePhoto',
+                    data: {
+                        Photo: photo
+                    }
+                });
+
                 photo = $uploadfile.text();
+            }
 
             if ($("#commentForm").valid() == false) {
                 return;

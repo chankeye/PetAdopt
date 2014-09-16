@@ -90,5 +90,10 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             return Json(result);
         }
+
+        public void DeletePhoto(string photo)
+        {
+            _systemLogic.DeletePhoto(Server.MapPath("~/Content/uploads"), photo);
+        }
     }
 }

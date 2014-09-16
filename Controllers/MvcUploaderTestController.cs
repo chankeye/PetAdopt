@@ -36,8 +36,9 @@ namespace PetAdopt.Controllers
                     {
                         tempfileName = path + "\\" + my_counter.ToString() + "_" + potoName;
                         fullpotoPath = tempfileName;
-                        my_counter = my_counter + 1;
                         tempPotoName = my_counter.ToString() + "_" + potoName;
+
+                        my_counter = my_counter + 1;
                     }
                     potoName = tempPotoName;
                 }

@@ -7,6 +7,20 @@
 
 $(function () {
 
+    // 取得地區列表
+    $.ajax({
+        type: 'post',
+        url: '/Manage/System/GetAreaList',
+        success: function (area) {
+            vm.areas(area);
+            vm.areas.unshift({
+                "Word": "請選擇",
+                "Id": ""
+            });
+            $("#selOptions option:first").attr("selected", true);
+        }
+    });
+
     var vm = new MyViewModel();
 
     var urlParams = {};
@@ -26,6 +40,7 @@ $(function () {
         window.location = '/Manage/News';
 
     // 取得最新消息
+    var photo;
     $.ajax({
         type: 'post',
         url: '/Manage/News/EditInit',
@@ -34,6 +49,7 @@ $(function () {
         },
         success: function (data) {
             if (data.IsSuccess) {
+                photo = data.ReturnObject.Poto;
                 $("#title").val(data.ReturnObject.Title);
                 $("#selOptions").children().each(function () {
                     if ($(this).val() == data.ReturnObject.AreaId) {
@@ -52,26 +68,13 @@ $(function () {
         }
     });
 
-    // 取得地區列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/System/GetAreaList',
-        success: function (area) {
-            vm.areas(area);
-            vm.areas.unshift({
-                "Word": "請選擇",
-                "Id": ""
-            });
-            $("#selOptions option:first").attr("selected", true);
-        }
-    });
-
     // 修改消息
     $("#btn1").click(
         function () {
             var $btn = $("#btn1");
             var $uploadfile = $(".table-striped .name a");
-            var poto = $uploadfile.text();
+            if ($uploadfile.text() != "")
+                photo = $uploadfile.text();
 
             if ($("#commentForm").valid() == false) {
                 return;
@@ -95,7 +98,7 @@ $(function () {
                 url: '/Manage/News/EditNews',
                 data: {
                     id: urlParams["id"],
-                    Poto: poto,
+                    Poto: photo,
                     Title: $("#title").val(),
                     Message: oEditor.getData(),
                     Url: $("#source").val(),
@@ -110,7 +113,7 @@ $(function () {
                         $("#selOptions option:first").attr("selected", true);
 
                         alert("修改完成");
-                        window.location = '/Manage/News/Index';
+                        window.location = '/Manage/News';
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -121,7 +124,7 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Manage/News/Index';
+        window.location = '/Manage/News';
     });
 
     ko.applyBindings(vm);

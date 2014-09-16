@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System.IO;
+using PetAdopt.DTO;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
@@ -39,21 +40,24 @@ namespace PetAdopt.Logic
         /// 刪除最新活動
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteActivity(int id)
+        public IsSuccessResult DeleteActivity(string path, int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
             var result = new IsSuccessResult();
-            var activitiy = PetContext
-                .Activities
-                .Where(r => r.Id == id)
-                .SingleOrDefault();
+            var activitiy = PetContext.Activities.SingleOrDefault(r => r.Id == id);
             if (activitiy == null)
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此活動";
                 return result;
+            }
+
+            // 有上傳圖片，就把圖片刪掉
+            if (string.IsNullOrWhiteSpace(activitiy.CoverPoto) == false)
+            {
+                File.Delete(path + "//" + activitiy.CoverPoto);
             }
 
             try

@@ -38,7 +38,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = _activityLogic.DeleteActivity(id);
+            var result = _activityLogic.DeleteActivity(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }

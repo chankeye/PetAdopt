@@ -18,7 +18,7 @@ namespace PetAdopt.Models
         public int OperationId { get; set; }
         public string CoverPoto { get; set; }
         public virtual Area Area { get; set; }
-        public virtual ICollection<Activity_Message_Mapping> Activity_Message_Mapping { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
+        public virtual ICollection<Activity_Message_Mapping> Activity_Message_Mapping { get; set; }
     }
 }

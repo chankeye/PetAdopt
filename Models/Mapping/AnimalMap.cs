@@ -12,7 +12,6 @@ namespace PetAdopt.Models.Mapping
 
             // Properties
             this.Property(t => t.CoverPoto)
-                .IsRequired()
                 .HasMaxLength(100);
 
             this.Property(t => t.Name)

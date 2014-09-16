@@ -17,9 +17,9 @@ namespace PetAdopt.Models.Mapping
 
             // Table & Column Mappings
             this.ToTable("sysdiagrams");
+            this.Property(t => t.diagram_id).HasColumnName("diagram_id");
             this.Property(t => t.name).HasColumnName("name");
             this.Property(t => t.principal_id).HasColumnName("principal_id");
-            this.Property(t => t.diagram_id).HasColumnName("diagram_id");
             this.Property(t => t.version).HasColumnName("version");
             this.Property(t => t.definition).HasColumnName("definition");
         }

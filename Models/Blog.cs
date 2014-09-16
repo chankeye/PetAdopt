@@ -18,7 +18,7 @@ namespace PetAdopt.Models
         public short ClassId { get; set; }
         public virtual Animal Animal { get; set; }
         public virtual Class Class { get; set; }
-        public virtual ICollection<Blog_Message_Mapping> Blog_Message_Mapping { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
+        public virtual ICollection<Blog_Message_Mapping> Blog_Message_Mapping { get; set; }
     }
 }

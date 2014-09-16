@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "動物收容所";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <script src="/Areas/Manage/Scripts/ctrls/SheltersCtrl.js"></script>
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div>
+    <legend class="text-info">
+        <i class="fa fa-check"></i>
+        收容所管理
+    </legend>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序號</th>
+                <th>名稱</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: shelterslist">
+            <tr>
+                <td><a href='#' data-bind="click: $root.removeShelters">移除</a></td>
+                <td><span data-bind="text: Id"></span></td>
+                <td><span data-bind="text: Name"></span></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

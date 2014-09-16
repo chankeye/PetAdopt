@@ -8,7 +8,7 @@ namespace PetAdopt.Areas.Manage.Controllers
     [Authorize]
     public class HelpController : _BaseController
     {
-        #region _activityLogic
+        #region _helpLogic
         /// <summary>
         /// HelpLogic
         /// </summary>
@@ -31,9 +31,9 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetHelpList()
         {
-            var newslist = _helpLogic.GetHelpList();
+            var helplist = _helpLogic.GetHelpList();
 
-            return Json(newslist);
+            return Json(helplist);
         }
 
         public ActionResult Delete(int id)

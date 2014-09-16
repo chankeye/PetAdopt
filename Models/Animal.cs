@@ -28,11 +28,11 @@ namespace PetAdopt.Models
         public short ClassId { get; set; }
         public virtual Area Area { get; set; }
         public virtual Class Class { get; set; }
-        public virtual ICollection<Animal_Message_Mapping> Animal_Message_Mapping { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
-        public virtual ICollection<Animal_Picture_Mapping> Animal_Picture_Mapping { get; set; }
         public virtual Shelter Shelter { get; set; }
         public virtual Status Status { get; set; }
+        public virtual ICollection<Animal_Message_Mapping> Animal_Message_Mapping { get; set; }
+        public virtual ICollection<Animal_Picture_Mapping> Animal_Picture_Mapping { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace PetAdopt.Models
         public short ClassId { get; set; }
         public int OperationId { get; set; }
         public virtual Class Class { get; set; }
-        public virtual ICollection<Knowledge_Message_Mapping> Knowledge_Message_Mapping { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
+        public virtual ICollection<Knowledge_Message_Mapping> Knowledge_Message_Mapping { get; set; }
     }
 }

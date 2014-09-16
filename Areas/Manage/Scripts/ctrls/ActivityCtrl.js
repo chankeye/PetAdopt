@@ -1,30 +1,34 @@
-﻿function MyViewModel() {
-    var self = this;
+﻿$(function () {
 
-    self.activities = ko.observableArray();
-    self.areas = ko.observableArray();
+    function MyViewModel() {
+        var self = this;
 
-    self.removeActivity = function (news) {
-        if (confirm('確定要刪除？')) {
-            $.ajax({
-                type: 'post',
-                url: '/Manage/Activity/DeleteActivity',
-                data: {
-                    id: news.Id,
-                },
-                success: function (data) {
-                    if (data.IsSuccess) {
-                        self.activities.remove(news);
-                    } else {
-                        alert(data.ErrorMessage);
+        self.activities = ko.observableArray();
+        self.areas = ko.observableArray();
+
+        self.removeActivity = function (activity) {
+            if (confirm('確定要刪除？')) {
+                $.ajax({
+                    type: 'post',
+                    url: '/Manage/Activity/Delete',
+                    data: {
+                        id: activity.Id,
+                    },
+                    success: function (data) {
+                        if (data.IsSuccess) {
+                            self.activities.remove(activity);
+                        } else {
+                            alert(data.ErrorMessage);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
-    }
-};
 
-$(function () {
+        self.editActivity = function (activity) {
+            window.location = "/Manage/Activity/Edit?id=" + activity.Id;
+        }
+    };
 
     var vm = new MyViewModel();
 
@@ -55,6 +59,8 @@ $(function () {
     $("#btn1").click(
         function () {
             var $btn = $("#btn1");
+            var $uploadfile = $(".table-striped .name a");
+            var poto = $uploadfile.text();
 
             if ($("#commentForm").valid() == false) {
                 return;
@@ -77,7 +83,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Activity/AddActivity',
                 data: {
-                    Poto: '',
+                    Poto: poto,
                     Title: $("#title").val(),
                     Message: oEditor.getData(),
                     Address: $("#address").val(),

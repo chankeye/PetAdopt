@@ -101,6 +101,7 @@
     <Content Include="Areas\Manage\Scripts\ctrls\BlogCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\HelpCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\KnowledgeCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\ActivityEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\NewsEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\UserCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\NewsCtrl.js" />
@@ -222,6 +223,7 @@
     <Content Include="Areas\Manage\Views\Help\Index.cshtml" />
     <Content Include="Areas\Manage\Views\Knowledge\Index.cshtml" />
     <Content Include="Areas\Manage\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Activity\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />

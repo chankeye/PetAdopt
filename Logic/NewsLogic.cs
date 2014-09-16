@@ -1,16 +1,11 @@
-﻿using System.Data.Entity.Validation;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Web.Helpers;
-using System.Web.Util;
-using PetAdopt.DTO;
+﻿using PetAdopt.DTO;
 using PetAdopt.Models;
 using PetAdopt.Utilities;
-using NLog;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PetAdopt.Logic
 {

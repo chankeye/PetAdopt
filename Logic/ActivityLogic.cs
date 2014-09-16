@@ -73,6 +73,32 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得最新活動
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<CreateActivity> GetActivity(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var activity = PetContext.Activities.SingleOrDefault(r => r.Id == id);
+            if (activity == null)
+                return new IsSuccessResult<CreateActivity>("找不到此活動");
+
+            return new IsSuccessResult<CreateActivity>
+            {
+                ReturnObject = new CreateActivity
+                {
+                    Poto = activity.CoverPoto,
+                    Title = activity.Title,
+                    Message = activity.Message,
+                    AreaId = activity.AreaId,
+                    Address = activity.Address
+                }
+            };
+        }
+
+        /// <summary>
         /// 新增最新活動
         /// </summary>
         /// <returns></returns>
@@ -138,6 +164,71 @@ namespace PetAdopt.Logic
                 log.Error(ex);
 
                 return new IsSuccessResult<ActivityItem>("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        /// <summary>
+        /// 修改最新活動
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult EditActivity(int id, CreateActivity data)
+        {
+            var log = GetLogger();
+            log.Debug("poto: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}, id:{5}", data.Poto, data.Title, data.Message,
+                data.AreaId, data.Address, id);
+
+            var activity = PetContext.Activities.SingleOrDefault(r => r.Id == id);
+            if (activity == null)
+                return new IsSuccessResult("找不到此最新活動");
+
+            if (string.IsNullOrWhiteSpace(data.Title))
+                return new IsSuccessResult("請輸入標題");
+            data.Title = data.Title.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Message))
+                return new IsSuccessResult("請輸入內容");
+            data.Message = data.Message.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Poto) == false)
+                data.Poto = data.Poto.Trim();
+
+            var isAny = PetContext.Activities.Any(r => r.Title == data.Title && r.Id != id);
+            if (isAny)
+                return new IsSuccessResult(string.Format("已經有 {0} 這個最新消息了", data.Title));
+
+            if (data.AreaId.HasValue)
+            {
+                var hasArea = PetContext.Areas.Any(r => r.Id == data.AreaId);
+                if (hasArea == false)
+                    return new IsSuccessResult("請選擇正確的地區");
+            }
+
+            if (string.IsNullOrWhiteSpace(data.Address) == false)
+                data.Address = data.Address.Trim();
+
+            if (activity.CoverPoto == data.Poto && activity.Title == data.Title && activity.Message == data.Message &&
+                activity.Address == data.Address && activity.AreaId == data.AreaId)
+            {
+                return new IsSuccessResult();
+            }
+
+            try
+            {
+                activity.CoverPoto = data.Poto;
+                activity.Title = data.Title;
+                activity.Message = data.Message;
+                activity.Address = data.Address;
+                activity.AreaId = data.AreaId;
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
     }

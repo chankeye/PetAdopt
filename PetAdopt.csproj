@@ -99,6 +99,7 @@
     <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AskCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\BlogCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\AnimalCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\SheltersCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\HelpCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\KnowledgeCtrl.js" />
@@ -226,6 +227,7 @@
     <Content Include="Areas\Manage\Views\User\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Activity\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Shelters\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Animal\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -595,6 +597,7 @@
     <Compile Include="Areas\Manage\Controllers\ActivityController.cs" />
     <Compile Include="Areas\Manage\Controllers\AskController.cs" />
     <Compile Include="Areas\Manage\Controllers\BlogController.cs" />
+    <Compile Include="Areas\Manage\Controllers\AnimalController.cs" />
     <Compile Include="Areas\Manage\Controllers\SheltersController.cs" />
     <Compile Include="Areas\Manage\Controllers\HelpController.cs" />
     <Compile Include="Areas\Manage\Controllers\KnowledgeController.cs" />
@@ -607,6 +610,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
+    <Compile Include="DTO\Animal\AnimalItem.cs" />
     <Compile Include="DTO\Ask\AskItem.cs" />
     <Compile Include="DTO\Blog\BlogItem.cs" />
     <Compile Include="DTO\Help\HelpItem.cs" />
@@ -628,6 +632,7 @@
     <Compile Include="Logic\ActivityLogic.cs" />
     <Compile Include="Logic\AskLogic.cs" />
     <Compile Include="Logic\BlogLogic.cs" />
+    <Compile Include="Logic\AnimalLogic.cs" />
     <Compile Include="Logic\SheltersLogic.cs" />
     <Compile Include="Logic\HelpLogic.cs" />
     <Compile Include="Logic\KnowledgeLogic.cs" />
@@ -717,7 +722,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Manage\Views\Animal\" />
     <Folder Include="Content\Views\" />
     <Folder Include="Scripts\ctrls\" />
   </ItemGroup>

@@ -18,21 +18,33 @@ namespace PetAdopt.Logic
         /// 取得部落格列表
         /// </summary>
         /// <returns></returns>
-        public List<BlogItem> GetBlogList()
+        public BlogList GetBlogList(int page)
         {
             var log = GetLogger();
-            log.Debug("GetBlogList in");
+            log.Debug("page:{0}", page);
 
-            var bloglist = PetContext
-                .Blogs
+            if (page <= 0)
+                page = 1;
+
+            var list = PetContext.Blogs
                 .Select(r => new BlogItem
                 {
                     Id = r.Id,
                     Title = r.Title
                 })
+                .OrderBy(r=>r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return bloglist;
+            var count = PetContext.Blogs.Count();
+            var result = new BlogList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

@@ -28,13 +28,11 @@ namespace PetAdopt.Logic
                 page = 1;
 
             var list = PetContext.Asks
-                .Select(r =>
-                    new AskItem
-                    {
-                        Id = r.Id,
-                        Title = r.Title
-                    }
-                )
+                .Select(r =>new AskItem
+                {
+                    Id = r.Id,
+                    Title = r.Title
+                })
                 .OrderBy(r => r.Id)
                 .Skip((page - 1) * 10)
                 .Take(10)

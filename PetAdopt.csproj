@@ -614,7 +614,7 @@
     <Compile Include="Controllers\_BaseController.cs" />
     <Compile Include="DTO\Animal\AnimalItem.cs" />
     <Compile Include="DTO\Ask\AskList.cs" />
-    <Compile Include="DTO\Blog\BlogItem.cs" />
+    <Compile Include="DTO\Blog\BlogList.cs" />
     <Compile Include="DTO\Help\HelpItem.cs" />
     <Compile Include="DTO\IsSuccessResult.cs" />
     <Compile Include="DTO\Knowledge\KnowledgeItem.cs" />

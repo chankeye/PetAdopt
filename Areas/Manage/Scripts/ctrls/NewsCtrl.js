@@ -1,7 +1,10 @@
-﻿function MyViewModel() {
+﻿var MyViewModel = function () {
     var self = this;
 
-    self.newslist = ko.observableArray();
+    self.loading = ko.observable(false);
+    self.responseMessage = ko.observable($.commonLocalization.noRecord);
+    self.history = ko.observableArray([]);
+
     self.areas = ko.observableArray();
 
     self.removeNews = function (news) {
@@ -26,20 +29,39 @@
     self.editNews = function (news) {
         window.location = "/Manage/News/Edit?id=" + news.Id;
     }
+
+    //Add PaginationModel
+    //from pagination.js
+    ko.utils.extend(self, new PaginationModel());
+
+    self.loadHistory = function (page) {
+        self.responseMessage($.commonLocalization.loading);
+        self.loading(true);
+        self.history.removeAll();
+        self.pagination(0, 0, 0);
+        var limit = 10;
+        page = page || 1; // if page didn't send
+        $.ajax({
+            type: 'post',
+            url: '/Manage/News/GetNewsList',
+            data: {
+                page: page
+            }
+        }).done(function (response) {
+            self.responseMessage('');
+            self.history(response.List);
+            self.pagination(page, response.Count, limit);
+
+            if (response.Count == 0)
+                self.responseMessage($.commonLocalization.noRecord);
+
+        }).always(function () {
+            self.loading(false);
+        });
+    };
 };
 
 $(function () {
-
-    var vm = new MyViewModel();
-
-    // 取得消息列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/News/GetNewsList',
-        success: function (data) {
-            vm.newslist(data);
-        }
-    });
 
     // 取得地區列表
     $.ajax({
@@ -54,6 +76,10 @@ $(function () {
             $("#selOptions option:first").attr("selected", true);
         }
     });
+
+    window.vm = new MyViewModel();
+    window.vm.loadHistory();
+    ko.applyBindings(window.vm);
 
     // 新增消息
     $("#btn1").click(
@@ -114,6 +140,4 @@ $(function () {
         $("#source").val('');
         $("#selOptions option:first").attr("selected", true);
     });
-
-    ko.applyBindings(vm);
 });

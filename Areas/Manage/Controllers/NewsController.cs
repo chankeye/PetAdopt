@@ -30,9 +30,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return View();
         }
 
-        public ActionResult GetNewsList()
+        public ActionResult GetNewsList(int page)
         {
-            var newslist = _newsLogic.GetNewsList();
+            var newslist = _newsLogic.GetNewsList(page);
 
             return Json(newslist);
         }

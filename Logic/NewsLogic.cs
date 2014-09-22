@@ -21,21 +21,33 @@ namespace PetAdopt.Logic
         /// 取得最新消息列表
         /// </summary>
         /// <returns></returns>
-        public List<NewsItem> GetNewsList()
+        public NewsList GetNewsList(int page)
         {
             var log = GetLogger();
-            log.Debug("GetNewsList in");
+            log.Debug("page:{0}", page);
 
-            var newslist = PetContext
-                .News
+            if (page <= 0)
+                page = 1;
+
+            var list = PetContext.News
                 .Select(r => new NewsItem
                 {
                     Id = r.Id,
                     Title = r.Title
                 })
+                .OrderByDescending(r => r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return newslist;
+            var count = PetContext.News.Count();
+            var result = new NewsList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

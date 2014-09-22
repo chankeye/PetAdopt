@@ -1,4 +1,6 @@
-﻿namespace PetAdopt.DTO
+﻿using System.Collections.Generic;
+
+namespace PetAdopt.DTO
 {
     /// <summary>
     /// 使用者資訊
@@ -23,5 +25,12 @@
         public string Account { get; set; }
 
         public bool  IsDisable { get; set; }
+    }
+
+    public class UserList
+    {
+        public List<UserItem> List { get; set; }
+
+        public int Count { get; set; }
     }
 }

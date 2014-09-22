@@ -157,22 +157,31 @@ namespace PetAdopt.Logic
         /// 取得使用者列表
         /// </summary>
         /// <returns></returns>
-        public List<UserItem> GetUserList()
+        public UserList GetUserList(int page)
         {
             var log = GetLogger();
-            log.Debug("GetUserList in");
+            log.Debug("page:{0}", page);
 
-            var users = PetContext
-                .Users
+            var list = PetContext.Users
                 .Select(r => new UserItem
                 {
                     Id = r.Id,
                     Account = r.Account,
                     IsDisable = r.IsDisable
                 })
+                .OrderByDescending(r => r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return users;
+            var count = PetContext.Users.Count();
+            var result = new UserList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

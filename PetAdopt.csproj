@@ -624,7 +624,7 @@
     <Compile Include="DTO\News\CreateNews.cs" />
     <Compile Include="DTO\News\NewsListInfo.cs" />
     <Compile Include="DTO\Operation.cs" />
-    <Compile Include="DTO\Shelters\SheltersItem.cs" />
+    <Compile Include="DTO\Shelters\SheltersList.cs" />
     <Compile Include="DTO\System\SystemInfo.cs" />
     <Compile Include="DTO\User\UserInfo.cs" />
     <Compile Include="DTO\User\CreateUser.cs" />

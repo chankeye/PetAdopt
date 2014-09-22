@@ -18,21 +18,33 @@ namespace PetAdopt.Logic
         /// 取得收容所列表
         /// </summary>
         /// <returns></returns>
-        public List<SheltersItem> GetSheltersList()
+        public SheltersList GetSheltersList(int page)
         {
             var log = GetLogger();
-            log.Debug("GetSheltersList in");
+            log.Debug("page:{0}", page);
 
-            var shelterslist = PetContext
-                .Shelters
+            if (page <= 0)
+                page = 1;
+
+            var list = PetContext.Shelters
                 .Select(r => new SheltersItem
                 {
                     Id = r.Id,
                     Name = r.Name
                 })
+                .OrderByDescending(r => r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return shelterslist;
+            var count = PetContext.Shelters.Count();
+            var result = new SheltersList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

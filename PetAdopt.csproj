@@ -110,6 +110,7 @@
     <Content Include="Areas\Manage\Scripts\ctrls\SystemCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AccountChangePasswordCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\UserEditCtrl.js" />
+    <Content Include="Scripts\locale\common.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -567,6 +568,7 @@
     <Content Include="Scripts\ckeditor\skins\v2\skin.js" />
     <Content Include="Scripts\ckeditor\skins\v2\templates.css" />
     <Content Include="Scripts\ckeditor\themes\default\theme.js" />
+    <Content Include="Scripts\ctrls\pagination.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -611,7 +613,7 @@
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
     <Compile Include="DTO\Animal\AnimalItem.cs" />
-    <Compile Include="DTO\Ask\AskItem.cs" />
+    <Compile Include="DTO\Ask\AskList.cs" />
     <Compile Include="DTO\Blog\BlogItem.cs" />
     <Compile Include="DTO\Help\HelpItem.cs" />
     <Compile Include="DTO\IsSuccessResult.cs" />
@@ -723,7 +725,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Views\" />
-    <Folder Include="Scripts\ctrls\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

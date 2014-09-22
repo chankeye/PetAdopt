@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System.Web.UI.WebControls;
+using PetAdopt.DTO;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
@@ -18,21 +19,35 @@ namespace PetAdopt.Logic
         /// 取得問與答列表
         /// </summary>
         /// <returns></returns>
-        public List<AskItem> GetAskList()
+        public AskList GetAskList(int page)
         {
             var log = GetLogger();
-            log.Debug("GetHelpList in");
+            log.Debug("page:{0}", page);
 
-            var asklist = PetContext
-                .Asks
-                .Select(r => new AskItem
-                {
-                    Id = r.Id,
-                    Title = r.Title
-                })
+            if (page <= 0)
+                page = 1;
+
+            var list = PetContext.Asks
+                .Select(r =>
+                    new AskItem
+                    {
+                        Id = r.Id,
+                        Title = r.Title
+                    }
+                )
+                .OrderBy(r => r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return asklist;
+            var count = PetContext.Asks.Count();
+            var result = new AskList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

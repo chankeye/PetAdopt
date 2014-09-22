@@ -39,3 +39,49 @@ ul.ul-padding-vertical-05 {
 #div-dateNow {
     float: right;
 }
+
+/* 分頁 */
+.pagination {
+    background: #808D96;
+    padding: 10px 0 0;
+    text-align: center;
+    height: 28px;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+    .pagination ul {
+        padding: 0;
+        display: inline-block;
+    }
+
+    .pagination li {
+        display: inline;
+        padding: 10px;
+        vertical-align: middle;
+        height: 40px;
+    }
+
+    .pagination a {
+        padding: 12px 10px;
+        color: #fff;
+    }
+
+        .pagination a:hover {
+            color: #d7172f;
+        }
+
+.prev {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.next {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+/* /分頁 */

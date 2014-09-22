@@ -19,21 +19,33 @@ namespace PetAdopt.Logic
         /// 取得最新活動列表
         /// </summary>
         /// <returns></returns>
-        public List<ActivityItem> GetActivities()
+        public ActivityList GetActivities(int page)
         {
             var log = GetLogger();
-            log.Debug("GetActivities in");
+            log.Debug("page:{0}", page);
 
-            var activities = PetContext
-                .Activities
+            if (page <= 0)
+                page = 1;
+
+            var list = PetContext.Activities
                 .Select(r => new ActivityItem
                 {
                     Id = r.Id,
                     Title = r.Title
                 })
+                .OrderByDescending(r => r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return activities;
+            var count = PetContext.Activities.Count();
+            var result = new ActivityList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

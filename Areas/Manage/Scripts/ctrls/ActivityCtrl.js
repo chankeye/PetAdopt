@@ -1,45 +1,67 @@
-﻿$(function () {
+﻿var MyViewModel = function () {
+    var self = this;
 
-    function MyViewModel() {
-        var self = this;
+    self.loading = ko.observable(false);
+    self.responseMessage = ko.observable($.commonLocalization.noRecord);
+    self.history = ko.observableArray([]);
 
-        self.activities = ko.observableArray();
-        self.areas = ko.observableArray();
+    self.areas = ko.observableArray();
 
-        self.removeActivity = function (activity) {
-            if (confirm('確定要刪除？')) {
-                $.ajax({
-                    type: 'post',
-                    url: '/Manage/Activity/Delete',
-                    data: {
-                        id: activity.Id,
-                    },
-                    success: function (data) {
-                        if (data.IsSuccess) {
-                            self.activities.remove(activity);
-                        } else {
-                            alert(data.ErrorMessage);
-                        }
+    self.removeActivity = function (activity) {
+        if (confirm('確定要刪除？')) {
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Activity/Delete',
+                data: {
+                    id: activity.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.activities.remove(activity);
+                    } else {
+                        alert(data.ErrorMessage);
                     }
-                });
+                }
+            });
+        }
+    }
+
+    self.editActivity = function (activity) {
+        window.location = "/Manage/Activity/Edit?id=" + activity.Id;
+    }
+
+    //Add PaginationModel
+    //from pagination.js
+    ko.utils.extend(self, new PaginationModel());
+
+    self.loadHistory = function (page) {
+        self.responseMessage($.commonLocalization.loading);
+        self.loading(true);
+        self.history.removeAll();
+        self.pagination(0, 0, 0);
+        var limit = 10;
+        page = page || 1; // if page didn't send
+        $.ajax({
+            type: 'post',
+            url: '/Manage/Activity/GetActivities',
+            data: {
+                page: page
             }
-        }
+        }).done(function (response) {
+            self.responseMessage('');
+            self.history(response.List);
+            self.pagination(page, response.Count, limit);
 
-        self.editActivity = function (activity) {
-            window.location = "/Manage/Activity/Edit?id=" + activity.Id;
-        }
+            if (response.Count == 0)
+                self.responseMessage($.commonLocalization.noRecord);
+
+        }).always(function () {
+            self.loading(false);
+        });
     };
+};
 
-    var vm = new MyViewModel();
-
-    // 取得消息列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/Activity/GetActivities',
-        success: function (data) {
-            vm.activities(data);
-        }
-    });
+$(function () {
 
     // 取得地區列表
     $.ajax({
@@ -54,6 +76,10 @@
             $("#selOptions option:first").attr("selected", true);
         }
     });
+
+    window.vm = new MyViewModel();
+    window.vm.loadHistory();
+    ko.applyBindings(window.vm);
 
     // 新增消息
     $("#btn1").click(
@@ -114,6 +140,4 @@
         $("#address").val('');
         $("#selOptions option:first").attr("selected", true);
     });
-
-    ko.applyBindings(vm);
 });

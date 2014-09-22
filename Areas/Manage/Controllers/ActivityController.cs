@@ -29,9 +29,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return View();
         }
 
-        public ActionResult GetActivities()
+        public ActionResult GetActivities(int page)
         {
-            var newslist = _activityLogic.GetActivities();
+            var newslist = _activityLogic.GetActivities(page);
 
             return Json(newslist);
         }

@@ -615,7 +615,7 @@
     <Compile Include="DTO\Animal\AnimalItem.cs" />
     <Compile Include="DTO\Ask\AskList.cs" />
     <Compile Include="DTO\Blog\BlogList.cs" />
-    <Compile Include="DTO\Help\HelpItem.cs" />
+    <Compile Include="DTO\Help\HelpList.cs" />
     <Compile Include="DTO\IsSuccessResult.cs" />
     <Compile Include="DTO\Knowledge\KnowledgeList.cs" />
     <Compile Include="DTO\LoginInfo.cs" />

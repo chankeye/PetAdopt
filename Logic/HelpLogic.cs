@@ -18,21 +18,33 @@ namespace PetAdopt.Logic
         /// 取得即刻救援列表
         /// </summary>
         /// <returns></returns>
-        public List<HelpItem> GetHelpList()
+        public HelpList GetHelpList(int page)
         {
             var log = GetLogger();
-            log.Debug("GetHelpList in");
+            log.Debug("page:{0}", page);
 
-            var helplist = PetContext
-                .Helps
+            if (page <= 0)
+                page = 1;
+
+            var list = PetContext.Helps
                 .Select(r => new HelpItem
                 {
                     Id = r.Id,
                     Title = r.Title
                 })
+                .OrderByDescending(r => r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return helplist;
+            var count = PetContext.Helps.Count();
+            var result = new HelpList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

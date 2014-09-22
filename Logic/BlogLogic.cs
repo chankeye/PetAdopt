@@ -32,7 +32,7 @@ namespace PetAdopt.Logic
                     Id = r.Id,
                     Title = r.Title
                 })
-                .OrderBy(r=>r.Id)
+                .OrderByDescending(r => r.Id)
                 .Skip((page - 1) * 10)
                 .Take(10)
                 .ToList();

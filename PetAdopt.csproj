@@ -617,7 +617,7 @@
     <Compile Include="DTO\Blog\BlogList.cs" />
     <Compile Include="DTO\Help\HelpItem.cs" />
     <Compile Include="DTO\IsSuccessResult.cs" />
-    <Compile Include="DTO\Knowledge\KnowledgeItem.cs" />
+    <Compile Include="DTO\Knowledge\KnowledgeList.cs" />
     <Compile Include="DTO\LoginInfo.cs" />
     <Compile Include="DTO\Activity\CreateActivity.cs" />
     <Compile Include="DTO\Activity\ActivitiesInfo.cs" />

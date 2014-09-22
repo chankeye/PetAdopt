@@ -22,12 +22,22 @@
                 <th>標題</th>
             </tr>
         </thead>
-        <tbody data-bind="foreach: knowledgelist">
+        <tbody data-bind="foreach: history">
             <tr>
                 <td><a href='#' data-bind="click: $root.removeKnowledge">移除</a></td>
                 <td><span data-bind="text: Id"></span></td>
                 <td><span data-bind="text: Title"></span></td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr><td data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></td></tr>
+        </tfoot>
     </table>
+    <!--pagination-->
+    <div class="pagination clearfix">
+        <span class="prev"><a href="#">&lt;&lt; Previous</a></span>
+        <ul class="pagi"></ul>
+        <span class="next"><a href="#">Next &gt;&gt;</a></span>
+    </div>
+    <!--pagination-->
 </div>

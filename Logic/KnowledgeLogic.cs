@@ -18,21 +18,30 @@ namespace PetAdopt.Logic
         /// 取得知識列表
         /// </summary>
         /// <returns></returns>
-        public List<KnowledgeItem> GetKnowledgeList()
+        public KnowledgeList GetKnowledgeList(int page)
         {
             var log = GetLogger();
-            log.Debug("GetKnowledgeList in");
+            log.Debug("page:{0}", page);
 
-            var knowledgelist = PetContext
-                .Knowledges
+            var list = PetContext.Knowledges
                 .Select(r => new KnowledgeItem
                 {
                     Id = r.Id,
                     Title = r.Title
                 })
+                .OrderByDescending(r => r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return knowledgelist;
+            var count = PetContext.Knowledges.Count();
+            var result = new KnowledgeList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

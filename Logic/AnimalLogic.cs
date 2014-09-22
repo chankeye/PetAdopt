@@ -18,21 +18,30 @@ namespace PetAdopt.Logic
         /// 取得動物列表
         /// </summary>
         /// <returns></returns>
-        public List<AnimalItem> GetAnimalList()
+        public AnimalList GetAnimalList(int page)
         {
             var log = GetLogger();
-            log.Debug("GetAnimalList in");
+            log.Debug("page:{0}", page);
 
-            var animallist = PetContext
-                .Animals
+            var list = PetContext.Animals
                 .Select(r => new AnimalItem
                 {
                     Id = r.Id,
                     Name = r.Name
                 })
+                .OrderByDescending(r => r.Id)
+                .Skip((page - 1) * 10)
+                .Take(10)
                 .ToList();
 
-            return animallist;
+            var count = PetContext.Animals.Count();
+            var result = new AnimalList
+            {
+                List = list,
+                Count = count
+            };
+
+            return result;
         }
 
         /// <summary>

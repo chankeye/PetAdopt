@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System.IO;
+using PetAdopt.DTO;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace PetAdopt.Logic
         /// 刪除即刻救援
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteHelp(int id)
+        public IsSuccessResult DeleteHelp(string path, int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
@@ -63,6 +64,12 @@ namespace PetAdopt.Logic
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此救援文章";
                 return result;
+            }
+
+            // 有上傳圖片，就把圖片刪掉
+            if (string.IsNullOrWhiteSpace(help.CoverPoto) == false)
+            {
+                File.Delete(path + "//" + help.CoverPoto);
             }
 
             try
@@ -78,6 +85,78 @@ namespace PetAdopt.Logic
                 result.IsSuccess = false;
                 result.ErrorMessage = "發生不明錯誤，請稍候再試";
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 新增救援
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<HelpItem> AddHelp(CreateHelp data)
+        {
+            var log = GetLogger();
+            log.Debug("title: {0}, message:{1}, classId:{2}, areaId:{3}, address:{4}, poto:{5}",
+                data.Title, data.Message, data.ClassId, data.AreaId, data.Address, data.Poto);
+
+            if (string.IsNullOrWhiteSpace(data.Title))
+                return new IsSuccessResult<HelpItem>("請輸入標題");
+            data.Title = data.Title.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Message))
+                return new IsSuccessResult<HelpItem>("請輸入內容");
+            data.Message = data.Message.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Address))
+                return new IsSuccessResult<HelpItem>("請輸入地址");
+            data.Address = data.Address.Trim();
+
+            var isAny = PetContext.Helps.Any(r => r.Title == data.Title);
+            if (isAny)
+                return new IsSuccessResult<HelpItem>(string.Format("已經有 {0} 這個救援了", data.Title));
+
+            var hasClass = PetContext.Classes.Any(r => r.Id == data.ClassId);
+            if (hasClass == false)
+                return new IsSuccessResult<HelpItem>("請選擇正確的分類");
+
+            var hasArea = PetContext.Areas.Any(r => r.Id == data.AreaId);
+            if (hasArea == false)
+                return new IsSuccessResult<HelpItem>("請選擇正確的地區");
+
+            if (string.IsNullOrWhiteSpace(data.Poto) == false)
+                data.Poto = data.Poto.Trim();
+
+            try
+            {
+                var ask = PetContext.Helps.Add(new Help
+                {
+                    CoverPoto = data.Poto,
+                    Title = data.Title,
+                    Message = data.Message,
+                    ClassId = data.ClassId,
+                    AreaId = data.AreaId,
+                    Address = data.Address,
+                    OperationInfo = new OperationInfo
+                    {
+                        Date = DateTime.Now,
+                        UserId = GetOperationInfo().UserId
+                    }
+                });
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult<HelpItem>
+                {
+                    ReturnObject = new HelpItem
+                    {
+                        Id = ask.Id,
+                        Title = ask.Title,
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult<HelpItem>("發生不明錯誤，請稍候再試");
             }
         }
     }

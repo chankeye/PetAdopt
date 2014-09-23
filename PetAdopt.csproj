@@ -620,6 +620,7 @@
     <Compile Include="DTO\Ask\AskList.cs" />
     <Compile Include="DTO\Ask\CreateAsk.cs" />
     <Compile Include="DTO\Blog\BlogList.cs" />
+    <Compile Include="DTO\Help\CreateHelp.cs" />
     <Compile Include="DTO\Help\HelpList.cs" />
     <Compile Include="DTO\IsSuccessResult.cs" />
     <Compile Include="DTO\Knowledge\CreateKnowledge.cs" />

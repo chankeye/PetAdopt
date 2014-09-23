@@ -5,6 +5,9 @@
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
     self.history = ko.observableArray();
 
+    self.classes = ko.observableArray();
+    self.areas = ko.observableArray();
+
     self.removeHelp = function (help) {
         if (confirm('確定要刪除？')) {
 
@@ -26,6 +29,10 @@
                 }
             });
         }
+    }
+
+    self.editHelp = function (help) {
+        window.location = "/Manage/Help/Edit?id=" + help.Id;
     }
 
     //Add PaginationModel
@@ -61,7 +68,98 @@
 
 $(function () {
 
+    // 取得分類列表
+    $.ajax({
+        type: 'post',
+        url: '/Manage/System/GetClassList',
+        success: function (classes) {
+            window.vm.classes(classes);
+            window.vm.classes.unshift({
+                "Word": "請選擇",
+                "Id": ""
+            });
+            $("#selOptionsClass option:first").attr("selected", true);
+        }
+    });
+
+    // 取得地區列表
+    $.ajax({
+        type: 'post',
+        url: '/Manage/System/GetAreaList',
+        success: function (area) {
+            vm.areas(area);
+            vm.areas.unshift({
+                "Word": "請選擇",
+                "Id": ""
+            });
+            $("#selOptionsAreas option:first").attr("selected", true);
+        }
+    });
+
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
+
+    // 新增救援
+    $("#btn1").click(
+        function () {
+            var $btn = $("#btn1");
+            var $uploadfile = $(".table-striped .name a");
+            var poto = $uploadfile.text();
+
+            if ($("#commentForm").valid() == false) {
+                return;
+            }
+
+            if ($("#selOptionsClass").val() == "") {
+                alert('請選擇分類');
+                return;
+            }
+
+            if ($("#selOptionsAreas").val() == "") {
+                alert('請選擇地區');
+                return;
+            }
+
+            $btn.button("loading");
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Help/AddHelp',
+                data: {
+                    Poto: poto,
+                    Title: $("#title").val(),
+                    Message: $("#message").val(),
+                    Address: $("#address").val(),
+                    ClassId: $("#selOptionsClass").val(),
+                    AreaId: $("#selOptionsAreas").val()
+                },
+                success: function (data) {
+                    $btn.button("reset");
+                    if (data.IsSuccess) {
+                        //window.vm.history.push(data.ReturnObject);
+                        window.vm.loadHistory();
+                        $("#title").val('');
+                        $("#message").val(''),
+                        $("#address").val('');
+                        $("#selOptionsClass option:first").attr("selected", true);
+                        $("#selOptionsAreas option:first").attr("selected", true);
+
+                        alert("新增成功");
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        });
+
+    // 取消
+    $("#btn2").click(
+    function () {
+        $("#title").val('');
+        $("#message").val('');
+        $("#address").val('');
+        $("#selOptionsClass option:first").attr("selected", true);
+        $("#selOptionsAreas option:first").attr("selected", true);
+    });
 });

@@ -38,7 +38,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = _helpLogic.DeleteHelp(id);
+            var result = _helpLogic.DeleteHelp(Server.MapPath("~/Content/uploads"), id);
+
+            return Json(result);
+        }
+
+        public ActionResult AddHelp(CreateHelp data)
+        {
+            var result = _helpLogic.AddHelp(data);
 
             return Json(result);
         }

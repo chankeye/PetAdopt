@@ -121,15 +121,15 @@ namespace PetAdopt.Logic
         public IsSuccessResult<ActivityItem> AddActivity(CreateActivity data)
         {
             var log = GetLogger();
-            log.Debug("poto: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}", data.Poto, data.Title, data.Message,
-                data.AreaId, data.Address);
+            log.Debug("poto: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}", 
+                data.Poto, data.Title, data.Message, data.AreaId, data.Address);
 
             if (string.IsNullOrWhiteSpace(data.Title))
-                return new IsSuccessResult<ActivityItem>("標題請勿傳入空值");
+                return new IsSuccessResult<ActivityItem>("請輸入標題");
             data.Title = data.Title.Trim();
 
             if (string.IsNullOrWhiteSpace(data.Message))
-                return new IsSuccessResult<ActivityItem>("內容請勿傳入空值");
+                return new IsSuccessResult<ActivityItem>("請輸入內容");
             data.Message = data.Message.Trim();
 
             if (string.IsNullOrWhiteSpace(data.Poto) == false)

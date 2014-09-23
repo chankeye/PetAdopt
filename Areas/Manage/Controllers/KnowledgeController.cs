@@ -42,5 +42,31 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             return Json(result);
         }
+
+        public ActionResult AddKnowledge(CreateKnowledge data)
+        {
+            var result = _knowledgeLogic.AddKnowledge(data);
+
+            return Json(result);
+        }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        public ActionResult EditInit(int id)
+        {
+            var result = _knowledgeLogic.GetKnowledge(id);
+
+            return Json(result);
+        }
+
+        public ActionResult EditKnowledge(int id, CreateKnowledge data)
+        {
+            var result = _knowledgeLogic.EditKnowledge(id, data);
+
+            return Json(result);
+        }
     }
 }

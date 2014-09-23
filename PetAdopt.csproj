@@ -98,6 +98,7 @@
   <ItemGroup>
     <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AskCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\KnowledgeEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\BlogCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AnimalCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AskEditCtrl.js" />
@@ -231,6 +232,7 @@
     <Content Include="Areas\Manage\Views\Shelters\Index.cshtml" />
     <Content Include="Areas\Manage\Views\Animal\Index.cshtml" />
     <Content Include="Areas\Manage\Views\Ask\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Knowledge\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -620,6 +622,7 @@
     <Compile Include="DTO\Blog\BlogList.cs" />
     <Compile Include="DTO\Help\HelpList.cs" />
     <Compile Include="DTO\IsSuccessResult.cs" />
+    <Compile Include="DTO\Knowledge\CreateKnowledge.cs" />
     <Compile Include="DTO\Knowledge\KnowledgeList.cs" />
     <Compile Include="DTO\LoginInfo.cs" />
     <Compile Include="DTO\Activity\CreateActivity.cs" />

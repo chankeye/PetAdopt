@@ -37,13 +37,13 @@ $(function () {
 
     // 沒有輸入id直接導回
     if (urlParams["id"] == null)
-        window.location = '/Manage/Ask';
+        window.location = '/Manage/Knowledge';
 
     // 取得問與答
     var photo;
     $.ajax({
         type: 'post',
-        url: '/Manage/Ask/EditInit',
+        url: '/Manage/Knowledge/EditInit',
         data: {
             id: urlParams["id"]
         },
@@ -62,7 +62,7 @@ $(function () {
                 $("#message").val(data.ReturnObject.Message);
             } else {
                 alert(data.ErrorMessage);
-                window.location = '/Manage/Ask';
+                window.location = '/Manage/Knowledge';
             }
         }
     });
@@ -85,7 +85,7 @@ $(function () {
 
             $.ajax({
                 type: 'post',
-                url: '/Manage/Ask/EditAsk',
+                url: '/Manage/Knowledge/EditKnowledge',
                 data: {
                     id: urlParams["id"],
                     Title: $("#title").val(),
@@ -100,7 +100,7 @@ $(function () {
                         $("#selOptions option:first").attr("selected", true);
 
                         alert("修改完成");
-                        window.location = '/Manage/Ask';
+                        window.location = '/Manage/Knowledge';
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -111,7 +111,7 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Manage/Ask';
+        window.location = '/Manage/Knowledge';
     });
 
     ko.applyBindings(vm);

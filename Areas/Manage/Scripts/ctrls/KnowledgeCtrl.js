@@ -5,6 +5,8 @@
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
     self.history = ko.observableArray();
 
+    self.classes = ko.observableArray();
+
     self.removeKnowledge = function (knowledge) {
         if (confirm('確定要刪除？')) {
 
@@ -26,6 +28,10 @@
                 }
             });
         }
+    }
+
+    self.editKnowledge = function (knowledge) {
+        window.location = "/Manage/Knowledge/Edit?id=" + knowledge.Id;
     }
 
     //Add PaginationModel
@@ -61,7 +67,70 @@
 
 $(function () {
 
+    // 取得分類列表
+    $.ajax({
+        type: 'post',
+        url: '/Manage/System/GetClassList',
+        success: function (classes) {
+            window.vm.classes(classes);
+            window.vm.classes.unshift({
+                "Word": "請選擇",
+                "Id": ""
+            });
+            $("#selOptions option:first").attr("selected", true);
+        }
+    });
+
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
+
+    // 新增知識
+    $("#btn1").click(
+        function () {
+            var $btn = $("#btn1");
+
+            if ($("#commentForm").valid() == false) {
+                return;
+            }
+
+            if ($("#selOptions").val() == "") {
+                alert('請選擇分類');
+                return;
+            }
+
+            $btn.button("loading");
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Knowledge/AddKnowledge',
+                data: {
+                    Title: $("#title").val(),
+                    Message: $("#message").val(),
+                    ClassId: $("#selOptions").val()
+                },
+                success: function (data) {
+                    $btn.button("reset");
+                    if (data.IsSuccess) {
+                        //window.vm.history.push(data.ReturnObject);
+                        window.vm.loadHistory();
+                        $("#title").val('');
+                        $("#message").val(''),
+                        $("#selOptions option:first").attr("selected", true);
+
+                        alert("新增成功");
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        });
+
+    // 取消
+    $("#btn2").click(
+    function () {
+        $("#title").val('');
+        $("#message").val('');
+        $("#selOptions option:first").attr("selected", true);
+    });
 });

@@ -3,7 +3,7 @@
 
     self.loading = ko.observable(false);
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
-    self.history = ko.observableArray([]);
+    self.history = ko.observableArray();
 
     self.removeHelp = function (help) {
         if (confirm('確定要刪除？')) {
@@ -19,7 +19,7 @@
                 },
                 success: function (data) {
                     if (data.IsSuccess) {
-                        self.helplist.remove(help);
+                        self.history.remove(help);
                     } else {
                         alert(data.ErrorMessage);
                     }

@@ -3,7 +3,7 @@
 
     self.loading = ko.observable(false);
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
-    self.history = ko.observableArray([]);
+    self.history = ko.observableArray();
 
     self.removeUser = function (user) {
         if (confirm('確定要刪除？')) {
@@ -19,9 +19,9 @@
                 },
                 success: function (data) {
                     if (data.IsSuccess) {
-                        self.userlist.remove(user);
+                        self.history.remove(user);
                         user.IsDisable = true;
-                        self.userlist.push(user);
+                        self.history.push(user);
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -95,7 +95,8 @@ $(function () {
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        vm.userlist.push(data.ReturnObject);
+                        //vm.userlist.push(data.ReturnObject);
+                        window.vm.loadHistory();
                         $("#account").val('');
                         $("#display").val('');
                         $("#mobile").val('');

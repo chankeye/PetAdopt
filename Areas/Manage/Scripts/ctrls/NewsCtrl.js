@@ -3,7 +3,7 @@
 
     self.loading = ko.observable(false);
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
-    self.history = ko.observableArray([]);
+    self.history = ko.observableArray();
 
     self.areas = ko.observableArray();
 
@@ -17,7 +17,7 @@
                 },
                 success: function (data) {
                     if (data.IsSuccess) {
-                        self.newslist.remove(news);
+                        self.history.remove(news);
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -68,8 +68,8 @@ $(function () {
         type: 'post',
         url: '/Manage/System/GetAreaList',
         success: function (area) {
-            vm.areas(area);
-            vm.areas.unshift({
+            window.vm.areas(area);
+            window.vm.areas.unshift({
                 "Word": "請選擇",
                 "Id": ""
             });
@@ -118,7 +118,8 @@ $(function () {
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        vm.newslist.push(data.ReturnObject);
+                        //vm.history.push(data.ReturnObject);
+                        window.vm.loadHistory();
                         $("#title").val('');
                         oEditor.setData('');
                         $("#source").val('');

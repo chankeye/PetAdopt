@@ -3,7 +3,7 @@
 
     self.loading = ko.observable(false);
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
-    self.history = ko.observableArray([]);
+    self.history = ko.observableArray();
 
     self.areas = ko.observableArray();
 
@@ -17,7 +17,7 @@
                 },
                 success: function (data) {
                     if (data.IsSuccess) {
-                        self.activities.remove(activity);
+                        self.history.remove(activity);
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -118,7 +118,8 @@ $(function () {
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        vm.activities.push(data.ReturnObject);
+                        //vm.history.push(data.ReturnObject);
+                        window.vm.loadHistory();
                         $("#title").val('');
                         oEditor.setData('');
                         $("#address").val('');

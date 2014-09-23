@@ -28,7 +28,7 @@ namespace PetAdopt.Logic
                 page = 1;
 
             var list = PetContext.Asks
-                .Select(r =>new AskItem
+                .Select(r => new AskItem
                 {
                     Id = r.Id,
                     Title = r.Title
@@ -79,6 +79,63 @@ namespace PetAdopt.Logic
                 result.IsSuccess = false;
                 result.ErrorMessage = "發生不明錯誤，請稍候再試";
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 新增問與答
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<AskItem> AddAsk(CreateAsk data)
+        {
+            var log = GetLogger();
+            log.Debug("title: {0}, message:{1}, classId:{2}", data.Title, data.Message, data.ClassId);
+
+            if (string.IsNullOrWhiteSpace(data.Title))
+                return new IsSuccessResult<AskItem>("標題請勿傳入空值");
+            data.Title = data.Title.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Message))
+                return new IsSuccessResult<AskItem>("內容請勿傳入空值");
+            data.Message = data.Message.Trim();
+
+            var isAny = PetContext.Asks.Any(r => r.Title == data.Title);
+            if (isAny)
+                return new IsSuccessResult<AskItem>(string.Format("已經有 {0} 這個問與答了", data.Title));
+
+            var hasClass = PetContext.Classes.Any(r => r.Id == data.ClassId);
+            if (hasClass == false)
+                return new IsSuccessResult<AskItem>("請選擇正確的分類");
+
+            try
+            {
+                var ask = PetContext.Asks.Add(new Ask
+                {
+                    Title = data.Title,
+                    Message = data.Message,
+                    ClassId = data.ClassId,
+                    OperationInfo = new OperationInfo
+                    {
+                        Date = DateTime.Now,
+                        UserId = GetOperationInfo().UserId
+                    }
+                });
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult<AskItem>
+                {
+                    ReturnObject = new AskItem
+                    {
+                        Id = ask.Id,
+                        Title = ask.Title,
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult<AskItem>("發生不明錯誤，請稍候再試");
             }
         }
     }

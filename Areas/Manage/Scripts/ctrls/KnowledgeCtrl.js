@@ -3,7 +3,7 @@
 
     self.loading = ko.observable(false);
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
-    self.history = ko.observableArray([]);
+    self.history = ko.observableArray();
 
     self.removeKnowledge = function (knowledge) {
         if (confirm('確定要刪除？')) {
@@ -19,7 +19,7 @@
                 },
                 success: function (data) {
                     if (data.IsSuccess) {
-                        self.knowledgelist.remove(knowledge);
+                        self.history.remove(knowledge);
                     } else {
                         alert(data.ErrorMessage);
                     }

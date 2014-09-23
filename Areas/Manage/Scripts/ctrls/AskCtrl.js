@@ -30,6 +30,10 @@
         }
     }
 
+    self.editAsk = function (ask) {
+        window.location = "/Manage/Ask/Edit?id=" + ask.Id;
+    }
+
     //Add PaginationModel
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());

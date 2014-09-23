@@ -206,11 +206,11 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult("找不到此最新消息");
 
             if (string.IsNullOrWhiteSpace(data.Title))
-                return new IsSuccessResult("標題請勿傳入空值");
+                return new IsSuccessResult("請輸入標題");
             data.Title = data.Title.Trim();
 
             if (string.IsNullOrWhiteSpace(data.Message))
-                return new IsSuccessResult("內容請勿傳入空值");
+                return new IsSuccessResult("請輸入內容");
             data.Message = data.Message.Trim();
 
             if (string.IsNullOrWhiteSpace(data.Poto) == false)

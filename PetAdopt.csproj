@@ -100,6 +100,7 @@
     <Content Include="Areas\Manage\Scripts\ctrls\AskCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\BlogCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AnimalCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\AskEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\SheltersCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\HelpCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\KnowledgeCtrl.js" />
@@ -229,6 +230,7 @@
     <Content Include="Areas\Manage\Views\Activity\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Shelters\Index.cshtml" />
     <Content Include="Areas\Manage\Views\Animal\Index.cshtml" />
+    <Content Include="Areas\Manage\Views\Ask\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />

@@ -7,6 +7,8 @@
 
 $(function () {
 
+    var vm = new MyViewModel();
+
     // 取得地區列表
     $.ajax({
         type: 'post',
@@ -20,8 +22,6 @@ $(function () {
             $("#selOptions option:first").attr("selected", true);
         }
     });
-
-    var vm = new MyViewModel();
 
     var urlParams = {};
     (function () {
@@ -64,6 +64,7 @@ $(function () {
                 $("#source").val(data.ReturnObject.Url);
             } else {
                 alert(data.ErrorMessage);
+                window.location = '/Manage/News';
             }
         }
     });

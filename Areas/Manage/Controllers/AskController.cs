@@ -49,5 +49,24 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             return Json(result);
         }
+
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        public ActionResult EditInit(int id)
+        {
+            var result = _askLogic.GetAsk(id);
+
+            return Json(result);
+        }
+
+        public ActionResult EditAsk(int id, CreateAsk data)
+        {
+            var result = _askLogic.EditAsk(id, data);
+
+            return Json(result);
+        }
     }
 }

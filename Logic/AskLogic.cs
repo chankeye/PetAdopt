@@ -83,6 +83,30 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得問與答
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<CreateAsk> GetAsk(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var ask = PetContext.Asks.SingleOrDefault(r => r.Id == id);
+            if (ask == null)
+                return new IsSuccessResult<CreateAsk>("找不到此問與答");
+
+            return new IsSuccessResult<CreateAsk>
+            {
+                ReturnObject = new CreateAsk
+                {
+                    Title = ask.Title,
+                    Message = ask.Message,
+                    ClassId = ask.ClassId,
+                }
+            };
+        }
+
+        /// <summary>
         /// 新增問與答
         /// </summary>
         /// <returns></returns>
@@ -136,6 +160,56 @@ namespace PetAdopt.Logic
                 log.Error(ex);
 
                 return new IsSuccessResult<AskItem>("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        /// <summary>
+        /// 修改問與答
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult EditAsk(int id, CreateAsk data)
+        {
+            var log = GetLogger();
+            log.Debug("title: {0}, message:{1}, classId:{2}, id:{3}", data.Title, data.Message, data.ClassId, id);
+
+            var ask = PetContext.Asks.SingleOrDefault(r => r.Id == id);
+            if (ask == null)
+                return new IsSuccessResult("找不到此問與答");
+
+            if (string.IsNullOrWhiteSpace(data.Title))
+                return new IsSuccessResult("請輸入標題");
+            data.Title = data.Title.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Message))
+                return new IsSuccessResult("請輸入內容");
+            data.Message = data.Message.Trim();
+
+            var isAny = PetContext.Asks.Any(r => r.Title == data.Title && r.Id != id);
+            if (isAny)
+                return new IsSuccessResult(string.Format("已經有 {0} 這個問與答了", data.Title));
+
+            var hasClass = PetContext.Classes.Any(r => r.Id == data.ClassId);
+            if (hasClass == false)
+                return new IsSuccessResult("請選擇正確的分類");
+
+            if (ask.Title == data.Title && ask.Message == data.Message && ask.ClassId == data.ClassId)
+                return new IsSuccessResult();
+
+            try
+            {
+                ask.Title = data.Title;
+                ask.Message = data.Message;
+                ask.ClassId = data.ClassId;
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
     }

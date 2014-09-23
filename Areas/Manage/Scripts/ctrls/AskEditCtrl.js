@@ -1,26 +1,27 @@
-﻿$(function () {
+﻿function MyViewModel() {
+    var self = this;
 
-    function MyViewModel() {
-        var self = this;
+    self.classes = ko.observableArray();
+};
 
-        self.areas = ko.observableArray();
-    };
 
-    // 取得地區列表
+$(function () {
+
+    var vm = new MyViewModel();
+
+    // 取得分類列表
     $.ajax({
         type: 'post',
-        url: '/Manage/System/GetAreaList',
-        success: function (area) {
-            vm.areas(area);
-            vm.areas.unshift({
+        url: '/Manage/System/GetClassList',
+        success: function (classes) {
+            vm.classes(classes);
+            vm.classes.unshift({
                 "Word": "請選擇",
                 "Id": ""
             });
             $("#selOptions option:first").attr("selected", true);
         }
     });
-
-    var vm = new MyViewModel();
 
     var urlParams = {};
     (function () {
@@ -36,13 +37,13 @@
 
     // 沒有輸入id直接導回
     if (urlParams["id"] == null)
-        window.location = '/Manage/Activity';
+        window.location = '/Manage/Ask';
 
-    // 取得最新活動
+    // 取得問與答
     var photo;
     $.ajax({
         type: 'post',
-        url: '/Manage/Activity/EditInit',
+        url: '/Manage/Ask/EditInit',
         data: {
             id: urlParams["id"]
         },
@@ -51,7 +52,7 @@
                 photo = data.ReturnObject.Poto;
                 $("#title").val(data.ReturnObject.Title);
                 $("#selOptions").children().each(function () {
-                    if ($(this).val() == data.ReturnObject.AreaId) {
+                    if ($(this).val() == data.ReturnObject.ClassId) {
                         //jQuery給法
                         $(this).attr("selected", true); //或是給"selected"也可
 
@@ -59,44 +60,25 @@
                         this.selected = true;
                     }
                 });
-                $("#content").val(data.ReturnObject.Message);
-                $("#address").val(data.ReturnObject.Address);
+                $("#message").val(data.ReturnObject.Message);
             } else {
                 alert(data.ErrorMessage);
-                window.location = '/Manage/Activity';
+                window.location = '/Manage/Ask';
             }
         }
     });
 
-    // 修改活動
+    // 修改問與答
     $("#btn1").click(
         function () {
             var $btn = $("#btn1");
-            var $uploadfile = $(".table-striped .name a");
-            if ($uploadfile.text() != "") {
-                $.ajax({
-                    type: 'post',
-                    url: '/Manage/System/DeletePhoto',
-                    data: {
-                        Photo: photo
-                    }
-                });
-
-                photo = $uploadfile.text();
-            }
 
             if ($("#commentForm").valid() == false) {
                 return;
             }
 
-            var oEditor = CKEDITOR.instances.content;
-            if (oEditor.getData() == '') {
-                alert('請輸入內容');
-                return;
-            }
-
-            if (oEditor.getData().length > 1000) {
-                alert('內容過長，請重新輸入');
+            if ($("#selOptions").val() == "") {
+                alert('請選擇分類');
                 return;
             }
 
@@ -104,25 +86,22 @@
 
             $.ajax({
                 type: 'post',
-                url: '/Manage/Activity/EditActivity',
+                url: '/Manage/Ask/EditAsk',
                 data: {
                     id: urlParams["id"],
-                    Poto: photo,
                     Title: $("#title").val(),
-                    Message: oEditor.getData(),
-                    Address: $("#address").val(),
-                    AreaId: $("#selOptions").val()
+                    Message: $("#message").val(),
+                    ClassId: $("#selOptions").val()
                 },
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
                         $("#title").val('');
-                        oEditor.setData('');
-                        $("#address").val('');
+                        $("#message").val(''),
                         $("#selOptions option:first").attr("selected", true);
 
                         alert("修改完成");
-                        window.location = '/Manage/Activity';
+                        window.location = '/Manage/Ask';
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -133,7 +112,7 @@
     // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Manage/Activity';
+        window.location = '/Manage/Ask';
     });
 
     ko.applyBindings(vm);

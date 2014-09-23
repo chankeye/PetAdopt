@@ -43,6 +43,7 @@ $(function () {
                     $("#checkbox").prop("checked", true);
             } else {
                 alert(data.ErrorMessage);
+                window.location = '/Manage/User';
             }
         }
     });

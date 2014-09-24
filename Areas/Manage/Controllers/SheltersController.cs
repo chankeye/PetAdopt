@@ -43,9 +43,28 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        public ActionResult EditInit(int id)
+        {
+            var result = _sheltersLogic.GetShelters(id);
+
+            return Json(result);
+        }
+
         public ActionResult AddShelters(CreateShelters data)
         {
             var result = _sheltersLogic.AddShelters(data);
+
+            return Json(result);
+        }
+
+        public ActionResult EditShelters(int id, CreateShelters data)
+        {
+            var result = _sheltersLogic.EditShelters(id, data);
 
             return Json(result);
         }

@@ -89,6 +89,34 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得收容所資訊
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<CreateShelters> GetShelters(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var shelters = PetContext.Shelters.SingleOrDefault(r => r.Id == id);
+            if (shelters == null)
+                return new IsSuccessResult<CreateShelters>("找不到此活動");
+
+            return new IsSuccessResult<CreateShelters>
+            {
+                ReturnObject = new CreateShelters
+                {
+                    Photo = shelters.CoverPhoto,
+                    Name = shelters.Name,
+                    Introduction = shelters.Introduction,
+                    AreaId = shelters.AreaId,
+                    Address = shelters.Address,
+                    Url = shelters.Url,
+                    Phone = shelters.Phone
+                }
+            };
+        }
+
+        /// <summary>
         /// 新增收容所
         /// </summary>
         /// <returns></returns>
@@ -161,6 +189,78 @@ namespace PetAdopt.Logic
                 log.Error(ex);
 
                 return new IsSuccessResult<SheltersItem>("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        /// <summary>
+        /// 修改收容所資訊
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult EditShelters(int id, CreateShelters data)
+        {
+            var log = GetLogger();
+            log.Debug("photo: {0}, name: {1}, intorduction:{2}, areaId:{3}, address:{4}, phone:{5}, url:{6}, id:{7}",
+                data.Photo, data.Name, data.Introduction, data.AreaId, data.Address, data.Phone, data.Url, id);
+
+            var shelters = PetContext.Shelters.SingleOrDefault(r => r.Id == id);
+            if (shelters == null)
+                return new IsSuccessResult("找不到此最新活動");
+
+            if (string.IsNullOrWhiteSpace(data.Name))
+                return new IsSuccessResult<SheltersItem>("請輸入收容所名稱");
+            data.Name = data.Name.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Introduction))
+                return new IsSuccessResult<SheltersItem>("請輸入收容所介紹");
+            data.Introduction = data.Introduction.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Address))
+                return new IsSuccessResult<SheltersItem>("請輸入收容所地址");
+            data.Address = data.Address.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Phone))
+                return new IsSuccessResult<SheltersItem>("請輸入收容所電話");
+            data.Phone = data.Phone.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Photo) == false)
+                data.Photo = data.Photo.Trim();
+
+            var isAny = PetContext.Shelters.Any(r => r.Name == data.Name && r.Id != id);
+            if (isAny)
+                return new IsSuccessResult<SheltersItem>(string.Format("已經有 {0} 這個收容所資料了", data.Name));
+
+            var hasArea = PetContext.Areas.Any(r => r.Id == data.AreaId);
+            if (hasArea == false)
+                return new IsSuccessResult<SheltersItem>("請選擇正確的地區");
+
+            if (string.IsNullOrWhiteSpace(data.Url) == false)
+                data.Url = data.Url.Trim();
+
+            if (shelters.CoverPhoto == data.Photo && shelters.Name == data.Name && shelters.Introduction == data.Introduction &&
+                shelters.Address == data.Address && shelters.AreaId == data.AreaId && shelters.Phone == data.Phone && shelters.Url == data.Url)
+            {
+                return new IsSuccessResult();
+            }
+
+            try
+            {
+                shelters.CoverPhoto = data.Photo;
+                shelters.Name = data.Name;
+                shelters.Introduction = data.Introduction;
+                shelters.Address = data.Address;
+                shelters.Url = data.Url;
+                shelters.Phone = data.Phone;
+                shelters.AreaId = data.AreaId;
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
     }

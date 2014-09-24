@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\SheltersEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\BlogEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\HelpEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AskCtrl.js" />
@@ -237,6 +238,7 @@
     <Content Include="Areas\Manage\Views\Knowledge\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Help\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Blog\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Shelters\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />

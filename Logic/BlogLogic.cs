@@ -80,5 +80,71 @@ namespace PetAdopt.Logic
                 return result;
             }
         }
+
+        /// <summary>
+        /// 新增Blog文章
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<BlogItem> AddBlog(CreateBlog data)
+        {
+            var log = GetLogger();
+            log.Debug("title: {0}, message:{1}, animalId:{2}, classId:{3}",
+                data.Title, data.Message, data.AnimalId, data.ClassId);
+
+            if (string.IsNullOrWhiteSpace(data.Title))
+                return new IsSuccessResult<BlogItem>("請輸入標題");
+            data.Title = data.Title.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Message))
+                return new IsSuccessResult<BlogItem>("請輸入內容");
+            data.Message = data.Message.Trim();
+
+            var isAny = PetContext.Activities.Any(r => r.Title == data.Title);
+            if (isAny)
+                return new IsSuccessResult<BlogItem>(string.Format("已經有 {0} 這個最新消息了", data.Title));
+
+            var hasClass = PetContext.Classes.Any(r => r.Id == data.ClassId);
+            if (hasClass == false)
+                return new IsSuccessResult<BlogItem>("請選擇正確的分類");
+
+            if (data.AnimalId.HasValue)
+            {
+                var hasAnimal = PetContext.Animals.Any(r => r.Id == data.AnimalId);
+                if (hasAnimal == false)
+                    return new IsSuccessResult<BlogItem>("請輸入正確的動物編號");
+            }
+
+            try
+            {
+                var blog = PetContext.Blogs.Add(new Blog
+                {
+                    Title = data.Title,
+                    Message = data.Message,
+                    AnimalId = data.AnimalId,
+                    ClassId = data.ClassId,
+                    OperationInfo = new OperationInfo
+                    {
+                        Date = DateTime.Now,
+                        UserId = GetOperationInfo().UserId
+                    }
+                });
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult<BlogItem>
+                {
+                    ReturnObject = new BlogItem
+                    {
+                        Id = blog.Id,
+                        Title = blog.Title,
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult<BlogItem>("發生不明錯誤，請稍候再試");
+            }
+        }
     }
 }

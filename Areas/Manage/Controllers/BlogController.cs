@@ -1,5 +1,5 @@
 ﻿using PetAdopt.Controllers;
-using PetAdopt.DTO;
+using PetAdopt.DTO.Blog;
 using PetAdopt.Logic;
 using System.Web.Mvc;
 
@@ -39,6 +39,14 @@ namespace PetAdopt.Areas.Manage.Controllers
         public ActionResult Delete(int id)
         {
             var result = _blogLogic.DeleteBlog(id);
+
+            return Json(result);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult AddBlog(CreateBlog data)
+        {
+            var result = _blogLogic.AddBlog(data);
 
             return Json(result);
         }

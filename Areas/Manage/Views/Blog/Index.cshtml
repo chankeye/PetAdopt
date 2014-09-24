@@ -10,6 +10,46 @@
     <h2>@ViewBag.Title</h2>
 </div>
 <div>
+    <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            新增文章
+        </legend>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">標題</label>
+            <div class="col-sm-4">
+                <input id="title" name="title" class="form-control required" maxlength="50" placeholder="請輸入標題" required autofocus />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">分類</label>
+            <div class="col-sm-4">
+                <select id="selOptions" class="form-control"
+                        data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">內容</label>
+            <div class="col-sm-4">
+                <textarea id="content" name="content" class="form-control ckeditor"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">動物</label>
+            <div class="col-sm-4">
+                <input id="animalId" name="animalId" class="form-control" placeholder="請輸入本站認養動物文章標題或編號" autofocus />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
+                <button id="btn2" type="button" class="btn btn-default">清除</button>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+
     <legend class="text-info">
         <i class="fa fa-check"></i>
         部落格管理
@@ -18,6 +58,7 @@
         <thead>
             <tr>
                 <th></th>
+                <th></th>
                 <th>序號</th>
                 <th>標題</th>
             </tr>
@@ -25,6 +66,7 @@
         <tbody data-bind="foreach: history">
             <tr>
                 <td><a href='#' data-bind="click: $root.removeBlog">移除</a></td>
+                <td><a href='#' data-bind="click: $root.editBlog">編輯</a></td>
                 <td><span data-bind="text: Id"></span></td>
                 <td><span data-bind="text: Title"></span></td>
             </tr>

@@ -68,8 +68,8 @@ $(function () {
         type: 'post',
         url: '/Manage/System/GetAreaList',
         success: function (area) {
-            vm.areas(area);
-            vm.areas.unshift({
+            window.vm.areas(area);
+            window.vm.areas.unshift({
                 "Word": "請選擇",
                 "Id": ""
             });

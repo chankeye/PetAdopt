@@ -1,5 +1,5 @@
 ﻿using PetAdopt.Controllers;
-using PetAdopt.DTO;
+using PetAdopt.DTO.Ask;
 using PetAdopt.Logic;
 using System.Web.Mvc;
 

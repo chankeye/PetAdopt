@@ -1,8 +1,8 @@
-﻿using System.IO;
-using PetAdopt.DTO;
+﻿using PetAdopt.DTO;
+using PetAdopt.DTO.Activity;
 using PetAdopt.Models;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace PetAdopt.Logic
@@ -67,9 +67,9 @@ namespace PetAdopt.Logic
             }
 
             // 有上傳圖片，就把圖片刪掉
-            if (string.IsNullOrWhiteSpace(activitiy.CoverPoto) == false)
+            if (string.IsNullOrWhiteSpace(activitiy.CoverPhoto) == false)
             {
-                File.Delete(path + "//" + activitiy.CoverPoto);
+                File.Delete(path + "//" + activitiy.CoverPhoto);
             }
 
             try
@@ -105,7 +105,7 @@ namespace PetAdopt.Logic
             {
                 ReturnObject = new CreateActivity
                 {
-                    Poto = activity.CoverPoto,
+                    Photo = activity.CoverPhoto,
                     Title = activity.Title,
                     Message = activity.Message,
                     AreaId = activity.AreaId,
@@ -121,8 +121,8 @@ namespace PetAdopt.Logic
         public IsSuccessResult<ActivityItem> AddActivity(CreateActivity data)
         {
             var log = GetLogger();
-            log.Debug("poto: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}", 
-                data.Poto, data.Title, data.Message, data.AreaId, data.Address);
+            log.Debug("photo: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}",
+                data.Photo, data.Title, data.Message, data.AreaId, data.Address);
 
             if (string.IsNullOrWhiteSpace(data.Title))
                 return new IsSuccessResult<ActivityItem>("請輸入標題");
@@ -132,8 +132,8 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult<ActivityItem>("請輸入內容");
             data.Message = data.Message.Trim();
 
-            if (string.IsNullOrWhiteSpace(data.Poto) == false)
-                data.Poto = data.Poto.Trim();
+            if (string.IsNullOrWhiteSpace(data.Photo) == false)
+                data.Photo = data.Photo.Trim();
 
             var isAny = PetContext.Activities.Any(r => r.Title == data.Title);
             if (isAny)
@@ -153,7 +153,7 @@ namespace PetAdopt.Logic
             {
                 var activity = PetContext.Activities.Add(new Activity
                 {
-                    CoverPoto = data.Poto,
+                    CoverPhoto = data.Photo,
                     Title = data.Title,
                     Message = data.Message,
                     Address = data.Address,
@@ -190,8 +190,8 @@ namespace PetAdopt.Logic
         public IsSuccessResult EditActivity(int id, CreateActivity data)
         {
             var log = GetLogger();
-            log.Debug("poto: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}, id:{5}", data.Poto, data.Title, data.Message,
-                data.AreaId, data.Address, id);
+            log.Debug("photo: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}, id:{5}",
+                data.Photo, data.Title, data.Message, data.AreaId, data.Address, id);
 
             var activity = PetContext.Activities.SingleOrDefault(r => r.Id == id);
             if (activity == null)
@@ -205,8 +205,8 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult("請輸入內容");
             data.Message = data.Message.Trim();
 
-            if (string.IsNullOrWhiteSpace(data.Poto) == false)
-                data.Poto = data.Poto.Trim();
+            if (string.IsNullOrWhiteSpace(data.Photo) == false)
+                data.Photo = data.Photo.Trim();
 
             var isAny = PetContext.Activities.Any(r => r.Title == data.Title && r.Id != id);
             if (isAny)
@@ -222,7 +222,7 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Address) == false)
                 data.Address = data.Address.Trim();
 
-            if (activity.CoverPoto == data.Poto && activity.Title == data.Title && activity.Message == data.Message &&
+            if (activity.CoverPhoto == data.Photo && activity.Title == data.Title && activity.Message == data.Message &&
                 activity.Address == data.Address && activity.AreaId == data.AreaId)
             {
                 return new IsSuccessResult();
@@ -230,7 +230,7 @@ namespace PetAdopt.Logic
 
             try
             {
-                activity.CoverPoto = data.Poto;
+                activity.CoverPhoto = data.Photo;
                 activity.Title = data.Title;
                 activity.Message = data.Message;
                 activity.Address = data.Address;

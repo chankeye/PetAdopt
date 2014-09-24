@@ -1,5 +1,5 @@
 ﻿using PetAdopt.Controllers;
-using PetAdopt.DTO;
+using PetAdopt.DTO.Help;
 using PetAdopt.Logic;
 using System.Web.Mvc;
 
@@ -43,9 +43,28 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        public ActionResult EditInit(int id)
+        {
+            var result = _helpLogic.GetHelp(id);
+
+            return Json(result);
+        }
+
         public ActionResult AddHelp(CreateHelp data)
         {
             var result = _helpLogic.AddHelp(data);
+
+            return Json(result);
+        }
+
+        public ActionResult EditHelp(int id, CreateHelp data)
+        {
+            var result = _helpLogic.EditHelp(id, data);
 
             return Json(result);
         }

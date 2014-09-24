@@ -1,13 +1,8 @@
-﻿using System.IO;
-using System.Web.Helpers;
-using System.Web.Util;
-using PetAdopt.DTO;
+﻿using PetAdopt.DTO;
+using PetAdopt.DTO.System;
 using PetAdopt.Models;
-using PetAdopt.Utilities;
-using NLog;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.IO;
 using System.Linq;
 
 namespace PetAdopt.Logic

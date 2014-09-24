@@ -1,8 +1,8 @@
 ﻿using PetAdopt.DTO;
+using PetAdopt.DTO.News;
 using PetAdopt.Models;
 using PetAdopt.Utilities;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -69,9 +69,9 @@ namespace PetAdopt.Logic
             }
 
             // 有上傳圖片，就把圖片刪掉
-            if (string.IsNullOrWhiteSpace(news.CoverPoto) == false)
+            if (string.IsNullOrWhiteSpace(news.CoverPhoto) == false)
             {
-                File.Delete(path + "//" + news.CoverPoto);
+                File.Delete(path + "//" + news.CoverPhoto);
             }
 
             try
@@ -107,7 +107,7 @@ namespace PetAdopt.Logic
             {
                 ReturnObject = new CreateNews
                 {
-                    Poto = news.CoverPoto,
+                    Photo = news.CoverPhoto,
                     Title = news.Title,
                     Message = news.Message,
                     AreaId = news.AreaId,
@@ -123,8 +123,8 @@ namespace PetAdopt.Logic
         public IsSuccessResult<NewsItem> AddNews(CreateNews data)
         {
             var log = GetLogger();
-            log.Debug("poto: {0}, title: {1}, message:{2}, areaId:{3}, url:{4}", data.Poto, data.Title, data.Message,
-                data.AreaId, data.Url);
+            log.Debug("photo: {0}, title: {1}, message:{2}, areaId:{3}, url:{4}",
+                data.Photo, data.Title, data.Message, data.AreaId, data.Url);
 
             if (string.IsNullOrWhiteSpace(data.Title))
                 return new IsSuccessResult<NewsItem>("標題請勿傳入空值");
@@ -134,8 +134,8 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult<NewsItem>("內容請勿傳入空值");
             data.Message = data.Message.Trim();
 
-            if (string.IsNullOrWhiteSpace(data.Poto) == false)
-                data.Poto = data.Poto.Trim();
+            if (string.IsNullOrWhiteSpace(data.Photo) == false)
+                data.Photo = data.Photo.Trim();
 
             // Url驗證
             if (string.IsNullOrWhiteSpace(data.Url) == false)
@@ -161,7 +161,7 @@ namespace PetAdopt.Logic
             {
                 var news = PetContext.News.Add(new News
                 {
-                    CoverPoto = data.Poto,
+                    CoverPhoto = data.Photo,
                     Title = data.Title,
                     Message = data.Message,
                     Url = data.Url,
@@ -198,8 +198,8 @@ namespace PetAdopt.Logic
         public IsSuccessResult EditNews(int id, CreateNews data)
         {
             var log = GetLogger();
-            log.Debug("poto: {0}, title: {1}, message:{2}, areaId:{3}, url:{4}, id:{5}", data.Poto, data.Title, data.Message,
-                data.AreaId, data.Url, id);
+            log.Debug("photo: {0}, title: {1}, message:{2}, areaId:{3}, url:{4}, id:{5}",
+                data.Photo, data.Title, data.Message, data.AreaId, data.Url, id);
 
             var news = PetContext.News.SingleOrDefault(r => r.Id == id);
             if (news == null)
@@ -213,8 +213,8 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult("請輸入內容");
             data.Message = data.Message.Trim();
 
-            if (string.IsNullOrWhiteSpace(data.Poto) == false)
-                data.Poto = data.Poto.Trim();
+            if (string.IsNullOrWhiteSpace(data.Photo) == false)
+                data.Photo = data.Photo.Trim();
 
             // Url驗證
             if (string.IsNullOrWhiteSpace(data.Url) == false)
@@ -236,7 +236,7 @@ namespace PetAdopt.Logic
                     return new IsSuccessResult("請選擇正確的地區");
             }
 
-            if (news.CoverPoto == data.Poto && news.Title == data.Title && news.Message == data.Message &&
+            if (news.CoverPhoto == data.Photo && news.Title == data.Title && news.Message == data.Message &&
                 news.Url == data.Url && news.AreaId == data.AreaId)
             {
                 return new IsSuccessResult();
@@ -244,7 +244,7 @@ namespace PetAdopt.Logic
 
             try
             {
-                news.CoverPoto = data.Poto;
+                news.CoverPhoto = data.Photo;
                 news.Title = data.Title;
                 news.Message = data.Message;
                 news.Url = data.Url;

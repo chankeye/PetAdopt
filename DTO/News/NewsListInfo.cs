@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PetAdopt.DTO
+namespace PetAdopt.DTO.News
 {
     public class NewsItem
     {

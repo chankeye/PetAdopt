@@ -23,7 +23,7 @@ namespace PetAdopt.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(30);
 
-            this.Property(t => t.CoverPoto)
+            this.Property(t => t.CoverPhoto)
                 .HasMaxLength(100);
 
             // Table & Column Mappings
@@ -35,7 +35,7 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.AreaId).HasColumnName("AreaId");
             this.Property(t => t.Address).HasColumnName("Address");
             this.Property(t => t.OperationId).HasColumnName("OperationId");
-            this.Property(t => t.CoverPoto).HasColumnName("CoverPoto");
+            this.Property(t => t.CoverPhoto).HasColumnName("CoverPhoto");
 
             // Relationships
             this.HasRequired(t => t.Area)

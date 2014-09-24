@@ -86,7 +86,7 @@ $(function () {
         function () {
             var $btn = $("#btn1");
             var $uploadfile = $(".table-striped .name a");
-            var poto = $uploadfile.text();
+            var photo = $uploadfile.text();
 
             if ($("#commentForm").valid() == false) {
                 return;
@@ -109,7 +109,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/News/AddNews',
                 data: {
-                    Poto: poto,
+                    Photo: photo,
                     Title: $("#title").val(),
                     Message: oEditor.getData(),
                     Url: $("#source").val(),

@@ -1,4 +1,4 @@
-﻿namespace PetAdopt.DTO
+﻿namespace PetAdopt.DTO.Knowledge
 {
     public class CreateKnowledge
     {

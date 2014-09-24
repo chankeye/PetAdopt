@@ -11,7 +11,7 @@ namespace PetAdopt.Models.Mapping
             this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.CoverPoto)
+            this.Property(t => t.CoverPhoto)
                 .HasMaxLength(100);
 
             this.Property(t => t.Name)
@@ -31,7 +31,7 @@ namespace PetAdopt.Models.Mapping
             // Table & Column Mappings
             this.ToTable("Animal");
             this.Property(t => t.Id).HasColumnName("Id");
-            this.Property(t => t.CoverPoto).HasColumnName("CoverPoto");
+            this.Property(t => t.CoverPhoto).HasColumnName("CoverPhoto");
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Introduction).HasColumnName("Introduction");
             this.Property(t => t.Age).HasColumnName("Age");

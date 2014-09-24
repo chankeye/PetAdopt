@@ -1,8 +1,8 @@
-﻿namespace PetAdopt.DTO
+﻿namespace PetAdopt.DTO.Activity
 {
     public class CreateActivity
     {
-        public string Poto { get; set; }
+        public string Photo { get; set; }
 
         public string Title { get; set; }
 

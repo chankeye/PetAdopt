@@ -87,8 +87,8 @@ $(function () {
         type: 'post',
         url: '/Manage/System/GetAreaList',
         success: function (area) {
-            vm.areas(area);
-            vm.areas.unshift({
+            window.vm.areas(area);
+            window.vm.areas.unshift({
                 "Word": "請選擇",
                 "Id": ""
             });
@@ -105,7 +105,7 @@ $(function () {
         function () {
             var $btn = $("#btn1");
             var $uploadfile = $(".table-striped .name a");
-            var poto = $uploadfile.text();
+            var photo = $uploadfile.text();
 
             if ($("#commentForm").valid() == false) {
                 return;
@@ -127,7 +127,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Help/AddHelp',
                 data: {
-                    Poto: poto,
+                    Photo: photo,
                     Title: $("#title").val(),
                     Message: $("#message").val(),
                     Address: $("#address").val(),

@@ -1,6 +1,5 @@
-﻿using System;
-using PetAdopt.Controllers;
-using PetAdopt.DTO;
+﻿using PetAdopt.Controllers;
+using PetAdopt.DTO.News;
 using PetAdopt.Logic;
 using System.Web.Mvc;
 

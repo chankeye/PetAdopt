@@ -1,10 +1,25 @@
 ﻿function MyViewModel() {
     var self = this;
 
+    self.classes = ko.observableArray();
     self.areas = ko.observableArray();
 };
 
 $(function () {
+
+    // 取得分類列表
+    $.ajax({
+        type: 'post',
+        url: '/Manage/System/GetClassList',
+        success: function (classes) {
+            vm.classes(classes);
+            vm.classes.unshift({
+                "Word": "請選擇",
+                "Id": ""
+            });
+            $("#selOptionsClass option:first").attr("selected", true);
+        }
+    });
 
     // 取得地區列表
     $.ajax({
@@ -16,7 +31,7 @@ $(function () {
                 "Word": "請選擇",
                 "Id": ""
             });
-            $("#selOptions option:first").attr("selected", true);
+            $("#selOptionsAreas option:first").attr("selected", true);
         }
     });
 
@@ -36,13 +51,13 @@ $(function () {
 
     // 沒有輸入id直接導回
     if (urlParams["id"] == null)
-        window.location = '/Manage/Activity';
+        window.location = '/Manage/Help';
 
-    // 取得最新活動
+    // 取得最新救援
     var photo;
     $.ajax({
         type: 'post',
-        url: '/Manage/Activity/EditInit',
+        url: '/Manage/Help/EditInit',
         data: {
             id: urlParams["id"]
         },
@@ -50,7 +65,7 @@ $(function () {
             if (data.IsSuccess) {
                 photo = data.ReturnObject.Photo;
                 $("#title").val(data.ReturnObject.Title);
-                $("#selOptions").children().each(function () {
+                $("#selOptionsAreas").children().each(function () {
                     if ($(this).val() == data.ReturnObject.AreaId) {
                         //jQuery給法
                         $(this).attr("selected", true); //或是給"selected"也可
@@ -59,16 +74,25 @@ $(function () {
                         this.selected = true;
                     }
                 });
-                $("#content").val(data.ReturnObject.Message);
+                $("#selOptionsClass").children().each(function () {
+                    if ($(this).val() == data.ReturnObject.ClassId) {
+                        //jQuery給法
+                        $(this).attr("selected", true); //或是給"selected"也可
+
+                        //javascript給法
+                        this.selected = true;
+                    }
+                });
+                $("#message").val(data.ReturnObject.Message);
                 $("#address").val(data.ReturnObject.Address);
             } else {
                 alert(data.ErrorMessage);
-                window.location = '/Manage/Activity';
+                window.location = '/Manage/Help';
             }
         }
     });
 
-    // 修改活動
+    // 修改救援
     $("#btn1").click(
         function () {
             var $btn = $("#btn1");
@@ -89,14 +113,13 @@ $(function () {
                 return;
             }
 
-            var oEditor = CKEDITOR.instances.content;
-            if (oEditor.getData() == '') {
-                alert('請輸入內容');
+            if ($("#selOptionsClass").val() == "") {
+                alert('請選擇分類');
                 return;
             }
 
-            if (oEditor.getData().length > 1000) {
-                alert('內容過長，請重新輸入');
+            if ($("#selOptionsAreas").val() == "") {
+                alert('請選擇地區');
                 return;
             }
 
@@ -104,25 +127,27 @@ $(function () {
 
             $.ajax({
                 type: 'post',
-                url: '/Manage/Activity/EditActivity',
+                url: '/Manage/Help/EditHelp',
                 data: {
                     id: urlParams["id"],
                     Photo: photo,
                     Title: $("#title").val(),
-                    Message: oEditor.getData(),
+                    Message: $("#message").val(),
                     Address: $("#address").val(),
-                    AreaId: $("#selOptions").val()
+                    AreaId: $("#selOptionsAreas").val(),
+                    ClassId: $("#selOptionsClass").val()
                 },
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
                         $("#title").val('');
-                        oEditor.setData('');
+                        $("#message").val('');
                         $("#address").val('');
-                        $("#selOptions option:first").attr("selected", true);
+                        $("#selOptionsClass option:first").attr("selected", true);
+                        $("#selOptionsAreas option:first").attr("selected", true);
 
                         alert("修改完成");
-                        window.location = '/Manage/Activity';
+                        window.location = '/Manage/Help';
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -133,7 +158,7 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Manage/Activity';
+        window.location = '/Manage/Help';
     });
 
     ko.applyBindings(vm);

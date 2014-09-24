@@ -17,7 +17,7 @@ namespace PetAdopt.Models
         public short AreaId { get; set; }
         public string Address { get; set; }
         public int OperationId { get; set; }
-        public string CoverPoto { get; set; }
+        public string CoverPhoto { get; set; }
         public virtual Area Area { get; set; }
         public virtual Class Class { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }

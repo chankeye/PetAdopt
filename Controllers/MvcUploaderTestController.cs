@@ -24,23 +24,23 @@ namespace PetAdopt.Controllers
             {
                 // §PÂ_ÀÉ¦W¬O§_­«ÂÐ
                 var path = Server.MapPath("~/Content/uploads");
-                var potoName = Request.Files[i].FileName;
-                var fullpotoPath = path + "\\" + Request.Files[i].FileName;
+                var photoName = Request.Files[i].FileName;
+                var fullphotoPath = path + "\\" + Request.Files[i].FileName;
 
-                if (System.IO.File.Exists(fullpotoPath))
+                if (System.IO.File.Exists(fullphotoPath))
                 {
                     var my_counter = 2;
                     string tempfileName = "";
-                    string tempPotoName = "";
-                    while (System.IO.File.Exists(fullpotoPath))
+                    string tempPhotoName = "";
+                    while (System.IO.File.Exists(fullphotoPath))
                     {
-                        tempfileName = path + "\\" + my_counter.ToString() + "_" + potoName;
-                        fullpotoPath = tempfileName;
-                        tempPotoName = my_counter.ToString() + "_" + potoName;
+                        tempfileName = path + "\\" + my_counter.ToString() + "_" + photoName;
+                        fullphotoPath = tempfileName;
+                        tempPhotoName = my_counter.ToString() + "_" + photoName;
 
                         my_counter = my_counter + 1;
                     }
-                    potoName = tempPotoName;
+                    photoName = tempPhotoName;
                 }
 
                 var st = FileSaver.StoreFile(x =>
@@ -55,12 +55,12 @@ namespace PetAdopt.Controllers
 
 
                     //overriding defaults
-                    x.FileName = potoName;// default is filename suffixed with filetimestamp
+                    x.FileName = photoName;// default is filename suffixed with filetimestamp
                     x.ThrowExceptions = true;//default is false, if false exception message is set in error property
                 });
 
-                st.Title = potoName;
-                st.name = potoName;
+                st.Title = photoName;
+                st.name = photoName;
                 statuses.Add(st);
             }
 

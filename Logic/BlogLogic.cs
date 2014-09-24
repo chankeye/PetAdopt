@@ -1,7 +1,7 @@
 ﻿using PetAdopt.DTO;
+using PetAdopt.DTO.Blog;
 using PetAdopt.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace PetAdopt.Logic

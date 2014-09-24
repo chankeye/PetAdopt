@@ -1,4 +1,4 @@
-﻿namespace PetAdopt.DTO
+﻿namespace PetAdopt.DTO.Ask
 {
     public class CreateAsk
     {

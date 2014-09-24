@@ -49,7 +49,7 @@ $(function () {
         },
         success: function (data) {
             if (data.IsSuccess) {
-                photo = data.ReturnObject.Poto;
+                photo = data.ReturnObject.Photo;
                 $("#title").val(data.ReturnObject.Title);
                 $("#selOptions").children().each(function () {
                     if ($(this).val() == data.ReturnObject.AreaId) {
@@ -108,7 +108,7 @@ $(function () {
                 url: '/Manage/News/EditNews',
                 data: {
                     id: urlParams["id"],
-                    Poto: photo,
+                    Photo: photo,
                     Title: $("#title").val(),
                     Message: oEditor.getData(),
                     Url: $("#source").val(),

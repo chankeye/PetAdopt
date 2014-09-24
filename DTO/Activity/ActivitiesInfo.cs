@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PetAdopt.DTO
+namespace PetAdopt.DTO.Activity
 {
     public class ActivityItem
     {

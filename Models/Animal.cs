@@ -13,7 +13,7 @@ namespace PetAdopt.Models
         }
 
         public int Id { get; set; }
-        public string CoverPoto { get; set; }
+        public string CoverPhoto { get; set; }
         public string Name { get; set; }
         public string Introduction { get; set; }
         public Nullable<short> Age { get; set; }

@@ -1,8 +1,7 @@
-﻿using System.Web.UI.WebControls;
-using PetAdopt.DTO;
+﻿using PetAdopt.DTO;
+using PetAdopt.DTO.Ask;
 using PetAdopt.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace PetAdopt.Logic

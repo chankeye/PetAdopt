@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PetAdopt.DTO
+namespace PetAdopt.DTO.User
 {
     /// <summary>
     /// 使用者資訊

@@ -1,12 +1,10 @@
-﻿using System.Text.RegularExpressions;
-using PetAdopt.DTO;
+﻿using PetAdopt.DTO;
+using PetAdopt.DTO.User;
 using PetAdopt.Models;
 using PetAdopt.Utilities;
-using NLog;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace PetAdopt.Logic
 {

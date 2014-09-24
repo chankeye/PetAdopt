@@ -1,5 +1,5 @@
 ﻿using PetAdopt.Controllers;
-using PetAdopt.DTO;
+using PetAdopt.DTO.Shelters;
 using PetAdopt.Logic;
 using System.Web.Mvc;
 
@@ -38,7 +38,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = _sheltersLogic.DeleteShelters(id);
+            var result = _sheltersLogic.DeleteShelters(Server.MapPath("~/Content/uploads"), id);
+
+            return Json(result);
+        }
+
+        public ActionResult AddShelters(CreateShelters data)
+        {
+            var result = _sheltersLogic.AddShelters(data);
 
             return Json(result);
         }

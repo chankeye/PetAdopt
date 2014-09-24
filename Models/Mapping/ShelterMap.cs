@@ -39,7 +39,7 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Introduction).HasColumnName("Introduction");
             this.Property(t => t.Url).HasColumnName("Url");
-            this.Property(t => t.AearId).HasColumnName("AearId");
+            this.Property(t => t.AreaId).HasColumnName("AreaId");
             this.Property(t => t.Address).HasColumnName("Address");
             this.Property(t => t.Phone).HasColumnName("Phone");
             this.Property(t => t.OperationId).HasColumnName("OperationId");
@@ -48,7 +48,7 @@ namespace PetAdopt.Models.Mapping
             // Relationships
             this.HasRequired(t => t.Area)
                 .WithMany(t => t.Shelters)
-                .HasForeignKey(d => d.AearId);
+                .HasForeignKey(d => d.AreaId);
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Shelters)
                 .HasForeignKey(d => d.OperationId);

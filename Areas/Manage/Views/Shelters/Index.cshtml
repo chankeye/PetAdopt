@@ -10,6 +10,68 @@
     <h2>@ViewBag.Title</h2>
 </div>
 <div>
+    <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            新增收容所
+        </legend>
+        <div class="container">
+            <div class="well">
+                <legend>上傳圖片</legend>
+                <p class="help-block">只限副檔名 jpg / png 最大5 MB, 只能上傳一張圖片</p>
+                <a class="btn btn-large btn-primary" data-target="#dlgFileUpload" data-toggle="modal" href="/MvcFileUpload/UploadDialog?FileTypes=%2F%28%5C.%7C%5C%2F%29%28jpe%3Fg%7Cpng%29%24%2Fi&amp;MaxFileSizeInBytes=5000000&amp;MaxNumberOfFiles=1&amp;DisableImagePreview=False&amp;UploadUrl=%2FMvcUploaderTest%2FUploadFile&amp;UIStyle=Bootstrap&amp;ReturnUrl=%23&amp;RenderSharedScript=True&amp;ShowPopUpClose=True&amp;postValues%5b0%5d.Key=entityId&amp;postValues%5b0%5d.Value=1234" role="button">上傳</a>
+            </div>
+            <!-- file upload modal dialog -->
+            <div class="modal fade" id="dlgFileUpload" tabindex="-1" role="dialog" aria-hidden="true">
+            </div><!-- /.modal -->
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">名稱</label>
+            <div class="col-sm-4">
+                <input id="name" name="name" class="form-control required" maxlength="50" placeholder="請輸入收容所名稱" required autofocus />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">介紹</label>
+            <div class="col-sm-4">
+                <textarea id="introduction" name="introduction" class="form-control" maxlength="200" required placeholder="請輸入收容所介紹" required autofocus></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">電話</label>
+            <div class="col-sm-4">
+                <input id="phone" name="phone" class="form-control required" maxlength="10" placeholder="0422223333或0912345678" required autofocus />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">地區</label>
+            <div class="col-sm-4">
+                <select id="selOptions" class="form-control"
+                        data-bind="options: areas, optionsText: 'Word', optionsValue: 'Id'"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">地址</label>
+            <div class="col-sm-4">
+                <input id="address" name="address" class="form-control" maxlength="30" placeholder="請輸入地址" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">收容所網址</label>
+            <div class="col-sm-4">
+                <input id="source" name="source" type="url" class="form-control url" maxlength="100" placeholder="例：http://www.yahoo.com.tw" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
+                <button id="btn2" type="button" class="btn btn-default">清除</button>
+            </div>
+        </div>
+    </form>
+
+    <hr />
+
     <legend class="text-info">
         <i class="fa fa-check"></i>
         收容所管理
@@ -18,6 +80,7 @@
         <thead>
             <tr>
                 <th></th>
+                <th></th>
                 <th>序號</th>
                 <th>名稱</th>
             </tr>
@@ -25,6 +88,7 @@
         <tbody data-bind="foreach: history">
             <tr>
                 <td><a href='#' data-bind="click: $root.removeShelters">移除</a></td>
+                <td><a href='#' data-bind="click: $root.editShelters">編輯</a></td>
                 <td><span data-bind="text: Id"></span></td>
                 <td><span data-bind="text: Name"></span></td>
             </tr>

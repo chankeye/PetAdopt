@@ -14,7 +14,6 @@ namespace PetAdopt.Models
 
         public int Id { get; set; }
         public string CoverPhoto { get; set; }
-        public string Name { get; set; }
         public string Introduction { get; set; }
         public Nullable<short> Age { get; set; }
         public Nullable<int> SheltersId { get; set; }
@@ -26,6 +25,7 @@ namespace PetAdopt.Models
         public Nullable<System.DateTime> EndDate { get; set; }
         public int OperationId { get; set; }
         public short ClassId { get; set; }
+        public string Title { get; set; }
         public virtual Area Area { get; set; }
         public virtual Class Class { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }

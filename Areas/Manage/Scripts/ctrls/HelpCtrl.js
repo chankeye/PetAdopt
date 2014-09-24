@@ -78,7 +78,7 @@ $(function () {
                 "Word": "請選擇",
                 "Id": ""
             });
-            $("#selOptionsClass option:first").attr("selected", true);
+            $("#selOptionsClasses option:first").attr("selected", true);
         }
     });
 
@@ -111,7 +111,7 @@ $(function () {
                 return;
             }
 
-            if ($("#selOptionsClass").val() == "") {
+            if ($("#selOptionsClasses").val() == "") {
                 alert('請選擇分類');
                 return;
             }
@@ -131,7 +131,7 @@ $(function () {
                     Title: $("#title").val(),
                     Message: $("#message").val(),
                     Address: $("#address").val(),
-                    ClassId: $("#selOptionsClass").val(),
+                    ClassId: $("#selOptionsClasses").val(),
                     AreaId: $("#selOptionsAreas").val()
                 },
                 success: function (data) {
@@ -142,7 +142,7 @@ $(function () {
                         $("#title").val('');
                         $("#message").val(''),
                         $("#address").val('');
-                        $("#selOptionsClass option:first").attr("selected", true);
+                        $("#selOptionsClasses option:first").attr("selected", true);
                         $("#selOptionsAreas option:first").attr("selected", true);
 
                         alert("新增成功");
@@ -159,7 +159,7 @@ $(function () {
         $("#title").val('');
         $("#message").val('');
         $("#address").val('');
-        $("#selOptionsClass option:first").attr("selected", true);
+        $("#selOptionsClasses option:first").attr("selected", true);
         $("#selOptionsAreas option:first").attr("selected", true);
     });
 });

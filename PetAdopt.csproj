@@ -623,6 +623,7 @@
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
     <Compile Include="DTO\Animal\AnimalList.cs" />
+    <Compile Include="DTO\Animal\CreateAnimal.cs" />
     <Compile Include="DTO\Ask\AskList.cs" />
     <Compile Include="DTO\Ask\CreateAsk.cs" />
     <Compile Include="DTO\Blog\BlogList.cs" />
@@ -696,7 +697,6 @@
     <Compile Include="Models\Mapping\Shelter_Message_MappingMap.cs" />
     <Compile Include="Models\Mapping\Shelter_Picture_MappingMap.cs" />
     <Compile Include="Models\Mapping\StatusMap.cs" />
-    <Compile Include="Models\Mapping\sysdiagramMap.cs" />
     <Compile Include="Models\Mapping\UserMap.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\News.cs" />
@@ -708,7 +708,6 @@
     <Compile Include="Models\Shelter_Message_Mapping.cs" />
     <Compile Include="Models\Shelter_Picture_Mapping.cs" />
     <Compile Include="Models\Status.cs" />
-    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Constant.cs" />

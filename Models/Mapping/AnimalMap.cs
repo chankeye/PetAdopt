@@ -14,10 +14,6 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.CoverPhoto)
                 .HasMaxLength(100);
 
-            this.Property(t => t.Name)
-                .IsRequired()
-                .HasMaxLength(10);
-
             this.Property(t => t.Introduction)
                 .IsRequired()
                 .HasMaxLength(200);
@@ -28,11 +24,14 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.Phone)
                 .HasMaxLength(10);
 
+            this.Property(t => t.Title)
+                .IsRequired()
+                .HasMaxLength(50);
+
             // Table & Column Mappings
             this.ToTable("Animal");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.CoverPhoto).HasColumnName("CoverPhoto");
-            this.Property(t => t.Name).HasColumnName("Name");
             this.Property(t => t.Introduction).HasColumnName("Introduction");
             this.Property(t => t.Age).HasColumnName("Age");
             this.Property(t => t.SheltersId).HasColumnName("SheltersId");
@@ -44,6 +43,7 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.EndDate).HasColumnName("EndDate");
             this.Property(t => t.OperationId).HasColumnName("OperationId");
             this.Property(t => t.ClassId).HasColumnName("ClassId");
+            this.Property(t => t.Title).HasColumnName("Title");
 
             // Relationships
             this.HasOptional(t => t.Area)

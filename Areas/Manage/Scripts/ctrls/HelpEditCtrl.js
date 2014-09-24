@@ -17,7 +17,7 @@ $(function () {
                 "Word": "請選擇",
                 "Id": ""
             });
-            $("#selOptionsClass option:first").attr("selected", true);
+            $("#selOptionsClasses option:first").attr("selected", true);
         }
     });
 
@@ -74,7 +74,7 @@ $(function () {
                         this.selected = true;
                     }
                 });
-                $("#selOptionsClass").children().each(function () {
+                $("#selOptionsClasses").children().each(function () {
                     if ($(this).val() == data.ReturnObject.ClassId) {
                         //jQuery給法
                         $(this).attr("selected", true); //或是給"selected"也可
@@ -113,7 +113,7 @@ $(function () {
                 return;
             }
 
-            if ($("#selOptionsClass").val() == "") {
+            if ($("#selOptionsClasses").val() == "") {
                 alert('請選擇分類');
                 return;
             }
@@ -135,7 +135,7 @@ $(function () {
                     Message: $("#message").val(),
                     Address: $("#address").val(),
                     AreaId: $("#selOptionsAreas").val(),
-                    ClassId: $("#selOptionsClass").val()
+                    ClassId: $("#selOptionsClasses").val()
                 },
                 success: function (data) {
                     $btn.button("reset");
@@ -143,7 +143,7 @@ $(function () {
                         $("#title").val('');
                         $("#message").val('');
                         $("#address").val('');
-                        $("#selOptionsClass option:first").attr("selected", true);
+                        $("#selOptionsClasses option:first").attr("selected", true);
                         $("#selOptionsAreas option:first").attr("selected", true);
 
                         alert("修改完成");

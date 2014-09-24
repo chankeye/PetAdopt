@@ -1,5 +1,5 @@
 ﻿using PetAdopt.Controllers;
-using PetAdopt.DTO;
+using PetAdopt.DTO.Animal;
 using PetAdopt.Logic;
 using System.Web.Mvc;
 
@@ -39,6 +39,25 @@ namespace PetAdopt.Areas.Manage.Controllers
         public ActionResult Delete(int id)
         {
             var result = _animalLogic.DeleteAnimal(id);
+
+            return Json(result);
+        }
+
+        //public ActionResult Edit()
+        //{
+        //    return View();
+        //}
+
+        //public ActionResult EditInit(int id)
+        //{
+        //    var result = _animalLogic.GetAnimal(id);
+
+        //    return Json(result);
+        //}
+
+        public ActionResult AddAnimal(CreateAnimal data)
+        {
+            var result = _animalLogic.AddAnimal(data);
 
             return Json(result);
         }

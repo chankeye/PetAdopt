@@ -43,10 +43,30 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
+        public ActionResult EditInit(int id)
+        {
+            var result = _blogLogic.GetBlog(id);
+
+            return Json(result);
+        }
+
         [ValidateInput(false)]
         public ActionResult AddBlog(CreateBlog data)
         {
             var result = _blogLogic.AddBlog(data);
+
+            return Json(result);
+        }
+
+        [ValidateInput(false)]
+        public ActionResult EditBlog(int id, CreateBlog data)
+        {
+            var result = _blogLogic.EditBlog(id, data);
 
             return Json(result);
         }

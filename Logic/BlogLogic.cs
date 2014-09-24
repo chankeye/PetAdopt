@@ -82,6 +82,31 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得文章
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<CreateBlog> GetBlog(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var blog = PetContext.Blogs.SingleOrDefault(r => r.Id == id);
+            if (blog == null)
+                return new IsSuccessResult<CreateBlog>("找不到此文章");
+
+            return new IsSuccessResult<CreateBlog>
+            {
+                ReturnObject = new CreateBlog
+                {
+                    Title = blog.Title,
+                    Message = blog.Message,
+                    ClassId = blog.ClassId,
+                    AnimalId = blog.AnimalId
+                }
+            };
+        }
+
+        /// <summary>
         /// 新增Blog文章
         /// </summary>
         /// <returns></returns>
@@ -144,6 +169,68 @@ namespace PetAdopt.Logic
                 log.Error(ex);
 
                 return new IsSuccessResult<BlogItem>("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        /// <summary>
+        /// 修改部落格文章
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult EditBlog(int id, CreateBlog data)
+        {
+            var log = GetLogger();
+            log.Debug("title: {0}, message:{1}, classId:{2}, animalId:{3}, id:{4}",
+                data.Title, data.Message, data.ClassId, data.AnimalId, id);
+
+            var blog = PetContext.Blogs.SingleOrDefault(r => r.Id == id);
+            if (blog == null)
+                return new IsSuccessResult("找不到此文章");
+
+            if (string.IsNullOrWhiteSpace(data.Title))
+                return new IsSuccessResult("請輸入標題");
+            data.Title = data.Title.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Message))
+                return new IsSuccessResult("請輸入內容");
+            data.Message = data.Message.Trim();
+
+            var isAny = PetContext.Blogs.Any(r => r.Title == data.Title && r.Id != id);
+            if (isAny)
+                return new IsSuccessResult(string.Format("已經有 {0} 這篇文章了", data.Title));
+
+            var hasClass = PetContext.Classes.Any(r => r.Id == data.ClassId);
+            if (hasClass == false)
+                return new IsSuccessResult("請選擇正確的分類");
+
+            if (data.AnimalId.HasValue)
+            {
+                var hasAnimal = PetContext.Animals.Any(r => r.Id == data.AnimalId);
+                if (hasAnimal == false)
+                    return new IsSuccessResult("請輸入正確的動物編號");
+            }
+
+            if (blog.Title == data.Title && blog.Message == data.Message &&
+                blog.ClassId == data.ClassId && blog.AnimalId == data.AnimalId)
+            {
+                return new IsSuccessResult();
+            }
+
+            try
+            {
+                blog.Title = data.Title;
+                blog.Message = data.Message;
+                blog.ClassId = data.ClassId;
+                blog.AnimalId = data.AnimalId;
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
     }

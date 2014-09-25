@@ -11,16 +11,14 @@
 </div>
 <div>
     <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            必填欄位
+        </legend>
         <div class="form-group">
             <label class="col-sm-2 control-label">暱稱</label>
             <div class="col-sm-4">
                 <input id="display" name="display" class="form-control required" maxlength="10" placeholder="請輸入暱稱" required />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">手機</label>
-            <div class="col-sm-4">
-                <input id="mobile" name="mobile" class="form-control" maxlength="10" placeholder="請輸入手機" />
             </div>
         </div>
         <div class="form-group">
@@ -36,6 +34,16 @@
                     <input type="checkbox" id="checkbox" name="checkbox">
                     是否為管理者
                 </label>
+            </div>
+        </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">手機</label>
+            <div class="col-sm-4">
+                <input id="mobile" name="mobile" class="form-control" minlength="10" maxlength="10" placeholder="請輸入手機" />
             </div>
         </div>
         <div class="form-group">

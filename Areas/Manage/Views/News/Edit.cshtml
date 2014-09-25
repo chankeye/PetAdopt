@@ -3,7 +3,7 @@
 @using MvcFileUploader.Models
 @using PetAdopt.Models
 @{
-    ViewBag.Title = "修改最新消息";
+    ViewBag.Title = "修改消息";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
 
 }
@@ -16,9 +16,13 @@
 </div>
 <div>
     <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            必填欄位
+        </legend>
         <div class="container">
             <div class="well">
-                <legend>更新圖片</legend>
+                <legend>更新封面圖</legend>
                 <p class="help-block">只限副檔名 jpg / png 最大5 MB, 只能上傳一張圖片</p>
                 <a class="btn btn-large btn-primary" data-target="#dlgFileUpload" data-toggle="modal" href="/MvcFileUpload/UploadDialog?FileTypes=%2F%28%5C.%7C%5C%2F%29%28jpe%3Fg%7Cpng%29%24%2Fi&amp;MaxFileSizeInBytes=5000000&amp;MaxNumberOfFiles=1&amp;DisableImagePreview=False&amp;UploadUrl=%2FMvcUploaderTest%2FUploadFile&amp;UIStyle=Bootstrap&amp;ReturnUrl=%23&amp;RenderSharedScript=True&amp;ShowPopUpClose=True&amp;postValues%5b0%5d.Key=entityId&amp;postValues%5b0%5d.Value=1234" role="button">更新</a>
             </div>
@@ -33,16 +37,20 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label">內容</label>
+            <div class="col-sm-4">
+                <textarea id="content" name="content" class="form-control ckeditor"></textarea>
+            </div>
+        </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
+        <div class="form-group">
             <label class="col-sm-2 control-label">地區</label>
             <div class="col-sm-4">
                 <select id="selOptions" class="form-control"
                         data-bind="options: areas, optionsText: 'Word', optionsValue: 'Id'"></select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">內容</label>
-            <div class="col-sm-4">
-                <textarea id="content" name="content" class="form-control ckeditor"></textarea>
             </div>
         </div>
         <div class="form-group">

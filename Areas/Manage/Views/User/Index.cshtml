@@ -7,30 +7,24 @@
     <script src="/Areas/Manage/Scripts/ctrls/UserCtrl.js"></script>
 }
 <div class="page-header">
-    <h2>@ViewBag.Title</h2>
+    <h2>新增使用者</h2>
 </div>
 <div>
     <form id="commentForm" class="form-horizontal" method="POST" name="form1">
         <legend class="text-info">
             <i class="fa fa-check"></i>
-            新增使用者
+            必填欄位
         </legend>
         <div class="form-group">
             <label class="col-sm-2 control-label">帳號</label>
             <div class="col-sm-4">
-                <input id="account" name="account" class="form-control required" maxlength="20" placeholder="請輸入帳號" required autofocus />
+                <input id="account" name="account" class="form-control required" minlength="6" maxlength="20" placeholder="請輸入帳號" required autofocus />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">暱稱</label>
             <div class="col-sm-4">
                 <input id="display" name="display" class="form-control required" maxlength="10" placeholder="請輸入暱稱" required />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">手機</label>
-            <div class="col-sm-4">
-                <input id="mobile" name="mobile" class="form-control" maxlength="10" placeholder="請輸入手機" />
             </div>
         </div>
         <div class="form-group">
@@ -48,20 +42,29 @@
                 </label>
             </div>
         </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">手機</label>
+            <div class="col-sm-4">
+                <input id="mobile" name="mobile" class="form-control" minlength="10" maxlength="10" placeholder="例:0912345678" />
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
-                <button id="btn2" type="button" class="btn btn-default">清除</button>
+                <button id="btn2" type="reset" class="btn btn-default">清除</button>
             </div>
         </div>
     </form>
 
     <hr />
 
-    <legend class="text-info">
-        <i class="fa fa-check"></i>
-        使用者管理
-    </legend>
+    <div class="page-header">
+        <h2>使用者列表</h2>
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>

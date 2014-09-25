@@ -125,12 +125,4 @@ $(function () {
                 }
             });
         });
-
-    // 取消
-    $("#btn2").click(
-    function () {
-        $("#title").val('');
-        $("#message").val('');
-        $("#selOptions option:first").attr("selected", true);
-    });
 });

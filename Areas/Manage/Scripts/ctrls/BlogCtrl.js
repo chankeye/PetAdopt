@@ -142,9 +142,6 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        $("#title").val('');
         CKEDITOR.instances.content.setData('');
-        $("#animalId").val('');
-        $("#selOptions option:first").attr("selected", true);
     });
 });

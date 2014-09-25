@@ -134,15 +134,4 @@ $(function () {
                 }
             });
         });
-
-    // 取消
-    $("#btn2").click(
-    function () {
-        $("#name").val('');
-        $("#introduction").val('');
-        $("#phone").val('');
-        $("#address").val('');
-        $("#selOptions option:first").attr("selected", true);
-        $("#source").val();
-    });
 });

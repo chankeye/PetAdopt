@@ -109,14 +109,4 @@ $(function () {
                 }
             });
         });
-
-    // 取消
-    $("#btn2").click(
-    function () {
-        $("#account").val('');
-        $("#display").val('');
-        $("#mobile").val('');
-        $("#email").val('');
-        $("#checkbox").prop("checked", '');
-    });
 });

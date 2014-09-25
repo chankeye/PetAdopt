@@ -152,14 +152,4 @@ $(function () {
                 }
             });
         });
-
-    // 取消
-    $("#btn2").click(
-    function () {
-        $("#title").val('');
-        $("#message").val('');
-        $("#address").val('');
-        $("#selOptionsClasses option:first").attr("selected", true);
-        $("#selOptionsAreas option:first").attr("selected", true);
-    });
 });

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "修改部落格文章";
+    ViewBag.Title = "修改文章";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
 
 }
@@ -12,17 +12,14 @@
 </div>
 <div>
     <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            必填欄位
+        </legend>
         <div class="form-group">
             <label class="col-sm-2 control-label">標題</label>
             <div class="col-sm-4">
                 <input id="title" name="title" class="form-control required" maxlength="50" placeholder="請輸入標題" required autofocus />
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">分類</label>
-            <div class="col-sm-4">
-                <select id="selOptions" class="form-control"
-                        data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
             </div>
         </div>
         <div class="form-group">
@@ -32,10 +29,22 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">動物</label>
+            <label class="col-sm-2 control-label">分類</label>
             <div class="col-sm-4">
-                <input id="animalId" name="animalId" class="form-control" placeholder="請輸入本站認養動物文章標題或編號" autofocus />
+                <select id="selOptions" class="form-control required"
+                        data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
             </div>
+        </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">動物編號</label>
+            <div class="col-sm-4">
+                <input id="animalId" name="animalId" class="form-control" placeholder="請輸入動物編號 或 輸入認養動物標題進行查詢" autofocus />
+            </div>
+            (如與本站送養動物有關，建議填入編號，進行連結)
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

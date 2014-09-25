@@ -136,9 +136,6 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        $("#title").val('');
         CKEDITOR.instances.content.setData('');
-        $("#source").val('');
-        $("#selOptions option:first").attr("selected", true);
     });
 });

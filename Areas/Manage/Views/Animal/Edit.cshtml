@@ -11,18 +11,19 @@
 </div>
 <div>
     <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            必填欄位
+        </legend>
         <div class="container">
             <div class="well">
-                <legend>更新圖片</legend>
+                <legend>更新封面圖</legend>
                 <p class="help-block">只限副檔名 jpg / png 最大5 MB, 只能上傳一張圖片</p>
                 <a class="btn btn-large btn-primary" data-target="#dlgFileUpload" data-toggle="modal" href="/MvcFileUpload/UploadDialog?FileTypes=%2F%28%5C.%7C%5C%2F%29%28jpe%3Fg%7Cpng%29%24%2Fi&amp;MaxFileSizeInBytes=5000000&amp;MaxNumberOfFiles=1&amp;DisableImagePreview=False&amp;UploadUrl=%2FMvcUploaderTest%2FUploadFile&amp;UIStyle=Bootstrap&amp;ReturnUrl=%23&amp;RenderSharedScript=True&amp;ShowPopUpClose=True&amp;postValues%5b0%5d.Key=entityId&amp;postValues%5b0%5d.Value=1234" role="button">更新</a>
             </div>
             <!-- file upload modal dialog -->
             <div class="modal fade" id="dlgFileUpload" tabindex="-1" role="dialog" aria-hidden="true">
             </div><!-- /.modal -->
-        </div>
-        <div class="form-group">
-            <h4><label class="col-sm-2 control-label text-info">必填欄位</label></h4>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">標題</label>
@@ -33,33 +34,33 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">送養日期</label>
             <div class="col-sm-4">
-                <input id="startDate" name="startDate" type="date" class="form-control date required" placeholder="yyyy/mm/dd" required autofocus />
+                <input id="startDate" name="startDate" type="date" class="form-control date required" placeholder="yyyy/mm/dd" required />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">介紹</label>
             <div class="col-sm-4">
-                <textarea id="introduction" name="introduction" class="form-control required" maxlength="200" placeholder="請輸入動物相關介紹" required autofocus></textarea>
+                <textarea id="introduction" name="introduction" class="form-control required" maxlength="200" placeholder="請輸入動物相關介紹" required></textarea>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">分類</label>
             <div class="col-sm-4">
-                <select id="selOptionsClasses" class="form-control"
+                <select id="selOptionsClasses" class="form-control required"
                         data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">狀態</label>
             <div class="col-sm-4">
-                <select id="selOptionsStatuses" class="form-control"
+                <select id="selOptionsStatuses" class="form-control required"
                         data-bind="options: statuses, optionsText: 'Word', optionsValue: 'Id'"></select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">所在收容所編號</label>
             <div class="col-sm-4">
-                <input id="shelters" name="shelters" class="form-control" maxlength="30" placeholder="請輸入收容所編號" autofocus />
+                <input id="shelters" name="shelters" class="form-control" maxlength="30" placeholder="請輸入收容所編號" />
             </div>
             (有輸入就無需輸入地區、地址、電話)
         </div>
@@ -73,35 +74,36 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">地址</label>
             <div class="col-sm-4">
-                <input id="address" name="address" class="form-control" maxlength="30" placeholder="請輸入地址" autofocus />
+                <input id="address" name="address" class="form-control" maxlength="30" placeholder="請輸入地址" />
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">電話</label>
             <div class="col-sm-4">
-                <input id="phone" name="phone" type="number" class="form-control" maxlength="10" placeholder="請輸入電話" autofocus />
+                <input id="phone" name="phone" type="number" class="form-control" minlength="10" maxlength="10" placeholder="0422223333或0912345678" />
             </div>
         </div>
-        <div class="form-group">
-            <h4><label class="col-sm-2 control-label text-info">選填欄位</label></h4>
-        </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
         <div class="form-group">
             <label class="col-sm-2 control-label">安樂死日期</label>
             <div class="col-sm-4">
-                <input id="endDate" name="endDate" type="date" class="form-control date" placeholder="yyyy/mm/dd" autofocus />
+                <input id="endDate" name="endDate" type="date" class="form-control date" placeholder="yyyy/mm/dd" />
             </div>
             (建議填入，可增加首頁出現機率)
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">年齡</label>
             <div class="col-sm-4">
-                <input id="age" name="age" type="number" class="form-control" maxlength="3" placeholder="請輸入動物年齡" autofocus />
+                <input id="age" name="age" type="number" class="form-control" maxlength="3" placeholder="請輸入動物年齡" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">修改</button>
-                <button id="btn2" type="reset" class="btn btn-default">取消</button>
+                <button id="btn2" type="button" class="btn btn-default">取消</button>
             </div>
         </div>
     </form>

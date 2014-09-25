@@ -116,6 +116,9 @@
     <Content Include="Areas\Manage\Scripts\ctrls\SystemCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AccountChangePasswordCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\UserEditCtrl.js" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\locale\common.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -241,6 +244,10 @@
     <Content Include="Areas\Manage\Views\Blog\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Shelters\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Animal\Edit.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\FontAwesome.otf" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />

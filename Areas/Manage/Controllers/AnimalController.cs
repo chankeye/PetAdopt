@@ -38,26 +38,33 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = _animalLogic.DeleteAnimal(id);
+            var result = _animalLogic.DeleteAnimal(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }
 
-        //public ActionResult Edit()
-        //{
-        //    return View();
-        //}
+        public ActionResult Edit()
+        {
+            return View();
+        }
 
-        //public ActionResult EditInit(int id)
-        //{
-        //    var result = _animalLogic.GetAnimal(id);
+        public ActionResult EditInit(int id)
+        {
+            var result = _animalLogic.GetAnimal(id);
 
-        //    return Json(result);
-        //}
+            return Json(result);
+        }
 
         public ActionResult AddAnimal(CreateAnimal data)
         {
             var result = _animalLogic.AddAnimal(data);
+
+            return Json(result);
+        }
+
+        public ActionResult EditAnimal(int id, CreateAnimal data)
+        {
+            var result = _animalLogic.EditAnimal(id, data);
 
             return Json(result);
         }

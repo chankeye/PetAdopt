@@ -32,7 +32,7 @@
         }
     }
 
-    self.editActivity = function (animal) {
+    self.editAnimal = function (animal) {
         window.location = "/Manage/Animal/Edit?id=" + animal.Id;
     }
 

@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\ctrls\AnimalEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\SheltersEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\BlogEditCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\HelpEditCtrl.js" />
@@ -239,6 +240,7 @@
     <Content Include="Areas\Manage\Views\Help\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Blog\Edit.cshtml" />
     <Content Include="Areas\Manage\Views\Shelters\Edit.cshtml" />
+    <Content Include="Areas\Manage\Views\Animal\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -623,6 +625,7 @@
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
     <Compile Include="DTO\Animal\AnimalList.cs" />
+    <Compile Include="DTO\Animal\GetAnimal.cs" />
     <Compile Include="DTO\Animal\CreateAnimal.cs" />
     <Compile Include="DTO\Ask\AskList.cs" />
     <Compile Include="DTO\Ask\CreateAsk.cs" />

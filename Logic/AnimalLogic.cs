@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System.IO;
+using PetAdopt.DTO;
 using PetAdopt.DTO.Animal;
 using PetAdopt.Models;
 using System;
@@ -48,7 +49,7 @@ namespace PetAdopt.Logic
         /// 刪除動物
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteAnimal(int id)
+        public IsSuccessResult DeleteAnimal(string path, int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
@@ -60,6 +61,12 @@ namespace PetAdopt.Logic
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此動物資訊";
                 return result;
+            }
+
+            // 有上傳圖片，就把圖片刪掉
+            if (string.IsNullOrWhiteSpace(animal.CoverPhoto) == false)
+            {
+                File.Delete(path + "//" + animal.CoverPhoto);
             }
 
             try
@@ -76,6 +83,39 @@ namespace PetAdopt.Logic
                 result.ErrorMessage = "發生不明錯誤，請稍候再試";
                 return result;
             }
+        }
+
+        /// <summary>
+        /// 取得動物資訊
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<GetAnimal> GetAnimal(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var animal = PetContext.Animals.SingleOrDefault(r => r.Id == id);
+            if (animal == null)
+                return new IsSuccessResult<GetAnimal>("找不到此認養動物資訊");
+
+            return new IsSuccessResult<GetAnimal>
+            {
+                ReturnObject = new GetAnimal
+                {
+                    Photo = animal.CoverPhoto,
+                    Title = animal.Title,
+                    Introduction = animal.Introduction,
+                    Address = animal.Address,
+                    AreaId = animal.AreaId,
+                    ClassId = animal.ClassId,
+                    SheltersId = animal.SheltersId,
+                    Phone = animal.Phone,
+                    StartDate = animal.StartDate.ToString("yyyy-MM-dd"),
+                    EndDate = animal.EndDate.HasValue ? animal.EndDate.Value.ToString("yyyy-MM-dd") : null,
+                    Age = animal.Age,
+                    StatusId = animal.StatusId
+                }
+            };
         }
 
         /// <summary>
@@ -98,7 +138,7 @@ namespace PetAdopt.Logic
 
             if (data.EndDate.HasValue)
             {
-                if(data.EndDate < data.StartDate)
+                if (data.EndDate < data.StartDate)
                     return new IsSuccessResult<AnimalItem>("安樂死日期不得在認養日期之前");
             }
 
@@ -118,7 +158,7 @@ namespace PetAdopt.Logic
             }
             else
             {
-                if(data.AreaId.HasValue == false)
+                if (data.AreaId.HasValue == false)
                     return new IsSuccessResult<AnimalItem>("請選擇地區");
                 else
                 {
@@ -127,7 +167,7 @@ namespace PetAdopt.Logic
                         return new IsSuccessResult<AnimalItem>("請選擇正確的地區");
                 }
 
-                if(string.IsNullOrWhiteSpace(data.Phone))
+                if (string.IsNullOrWhiteSpace(data.Phone))
                     return new IsSuccessResult<AnimalItem>("請輸入電話");
                 data.Phone = data.Phone.Trim();
 
@@ -145,7 +185,7 @@ namespace PetAdopt.Logic
 
             try
             {
-                var activity = PetContext.Animals.Add(new Animal
+                var animal = PetContext.Animals.Add(new Animal
                 {
                     CoverPhoto = data.Photo,
                     Title = data.Title,
@@ -171,8 +211,8 @@ namespace PetAdopt.Logic
                 {
                     ReturnObject = new AnimalItem
                     {
-                        Id = activity.Id,
-                        Title = activity.Title,
+                        Id = animal.Id,
+                        Title = animal.Title,
                     }
                 };
             }
@@ -181,6 +221,102 @@ namespace PetAdopt.Logic
                 log.Error(ex);
 
                 return new IsSuccessResult<AnimalItem>("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        /// <summary>
+        /// 修改認養動物資訊
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult EditAnimal(int id, CreateAnimal data)
+        {
+            var log = GetLogger();
+            log.Debug("photo: {0}, title: {1}, introduction:{2}, areaId:{3}, address:{4}, phone:{5}, classId:{6}, sheltersId:{7}, startDate:{8}, endDate:{9}, statusId:{10}, age:{11}, id:{12}",
+                data.Photo, data.Title, data.Introduction, data.AreaId, data.Address, data.Phone, data.ClassId, data.SheltersId, data.StartDate, data.EndDate, data.StartDate, data.Age, id);
+
+            var animal = PetContext.Animals.SingleOrDefault(r => r.Id == id);
+            if (animal == null)
+                return new IsSuccessResult("找不到此認養動物資訊");
+
+            if (string.IsNullOrWhiteSpace(data.Title))
+                return new IsSuccessResult<AnimalItem>("請輸入標題");
+            data.Title = data.Title.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Introduction))
+                return new IsSuccessResult<AnimalItem>("請輸入介紹");
+            data.Introduction = data.Introduction.Trim();
+
+            if (data.EndDate.HasValue)
+            {
+                if (data.EndDate < data.StartDate)
+                    return new IsSuccessResult<AnimalItem>("安樂死日期不得在認養日期之前");
+            }
+
+            var hasClass = PetContext.Classes.Any(r => r.Id == data.ClassId);
+            if (hasClass == false)
+                return new IsSuccessResult<AnimalItem>("請選擇正確的分類");
+
+            var hasStatus = PetContext.Status.Any(r => r.Id == data.StatusId);
+            if (hasStatus == false)
+                return new IsSuccessResult<AnimalItem>("請選擇正確的狀態");
+
+            if (data.SheltersId.HasValue)
+            {
+                var hasShelters = PetContext.Shelters.Any(r => r.Id == data.SheltersId);
+                if (hasShelters == false)
+                    return new IsSuccessResult<AnimalItem>("找不到此收容所編號");
+            }
+            else
+            {
+                if (data.AreaId.HasValue == false)
+                    return new IsSuccessResult<AnimalItem>("請選擇地區");
+                else
+                {
+                    var hasArea = PetContext.Areas.Any(r => r.Id == data.AreaId);
+                    if (hasArea == false)
+                        return new IsSuccessResult<AnimalItem>("請選擇正確的地區");
+                }
+
+                if (string.IsNullOrWhiteSpace(data.Phone))
+                    return new IsSuccessResult<AnimalItem>("請輸入電話");
+                data.Phone = data.Phone.Trim();
+
+                if (string.IsNullOrWhiteSpace(data.Address))
+                    return new IsSuccessResult<AnimalItem>("請輸入地址");
+                data.Address = data.Address.Trim();
+            }
+
+            if (string.IsNullOrWhiteSpace(data.Photo) == false)
+                data.Photo = data.Photo.Trim();
+
+            var isAny = PetContext.Animals.Any(r => r.Title == data.Title && r.Id != id);
+            if (isAny)
+                return new IsSuccessResult<AnimalItem>(string.Format("已經有 {0} 這個認養資訊了", data.Title));
+
+            try
+            {
+                animal.CoverPhoto = data.Photo;
+                animal.Title = data.Title;
+                animal.Introduction = data.Introduction;
+                animal.Address = data.Address;
+                animal.AreaId = data.AreaId;
+                animal.ClassId = data.ClassId;
+                animal.SheltersId = data.SheltersId;
+                animal.Phone = data.Phone;
+                animal.StartDate = data.StartDate;
+                animal.EndDate = data.EndDate;
+                animal.Age = data.Age;
+                animal.StatusId = data.StatusId;
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System.Collections.Generic;
+using PetAdopt.DTO;
 using PetAdopt.DTO.Ask;
 using PetAdopt.Models;
 using System;
@@ -18,26 +19,111 @@ namespace PetAdopt.Logic
         /// 取得問與答列表
         /// </summary>
         /// <returns></returns>
-        public AskList GetAskList(int page)
+        public AskList GetAskList(int page = 1, int take = 10, string query = "", bool isLike = true)
         {
             var log = GetLogger();
-            log.Debug("page:{0}", page);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
 
             if (page <= 0)
                 page = 1;
 
-            var list = PetContext.Asks
-                .Select(r => new AskItem
-                {
-                    Id = r.Id,
-                    Title = r.Title
-                })
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * 10)
-                .Take(10)
-                .ToList();
+            if (take < 1)
+                take = 10;
 
-            var count = PetContext.Asks.Count();
+            List<AskItem> list;
+            var count = 0;
+
+            // 查全部
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                var asks = PetContext.Asks
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Title,
+                        r.OperationInfo.Date
+                    });
+
+                var templist = asks
+                    .OrderByDescending(r => r.Id)
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                list = templist
+                    .Select(r => new AskItem
+                    {
+                        Id = r.Id,
+                        Title = r.Title,
+                        Date = r.Date.ToString("yyyy/MM/dd")
+                    })
+                    .ToList();
+
+                count = asks.Count();
+            }
+            // 查特定標題
+            else
+            {
+                // 查完全命中的
+                if (isLike == false)
+                {
+                    var asks = PetContext.Asks
+                        .Where(r => r.Title == query)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = asks
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new AskItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = asks.Count();
+                }
+                // 查包含的
+                else
+                {
+                    var asks = PetContext.Asks
+                        .Where(r => r.Title.Contains(query))
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = asks
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new AskItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = asks.Count();
+                }
+            }
+
             var result = new AskList
             {
                 List = list,

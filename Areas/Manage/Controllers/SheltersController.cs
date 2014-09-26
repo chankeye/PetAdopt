@@ -29,9 +29,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return View();
         }
 
-        public ActionResult GetSheltersList(int page)
+        public ActionResult GetSheltersList(int page, int take, string query, bool isLike)
         {
-            var shelterslist = _sheltersLogic.GetSheltersList(page);
+            var shelterslist = _sheltersLogic.GetSheltersList(page, take, query, isLike);
 
             return Json(shelterslist);
         }

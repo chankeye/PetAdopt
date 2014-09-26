@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using PetAdopt.DTO;
 using PetAdopt.DTO.Shelters;
 using PetAdopt.Models;
@@ -19,26 +20,111 @@ namespace PetAdopt.Logic
         /// 取得收容所列表
         /// </summary>
         /// <returns></returns>
-        public SheltersList GetSheltersList(int page)
+        public SheltersList GetSheltersList(int page = 1, int take = 10, string query = "", bool isLike = true)
         {
             var log = GetLogger();
-            log.Debug("page:{0}", page);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
 
-            if (page <= 0)
+            if (page < 1)
                 page = 1;
 
-            var list = PetContext.Shelters
-                .Select(r => new SheltersItem
-                {
-                    Id = r.Id,
-                    Name = r.Name
-                })
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * 10)
-                .Take(10)
-                .ToList();
+            if (take < 1)
+                take = 10;
 
-            var count = PetContext.Shelters.Count();
+            List<SheltersItem> list;
+            var count = 0;
+
+            // 查全部
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                var shelterses = PetContext.Shelters
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Name,
+                        Area = r.Area.Word
+                    });
+
+                var templist = shelterses
+                    .OrderByDescending(r => r.Id)
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                list = templist
+                    .Select(r => new SheltersItem
+                    {
+                        Id = r.Id,
+                        Name = r.Name,
+                        Area = r.Area
+                    })
+                    .ToList();
+
+                count = shelterses.Count();
+            }
+            // 查特定標題
+            else
+            {
+                // 查完全命中的
+                if (isLike == false)
+                {
+                    var shelterses = PetContext.Shelters
+                        .Where(r => r.Name == query)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Name,
+                            Area = r.Area.Word
+                        });
+
+                    var templist = shelterses
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new SheltersItem
+                        {
+                            Id = r.Id,
+                            Name = r.Name,
+                            Area = r.Area
+                        })
+                        .ToList();
+
+                    count = shelterses.Count();
+                }
+                // 查包含的
+                else
+                {
+                    var shelterses = PetContext.Shelters
+                        .Where(r => r.Name.Contains(query))
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Name,
+                            Area = r.Area.Word
+                        });
+
+                    var templist = shelterses
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new SheltersItem
+                        {
+                            Id = r.Id,
+                            Name = r.Name,
+                            Area = r.Area
+                        })
+                        .ToList();
+
+                    count = shelterses.Count();
+                }
+            }
+
             var result = new SheltersList
             {
                 List = list,

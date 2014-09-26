@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System.Collections.Generic;
+using PetAdopt.DTO;
 using PetAdopt.DTO.Knowledge;
 using PetAdopt.Models;
 using System;
@@ -18,23 +19,111 @@ namespace PetAdopt.Logic
         /// 取得知識列表
         /// </summary>
         /// <returns></returns>
-        public KnowledgeList GetKnowledgeList(int page)
+        public KnowledgeList GetKnowledgeList(int page = 1, int take = 10, string query = "", bool isLike = true)
         {
             var log = GetLogger();
-            log.Debug("page:{0}", page);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
 
-            var list = PetContext.Knowledges
-                .Select(r => new KnowledgeItem
+            if (page < 1)
+                page = 1;
+
+            if (take < 1)
+                take = 10;
+
+            List<KnowledgeItem> list;
+            var count = 0;
+
+            // 查全部
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                var knowledgeItem = PetContext.Knowledges
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Title,
+                        r.OperationInfo.Date
+                    });
+
+                var templist = knowledgeItem
+                    .OrderByDescending(r => r.Id)
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                list = templist
+                    .Select(r => new KnowledgeItem
+                    {
+                        Id = r.Id,
+                        Title = r.Title,
+                        Date = r.Date.ToString("yyyy/MM/dd")
+                    })
+                    .ToList();
+
+                count = knowledgeItem.Count();
+            }
+            // 查特定標題
+            else
+            {
+                // 查完全命中的
+                if (isLike == false)
                 {
-                    Id = r.Id,
-                    Title = r.Title
-                })
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * 10)
-                .Take(10)
-                .ToList();
+                    var knowledgeItem = PetContext.Knowledges
+                        .Where(r => r.Title == query)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
 
-            var count = PetContext.Knowledges.Count();
+                    var templist = knowledgeItem
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new KnowledgeItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = knowledgeItem.Count();
+                }
+                // 查包含的
+                else
+                {
+                    var knowledgeItem = PetContext.Knowledges
+                        .Where(r => r.Title.Contains(query))
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = knowledgeItem
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new KnowledgeItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = knowledgeItem.Count();
+                }
+            }
+
             var result = new KnowledgeList
             {
                 List = list,

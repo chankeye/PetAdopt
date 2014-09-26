@@ -7,6 +7,8 @@ namespace PetAdopt.DTO.Animal
         public int Id { get; set; }
 
         public string Title { get; set; }
+
+        public string Date { get; set; }
     }
 
     public class AnimalList

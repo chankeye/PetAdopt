@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using PetAdopt.DTO;
 using PetAdopt.DTO.Animal;
 using PetAdopt.Models;
@@ -19,23 +20,111 @@ namespace PetAdopt.Logic
         /// 取得動物列表
         /// </summary>
         /// <returns></returns>
-        public AnimalList GetAnimalList(int page)
+        public AnimalList GetAnimalList(int page = 1, int take = 10, string query = "", bool isLike = true)
         {
             var log = GetLogger();
-            log.Debug("page:{0}", page);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
 
-            var list = PetContext.Animals
-                .Select(r => new AnimalItem
+            if (page < 1)
+                page = 1;
+
+            if (take < 1)
+                take = 10;
+
+            List<AnimalItem> list;
+            var count = 0;
+
+            // 查全部
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                var animals = PetContext.Animals
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Title,
+                        r.OperationInfo.Date
+                    });
+
+                var templist = animals
+                    .OrderByDescending(r => r.Id)
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                list = templist
+                    .Select(r => new AnimalItem
+                    {
+                        Id = r.Id,
+                        Title = r.Title,
+                        Date = r.Date.ToString("yyyy/MM/dd")
+                    })
+                    .ToList();
+
+                count = animals.Count();
+            }
+            // 查特定標題
+            else
+            {
+                // 查完全命中的
+                if (isLike == false)
                 {
-                    Id = r.Id,
-                    Title = r.Title
-                })
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * 10)
-                .Take(10)
-                .ToList();
+                    var animals = PetContext.Animals
+                        .Where(r => r.Title == query)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
 
-            var count = PetContext.Animals.Count();
+                    var templist = animals
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new AnimalItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = animals.Count();
+                }
+                // 查包含的
+                else
+                {
+                    var animals = PetContext.Animals
+                        .Where(r => r.Title.Contains(query))
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = animals
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new AnimalItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = animals.Count();
+                }
+            }
+
             var result = new AnimalList
             {
                 List = list,

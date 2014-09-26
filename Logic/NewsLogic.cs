@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System.Collections.Generic;
+using PetAdopt.DTO;
 using PetAdopt.DTO.News;
 using PetAdopt.Models;
 using PetAdopt.Utilities;
@@ -21,26 +22,111 @@ namespace PetAdopt.Logic
         /// 取得最新消息列表
         /// </summary>
         /// <returns></returns>
-        public NewsList GetNewsList(int page)
+        public NewsList GetNewsList(int page = 1, int take = 10, string query = "", bool isLike = true)
         {
             var log = GetLogger();
-            log.Debug("page:{0}", page);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
 
-            if (page <= 0)
+            if (page < 1)
                 page = 1;
 
-            var list = PetContext.News
-                .Select(r => new NewsItem
-                {
-                    Id = r.Id,
-                    Title = r.Title
-                })
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * 10)
-                .Take(10)
-                .ToList();
+            if (take < 1)
+                take = 10;
 
-            var count = PetContext.News.Count();
+            List<NewsItem> list;
+            var count = 0;
+
+            // 查全部
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                var newslist = PetContext.News
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Title,
+                        r.OperationInfo.Date
+                    });
+
+                var templist = newslist
+                    .OrderByDescending(r => r.Id)
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                list = templist
+                    .Select(r => new NewsItem
+                    {
+                        Id = r.Id,
+                        Title = r.Title,
+                        Date = r.Date.ToString("yyyy/MM/dd")
+                    })
+                    .ToList();
+
+                count = newslist.Count();
+            }
+            // 查特定標題
+            else
+            {
+                // 查完全命中的
+                if (isLike == false)
+                {
+                    var newslist = PetContext.News
+                        .Where(r => r.Title == query)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = newslist
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new NewsItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = newslist.Count();
+                }
+                // 查包含的
+                else
+                {
+                    var newslist = PetContext.News
+                        .Where(r => r.Title.Contains(query))
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = newslist
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new NewsItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = newslist.Count();
+                }
+            }
+
             var result = new NewsList
             {
                 List = list,

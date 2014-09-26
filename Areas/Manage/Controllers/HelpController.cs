@@ -29,9 +29,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return View();
         }
 
-        public ActionResult GetHelpList(int page)
+        public ActionResult GetHelpList(int page, int take, string query, bool isLike)
         {
-            var helplist = _helpLogic.GetHelpList(page);
+            var helplist = _helpLogic.GetHelpList(page, take, query, isLike);
 
             return Json(helplist);
         }

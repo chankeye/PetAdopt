@@ -1,4 +1,5 @@
-﻿using System.Web.WebPages;
+﻿using System.Collections.Generic;
+using System.Web.WebPages;
 using PetAdopt.DTO;
 using PetAdopt.DTO.Help;
 using PetAdopt.Models;
@@ -20,26 +21,111 @@ namespace PetAdopt.Logic
         /// 取得即刻救援列表
         /// </summary>
         /// <returns></returns>
-        public HelpList GetHelpList(int page)
+        public HelpList GetHelpList(int page = 1, int take = 10, string query = "", bool isLike = true)
         {
             var log = GetLogger();
-            log.Debug("page:{0}", page);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
 
-            if (page <= 0)
+            if (page < 1)
                 page = 1;
 
-            var list = PetContext.Helps
-                .Select(r => new HelpItem
-                {
-                    Id = r.Id,
-                    Title = r.Title
-                })
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * 10)
-                .Take(10)
-                .ToList();
+            if (take < 1)
+                take = 10;
 
-            var count = PetContext.Helps.Count();
+            List<HelpItem> list;
+            var count = 0;
+
+            // 查全部
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                var helps = PetContext.Helps
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Title,
+                        r.OperationInfo.Date
+                    });
+
+                var templist = helps
+                    .OrderByDescending(r => r.Id)
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                list = templist
+                    .Select(r => new HelpItem
+                    {
+                        Id = r.Id,
+                        Title = r.Title,
+                        Date = r.Date.ToString("yyyy/MM/dd")
+                    })
+                    .ToList();
+
+                count = helps.Count();
+            }
+            // 查特定標題
+            else
+            {
+                // 查完全命中的
+                if (isLike == false)
+                {
+                    var helps = PetContext.Helps
+                        .Where(r => r.Title == query)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = helps
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new HelpItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = helps.Count();
+                }
+                // 查包含的
+                else
+                {
+                    var helps = PetContext.Helps
+                        .Where(r => r.Title.Contains(query))
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = helps
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new HelpItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = helps.Count();
+                }
+            }
+
             var result = new HelpList
             {
                 List = list,

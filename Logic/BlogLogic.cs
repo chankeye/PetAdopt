@@ -1,4 +1,6 @@
-﻿using PetAdopt.DTO;
+﻿using System.Collections.Generic;
+using System.Threading;
+using PetAdopt.DTO;
 using PetAdopt.DTO.Blog;
 using PetAdopt.Models;
 using System;
@@ -18,26 +20,111 @@ namespace PetAdopt.Logic
         /// 取得部落格列表
         /// </summary>
         /// <returns></returns>
-        public BlogList GetBlogList(int page)
+        public BlogList GetBlogList(int page = 1, int take = 10, string query = "", bool isLike = true)
         {
             var log = GetLogger();
-            log.Debug("page:{0}", page);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
 
-            if (page <= 0)
+            if (page < 1)
                 page = 1;
 
-            var list = PetContext.Blogs
-                .Select(r => new BlogItem
-                {
-                    Id = r.Id,
-                    Title = r.Title
-                })
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * 10)
-                .Take(10)
-                .ToList();
+            if (take < 1)
+                take = 10;
 
-            var count = PetContext.Blogs.Count();
+            List<BlogItem> list;
+            var count = 0;
+
+            // 查全部
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                var blogs = PetContext.Blogs
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Title,
+                        r.OperationInfo.Date
+                    });
+
+                var templist = blogs
+                    .OrderByDescending(r => r.Id)
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                list = templist
+                    .Select(r => new BlogItem
+                    {
+                        Id = r.Id,
+                        Title = r.Title,
+                        Date = r.Date.ToString("yyyy/MM/dd")
+                    })
+                    .ToList();
+
+                count = blogs.Count();
+            }
+            // 查特定標題
+            else
+            {
+                // 查完全命中的
+                if (isLike == false)
+                {
+                    var blogs = PetContext.Blogs
+                        .Where(r => r.Title == query)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = blogs
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new BlogItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = blogs.Count();
+                }
+                // 查包含的
+                else
+                {
+                    var blogs = PetContext.Blogs
+                        .Where(r => r.Title.Contains(query))
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        });
+
+                    var templist = blogs
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new BlogItem
+                        {
+                            Id = r.Id,
+                            Title = r.Title,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = blogs.Count();
+                }
+            }
+
             var result = new BlogList
             {
                 List = list,

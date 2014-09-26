@@ -29,9 +29,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return View();
         }
 
-        public ActionResult GetBlogList(int page)
+        public ActionResult GetBlogList(int page, int take, string query, bool isLike)
         {
-            var bloglist = _blogLogic.GetBlogList(page);
+            var bloglist = _blogLogic.GetBlogList(page, take, query, isLike);
 
             return Json(bloglist);
         }

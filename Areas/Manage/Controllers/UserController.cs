@@ -29,9 +29,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return View();
         }
 
-        public ActionResult GetUserList(int page)
+        public ActionResult GetUserList(int page, int take, string query, bool isLike)
         {
-            var newslist = _userLogic.GetUserList(page);
+            var newslist = _userLogic.GetUserList(page, take, query, isLike);
 
             return Json(newslist);
         }

@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System.Collections.Generic;
+using PetAdopt.DTO;
 using PetAdopt.DTO.User;
 using PetAdopt.Models;
 using PetAdopt.Utilities;
@@ -155,24 +156,117 @@ namespace PetAdopt.Logic
         /// 取得使用者列表
         /// </summary>
         /// <returns></returns>
-        public UserList GetUserList(int page)
+        public UserList GetUserList(int page = 1, int take = 10, string query = "", bool isLike = true)
         {
             var log = GetLogger();
-            log.Debug("page:{0}", page);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
 
-            var list = PetContext.Users
-                .Select(r => new UserItem
+            if (page < 1)
+                page = 1;
+
+            if (take < 1)
+                take = 10;
+
+            List<UserItem> list;
+            var count = 0;
+
+            // 查全部
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                var users = PetContext.Users
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Account,
+                        r.IsDisable,
+                        r.Date
+                    });
+
+                var templist = users
+                    .OrderByDescending(r => r.Id)
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                list = templist
+                    .Select(r => new UserItem
+                    {
+                        Id = r.Id,
+                        Account = r.Account,
+                        IsDisable = r.IsDisable,
+                        Date = r.Date.ToString("yyyy/MM/dd")
+                    })
+                    .ToList();
+
+                count = users.Count();
+            }
+            // 查特定標題
+            else
+            {
+                // 查完全命中的
+                if (isLike == false)
                 {
-                    Id = r.Id,
-                    Account = r.Account,
-                    IsDisable = r.IsDisable
-                })
-                .OrderByDescending(r => r.Id)
-                .Skip((page - 1) * 10)
-                .Take(10)
-                .ToList();
+                    var users = PetContext.Users
+                        .Where(r => r.Account == query)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Account,
+                            r.IsDisable,
+                            r.Date
+                        });
 
-            var count = PetContext.Users.Count();
+                    var templist = users
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new UserItem
+                        {
+                            Id = r.Id,
+                            Account = r.Account,
+                            IsDisable = r.IsDisable,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = users.Count();
+                }
+                // 查包含的
+                else
+                {
+                    var users = PetContext.Users
+                        .Where(r => r.Account.Contains(query))
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Account,
+                            r.IsDisable,
+                            r.Date
+                        });
+
+                    var templist = users
+                        .OrderByDescending(r => r.Id)
+                        .Skip((page - 1) * take)
+                        .Take(take)
+                        .ToList();
+
+                    list = templist
+                        .Select(r => new UserItem
+                        {
+                            Id = r.Id,
+                            Account = r.Account,
+                            IsDisable = r.IsDisable,
+                            Date = r.Date.ToString("yyyy/MM/dd")
+                        })
+                        .ToList();
+
+                    count = users.Count();
+                }
+            }
+
             var result = new UserList
             {
                 List = list,

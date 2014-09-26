@@ -65,6 +65,13 @@
     <div class="page-header">
         <h2>使用者列表</h2>
     </div>
+    <div>
+        <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
+        <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>
+        <br />
+        <input id="checkAll" name="checkAll" type="checkbox" />
+        <label for="checkAll">完全比對</label>
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -72,7 +79,8 @@
                 <th></th>
                 <th>序號</th>
                 <th>帳號</th>
-                <th>是否已刪除</th>
+                <th>加入日期</th>
+                <th>是否停用中</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: history">
@@ -81,6 +89,7 @@
                 <td><a href='#' data-bind="click: $root.editUser">編輯</a></td>
                 <td><span data-bind="text: Id"></span></td>
                 <td><span data-bind="text: Account"></span></td>
+                <td><span data-bind="text: Date"></span></td>
                 <td><span data-bind="text: IsDisable"></span></td>
             </tr>
         </tbody>

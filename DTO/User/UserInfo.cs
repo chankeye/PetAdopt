@@ -24,6 +24,8 @@ namespace PetAdopt.DTO.User
 
         public string Account { get; set; }
 
+        public string Date { get; set; }
+
         public bool  IsDisable { get; set; }
     }
 

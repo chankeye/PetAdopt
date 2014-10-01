@@ -13,6 +13,7 @@ namespace PetAdopt.Models
             this.Blogs = new List<Blog>();
             this.Helps = new List<Help>();
             this.Knowledges = new List<Knowledge>();
+            this.Messages = new List<Message>();
             this.News = new List<News>();
             this.Shelters = new List<Shelter>();
         }
@@ -26,6 +27,7 @@ namespace PetAdopt.Models
         public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Help> Helps { get; set; }
         public virtual ICollection<Knowledge> Knowledges { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<News> News { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<Shelter> Shelters { get; set; }

@@ -7,7 +7,7 @@ namespace PetAdopt.Models
     {
         public Knowledge()
         {
-            this.Knowledge_Message_Mapping = new List<Knowledge_Message_Mapping>();
+            this.Messages = new List<Message>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace PetAdopt.Models
         public int OperationId { get; set; }
         public virtual Class Class { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
-        public virtual ICollection<Knowledge_Message_Mapping> Knowledge_Message_Mapping { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

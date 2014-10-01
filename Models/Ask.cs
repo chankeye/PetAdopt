@@ -7,7 +7,7 @@ namespace PetAdopt.Models
     {
         public Ask()
         {
-            this.Ask_Message_Mapping = new List<Ask_Message_Mapping>();
+            this.Messages = new List<Message>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace PetAdopt.Models
         public int OperationId { get; set; }
         public virtual Class Class { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
-        public virtual ICollection<Ask_Message_Mapping> Ask_Message_Mapping { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

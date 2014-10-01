@@ -7,7 +7,7 @@ namespace PetAdopt.Models
     {
         public Help()
         {
-            this.Help_Message_Mapping = new List<Help_Message_Mapping>();
+            this.Messages = new List<Message>();
         }
 
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace PetAdopt.Models
         public virtual Area Area { get; set; }
         public virtual Class Class { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
-        public virtual ICollection<Help_Message_Mapping> Help_Message_Mapping { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

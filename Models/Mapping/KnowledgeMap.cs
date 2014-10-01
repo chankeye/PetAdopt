@@ -28,6 +28,15 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.OperationId).HasColumnName("OperationId");
 
             // Relationships
+            this.HasMany(t => t.Messages)
+                .WithMany(t => t.Knowledges)
+                .Map(m =>
+                    {
+                        m.ToTable("Knowledge_Message_Mapping");
+                        m.MapLeftKey("KnowledgeId");
+                        m.MapRightKey("MessageId");
+                    });
+
             this.HasRequired(t => t.Class)
                 .WithMany(t => t.Knowledges)
                 .HasForeignKey(d => d.ClassId);

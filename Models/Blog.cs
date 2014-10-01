@@ -7,7 +7,7 @@ namespace PetAdopt.Models
     {
         public Blog()
         {
-            this.Blog_Message_Mapping = new List<Blog_Message_Mapping>();
+            this.Messages = new List<Message>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace PetAdopt.Models
         public virtual Animal Animal { get; set; }
         public virtual Class Class { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
-        public virtual ICollection<Blog_Message_Mapping> Blog_Message_Mapping { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

@@ -36,6 +36,15 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.CoverPhoto).HasColumnName("CoverPhoto");
 
             // Relationships
+            this.HasMany(t => t.Messages)
+                .WithMany(t => t.News)
+                .Map(m =>
+                    {
+                        m.ToTable("News_Message_Mapping");
+                        m.MapLeftKey("NewsId");
+                        m.MapRightKey("MessageId");
+                    });
+
             this.HasOptional(t => t.Area)
                 .WithMany(t => t.News)
                 .HasForeignKey(d => d.AreaId);

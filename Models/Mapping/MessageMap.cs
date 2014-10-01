@@ -20,6 +20,48 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Message1).HasColumnName("Message");
             this.Property(t => t.OperationId).HasColumnName("OperationId");
+
+            // Relationships
+            this.HasMany(t => t.Activities)
+                .WithMany(t => t.Messages)
+                .Map(m =>
+                    {
+                        m.ToTable("Activity_Message_Mapping");
+                        m.MapLeftKey("MessageId");
+                        m.MapRightKey("ActivityId");
+                    });
+
+            this.HasMany(t => t.Animals)
+                .WithMany(t => t.Messages)
+                .Map(m =>
+                    {
+                        m.ToTable("Animal_Message_Mapping");
+                        m.MapLeftKey("MessageId");
+                        m.MapRightKey("AnimalId");
+                    });
+
+            this.HasMany(t => t.Asks)
+                .WithMany(t => t.Messages)
+                .Map(m =>
+                    {
+                        m.ToTable("Ask_Message_Mapping");
+                        m.MapLeftKey("MessageId");
+                        m.MapRightKey("AskId");
+                    });
+
+            this.HasMany(t => t.Blogs)
+                .WithMany(t => t.Messages)
+                .Map(m =>
+                    {
+                        m.ToTable("Blog_Message_Mapping");
+                        m.MapLeftKey("MessageId");
+                        m.MapRightKey("BlogId");
+                    });
+
+            this.HasRequired(t => t.OperationInfo)
+                .WithMany(t => t.Messages)
+                .HasForeignKey(d => d.OperationId);
+
         }
     }
 }

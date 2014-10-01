@@ -7,7 +7,7 @@ namespace PetAdopt.Models
     {
         public Activity()
         {
-            this.Activity_Message_Mapping = new List<Activity_Message_Mapping>();
+            this.Messages = new List<Message>();
         }
 
         public int Id { get; set; }
@@ -19,6 +19,6 @@ namespace PetAdopt.Models
         public string CoverPhoto { get; set; }
         public virtual Area Area { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
-        public virtual ICollection<Activity_Message_Mapping> Activity_Message_Mapping { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

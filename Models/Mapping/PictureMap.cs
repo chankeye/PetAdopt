@@ -19,6 +19,18 @@ namespace PetAdopt.Models.Mapping
             this.ToTable("Picture");
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Position).HasColumnName("Position");
+
+            // Relationships
+            this.HasMany(t => t.Animals)
+                .WithMany(t => t.Pictures)
+                .Map(m =>
+                    {
+                        m.ToTable("Animal_Picture_Mapping");
+                        m.MapLeftKey("PictureId");
+                        m.MapRightKey("AnimalId");
+                    });
+
+
         }
     }
 }

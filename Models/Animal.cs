@@ -7,9 +7,9 @@ namespace PetAdopt.Models
     {
         public Animal()
         {
-            this.Animal_Message_Mapping = new List<Animal_Message_Mapping>();
-            this.Animal_Picture_Mapping = new List<Animal_Picture_Mapping>();
             this.Blogs = new List<Blog>();
+            this.Messages = new List<Message>();
+            this.Pictures = new List<Picture>();
         }
 
         public int Id { get; set; }
@@ -31,8 +31,8 @@ namespace PetAdopt.Models
         public virtual OperationInfo OperationInfo { get; set; }
         public virtual Shelter Shelter { get; set; }
         public virtual Status Status { get; set; }
-        public virtual ICollection<Animal_Message_Mapping> Animal_Message_Mapping { get; set; }
-        public virtual ICollection<Animal_Picture_Mapping> Animal_Picture_Mapping { get; set; }
         public virtual ICollection<Blog> Blogs { get; set; }
+        public virtual ICollection<Message> Messages { get; set; }
+        public virtual ICollection<Picture> Pictures { get; set; }
     }
 }

@@ -31,9 +31,16 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetAskList(int page, int take, string query, bool isLike)
         {
-            var newslist = _askLogic.GetAskList(page, take, query, isLike);
+            var asklist = _askLogic.GetAskList(page, take, query, isLike);
 
-            return Json(newslist);
+            return Json(asklist);
+        }
+
+        public ActionResult GetMessageList(int id, int page, int take)
+        {
+            var asklist = _askLogic.GetMessageList(id, page, take);
+
+            return Json(asklist);
         }
 
         public ActionResult Delete(int id)
@@ -42,6 +49,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             return Json(result);
         }
+
+        public ActionResult DeleteMessage(int messageId)
+        {
+            var result = _askLogic.DeleteMessage(messageId);
+
+            return Json(result);
+        }
+
 
         public ActionResult AddAsk(CreateAsk data)
         {

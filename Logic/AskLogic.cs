@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using PetAdopt.DTO;
 using PetAdopt.DTO.Ask;
 using PetAdopt.Models;
@@ -168,6 +169,40 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 刪除留言
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult DeleteMessage(int messageId)
+        {
+            var log = GetLogger();
+            log.Debug("messageId:{0}", messageId);
+
+            var result = new IsSuccessResult();
+            var message = PetContext.Messages.SingleOrDefault(r => r.Id == messageId);
+            if (message == null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "找不到此留言";
+                return result;
+            }
+
+            try
+            {
+                PetContext.Messages.Remove(message);
+                PetContext.SaveChanges();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                result.IsSuccess = false;
+                result.ErrorMessage = "發生不明錯誤，請稍候再試";
+                return result;
+            }
+        }
+
+        /// <summary>
         /// 取得問與答
         /// </summary>
         /// <returns></returns>
@@ -188,6 +223,54 @@ namespace PetAdopt.Logic
                     Message = ask.Message,
                     ClassId = ask.ClassId,
                 }
+            };
+        }
+
+        /// <summary>
+        /// 取得留言列表
+        /// </summary>
+        /// <param name="id">Ask.Id</param>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <returns></returns>
+        public MessageList GetMessageList(int id, int page = 1, int take = 10)
+        {
+            var log = GetLogger();
+            log.Debug("page:{0}, take:{1}, id:{3}", page, take, id);
+
+            if (page <= 0)
+                page = 1;
+
+            if (take < 1)
+                take = 10;
+
+            var messages = PetContext.Asks
+                .Where(r => r.Id == id)
+                .SelectMany(r => r.Messages);
+
+            var temp = messages.Select(r => new
+            {
+                r.Id,
+                Message = r.Message1,
+                r.OperationInfo.Date,
+                r.OperationInfo.User.Account
+            })
+            .ToList();
+
+            var list = temp.Select(r => new MessageItem
+            {
+                Id = r.Id,
+                Message = r.Message,
+                Date = r.Date.ToString("yyyy-MM-dd"),
+                Account = r.Account
+            })
+            .ToList();
+
+            var count = list.Count();
+            return new MessageList
+            {
+                List = list,
+                Count = count
             };
         }
 

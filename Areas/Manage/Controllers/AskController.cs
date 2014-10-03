@@ -38,9 +38,9 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var asklist = _askLogic.GetMessageList(id, page, take);
+            var result = _askLogic.GetMessageList(id, page, take);
 
-            return Json(asklist);
+            return Json(result);
         }
 
         public ActionResult Delete(int id)

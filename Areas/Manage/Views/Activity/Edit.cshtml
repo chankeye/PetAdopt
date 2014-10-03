@@ -62,4 +62,40 @@
             </div>
         </div>
     </form>
+    
+    <hr />
+
+    <div class="page-header">
+        <h2>留言</h2>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序號</th>
+                <th>日期</th>
+                <th>內容</th>
+                <th>發佈者</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: $root.history">
+            <tr>
+                <td><a href='#' data-bind="click: $root.removeMessage">移除</a></td>
+                <td><span data-bind="text: Id"></span></td>
+                <td><span data-bind="text: Date"></span></td>
+                <td><span data-bind="text: Message"></span></td>
+                <td><span data-bind="text: Account"></span></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr><td data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></td></tr>
+        </tfoot>
+    </table>
+    <!--pagination-->
+    <div class="pagination clearfix">
+        <span class="prev"><a href="#">&lt;&lt; Previous</a></span>
+        <ul class="pagi"></ul>
+        <span class="next"><a href="#">Next &gt;&gt;</a></span>
+    </div>
+    <!--pagination-->
 </div>

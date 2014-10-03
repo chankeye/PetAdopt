@@ -138,6 +138,9 @@ $(function () {
         success: function (data) {
             if (data.IsSuccess) {
                 photo = data.ReturnObject.Photo;
+                if (photo != null) {
+                    $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
+                }
                 $("#title").val(data.ReturnObject.Title);
                 $("#startDate").val(data.ReturnObject.StartDate),
                 $("#endDate").val(data.ReturnObject.EndDate),

@@ -198,7 +198,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
-    <Content Include="Content\uploads\readme.txt" />
     <Content Include="Content\_site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -737,6 +736,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\uploads\" />
     <Folder Include="Content\Views\" />
   </ItemGroup>
   <PropertyGroup>

@@ -109,6 +109,9 @@ $(function () {
         success: function (data) {
             if (data.IsSuccess) {
                 photo = data.ReturnObject.Photo;
+                if (photo != null) {
+                    $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
+                }
                 $("#title").val(data.ReturnObject.Title);
                 $("#selOptions").children().each(function () {
                     if ($(this).val() == data.ReturnObject.AreaId) {

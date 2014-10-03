@@ -1,8 +1,8 @@
+using MvcFileUploader;
+using MvcFileUploader.Models;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using MvcFileUploader;
-using MvcFileUploader.Models;
 
 namespace PetAdopt.Controllers
 {
@@ -100,10 +100,6 @@ namespace PetAdopt.Controllers
             return viewresult;
         }
 
-
-
-
-
         //here i am receving the extra info injected
         [HttpPost] // should accept only post
         public ActionResult DeleteFile(int? entityId, string fileUrl)
@@ -120,7 +116,6 @@ namespace PetAdopt.Controllers
 
             return viewresult; // trigger success
         }
-
 
         public ActionResult DownloadFile(string fileUrl, string mimetype)
         {

@@ -1,13 +1,71 @@
 ﻿function MyViewModel() {
     var self = this;
 
+    self.loading = ko.observable(false);
+    self.responseMessage = ko.observable($.commonLocalization.noRecord);
+    self.history = ko.observableArray();
+
     self.areas = ko.observableArray();
+
+    self.removeMessage = function (message) {
+        if (confirm('確定要刪除？')) {
+
+            if (message.IsDisable == true)
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/News/DeleteMessage',
+                data: {
+                    Id: window.id,
+                    MessageId: message.Id
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(message);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    //Add PaginationModel
+    //from pagination.js
+    ko.utils.extend(self, new PaginationModel());
+
+    self.loadHistory = function (page, take) {
+        self.responseMessage($.commonLocalization.loading);
+        self.loading(true);
+        self.history.removeAll();
+        self.pagination(0, 0, 0);
+        page = page || 1; // if page didn't send
+        take = take || 10;
+        $.ajax({
+            type: 'post',
+            url: '/Manage/News/GetMessageList',
+            data: {
+                id: window.id,
+                page: page,
+                take: take
+            }
+        }).done(function (response) {
+            self.responseMessage('');
+            self.history(response.List);
+            self.pagination(page, response.Count, take);
+
+            if (response.Count == 0)
+                self.responseMessage($.commonLocalization.noRecord);
+
+        }).always(function () {
+            self.loading(false);
+        });
+    };
 };
 
 
 $(function () {
-
-    var vm = new MyViewModel();
 
     // 取得地區列表
     $.ajax({
@@ -38,6 +96,7 @@ $(function () {
     // 沒有輸入id直接導回
     if (urlParams["id"] == null)
         window.location = '/Manage/News';
+    window.id = urlParams["id"];
 
     // 取得最新消息
     var photo;
@@ -68,6 +127,10 @@ $(function () {
             }
         }
     });
+
+    window.vm = new MyViewModel();
+    window.vm.loadHistory();
+    ko.applyBindings(window.vm);
 
     // 修改消息
     $("#btn1").click(
@@ -136,6 +199,4 @@ $(function () {
     function () {
         window.location = '/Manage/News';
     });
-
-    ko.applyBindings(vm);
 });

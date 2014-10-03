@@ -172,13 +172,22 @@ namespace PetAdopt.Logic
         /// 刪除留言
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteMessage(int messageId)
+        public IsSuccessResult DeleteMessage(int id, int messageId)
         {
             var log = GetLogger();
-            log.Debug("messageId:{0}", messageId);
+            log.Debug("id:{0}, messageId:{1}", id, messageId);
 
             var result = new IsSuccessResult();
-            var message = PetContext.Messages.SingleOrDefault(r => r.Id == messageId);
+
+            var ask = PetContext.Asks.SingleOrDefault(r => r.Id == 26);
+            if (ask == null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "找不到此問與答";
+                return result;
+            }
+
+            var message = ask.Messages.SingleOrDefault(r => r.Id == messageId);
             if (message == null)
             {
                 result.IsSuccess = false;
@@ -236,7 +245,7 @@ namespace PetAdopt.Logic
         public MessageList GetMessageList(int id, int page = 1, int take = 10)
         {
             var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, id:{3}", page, take, id);
+            log.Debug("page:{0}, take:{1}, id:{2}", page, take, id);
 
             if (page <= 0)
                 page = 1;
@@ -255,6 +264,9 @@ namespace PetAdopt.Logic
                 r.OperationInfo.Date,
                 r.OperationInfo.User.Account
             })
+            .OrderByDescending(r => r.Id)
+            .Skip((page - 1) * take)
+            .Take(take)
             .ToList();
 
             var list = temp.Select(r => new MessageItem
@@ -266,7 +278,7 @@ namespace PetAdopt.Logic
             })
             .ToList();
 
-            var count = list.Count();
+            var count = messages.Count();
             return new MessageList
             {
                 List = list,

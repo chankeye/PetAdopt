@@ -17,6 +17,7 @@
                 type: 'post',
                 url: '/Manage/Ask/DeleteMessage',
                 data: {
+                    Id: window.id,
                     MessageId: message.Id
                 },
                 success: function (data) {
@@ -62,7 +63,6 @@
         });
     };
 };
-
 
 $(function () {
 

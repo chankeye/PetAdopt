@@ -50,9 +50,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
-        public ActionResult DeleteMessage(int messageId)
+        public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _askLogic.DeleteMessage(messageId);
+            var result = _askLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }

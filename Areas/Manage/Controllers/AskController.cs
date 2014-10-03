@@ -57,7 +57,6 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
-
         public ActionResult AddAsk(CreateAsk data)
         {
             var result = _askLogic.AddAsk(data);

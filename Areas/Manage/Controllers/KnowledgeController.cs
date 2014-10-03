@@ -36,9 +36,23 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(newslist);
         }
 
+        public ActionResult GetMessageList(int id, int page, int take)
+        {
+            var asklist = _knowledgeLogic.GetMessageList(id, page, take);
+
+            return Json(asklist);
+        }
+
         public ActionResult Delete(int id)
         {
             var result = _knowledgeLogic.DeleteKnowledge(id);
+
+            return Json(result);
+        }
+
+        public ActionResult DeleteMessage(int id, int messageId)
+        {
+            var result = _knowledgeLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }

@@ -171,6 +171,8 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除留言
         /// </summary>
+        /// <param name="id">Ask.id</param>
+        /// <param name="messageId"></param>
         /// <returns></returns>
         public IsSuccessResult DeleteMessage(int id, int messageId)
         {
@@ -179,7 +181,7 @@ namespace PetAdopt.Logic
 
             var result = new IsSuccessResult();
 
-            var ask = PetContext.Asks.SingleOrDefault(r => r.Id == 26);
+            var ask = PetContext.Asks.SingleOrDefault(r => r.Id == id);
             if (ask == null)
             {
                 result.IsSuccess = false;

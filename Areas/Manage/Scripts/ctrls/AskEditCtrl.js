@@ -98,7 +98,6 @@ $(function () {
     window.id = urlParams["id"];
 
     // 取得問與答
-    var photo;
     $.ajax({
         type: 'post',
         url: '/Manage/Ask/EditInit',

@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using PetAdopt.DTO;
+﻿using PetAdopt.DTO;
 using PetAdopt.DTO.Animal;
-using PetAdopt.DTO.Ask;
 using PetAdopt.Models;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace PetAdopt.Logic
@@ -136,6 +135,90 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得動物資訊
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<GetAnimal> GetAnimal(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var animal = PetContext.Animals.SingleOrDefault(r => r.Id == id);
+            if (animal == null)
+                return new IsSuccessResult<GetAnimal>("找不到此認養動物資訊");
+
+            return new IsSuccessResult<GetAnimal>
+            {
+                ReturnObject = new GetAnimal
+                {
+                    Photo = animal.CoverPhoto,
+                    Title = animal.Title,
+                    Introduction = animal.Introduction,
+                    Address = animal.Address,
+                    AreaId = animal.AreaId,
+                    ClassId = animal.ClassId,
+                    SheltersId = animal.SheltersId,
+                    Phone = animal.Phone,
+                    StartDate = animal.StartDate.ToString("yyyy-MM-dd"),
+                    EndDate = animal.EndDate.HasValue ? animal.EndDate.Value.ToString("yyyy-MM-dd") : null,
+                    Age = animal.Age,
+                    StatusId = animal.StatusId
+                }
+            };
+        }
+
+        /// <summary>
+        /// 取得留言列表
+        /// </summary>
+        /// <param name="id">Animal.Id</param>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <returns></returns>
+        public AnimalMessageList GetMessageList(int id, int page = 1, int take = 10)
+        {
+            var log = GetLogger();
+            log.Debug("page:{0}, take:{1}, id:{2}", page, take, id);
+
+            if (page <= 0)
+                page = 1;
+
+            if (take < 1)
+                take = 10;
+
+            var messages = PetContext.Animals
+                .Where(r => r.Id == id)
+                .SelectMany(r => r.Messages);
+
+            var temp = messages.Select(r => new
+            {
+                r.Id,
+                Message = r.Message1,
+                r.OperationInfo.Date,
+                r.OperationInfo.User.Account
+            })
+            .OrderByDescending(r => r.Id)
+            .Skip((page - 1) * take)
+            .Take(take)
+            .ToList();
+
+            var list = temp.Select(r => new AnimalMessageItem
+            {
+                Id = r.Id,
+                Message = r.Message,
+                Date = r.Date.ToString("yyyy-MM-dd"),
+                Account = r.Account
+            })
+            .ToList();
+
+            var count = messages.Count();
+            return new AnimalMessageList
+            {
+                List = list,
+                Count = count
+            };
+        }
+
+        /// <summary>
         /// 刪除動物
         /// </summary>
         /// <returns></returns>
@@ -218,90 +301,6 @@ namespace PetAdopt.Logic
                 result.ErrorMessage = "發生不明錯誤，請稍候再試";
                 return result;
             }
-        }
-
-        /// <summary>
-        /// 取得動物資訊
-        /// </summary>
-        /// <returns></returns>
-        public IsSuccessResult<GetAnimal> GetAnimal(int id)
-        {
-            var log = GetLogger();
-            log.Debug("id: {0}", id);
-
-            var animal = PetContext.Animals.SingleOrDefault(r => r.Id == id);
-            if (animal == null)
-                return new IsSuccessResult<GetAnimal>("找不到此認養動物資訊");
-
-            return new IsSuccessResult<GetAnimal>
-            {
-                ReturnObject = new GetAnimal
-                {
-                    Photo = animal.CoverPhoto,
-                    Title = animal.Title,
-                    Introduction = animal.Introduction,
-                    Address = animal.Address,
-                    AreaId = animal.AreaId,
-                    ClassId = animal.ClassId,
-                    SheltersId = animal.SheltersId,
-                    Phone = animal.Phone,
-                    StartDate = animal.StartDate.ToString("yyyy-MM-dd"),
-                    EndDate = animal.EndDate.HasValue ? animal.EndDate.Value.ToString("yyyy-MM-dd") : null,
-                    Age = animal.Age,
-                    StatusId = animal.StatusId
-                }
-            };
-        }
-
-        /// <summary>
-        /// 取得留言列表
-        /// </summary>
-        /// <param name="id">Animal.Id</param>
-        /// <param name="page">第幾頁(1是第一頁)</param>
-        /// <param name="take">取幾筆資料</param>
-        /// <returns></returns>
-        public MessageList GetMessageList(int id, int page = 1, int take = 10)
-        {
-            var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, id:{2}", page, take, id);
-
-            if (page <= 0)
-                page = 1;
-
-            if (take < 1)
-                take = 10;
-
-            var messages = PetContext.Animals
-                .Where(r => r.Id == id)
-                .SelectMany(r => r.Messages);
-
-            var temp = messages.Select(r => new
-            {
-                r.Id,
-                Message = r.Message1,
-                r.OperationInfo.Date,
-                r.OperationInfo.User.Account
-            })
-            .OrderByDescending(r => r.Id)
-            .Skip((page - 1) * take)
-            .Take(take)
-            .ToList();
-
-            var list = temp.Select(r => new MessageItem
-            {
-                Id = r.Id,
-                Message = r.Message,
-                Date = r.Date.ToString("yyyy-MM-dd"),
-                Account = r.Account
-            })
-            .ToList();
-
-            var count = messages.Count();
-            return new MessageList
-            {
-                List = list,
-                Count = count
-            };
         }
 
         /// <summary>

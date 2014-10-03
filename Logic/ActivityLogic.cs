@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using PetAdopt.DTO;
+﻿using PetAdopt.DTO;
 using PetAdopt.DTO.Activity;
-using PetAdopt.DTO.Ask;
 using PetAdopt.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -136,6 +135,83 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得最新活動
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<CreateActivity> GetActivity(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var activity = PetContext.Activities.SingleOrDefault(r => r.Id == id);
+            if (activity == null)
+                return new IsSuccessResult<CreateActivity>("找不到此活動");
+
+            return new IsSuccessResult<CreateActivity>
+            {
+                ReturnObject = new CreateActivity
+                {
+                    Photo = activity.CoverPhoto,
+                    Title = activity.Title,
+                    Message = activity.Message,
+                    AreaId = activity.AreaId,
+                    Address = activity.Address
+                }
+            };
+        }
+
+        /// <summary>
+        /// 取得留言列表
+        /// </summary>
+        /// <param name="id">Activity.Id</param>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <returns></returns>
+        public ActivityMessageList GetMessageList(int id, int page = 1, int take = 10)
+        {
+            var log = GetLogger();
+            log.Debug("page:{0}, take:{1}, id:{2}", page, take, id);
+
+            if (page <= 0)
+                page = 1;
+
+            if (take < 1)
+                take = 10;
+
+            var messages = PetContext.Activities
+                .Where(r => r.Id == id)
+                .SelectMany(r => r.Messages);
+
+            var temp = messages.Select(r => new
+            {
+                r.Id,
+                Message = r.Message1,
+                r.OperationInfo.Date,
+                r.OperationInfo.User.Account
+            })
+            .OrderByDescending(r => r.Id)
+            .Skip((page - 1) * take)
+            .Take(take)
+            .ToList();
+
+            var list = temp.Select(r => new ActivityMessageItem
+            {
+                Id = r.Id,
+                Message = r.Message,
+                Date = r.Date.ToString("yyyy-MM-dd"),
+                Account = r.Account
+            })
+            .ToList();
+
+            var count = messages.Count();
+            return new ActivityMessageList
+            {
+                List = list,
+                Count = count
+            };
+        }
+
+        /// <summary>
         /// 刪除最新活動
         /// </summary>
         /// <returns></returns>
@@ -218,83 +294,6 @@ namespace PetAdopt.Logic
                 result.ErrorMessage = "發生不明錯誤，請稍候再試";
                 return result;
             }
-        }
-
-        /// <summary>
-        /// 取得最新活動
-        /// </summary>
-        /// <returns></returns>
-        public IsSuccessResult<CreateActivity> GetActivity(int id)
-        {
-            var log = GetLogger();
-            log.Debug("id: {0}", id);
-
-            var activity = PetContext.Activities.SingleOrDefault(r => r.Id == id);
-            if (activity == null)
-                return new IsSuccessResult<CreateActivity>("找不到此活動");
-
-            return new IsSuccessResult<CreateActivity>
-            {
-                ReturnObject = new CreateActivity
-                {
-                    Photo = activity.CoverPhoto,
-                    Title = activity.Title,
-                    Message = activity.Message,
-                    AreaId = activity.AreaId,
-                    Address = activity.Address
-                }
-            };
-        }
-
-        /// <summary>
-        /// 取得留言列表
-        /// </summary>
-        /// <param name="id">Activity.Id</param>
-        /// <param name="page">第幾頁(1是第一頁)</param>
-        /// <param name="take">取幾筆資料</param>
-        /// <returns></returns>
-        public MessageList GetMessageList(int id, int page = 1, int take = 10)
-        {
-            var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, id:{2}", page, take, id);
-
-            if (page <= 0)
-                page = 1;
-
-            if (take < 1)
-                take = 10;
-
-            var messages = PetContext.Activities
-                .Where(r => r.Id == id)
-                .SelectMany(r => r.Messages);
-
-            var temp = messages.Select(r => new
-            {
-                r.Id,
-                Message = r.Message1,
-                r.OperationInfo.Date,
-                r.OperationInfo.User.Account
-            })
-            .OrderByDescending(r => r.Id)
-            .Skip((page - 1) * take)
-            .Take(take)
-            .ToList();
-
-            var list = temp.Select(r => new MessageItem
-            {
-                Id = r.Id,
-                Message = r.Message,
-                Date = r.Date.ToString("yyyy-MM-dd"),
-                Account = r.Account
-            })
-            .ToList();
-
-            var count = messages.Count();
-            return new MessageList
-            {
-                List = list,
-                Count = count
-            };
         }
 
         /// <summary>

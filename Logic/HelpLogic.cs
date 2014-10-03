@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Web.WebPages;
-using PetAdopt.DTO;
-using PetAdopt.DTO.Ask;
+﻿using PetAdopt.DTO;
 using PetAdopt.DTO.Help;
 using PetAdopt.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -137,6 +135,84 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得救援文章
+        /// </summary>
+        /// <returns></returns>
+        public IsSuccessResult<CreateHelp> GetHelp(int id)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}", id);
+
+            var help = PetContext.Helps.SingleOrDefault(r => r.Id == id);
+            if (help == null)
+                return new IsSuccessResult<CreateHelp>("找不到此救援文章");
+
+            return new IsSuccessResult<CreateHelp>
+            {
+                ReturnObject = new CreateHelp
+                {
+                    Photo = help.CoverPhoto,
+                    Title = help.Title,
+                    Message = help.Message,
+                    AreaId = help.AreaId,
+                    Address = help.Address,
+                    ClassId = help.ClassId
+                }
+            };
+        }
+
+        /// <summary>
+        /// 取得留言列表
+        /// </summary>
+        /// <param name="id">Help.Id</param>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <returns></returns>
+        public HelpMessageList GetMessageList(int id, int page = 1, int take = 10)
+        {
+            var log = GetLogger();
+            log.Debug("page:{0}, take:{1}, id:{2}", page, take, id);
+
+            if (page <= 0)
+                page = 1;
+
+            if (take < 1)
+                take = 10;
+
+            var messages = PetContext.Helps
+                .Where(r => r.Id == id)
+                .SelectMany(r => r.Messages);
+
+            var temp = messages.Select(r => new
+            {
+                r.Id,
+                Message = r.Message1,
+                r.OperationInfo.Date,
+                r.OperationInfo.User.Account
+            })
+            .OrderByDescending(r => r.Id)
+            .Skip((page - 1) * take)
+            .Take(take)
+            .ToList();
+
+            var list = temp.Select(r => new HelpMessageItem
+            {
+                Id = r.Id,
+                Message = r.Message,
+                Date = r.Date.ToString("yyyy-MM-dd"),
+                Account = r.Account
+            })
+            .ToList();
+
+            var count = messages.Count();
+            return new HelpMessageList
+            {
+                List = list,
+                Count = count
+            };
+        }
+
+        /// <summary>
         /// 刪除即刻救援
         /// </summary>
         /// <returns></returns>
@@ -219,84 +295,6 @@ namespace PetAdopt.Logic
                 result.ErrorMessage = "發生不明錯誤，請稍候再試";
                 return result;
             }
-        }
-
-        /// <summary>
-        /// 取得救援文章
-        /// </summary>
-        /// <returns></returns>
-        public IsSuccessResult<CreateHelp> GetHelp(int id)
-        {
-            var log = GetLogger();
-            log.Debug("id: {0}", id);
-
-            var help = PetContext.Helps.SingleOrDefault(r => r.Id == id);
-            if (help == null)
-                return new IsSuccessResult<CreateHelp>("找不到此救援文章");
-
-            return new IsSuccessResult<CreateHelp>
-            {
-                ReturnObject = new CreateHelp
-                {
-                    Photo = help.CoverPhoto,
-                    Title = help.Title,
-                    Message = help.Message,
-                    AreaId = help.AreaId,
-                    Address = help.Address,
-                    ClassId = help.ClassId
-                }
-            };
-        }
-
-        /// <summary>
-        /// 取得留言列表
-        /// </summary>
-        /// <param name="id">Help.Id</param>
-        /// <param name="page">第幾頁(1是第一頁)</param>
-        /// <param name="take">取幾筆資料</param>
-        /// <returns></returns>
-        public MessageList GetMessageList(int id, int page = 1, int take = 10)
-        {
-            var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, id:{2}", page, take, id);
-
-            if (page <= 0)
-                page = 1;
-
-            if (take < 1)
-                take = 10;
-
-            var messages = PetContext.Helps
-                .Where(r => r.Id == id)
-                .SelectMany(r => r.Messages);
-
-            var temp = messages.Select(r => new
-            {
-                r.Id,
-                Message = r.Message1,
-                r.OperationInfo.Date,
-                r.OperationInfo.User.Account
-            })
-            .OrderByDescending(r => r.Id)
-            .Skip((page - 1) * take)
-            .Take(take)
-            .ToList();
-
-            var list = temp.Select(r => new MessageItem
-            {
-                Id = r.Id,
-                Message = r.Message,
-                Date = r.Date.ToString("yyyy-MM-dd"),
-                Account = r.Account
-            })
-            .ToList();
-
-            var count = messages.Count();
-            return new MessageList
-            {
-                List = list,
-                Count = count
-            };
         }
 
         /// <summary>

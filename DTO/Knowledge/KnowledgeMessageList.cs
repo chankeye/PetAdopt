@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace PetAdopt.DTO.Ask
+namespace PetAdopt.DTO.Knowledge
 {
-    public class MessageItem
+    public class KnowledgeMessageItem
     {
         public int Id { get; set; }
 
@@ -13,9 +13,9 @@ namespace PetAdopt.DTO.Ask
         public string Account { get; set; }
     }
 
-    public class MessageList
+    public class KnowledgeMessageList
     {
-        public List<MessageItem> List { get; set; }
+        public List<KnowledgeMessageItem> List { get; set; }
 
         public int Count { get; set; }
     }

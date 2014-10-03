@@ -118,6 +118,7 @@
     <Content Include="Areas\Manage\Scripts\ctrls\UserEditCtrl.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\Images\default.jpg" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\locale\common.js" />
     <Content Include="Content\bootstrap-theme.css" />

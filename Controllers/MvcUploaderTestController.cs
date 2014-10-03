@@ -25,6 +25,11 @@ namespace PetAdopt.Controllers
                 // 判斷檔名是否重覆
                 var path = Server.MapPath("~/Content/uploads");
                 var photoName = Request.Files[i].FileName;
+
+                // default.jpg是系統預設的圖片名，不允許別人使用
+                if (photoName == "default.jpg")
+                    photoName = "1_" + photoName;
+
                 var fullphotoPath = path + "\\" + Request.Files[i].FileName;
 
                 if (System.IO.File.Exists(fullphotoPath))

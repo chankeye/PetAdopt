@@ -124,6 +124,7 @@
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\ctrls\AccountChangePasswordCtrl.js" />
     <Content Include="Scripts\ctrls\AnimalCtrl.js" />
+    <Content Include="Scripts\ctrls\AnimalDetailCtrl.js" />
     <Content Include="Scripts\locale\common.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -737,6 +738,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Animal\Index.cshtml" />
+    <Content Include="Views\Animal\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

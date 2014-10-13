@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "動物詳細資訊";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <script src="../../Scripts/ctrls/AnimalDetailCtrl.js"></script>
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">封面圖</label>
+            <div class="col-sm-4">
+                <img id="coverPhoto" name="coverPhoto" alt="封面圖" class="img-responsive img-thumbnail" src="../../Content/Images/default.jpg">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">標題</label>
+            <div class="col-sm-4">
+                <label id="title" name="title"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">送養日期</label>
+            <div class="col-sm-4">
+                <label id="startDate" name="startDate"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">介紹</label>
+            <div class="col-sm-4">
+                <label id="introduction" name="introduction"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">分類</label>
+            <div class="col-sm-4">
+                <label id="selOptionsClasses" name="selOptionsClasses"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">狀態</label>
+            <div class="col-sm-4">
+                <label id="selOptionsStatuses" name="selOptionsStatuses"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">所在收容所編號</label>
+            <div class="col-sm-4">
+                <label id="shelters" name="shelters"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">地區</label>
+            <div class="col-sm-4">
+                <label id="selOptionsAreas" name="selOptionsAreas"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">地址</label>
+            <div class="col-sm-4">
+                <label id="address" name="address"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">電話</label>
+            <div class="col-sm-4">
+                <label id="phone" name="phone"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">安樂死日期</label>
+            <div class="col-sm-4">
+                <label id="endDate" name="endDate"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">年齡</label>
+            <div class="col-sm-4">
+                <label id="age" name="age"></label>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="page-header">
+        <h2>留言</h2>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>序號</th>
+                <th>日期</th>
+                <th>內容</th>
+                <th>發佈者</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: $root.history">
+            <tr>
+                <td><a href='#' data-bind="click: $root.removeMessage">移除</a></td>
+                <td><span data-bind="text: Id"></span></td>
+                <td><span data-bind="text: Date"></span></td>
+                <td><span data-bind="text: Message"></span></td>
+                <td><span data-bind="text: Account"></span></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr><td data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></td></tr>
+        </tfoot>
+    </table>
+    <!--pagination-->
+    <div class="pagination clearfix">
+        <span class="prev"><a href="#">&lt;&lt; Previous</a></span>
+        <ul class="pagi"></ul>
+        <span class="next"><a href="#">Next &gt;&gt;</a></span>
+    </div>
+    <!--pagination-->
+</div>

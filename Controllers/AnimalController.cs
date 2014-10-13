@@ -46,6 +46,20 @@ namespace PetAdopt.Controllers
             return Json(result);
         }
 
+        [AllowAnonymous]
+        public ActionResult Detail()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult DetailInit(int id)
+        {
+            var result = _animalLogic.GetAnimal(id);
+
+            return Json(result);
+        }
+
         /*public ActionResult Delete(int id)
         {
             var result = _animalLogic.DeleteAnimal(Server.MapPath("~/Content/uploads"), id);

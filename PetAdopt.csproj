@@ -116,12 +116,14 @@
     <Content Include="Areas\Manage\Scripts\ctrls\SystemCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\AccountChangePasswordCtrl.js" />
     <Content Include="Areas\Manage\Scripts\ctrls\UserEditCtrl.js" />
+    <Content Include="Areas\Manage\Scripts\App.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\default.jpg" />
     <Content Include="Content\Views\Account\Login.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Scripts\ctrls\AccountChangePasswordCtrl.js" />
+    <Content Include="Scripts\ctrls\AnimalCtrl.js" />
     <Content Include="Scripts\locale\common.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -631,6 +633,7 @@
     <Compile Include="Areas\Manage\ManageAreaRegistration.cs" />
     <Compile Include="Areas\Manage\Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnimalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
@@ -733,6 +736,7 @@
     <Content Include="Views\MvcUploaderTest\Demo.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Animal\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

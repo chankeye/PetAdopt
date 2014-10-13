@@ -1,11 +1,10 @@
-﻿using PetAdopt.Controllers;
-using PetAdopt.Logic;
+﻿using PetAdopt.Logic;
 using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 
-namespace PetAdopt.Areas.Manage.Controllers
+namespace PetAdopt.Controllers
 {
     [Authorize]
     public class AccountController : _BaseController
@@ -53,7 +52,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         public ActionResult Login(string account, string password, string returnUrl)
         {
             #region 驗證帳密
-            var isValid = _userLogic.IsValid(account, password, true);
+            var isValid = _userLogic.IsValid(account, password, false);
             if (isValid.IsSuccess == false)
             {
                 ModelState.AddModelError("", isValid.ErrorMessage);
@@ -96,7 +95,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         public ActionResult SignOut()
         {
             FormsAuthentication.SignOut();
-            return Redirect("/Manage/Account/Login");
+            return Redirect("/Account/Login");
         }
 
         #region Private Methods
@@ -110,7 +109,7 @@ namespace PetAdopt.Areas.Manage.Controllers
             if (Url.IsLocalUrl(returnUrl))
                 return Redirect(returnUrl);
             else
-                return Redirect("/Manage");
+                return Redirect("/");
         }
         #endregion //Private Methods
 

@@ -7,12 +7,12 @@
     var loginInfo = JsonConvert.DeserializeObject<LoginInfo>(userData);
     if (loginInfo.IsAdmin == false)
     {
-        Response.Redirect("~/Home/Index", true);
+        Response.Redirect("/", true);
     }
 }
 
 <!DOCTYPE html>
-<html ng-app="masterApp">
+<html>
 <head>
 
     @* meta *@
@@ -117,7 +117,7 @@
         <div>
             @RenderBody()
         </div>
-        <div ng-view>
+        <div>
         </div>
         <hr>
         <footer>

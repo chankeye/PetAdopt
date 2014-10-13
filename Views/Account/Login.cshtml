@@ -7,19 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <title>管理系統</title>
+    <title>會員登入</title>
 
     @* load css *@
-    <link href="../../../../Content/bootstrap.css" rel="stylesheet" />
-    <link href="../../../../Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/bootstrap-theme.css" rel="stylesheet" />
 
 </head>
 <body>
-    <link href="~/Areas/Manage/Content/Views/Account/Login.css" rel="stylesheet" />
+    <link href="~/Content/Views/Account/Login.css" rel="stylesheet" />
     <div class="container">
         <form class="form-signin" method="post" action="@Request.Url.PathAndQuery">
             <h2 class="form-signin-heading">
-                <span>管理系統</span>
+                <span>會員登入</span>
                 <small>登入</small>
             </h2>
             <input type="text" class="form-control" placeholder="請輸入帳號" autofocus name="account" required />

@@ -2,16 +2,43 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    @* meta *@
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
     <title>@ViewBag.Title</title>
     
+    @* load css *@
+    <link href="../../Content/mvcfileupload/vendor/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/_site.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.css" rel="stylesheet" />
+
     @RenderSection("style", false)
     
+    @* load js *@
+    <script src="../../Scripts/jquery-2.1.1.js"></script>
+    <script src="../../Scripts/jquery-ui-1.10.4.js"></script>
+    <script src="../../Scripts/jquery.validate.js"></script>
+    @*<script src="../../Scripts/knockout-3.1.0.js"></script>*@
+    <script src="../../Scripts/knockout-3.1.0.debug.js"></script>
+    <script src="../../Scripts/mvcfileupload/vendor/bootstrap.min.js"></script>
+    <script src="//www.google.com/jsapi"></script>
+
     @RenderSection("Scripts", false)
 </head>
 <body>
-    <div>
-        @RenderBody()
+    @* container *@
+    <div class="container">
+        <div>
+            @RenderBody()
+        </div>
+        <div>
+        </div>
+        <hr>
+        <footer>
+            <p>&copy; LoveAdopt 2014</p>
+        </footer>
     </div>
 </body>
 </html>

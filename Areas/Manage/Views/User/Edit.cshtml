@@ -1,10 +1,10 @@
 ﻿@{
     ViewBag.Title = "修改使用者資訊";
-    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+    Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
 {
-    <script src="/Areas/Manage/Scripts/ctrls/UserEditCtrl.js"></script>
+    <script src="../../Scripts/ctrls/UserEditCtrl.js"></script>
 }
 <div class="page-header">
     <h2>@ViewBag.Title</h2>
@@ -43,7 +43,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">手機</label>
             <div class="col-sm-4">
-                <input id="mobile" name="mobile" class="form-control" minlength="10" maxlength="10" placeholder="請輸入手機" />
+                <input id="mobile" name="mobile" class="form-control" maxlength="10" placeholder="請輸入手機" />
             </div>
         </div>
         <div class="form-group">

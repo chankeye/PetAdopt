@@ -68,35 +68,12 @@
 $(function () {
 
     // 取得地區列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/System/GetAreaList',
-        success: function (area) {
-            vm.areas(area);
-            vm.areas.unshift({
-                "Word": "請選擇",
-                "Id": ""
-            });
-            $("#selOptions option:first").attr("selected", true);
-        }
-    });
-
-    var urlParams = {};
-    (function () {
-        var e,
-            a = /\+/g,  // Regex for replacing addition symbol with a space
-            r = /([^&=]+)=?([^&]*)/g,
-            d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-            q = window.location.search.substring(1);
-        while (e = r.exec(q)) {
-            urlParams[d(e[1])] = d(e[2]);
-        }
-    })();
+    window.utils.getAreaList();
 
     // 沒有輸入id直接導回
-    if (urlParams["id"] == null)
+    window.id = window.utils.urlParams("id");
+    if (window.id == null)
         window.location = '/Manage/News';
-    window.id = urlParams["id"];
 
     // 取得最新消息
     var photo;
@@ -104,7 +81,7 @@ $(function () {
         type: 'post',
         url: '/Manage/News/EditInit',
         data: {
-            id: urlParams["id"]
+            id: window.id
         },
         success: function (data) {
             if (data.IsSuccess) {

@@ -67,18 +67,7 @@
 $(function () {
 
     // 取得地區列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/System/GetAreaList',
-        success: function (area) {
-            window.vm.areas(area);
-            window.vm.areas.unshift({
-                "Word": "請選擇",
-                "Id": ""
-            });
-            $("#selOptions option:first").attr("selected", true);
-        }
-    });
+    window.utils.getAreaList();
 
     var urlParams = {};
     (function () {
@@ -93,9 +82,9 @@ $(function () {
     })();
 
     // 沒有輸入id直接導回
-    if (urlParams["id"] == null)
+    window.id = window.utils.urlParams("id");
+    if (window.id == null)
         window.location = '/Manage/Activity';
-    window.id = urlParams["id"];
 
     // 取得最新活動
     var photo;
@@ -103,7 +92,7 @@ $(function () {
         type: 'post',
         url: '/Manage/Activity/EditInit',
         data: {
-            id: urlParams["id"]
+            id: window.id
         },
         success: function (data) {
             if (data.IsSuccess) {

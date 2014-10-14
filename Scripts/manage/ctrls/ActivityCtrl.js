@@ -70,18 +70,7 @@
 $(function () {
 
     // 取得地區列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/System/GetAreaList',
-        success: function (area) {
-            window.vm.areas(area);
-            window.vm.areas.unshift({
-                "Word": "請選擇",
-                "Id": ""
-            });
-            $("#selOptions option:first").attr("selected", true);
-        }
-    });
+    window.utils.getAreaList();
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

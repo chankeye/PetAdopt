@@ -116,7 +116,7 @@
     <Content Include="Scripts\manage\ctrls\SystemCtrl.js" />
     <Content Include="Scripts\manage\ctrls\AccountChangePasswordCtrl.js" />
     <Content Include="Scripts\manage\ctrls\UserEditCtrl.js" />
-    <Content Include="Scripts\manage\App.js" />
+    <Content Include="Scripts\_app.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\default.jpg" />
@@ -740,7 +740,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Animal\Index.cshtml" />
     <Content Include="Views\Animal\Detail.cshtml" />
-    <Content Include="Views\Partials\_Pagination.cshtml" />
+    <Content Include="Views\Shared\_Pagination.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

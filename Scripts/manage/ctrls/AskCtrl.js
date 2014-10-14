@@ -74,18 +74,7 @@
 $(function () {
 
     // 取得分類列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/System/GetClassList',
-        success: function (classes) {
-            window.vm.classes(classes);
-            window.vm.classes.unshift({
-                "Word": "請選擇",
-                "Id": ""
-            });
-            $("#selOptions option:first").attr("selected", true);
-        }
-    });
+    window.utils.getClassList();
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

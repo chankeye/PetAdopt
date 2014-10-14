@@ -69,63 +69,18 @@
 $(function () {
 
     // 取得地區列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/System/GetAreaList',
-        success: function (area) {
-            window.vm.areas(area);
-            window.vm.areas.unshift({
-                "Word": "請選擇",
-                "Id": ""
-            });
-            $("#selOptions option:first").attr("selected", true);
-        }
-    });
+    window.utils.getAreaList();
 
     // 取得分類列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/System/GetClassList',
-        success: function (classes) {
-            window.vm.classes(classes);
-            window.vm.classes.unshift({
-                "Word": "請選擇",
-                "Id": ""
-            });
-            $("#selOptionsClasses option:first").attr("selected", true);
-        }
-    });
+    window.utils.getClassList();
 
     // 取得狀態列表
-    $.ajax({
-        type: 'post',
-        url: '/Manage/System/GetStatusList',
-        success: function (statuses) {
-            window.vm.statuses(statuses);
-            window.vm.statuses.unshift({
-                "Word": "請選擇",
-                "Id": ""
-            });
-            $("#selOptionsStatuses option:first").attr("selected", true);
-        }
-    });
-
-    var urlParams = {};
-    (function () {
-        var e,
-            a = /\+/g,  // Regex for replacing addition symbol with a space
-            r = /([^&=]+)=?([^&]*)/g,
-            d = function (s) { return decodeURIComponent(s.replace(a, " ")); },
-            q = window.location.search.substring(1);
-        while (e = r.exec(q)) {
-            urlParams[d(e[1])] = d(e[2]);
-        }
-    })();
+    window.utils.getStatusList();
 
     // 沒有輸入id直接導回
-    if (urlParams["id"] == null)
+    window.id = window.utils.urlParams("id");
+    if (window.id == null)
         window.location = '/Manage/Animal';
-    window.id = urlParams["id"];
 
     // 取得認養資訊
     var photo;
@@ -133,7 +88,7 @@ $(function () {
         type: 'post',
         url: '/Manage/Animal/EditInit',
         data: {
-            id: urlParams["id"]
+            id: window.id
         },
         success: function (data) {
             if (data.IsSuccess) {

@@ -4,7 +4,7 @@
 }
 @section Scripts
 {
-    <script src="../../Scripts/ctrls/UserCtrl.js"></script>
+    <script src="../../../../Scripts/manage/ctrls/UserCtrl.js"></script>
 }
 <div class="page-header">
     <h2>新增使用者</h2>
@@ -98,10 +98,6 @@
         </tfoot>
     </table>
     <!--pagination-->
-    <div class="pagination clearfix">
-        <span class="prev"><a href="#">&lt;&lt; Previous</a></span>
-        <ul class="pagi"></ul>
-        <span class="next"><a href="#">Next &gt;&gt;</a></span>
-    </div>
+    @Html.Partial("_Pagination")
     <!--pagination-->
 </div>

@@ -96,27 +96,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Manage\Scripts\ctrls\ActivityCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\AnimalEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\SheltersEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\BlogEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\HelpEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\AskCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\KnowledgeEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\BlogCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\AnimalCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\AskEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\SheltersCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\HelpCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\KnowledgeCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\ActivityEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\NewsEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\UserCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\NewsCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\SystemCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\AccountChangePasswordCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\ctrls\UserEditCtrl.js" />
-    <Content Include="Areas\Manage\Scripts\App.js" />
+    <Content Include="Scripts\manage\ctrls\ActivityCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\AnimalEditCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\SheltersEditCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\BlogEditCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\HelpEditCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\AskCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\KnowledgeEditCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\BlogCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\AnimalCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\AskEditCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\SheltersCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\HelpCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\KnowledgeCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\ActivityEditCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\NewsEditCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\UserCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\NewsCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\SystemCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\AccountChangePasswordCtrl.js" />
+    <Content Include="Scripts\manage\ctrls\UserEditCtrl.js" />
+    <Content Include="Scripts\manage\App.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\default.jpg" />
@@ -130,7 +130,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Areas\Manage\Content\Views\Account\Login.css" />
+    <Content Include="Content\Views\Manage\Account\Login.css" />
     <Content Include="Content\mvcfileupload\blueimp\jquery.fileupload-noscript.css" />
     <Content Include="Content\mvcfileupload\blueimp\jquery.fileupload-ui-noscript.css" />
     <Content Include="Content\mvcfileupload\blueimp\jquery.fileupload-ui.css" />
@@ -253,6 +253,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Areas\Manage\Views\Shared\_Pagination.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />
@@ -739,6 +740,7 @@
     <Content Include="Views\Account\ChangePassword.cshtml" />
     <Content Include="Views\Animal\Index.cshtml" />
     <Content Include="Views\Animal\Detail.cshtml" />
+    <Content Include="Views\Partials\_Pagination.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -4,7 +4,7 @@
 }
 @section Scripts
 {
-    <script src="../../Scripts/ctrls/AskCtrl.js"></script>
+    <script src="../../../../Scripts/manage/ctrls/AskCtrl.js"></script>
 }
 
 <div class="page-header">
@@ -79,10 +79,6 @@
         </tfoot>
     </table>
     <!--pagination-->
-    <div class="pagination clearfix">
-        <span class="prev"><a href="#">&lt;&lt; Previous</a></span>
-        <ul class="pagi"></ul>
-        <span class="next"><a href="#">Next &gt;&gt;</a></span>
-    </div>
+    @Html.Partial("_Pagination")
     <!--pagination-->
 </div>

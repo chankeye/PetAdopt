@@ -4,7 +4,7 @@
 }
 @section Scripts
 {
-    <script src="../../Scripts/ctrls/AnimalEditCtrl.js"></script>
+    <script src="../../../../Scripts/manage/ctrls/AnimalEditCtrl.js"></script>
 }
 <div class="page-header">
     <h2>@ViewBag.Title</h2>
@@ -113,7 +113,7 @@
             </div>
         </div>
     </form>
-    
+
     <hr />
 
     <div class="page-header">
@@ -143,10 +143,6 @@
         </tfoot>
     </table>
     <!--pagination-->
-    <div class="pagination clearfix">
-        <span class="prev"><a href="#">&lt;&lt; Previous</a></span>
-        <ul class="pagi"></ul>
-        <span class="next"><a href="#">Next &gt;&gt;</a></span>
-    </div>
+    @Html.Partial("_Pagination")
     <!--pagination-->
 </div>

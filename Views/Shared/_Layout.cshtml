@@ -8,14 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <title>@ViewBag.Title</title>
-    
+
     @* load css *@
     <link href="../../Content/mvcfileupload/vendor/bootstrap.min.css" rel="stylesheet" />
     <link href="../../Content/_site.css" rel="stylesheet" />
     <link href="../../Content/font-awesome.css" rel="stylesheet" />
 
     @RenderSection("style", false)
-    
+
     @* load js *@
     <script src="../../Scripts/jquery-2.1.1.js"></script>
     <script src="../../Scripts/jquery-ui-1.10.4.js"></script>
@@ -27,12 +27,50 @@
     <script src="../../Scripts/ctrls/pagination.js"></script>
     <script src="../../Scripts/locale/common.js"></script>
     <script src="//www.google.com/jsapi"></script>
-    
+
     <script src="../../Areas/Manage/Scripts/App.js"></script>
 
     @RenderSection("Scripts", false)
 </head>
 <body>
+    @* navbar *@
+    <div class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand nav-group-name" href="/">愛認養</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Shelters">收容所</a></li>
+                    <li><a href="/Animal">動物資訊</a></li>
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">文章管理 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Blog">Blog</a></li>
+                            <li><a href="/Help">即刻救援</a></li>
+                            <li><a href="/Ask">問與答</a></li>
+                            <li><a href="/Knowledge">知識</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown">哈囉!! @User.Identity.Name 您好 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Account/ChangePassword">變更密碼</a></li>
+                            <li><a href="/Account/SignOut" target="_self">登出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
     @* container *@
     <div class="container">
         <div>

@@ -4,7 +4,7 @@
 }
 @section Scripts
 {
-    <script src="../../Scripts/ctrls/NewsCtrl.js"></script>
+    <script src="../../../../Scripts/manage/ctrls/NewsCtrl.js"></script>
 }
 <div class="page-header">
     <h2>新增消息</h2>
@@ -98,10 +98,6 @@
         </tfoot>
     </table>
     <!--pagination-->
-    <div class="pagination clearfix">
-        <span class="prev"><a href="#">&lt;&lt; Previous</a></span>
-        <ul class="pagi"></ul>
-        <span class="next"><a href="#">Next &gt;&gt;</a></span>
-    </div>
+    @Html.Partial("_Pagination")
     <!--pagination-->
 </div>

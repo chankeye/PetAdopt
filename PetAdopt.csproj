@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\ctrls\AnimalNewCtrl.js" />
     <Content Include="Scripts\manage\ctrls\ActivityCtrl.js" />
     <Content Include="Scripts\manage\ctrls\AnimalEditCtrl.js" />
     <Content Include="Scripts\manage\ctrls\SheltersEditCtrl.js" />
@@ -741,6 +742,7 @@
     <Content Include="Views\Animal\Index.cshtml" />
     <Content Include="Views\Animal\Detail.cshtml" />
     <Content Include="Views\Shared\_Pagination.cshtml" />
+    <Content Include="Views\Animal\New.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

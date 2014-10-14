@@ -30,6 +30,11 @@ namespace PetAdopt.Controllers
             return View();
         }
 
+        public ActionResult New()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public ActionResult GetAnimalList(int page, int take, string query, bool isLike)
         {

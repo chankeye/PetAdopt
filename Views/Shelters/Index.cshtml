@@ -1,17 +1,17 @@
 ﻿@{
-    ViewBag.Title = "待認養動物";
+    ViewBag.Title = "收容所資訊";
     Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
 {
-    <script src="../../Scripts/ctrls/AnimalCtrl.js"></script>
+    <script src="../../Scripts/ctrls/SheltersCtrl.js"></script>
 }
 <div class="page-header">
-    <h2>認養動物列表</h2>
+    <h2>收容所列表</h2>
 </div>
 <div>
     <div>
-        <p><a href="/Animal/New" class="btn btn-primary">新增待認養動物</a></p>
+        <p><a href="/Shelters/New" class="btn btn-primary">新增收容所</a></p>
         <p>
             <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
             <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>

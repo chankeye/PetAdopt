@@ -98,6 +98,8 @@
   <ItemGroup>
     <Content Include="Scripts\ctrls\AnimalNewCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersCtrl.js" />
+    <Content Include="Scripts\ctrls\SheltersDetailCtrl.js" />
+    <Content Include="Scripts\ctrls\SheltersNewCtrl.js" />
     <Content Include="Scripts\manage\ctrls\ActivityCtrl.js" />
     <Content Include="Scripts\manage\ctrls\AnimalEditCtrl.js" />
     <Content Include="Scripts\manage\ctrls\SheltersEditCtrl.js" />
@@ -640,6 +642,7 @@
     <Compile Include="Controllers\AnimalController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
+    <Compile Include="Controllers\SheltersController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
     <Compile Include="DTO\Activity\ActivityMessageList.cs" />
     <Compile Include="DTO\Animal\AnimalList.cs" />
@@ -745,6 +748,8 @@
     <Content Include="Views\Shared\_Pagination.cshtml" />
     <Content Include="Views\Animal\New.cshtml" />
     <Content Include="Views\Shelters\Index.cshtml" />
+    <Content Include="Views\Shelters\New.cshtml" />
+    <Content Include="Views\Shelters\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

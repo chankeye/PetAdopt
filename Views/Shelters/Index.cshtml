@@ -23,8 +23,8 @@
         <thead>
             <tr>
                 <th></th>
-                <th>標題</th>
-                <th>日期</th>
+                <th>名稱</th>
+                <th>地區</th>
             </tr>
         </thead>
         <tbody data-bind="foreach: history">
@@ -38,8 +38,8 @@
                         <img alt="封面圖" class="list-img" src="../../Content/Images/default.jpg">
                     </div>
                 </td>
-                <td><a href="#" data-bind="text: Title, click: $root.detail"></a></td>
-                <td><span data-bind="text: Date"></span></td>
+                <td><a href="#" data-bind="text: Name, click: $root.detail"></a></td>
+                <td><span data-bind="text: Area"></span></td>
             </tr>
         </tbody>
         <tfoot>

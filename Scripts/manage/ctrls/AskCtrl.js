@@ -89,7 +89,7 @@ $(function () {
                 return;
             }
 
-            if ($("#selOptions").val() == "") {
+            if ($("#selOptionsClasses").val() == "") {
                 alert('請選擇分類');
                 return;
             }
@@ -102,7 +102,7 @@ $(function () {
                 data: {
                     Title: $("#title").val(),
                     Message: $("#message").val(),
-                    ClassId: $("#selOptions").val()
+                    ClassId: $("#selOptionsClasses").val()
                 },
                 success: function (data) {
                     $btn.button("reset");
@@ -111,7 +111,7 @@ $(function () {
                         window.vm.loadHistory();
                         $("#title").val('');
                         $("#message").val(''),
-                        $("#selOptions option:first").attr("selected", true);
+                        $("#selOptionsClasses option:first").attr("selected", true);
 
                         alert("新增成功");
                     } else {

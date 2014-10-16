@@ -89,7 +89,7 @@ $(function () {
                     $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
                 }
                 $("#name").val(data.ReturnObject.Name);
-                $("#selOptions").children().each(function () {
+                $("#selOptionsAreas").children().each(function () {
                     if ($(this).val() == data.ReturnObject.AreaId) {
                         //jQuery給法
                         $(this).attr("selected", true); //或是給"selected"也可
@@ -134,7 +134,7 @@ $(function () {
                 return;
             }
 
-            if ($("#selOptions").val() == "") {
+            if ($("#selOptionsAreas").val() == "") {
                 alert('請選擇地區');
                 return;
             }
@@ -152,7 +152,7 @@ $(function () {
                     Address: $("#address").val(),
                     Url: $("#source").val(),
                     Phone: $("#phone").val(),
-                    AreaId: $("#selOptions").val(),
+                    AreaId: $("#selOptionsAreas").val(),
                 },
                 success: function (data) {
                     $btn.button("reset");
@@ -162,7 +162,7 @@ $(function () {
                         $("#address").val('');
                         $("#source").val('');
                         $("#phone").val('');
-                        $("#selOptions option:first").attr("selected", true);
+                        $("#selOptionsAreas option:first").attr("selected", true);
 
                         alert("修改完成");
                         window.location = '/Manage/Shelters';

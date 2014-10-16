@@ -53,12 +53,5 @@ $(function () {
 
     // 查詢
     $("#btn3").click(
-        /*function () {
-            var $btn = $("#btn3");
-
-            $btn.button("loading");
-            window.vm.loadHistory(1, 10, $("#search").val(), !$("#checkAll").is(':checked'));
-            $btn.button("reset");
-        });*/
         window.utils.searchList($("#btn3")));
 });

@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "新增收容所";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <script src="../../Scripts/manage/ctrls/SheltersCtrl.js"></script>
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div>
+    <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            必填欄位
+        </legend>
+        <div class="container">
+            <div class="well">
+                <legend>上傳封面圖</legend>
+                <p class="help-block">只限副檔名 jpg / png 最大5 MB, 只能上傳一張圖片</p>
+                <a class="btn btn-large btn-primary" data-target="#dlgFileUpload" data-toggle="modal" href="/MvcFileUpload/UploadDialog?FileTypes=%2F%28%5C.%7C%5C%2F%29%28jpe%3Fg%7Cpng%29%24%2Fi&amp;MaxFileSizeInBytes=5000000&amp;MaxNumberOfFiles=1&amp;DisableImagePreview=False&amp;UploadUrl=%2FMvcUploaderTest%2FUploadFile&amp;UIStyle=Bootstrap&amp;ReturnUrl=%23&amp;RenderSharedScript=True&amp;ShowPopUpClose=True&amp;postValues%5b0%5d.Key=entityId&amp;postValues%5b0%5d.Value=1234" role="button">上傳</a>
+            </div>
+            <!-- file upload modal dialog -->
+            <div class="modal fade" id="dlgFileUpload" tabindex="-1" role="dialog" aria-hidden="true">
+            </div><!-- /.modal -->
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">名稱</label>
+            <div class="col-sm-4">
+                <input id="name" name="name" class="form-control required" maxlength="50" placeholder="請輸入收容所名稱" required autofocus />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">介紹</label>
+            <div class="col-sm-4">
+                <textarea id="introduction" name="introduction" class="form-control required" maxlength="200" placeholder="請輸入收容所介紹" required></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">電話</label>
+            <div class="col-sm-4">
+                <input id="phone" name="phone" type="number" class="form-control required" minlength="10" maxlength="10" placeholder="0422223333或0912345678" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">地區</label>
+            <div class="col-sm-4">
+                <select id="selOptionsAreas" class="form-control required"
+                        data-bind="options: areas, optionsText: 'Word', optionsValue: 'Id'"></select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">地址</label>
+            <div class="col-sm-4">
+                <input id="address" name="address" class="form-control required" maxlength="30" placeholder="請輸入地址" required />
+            </div>
+        </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">收容所網址</label>
+            <div class="col-sm-4">
+                <input id="source" name="source" type="url" class="form-control url" maxlength="100" placeholder="例：http://www.yahoo.com.tw" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
+                <button id="btn2" type="reset" class="btn btn-danger">清除</button>
+                <a href="/Shelters" class="btn btn-default">返回</a>
+            </div>
+        </div>
+    </form>
+</div>

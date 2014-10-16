@@ -91,7 +91,7 @@ $(function () {
                 return;
             }
 
-            if ($("#selOptions").val() == "") {
+            if ($("#selOptionsAreas").val() == "") {
                 alert('請選擇地區');
                 return;
             }
@@ -107,7 +107,7 @@ $(function () {
                     Introduction: $("#introduction").val(),
                     Phone: $("#phone").val(),
                     Address: $("#address").val(),
-                    AreaId: $("#selOptions").val(),
+                    AreaId: $("#selOptionsAreas").val(),
                     Url: $("#source").val()
                 },
                 success: function (data) {
@@ -119,7 +119,7 @@ $(function () {
                         $("#introduction").val(''),
                         $("#phone").val(''),
                         $("#address").val('');
-                        $("#selOptions option:first").attr("selected", true);
+                        $("#selOptionsAreas option:first").attr("selected", true);
                         $("#source").val();
 
                         alert("新增成功");

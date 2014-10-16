@@ -89,7 +89,7 @@ $(function () {
                     $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
                 }
                 $("#title").val(data.ReturnObject.Title);
-                $("#selOptions").children().each(function () {
+                $("#selOptionsAreas").children().each(function () {
                     if ($(this).val() == data.ReturnObject.AreaId) {
                         //jQuery給法
                         $(this).attr("selected", true); //或是給"selected"也可
@@ -154,7 +154,7 @@ $(function () {
                     Title: $("#title").val(),
                     Message: oEditor.getData(),
                     Address: $("#address").val(),
-                    AreaId: $("#selOptions").val()
+                    AreaId: $("#selOptionsAreas").val()
                 },
                 success: function (data) {
                     $btn.button("reset");
@@ -162,7 +162,7 @@ $(function () {
                         $("#title").val('');
                         oEditor.setData('');
                         $("#address").val('');
-                        $("#selOptions option:first").attr("selected", true);
+                        $("#selOptionsAreas option:first").attr("selected", true);
 
                         alert("修改完成");
                         window.location = '/Manage/Activity';

@@ -85,7 +85,7 @@ $(function () {
         success: function (data) {
             if (data.IsSuccess) {
                 $("#title").val(data.ReturnObject.Title);
-                $("#selOptions").children().each(function () {
+                $("#selOptionsClasses").children().each(function () {
                     if ($(this).val() == data.ReturnObject.ClassId) {
                         //jQuery給法
                         $(this).attr("selected", true); //或是給"selected"也可
@@ -115,7 +115,7 @@ $(function () {
                 return;
             }
 
-            if ($("#selOptions").val() == "") {
+            if ($("#selOptionsClasses").val() == "") {
                 alert('請選擇分類');
                 return;
             }
@@ -129,14 +129,14 @@ $(function () {
                     id: urlParams["id"],
                     Title: $("#title").val(),
                     Message: $("#message").val(),
-                    ClassId: $("#selOptions").val()
+                    ClassId: $("#selOptionsClasses").val()
                 },
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
                         $("#title").val('');
                         $("#message").val(''),
-                        $("#selOptions option:first").attr("selected", true);
+                        $("#selOptionsClasses option:first").attr("selected", true);
 
                         alert("修改完成");
                         window.location = '/Manage/Knowledge';

@@ -29,7 +29,7 @@
         <tbody data-bind="foreach: history">
             <tr>
                 <td hidden="true"><span data-bind="text: Id"></span></td>
-                <td><span data-bind="text: Title, click: $root.detail"></span></td>
+                <td><a href="#" data-bind="text: Title, click: $root.detail"></a></td>
                 <td><span data-bind="text: Date"></span></td>
             </tr>
         </tbody>

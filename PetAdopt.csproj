@@ -98,6 +98,8 @@
   <ItemGroup>
     <Content Include="Scripts\ctrls\AnimalNewCtrl.js" />
     <Content Include="Scripts\ctrls\BlogCtrl.js" />
+    <Content Include="Scripts\ctrls\BlogDetailCtrl.js" />
+    <Content Include="Scripts\ctrls\BlogNewCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersDetailCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersNewCtrl.js" />
@@ -753,6 +755,8 @@
     <Content Include="Views\Shelters\New.cshtml" />
     <Content Include="Views\Shelters\Detail.cshtml" />
     <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Blog\New.cshtml" />
+    <Content Include="Views\Blog\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

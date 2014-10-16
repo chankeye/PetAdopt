@@ -18,7 +18,7 @@
         take = take || 10;
         $.ajax({
             type: 'post',
-            url: '/Shelters/GetMessageList',
+            url: '/Blog/GetMessageList',
             data: {
                 id: window.id,
                 page: page,
@@ -40,37 +40,31 @@
 
 $(function () {
 
-    // 取得地區列表
-    window.utils.getAreaList();
+    // 取得分類列表
+    window.utils.getClassList();
 
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
     if (window.id == null)
-        window.location = '/Manage/Shelters';
+        window.location = '/Manage/Blog';
 
-    // 取得收容所資訊
+    // 取得文章
     var photo;
     $.ajax({
         type: 'post',
-        url: '/Shelters/DetailInit',
+        url: '/Blog/DetailInit',
         data: {
             id: window.id
         },
         success: function (data) {
             if (data.IsSuccess) {
-                photo = data.ReturnObject.Photo;
-                if (photo != null) {
-                    $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
-                }
-                $("#name").text(data.ReturnObject.Name);
-                $("#selOptionsAreas").text(data.ReturnObject.AreaId);
-                $("#introduction").text(data.ReturnObject.Introduction);
-                $("#address").text(data.ReturnObject.Address);
-                $("#phone").text(data.ReturnObject.Phone);
-                $("#source").text(data.ReturnObject.url);
+                $("#title").text(data.ReturnObject.Title);
+                $("#selOptionsClasses").text(data.ReturnObject.ClassId);
+                $("#content").text(data.ReturnObject.Message);
+                $("#animalId").text(data.ReturnObject.AnimalId);
             } else {
                 alert(data.ErrorMessage);
-                window.location = '/Shelters';
+                window.location = '/Blog';
             }
         }
     });
@@ -79,9 +73,9 @@ $(function () {
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
 
-    // 返回
+    // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Shelters';
+        window.location = '/Blog';
     });
 });

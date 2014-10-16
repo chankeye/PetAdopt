@@ -1,17 +1,17 @@
 ﻿@{
-    ViewBag.Title = "請帶它回家";
+    ViewBag.Title = "他與她的故事";
     Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
 {
-    <script src="../../Scripts/ctrls/AnimalCtrl.js"></script>
+    <script src="../../Scripts/ctrls/BlogCtrl.js"></script>
 }
 <div class="page-header">
     <h2>@ViewBag.Title</h2>
 </div>
 <div>
     <div>
-        <p><a href="/Animal/New" class="btn btn-primary">新增待認養動物</a></p>
+        <p><a href="/Blog/New" class="btn btn-primary">發表文章</a></p>
         <p>
             <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
             <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>
@@ -22,7 +22,6 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th></th>
                 <th>標題</th>
                 <th>日期</th>
             </tr>
@@ -30,15 +29,7 @@
         <tbody data-bind="foreach: history">
             <tr>
                 <td hidden="true"><span data-bind="text: Id"></span></td>
-                <td>
-                    <div data-bind="if:Photo">
-                        <img alt="封面圖" class="list-img" data-bind="attr:{src: '../../Content/uploads/' + Photo}">
-                    </div>
-                    <div data-bind="ifnot:Photo">
-                        <img alt="封面圖" class="list-img" src="../../Content/Images/default.jpg">
-                    </div>
-                </td>
-                <td><a href="#" data-bind="text: Title, click: $root.detail"></a></td>
+                <td><span data-bind="text: Title, click: $root.detail"></span></td>
                 <td><span data-bind="text: Date"></span></td>
             </tr>
         </tbody>

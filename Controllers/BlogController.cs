@@ -4,23 +4,23 @@ using System.Web.Mvc;
 namespace PetAdopt.Controllers
 {
     [Authorize]
-    public class SheltersController : _BaseController
+    public class BlogController : _BaseController
     {
-        #region _sheltersLogic
+        #region _blogLogic
         /// <summary>
-        /// SheltersLogic
+        /// BlogLogic
         /// </summary>
-        SheltersLogic _sheltersLogic
+        BlogLogic _blogLogic
         {
             get
             {
-                if (@sheltersLogic == null)
-                    @sheltersLogic = new SheltersLogic(GetOperation());
-                return @sheltersLogic;
+                if (@blogLogic == null)
+                    @blogLogic = new BlogLogic(GetOperation());
+                return @blogLogic;
             }
         }
-        SheltersLogic @sheltersLogic;
-        #endregion //_sheltersLogic
+        BlogLogic @blogLogic;
+        #endregion //_blogLogic
 
         [AllowAnonymous]
         public ActionResult Index()
@@ -34,17 +34,17 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetSheltersList(int page, int take, string query, bool isLike)
+        public ActionResult GetBlogList(int page, int take, string query, bool isLike)
         {
-            var shelterslist = _sheltersLogic.GetSheltersList(page, take, query, isLike);
+            var bloglist = _blogLogic.GetBlogList(page, take, query, isLike);
 
-            return Json(shelterslist);
+            return Json(bloglist);
         }
 
         [AllowAnonymous]
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _sheltersLogic.GetMessageList(id, page, take);
+            var result = _blogLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
@@ -58,21 +58,21 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult DetailInit(int id)
         {
-            var result = _sheltersLogic.GetShelters(id);
+            var result = _blogLogic.GetBlog(id);
 
             return Json(result);
         }
 
         /*public ActionResult Delete(int id)
         {
-            var result = _sheltersLogic.DeleteShelters(Server.MapPath("~/Content/uploads"), id);
+            var result = _blogLogic.DeleteBlog(id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _sheltersLogic.DeleteMessage(id, messageId);
+            var result = _blogLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
@@ -84,21 +84,23 @@ namespace PetAdopt.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _sheltersLogic.GetShelters(id);
+            var result = _blogLogic.GetBlog(id);
 
             return Json(result);
         }
 
-        public ActionResult AddShelters(CreateShelters data)
+        [ValidateInput(false)]
+        public ActionResult AddBlog(CreateBlog data)
         {
-            var result = _sheltersLogic.AddShelters(data);
+            var result = _blogLogic.AddBlog(data);
 
             return Json(result);
         }
 
-        public ActionResult EditShelters(int id, CreateShelters data)
+        [ValidateInput(false)]
+        public ActionResult EditBlog(int id, CreateBlog data)
         {
-            var result = _sheltersLogic.EditShelters(id, data);
+            var result = _blogLogic.EditBlog(id, data);
 
             return Json(result);
         }*/

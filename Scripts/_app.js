@@ -61,14 +61,5 @@
         }
 
         return urlParams[data];
-    },
-
-    // 查詢
-    searchList: function (btn) {
-        var $btn = btn;
-
-        $btn.button("loading");
-        window.vm.loadHistory(1, 10, $("#search").val(), !$("#checkAll").is(':checked'));
-        $btn.button("reset");
     }
 }

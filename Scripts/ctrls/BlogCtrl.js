@@ -5,10 +5,8 @@
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
     self.history = ko.observableArray();
 
-    self.areas = ko.observableArray();
-
-    self.detail = function (shelters) {
-        window.location = "/Shelters/Detail?id=" + shelters.Id;
+    self.detail = function (blog) {
+        window.location = "/Blog/Detail?id=" + blog.Id;
     }
 
     //Add PaginationModel
@@ -27,7 +25,7 @@
             isLike = true;
         $.ajax({
             type: 'post',
-            url: '/Shelters/GetSheltersList',
+            url: '/Manage/Blog/GetBlogList',
             data: {
                 page: page,
                 take: take,
@@ -49,21 +47,16 @@
 }
 
 $(function () {
-
-    // 取得地區列表
-    window.utils.getAreaList();
-
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
 
     // 查詢
-    $("#btn3").click(
-        function () {
-            var $btn = $("#btn3");
+    $("#btn3").click(function () {
+        var $btn = $("#btn3");
 
-            $btn.button("loading");
-            window.vm.loadHistory(1, 10, $("#search").val(), !$("#checkAll").is(':checked'));
-            $btn.button("reset");
-        });
+        $btn.button("loading");
+        window.vm.loadHistory(1, 10, $("#search").val(), !$("#checkAll").is(':checked'));
+        $btn.button("reset");
+    });
 });

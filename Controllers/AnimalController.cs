@@ -1,6 +1,4 @@
-﻿using PetAdopt.Controllers;
-using PetAdopt.DTO.Animal;
-using PetAdopt.Logic;
+﻿using PetAdopt.Logic;
 using System.Web.Mvc;
 
 namespace PetAdopt.Controllers

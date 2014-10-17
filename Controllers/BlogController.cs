@@ -34,11 +34,18 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetBlogList(int page, int take, string query, bool isLike)
+        public ActionResult GetBlogList(int page, int take, string query, bool isLike, bool memberOnly = false)
         {
-            var bloglist = _blogLogic.GetBlogList(page, take, query, isLike);
-
-            return Json(bloglist);
+            if (memberOnly)
+            {
+                var bloglist = _blogLogic.GetBlogList(page, take, query, isLike, LoginInfo.Id);
+                return Json(bloglist);
+            }
+            else
+            {
+                var bloglist = _blogLogic.GetBlogList(page, take, query, isLike);
+                return Json(bloglist);
+            }
         }
 
         [AllowAnonymous]

@@ -33,6 +33,11 @@ namespace PetAdopt.Controllers
             return View();
         }
 
+        public ActionResult Blog()
+        {
+            return View();
+        }
+
         /// <summary>
         /// 登入畫面
         /// </summary>

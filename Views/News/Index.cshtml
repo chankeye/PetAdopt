@@ -1,17 +1,17 @@
 ﻿@{
-    ViewBag.Title = "請帶它回家";
+    ViewBag.Title = "最新消息";
     Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
 {
-    <script src="../../Scripts/ctrls/AnimalCtrl.js"></script>
+    <script src="../../Scripts/ctrls/NewsCtrl.js"></script>
 }
 <div class="page-header">
     <h2>@ViewBag.Title</h2>
 </div>
 <div>
     <div>
-        <p><a href="/Animal/New" class="btn btn-primary">新增待認養動物</a></p>
+        <p><a href="/News/New" class="btn btn-primary">發佈消息</a></p>
         <p>
             <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
             <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>

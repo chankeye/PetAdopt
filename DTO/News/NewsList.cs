@@ -6,6 +6,8 @@ namespace PetAdopt.DTO.News
     {
         public int Id { get; set; }
 
+        public string Photo { get; set; }
+
         public string Title { get; set; }
 
         public string Date { get; set; }

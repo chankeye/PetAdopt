@@ -34,11 +34,18 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetAnimalList(int page, int take, string query, bool isLike)
+        public ActionResult GetAnimalList(int page, int take, string query, bool isLike, bool memberOnly = false)
         {
-            var animallist = _animalLogic.GetAnimalList(page, take, query, isLike);
-
-            return Json(animallist);
+            if (memberOnly)
+            {
+                var animallist = _animalLogic.GetAnimalList(page, take, query, isLike, LoginInfo.Id);
+                return Json(animallist);
+            }
+            else
+            {
+                var animallist = _animalLogic.GetAnimalList(page, take, query, isLike);
+                return Json(animallist);
+            }
         }
 
         [AllowAnonymous]

@@ -82,6 +82,9 @@ $(function () {
     // 返回
     $("#btn2").click(
     function () {
-        window.location = '/Shelters';
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Shelters';
     });
 });

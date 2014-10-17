@@ -75,6 +75,9 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Help';
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Help';
     });
 });

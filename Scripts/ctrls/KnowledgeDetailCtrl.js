@@ -72,6 +72,9 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Knowledge';
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Knowledge';
     });
 });

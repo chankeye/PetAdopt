@@ -149,6 +149,9 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Manage/Ask';
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Manage/Ask';
     });
 });

@@ -23,6 +23,11 @@ namespace PetAdopt.Controllers
         }
         UserLogic @userLogic;
 
+        public ActionResult Animal()
+        {
+            return View();
+        }
+
         /// <summary>
         /// 登入畫面
         /// </summary>
@@ -35,7 +40,7 @@ namespace PetAdopt.Controllers
             // 如果已經登入了，就直接幫進入系統，不用看到登入畫面
             if (Request.IsAuthenticated)
                 return redirect(returnUrl);
-            
+
             return View();
         }
 

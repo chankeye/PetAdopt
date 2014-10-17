@@ -187,6 +187,9 @@ $(function () {
     // 取消
     $("#btn2").click(
     function () {
-        window.location = '/Manage/Help';
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Manage/Help';
     });
 });

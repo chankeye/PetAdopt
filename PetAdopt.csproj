@@ -99,6 +99,7 @@
     <Content Include="Scripts\ctrls\ActivityCtrl.js" />
     <Content Include="Scripts\ctrls\ActivityDetailCtrl.js" />
     <Content Include="Scripts\ctrls\ActivityNewCtrl.js" />
+    <Content Include="Scripts\ctrls\AccountAnimalCtrl.js" />
     <Content Include="Scripts\ctrls\AnimalNewCtrl.js" />
     <Content Include="Scripts\ctrls\AskCtrl.js" />
     <Content Include="Scripts\ctrls\AskDetailCtrl.js" />
@@ -792,6 +793,7 @@
     <Content Include="Views\Activity\Index.cshtml" />
     <Content Include="Views\Activity\New.cshtml" />
     <Content Include="Views\Activity\Detail.cshtml" />
+    <Content Include="Views\Account\Animal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

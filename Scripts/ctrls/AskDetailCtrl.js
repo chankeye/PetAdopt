@@ -18,7 +18,7 @@
         take = take || 10;
         $.ajax({
             type: 'post',
-            url: '/Blog/GetMessageList',
+            url: '/Ask/GetMessageList',
             data: {
                 id: window.id,
                 page: page,
@@ -46,13 +46,12 @@ $(function () {
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
     if (window.id == null)
-        window.location = '/Manage/Blog';
+        window.location = '/Ask';
 
-    // 取得文章
-    var photo;
+    // 取得問與答
     $.ajax({
         type: 'post',
-        url: '/Blog/DetailInit',
+        url: '/Ask/DetailInit',
         data: {
             id: window.id
         },
@@ -60,11 +59,10 @@ $(function () {
             if (data.IsSuccess) {
                 $("#title").text(data.ReturnObject.Title);
                 $("#selOptionsClasses").text(data.ReturnObject.ClassId);
-                $("#content").html(data.ReturnObject.Message);
-                $("#animalId").text(data.ReturnObject.AnimalId);
+                $("#message").html(data.ReturnObject.Message);
             } else {
                 alert(data.ErrorMessage);
-                window.location = '/Blog';
+                window.location = '/Ask';
             }
         }
     });
@@ -73,9 +71,9 @@ $(function () {
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
 
-    // 取消
+    // 返回
     $("#btn2").click(
     function () {
-        window.location = '/Blog';
+        window.location = '/Ask';
     });
 });

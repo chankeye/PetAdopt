@@ -97,6 +97,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\ctrls\AnimalNewCtrl.js" />
+    <Content Include="Scripts\ctrls\AskCtrl.js" />
+    <Content Include="Scripts\ctrls\AskDetailCtrl.js" />
+    <Content Include="Scripts\ctrls\AskNewCtrl.js" />
     <Content Include="Scripts\ctrls\BlogCtrl.js" />
     <Content Include="Scripts\ctrls\BlogDetailCtrl.js" />
     <Content Include="Scripts\ctrls\BlogNewCtrl.js" />
@@ -643,6 +646,7 @@
     <Compile Include="Areas\Manage\Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnimalController.cs" />
+    <Compile Include="Controllers\AskController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
@@ -757,6 +761,9 @@
     <Content Include="Views\Blog\Index.cshtml" />
     <Content Include="Views\Blog\New.cshtml" />
     <Content Include="Views\Blog\Detail.cshtml" />
+    <Content Include="Views\Ask\Index.cshtml" />
+    <Content Include="Views\Ask\New.cshtml" />
+    <Content Include="Views\Ask\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

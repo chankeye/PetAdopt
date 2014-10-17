@@ -106,6 +106,9 @@
     <Content Include="Scripts\ctrls\HelpCtrl.js" />
     <Content Include="Scripts\ctrls\HelpDetailCtrl.js" />
     <Content Include="Scripts\ctrls\HelpNewCtrl.js" />
+    <Content Include="Scripts\ctrls\KnowledgeCtrl.js" />
+    <Content Include="Scripts\ctrls\KnowledgeDetailCtrl.js" />
+    <Content Include="Scripts\ctrls\KnowledgeNewCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersDetailCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersNewCtrl.js" />
@@ -653,6 +656,7 @@
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KnowledgeController.cs" />
     <Compile Include="Controllers\MvcUploaderTestController.cs" />
     <Compile Include="Controllers\SheltersController.cs" />
     <Compile Include="Controllers\_BaseController.cs" />
@@ -771,6 +775,9 @@
     <Content Include="Views\Help\Index.cshtml" />
     <Content Include="Views\Help\New.cshtml" />
     <Content Include="Views\Help\Detail.cshtml" />
+    <Content Include="Views\Knowledge\Index.cshtml" />
+    <Content Include="Views\Knowledge\New.cshtml" />
+    <Content Include="Views\Knowledge\Detail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

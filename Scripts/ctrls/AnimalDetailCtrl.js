@@ -62,7 +62,7 @@ $(function () {
                 $("#title").text(data.ReturnObject.Title);
                 $("#startDate").text(data.ReturnObject.StartDate),
                 $("#endDate").text(data.ReturnObject.EndDate),
-                $("#introduction").text(data.ReturnObject.Introduction),
+                $("#introduction").html(data.ReturnObject.Introduction),
                 $("#shelters").text(data.ReturnObject.SheltersId),
                 $("#phone").text(data.ReturnObject.Phone),
                 $("#address").text(data.ReturnObject.Address),

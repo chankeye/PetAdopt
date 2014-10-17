@@ -41,6 +41,7 @@ namespace PetAdopt.Logic
                     .Select(r => new
                     {
                         r.Id,
+                        r.CoverPhoto,
                         r.Title,
                         r.OperationInfo.Date
                     });
@@ -55,6 +56,7 @@ namespace PetAdopt.Logic
                     .Select(r => new HelpItem
                     {
                         Id = r.Id,
+                        Photo = r.CoverPhoto,
                         Title = r.Title,
                         Date = r.Date.ToString("yyyy/MM/dd")
                     })
@@ -73,6 +75,7 @@ namespace PetAdopt.Logic
                         .Select(r => new
                         {
                             r.Id,
+                            r.CoverPhoto,
                             r.Title,
                             r.OperationInfo.Date
                         });
@@ -87,6 +90,7 @@ namespace PetAdopt.Logic
                         .Select(r => new HelpItem
                         {
                             Id = r.Id,
+                            Photo = r.CoverPhoto,
                             Title = r.Title,
                             Date = r.Date.ToString("yyyy/MM/dd")
                         })
@@ -102,6 +106,7 @@ namespace PetAdopt.Logic
                         .Select(r => new
                         {
                             r.Id,
+                            r.CoverPhoto,
                             r.Title,
                             r.OperationInfo.Date
                         });
@@ -116,6 +121,7 @@ namespace PetAdopt.Logic
                         .Select(r => new HelpItem
                         {
                             Id = r.Id,
+                            Photo = r.CoverPhoto,
                             Title = r.Title,
                             Date = r.Date.ToString("yyyy/MM/dd")
                         })

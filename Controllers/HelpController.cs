@@ -4,23 +4,23 @@ using System.Web.Mvc;
 namespace PetAdopt.Controllers
 {
     [Authorize]
-    public class AskController : _BaseController
+    public class HelpController : _BaseController
     {
-        #region _askLogic
+        #region _helpLogic
         /// <summary>
         /// HelpLogic
         /// </summary>
-        AskLogic _askLogic
+        HelpLogic _helpLogic
         {
             get
             {
-                if (@askLogic == null)
-                    @askLogic = new AskLogic(GetOperation());
-                return @askLogic;
+                if (@helpLogic == null)
+                    @helpLogic = new HelpLogic(GetOperation());
+                return @helpLogic;
             }
         }
-        AskLogic @askLogic;
-        #endregion //_askLogic
+        HelpLogic @helpLogic;
+        #endregion //_helpLogic
 
         [AllowAnonymous]
         public ActionResult Index()
@@ -34,17 +34,17 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetAskList(int page, int take, string query, bool isLike)
+        public ActionResult GetHelpList(int page, int take, string query, bool isLike)
         {
-            var asklist = _askLogic.GetAskList(page, take, query, isLike);
+            var helplist = _helpLogic.GetHelpList(page, take, query, isLike);
 
-            return Json(asklist);
+            return Json(helplist);
         }
 
         [AllowAnonymous]
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _askLogic.GetMessageList(id, page, take);
+            var result = _helpLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
@@ -58,28 +58,21 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult DetailInit(int id)
         {
-            var result = _askLogic.GetAsk(id);
+            var result = _helpLogic.GetHelp(id);
 
             return Json(result);
         }
 
         /*public ActionResult Delete(int id)
         {
-            var result = _askLogic.DeleteAsk(id);
+            var result = _helpLogic.DeleteHelp(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _askLogic.DeleteMessage(id, messageId);
-
-            return Json(result);
-        }
-
-        public ActionResult AddAsk(CreateAsk data)
-        {
-            var result = _askLogic.AddAsk(data);
+            var result = _helpLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
@@ -91,14 +84,21 @@ namespace PetAdopt.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _askLogic.GetAsk(id);
+            var result = _helpLogic.GetHelp(id);
 
             return Json(result);
         }
 
-        public ActionResult EditAsk(int id, CreateAsk data)
+        public ActionResult AddHelp(CreateHelp data)
         {
-            var result = _askLogic.EditAsk(id, data);
+            var result = _helpLogic.AddHelp(data);
+
+            return Json(result);
+        }
+
+        public ActionResult EditHelp(int id, CreateHelp data)
+        {
+            var result = _helpLogic.EditHelp(id, data);
 
             return Json(result);
         }*/

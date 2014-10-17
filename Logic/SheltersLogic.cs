@@ -21,7 +21,7 @@ namespace PetAdopt.Logic
         /// 取得收容所列表
         /// </summary>
         /// <returns></returns>
-        public SheltersList GetSheltersList(int page = 1, int take = 10, string query = "", bool isLike = true)
+        public SheltersList GetSheltersList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
         {
             var log = GetLogger();
             log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
@@ -43,11 +43,25 @@ namespace PetAdopt.Logic
                     {
                         r.Id,
                         r.Name,
-                        Area = r.Area.Word
+                        r.Area.Word,
+                        r.OperationInfo
                     });
+
+                // 指定誰發佈的
+                if (userId != -1)
+                {
+                    shelterses = shelterses
+                        .Where(r => r.OperationInfo.UserId == userId);
+                }
 
                 var templist = shelterses
                     .OrderByDescending(r => r.Id)
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Name,
+                        Area = r.Word,
+                    })
                     .Skip((page - 1) * take)
                     .Take(take)
                     .ToList();
@@ -75,11 +89,25 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Name,
-                            Area = r.Area.Word
+                            r.Area.Word,
+                            r.OperationInfo
                         });
+
+                    // 指定誰發佈的
+                    if (userId != -1)
+                    {
+                        shelterses = shelterses
+                            .Where(r => r.OperationInfo.UserId == userId);
+                    }
 
                     var templist = shelterses
                         .OrderByDescending(r => r.Id)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Name,
+                            Area = r.Word
+                        })
                         .Skip((page - 1) * take)
                         .Take(take)
                         .ToList();
@@ -104,11 +132,25 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Name,
-                            Area = r.Area.Word
+                            r.Area.Word,
+                            r.OperationInfo
                         });
+
+                    // 指定誰發佈的
+                    if (userId != -1)
+                    {
+                        shelterses = shelterses
+                            .Where(r => r.OperationInfo.UserId == userId);
+                    }
 
                     var templist = shelterses
                         .OrderByDescending(r => r.Id)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Name,
+                            Area = r.Word
+                        })
                         .Skip((page - 1) * take)
                         .Take(take)
                         .ToList();

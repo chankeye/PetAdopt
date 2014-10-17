@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\ctrls\AccountSheltersCtrl.js" />
     <Content Include="Scripts\ctrls\ActivityCtrl.js" />
     <Content Include="Scripts\ctrls\ActivityDetailCtrl.js" />
     <Content Include="Scripts\ctrls\ActivityNewCtrl.js" />
@@ -794,6 +795,7 @@
     <Content Include="Views\Activity\New.cshtml" />
     <Content Include="Views\Activity\Detail.cshtml" />
     <Content Include="Views\Account\Animal.cshtml" />
+    <Content Include="Views\Account\Shelters.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

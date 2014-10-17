@@ -28,6 +28,11 @@ namespace PetAdopt.Controllers
             return View();
         }
 
+        public ActionResult Shelters()
+        {
+            return View();
+        }
+
         /// <summary>
         /// 登入畫面
         /// </summary>

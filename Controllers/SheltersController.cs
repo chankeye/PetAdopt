@@ -1,4 +1,5 @@
-﻿using PetAdopt.Logic;
+﻿using System.Web.UI.WebControls;
+using PetAdopt.Logic;
 using System.Web.Mvc;
 
 namespace PetAdopt.Controllers
@@ -34,11 +35,18 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetSheltersList(int page, int take, string query, bool isLike)
+        public ActionResult GetSheltersList(int page, int take, string query, bool isLike, bool memberOnly = false)
         {
-            var shelterslist = _sheltersLogic.GetSheltersList(page, take, query, isLike);
-
-            return Json(shelterslist);
+            if (memberOnly)
+            {
+                var shelterslist = _sheltersLogic.GetSheltersList(page, take, query, isLike, LoginInfo.Id);
+                return Json(shelterslist);
+            }
+            else
+            {
+                var shelterslist = _sheltersLogic.GetSheltersList(page, take, query, isLike);
+                return Json(shelterslist);
+            }
         }
 
         [AllowAnonymous]

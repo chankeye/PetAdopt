@@ -63,12 +63,13 @@ $(function () {
                 $("#startDate").text(data.ReturnObject.StartDate),
                 $("#endDate").text(data.ReturnObject.EndDate),
                 $("#introduction").html(data.ReturnObject.Introduction),
-                $("#shelters").text(data.ReturnObject.SheltersId),
+                $("#shelters").text(data.ReturnObject.Shelters),
+                $("#shelters").attr("href","/Shelters/Detail?id=" + data.ReturnObject.SheltersId),
                 $("#phone").text(data.ReturnObject.Phone),
                 $("#address").text(data.ReturnObject.Address),
-                $("#selOptionsAreas").text(data.ReturnObject.Address),
-                $("#selOptionsClasses").text(data.ReturnObject.Address),
-                $("#selOptionsStatuses").text(data.ReturnObject.Address),
+                $("#selOptionsAreas").text(data.ReturnObject.Area),
+                $("#selOptionsClasses").text(data.ReturnObject.Class),
+                $("#selOptionsStatuses").text(data.ReturnObject.Status),
                 $("#age").text(data.ReturnObject.Age);
                 $("#address").text(data.ReturnObject.Address);
             } else {

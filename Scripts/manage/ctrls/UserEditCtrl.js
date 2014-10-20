@@ -52,7 +52,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/User/EditUser',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Account: account,
                     Display: $("#display").val(),
                     Mobile: $("#mobile").val(),

@@ -150,7 +150,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/News/EditNews',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Photo: photo,
                     Title: $("#title").val(),
                     Message: oEditor.getData(),

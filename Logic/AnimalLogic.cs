@@ -4,6 +4,7 @@ using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Data.Entity;
 using System.Linq;
 
 namespace PetAdopt.Logic
@@ -185,13 +186,19 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得動物資訊
         /// </summary>
+        /// <param name="id">Animal.Id</param>
         /// <returns></returns>
         public IsSuccessResult<GetAnimal> GetAnimal(int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
-            var animal = PetContext.Animals.SingleOrDefault(r => r.Id == id);
+            var animal = PetContext.Animals
+                .Include(r => r.Class)
+                .Include(r => r.Status)
+                .Include(r => r.Area)
+                .SingleOrDefault(r => r.Id == id);
+
             if (animal == null)
                 return new IsSuccessResult<GetAnimal>("找不到此認養動物資訊");
 
@@ -206,11 +213,15 @@ namespace PetAdopt.Logic
                     AreaId = animal.AreaId,
                     ClassId = animal.ClassId,
                     SheltersId = animal.SheltersId,
+                    StatusId = animal.StatusId,
+                    Area = animal.AreaId.HasValue ? animal.Area.Word : null,
+                    Class = animal.Class.Word,
+                    Shelters = animal.SheltersId.HasValue ? animal.Shelter.Name : null,
+                    Status = animal.Status.Word,
                     Phone = animal.Phone,
                     StartDate = animal.StartDate.ToString("yyyy-MM-dd"),
                     EndDate = animal.EndDate.HasValue ? animal.EndDate.Value.ToString("yyyy-MM-dd") : null,
-                    Age = animal.Age,
-                    StatusId = animal.StatusId
+                    Age = animal.Age
                 }
             };
         }

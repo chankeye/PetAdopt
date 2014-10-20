@@ -126,7 +126,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Knowledge/EditKnowledge',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Title: $("#title").val(),
                     Message: $("#message").val(),
                     ClassId: $("#selOptionsClasses").val()

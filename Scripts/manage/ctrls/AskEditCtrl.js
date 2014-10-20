@@ -125,7 +125,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Ask/EditAsk',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Title: $("#title").val(),
                     Message: $("#message").val(),
                     ClassId: $("#selOptionsClasses").val()

@@ -149,7 +149,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Activity/EditActivity',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Photo: photo,
                     Title: $("#title").val(),
                     Message: oEditor.getData(),

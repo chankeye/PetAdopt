@@ -145,7 +145,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Shelters/EditShelters',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Photo: photo,
                     Name: $("#name").val(),
                     Introduction: $("#introduction").val(),

@@ -158,7 +158,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Help/EditHelp',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Photo: photo,
                     Title: $("#title").val(),
                     Message: $("#message").val(),

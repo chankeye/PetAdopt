@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PetAdopt.DTO.Animal
+﻿namespace PetAdopt.DTO.Animal
 {
     public class GetAnimal
     {
@@ -14,11 +12,19 @@ namespace PetAdopt.DTO.Animal
 
         public int? SheltersId { get; set; }
 
+        public string Shelters { get; set; }
+
         public short ClassId { get; set; }
+
+        public string Class { get; set; }
 
         public short StatusId { get; set; }
 
+        public string Status { get; set; }
+
         public short? AreaId { get; set; }
+
+        public string Area { get; set; }
 
         public string Address { get; set; }
 

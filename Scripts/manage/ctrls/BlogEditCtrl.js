@@ -138,7 +138,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Blog/EditBlog',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Photo: photo,
                     Title: $("#title").val(),
                     Message: oEditor.getData(),

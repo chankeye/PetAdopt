@@ -187,7 +187,7 @@ $(function () {
                 type: 'post',
                 url: '/Manage/Animal/EditAnimal',
                 data: {
-                    id: urlParams["id"],
+                    id: window.id,
                     Photo: photo,
                     Title: $("#title").val(),
                     StartDate: $("#startDate").val(),

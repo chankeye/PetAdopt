@@ -1,6 +1,4 @@
-﻿using PetAdopt.Controllers;
-using PetAdopt.DTO.Knowledge;
-using PetAdopt.Logic;
+﻿using PetAdopt.Logic;
 using System.Web.Mvc;
 
 namespace PetAdopt.Controllers
@@ -12,16 +10,16 @@ namespace PetAdopt.Controllers
         /// <summary>
         /// HelpLogic
         /// </summary>
-        KnowledgeLogic _knowledgeLogic
+        KnowledgeLogic KnowledgeLogic
         {
             get
             {
-                if (@knowledgeLogic == null)
-                    @knowledgeLogic = new KnowledgeLogic(GetOperation());
-                return @knowledgeLogic;
+                if (_knowledgeLogic == null)
+                    _knowledgeLogic = new KnowledgeLogic(GetOperation());
+                return _knowledgeLogic;
             }
         }
-        KnowledgeLogic @knowledgeLogic;
+        KnowledgeLogic _knowledgeLogic;
         #endregion //_knowledgeLogic
 
         [AllowAnonymous]
@@ -40,12 +38,12 @@ namespace PetAdopt.Controllers
         {
             if (memberOnly)
             {
-                var newslist = _knowledgeLogic.GetKnowledgeList(page, take, query, isLike, LoginInfo.Id);
+                var newslist = KnowledgeLogic.GetKnowledgeList(page, take, query, isLike, LoginInfo.Id);
                 return Json(newslist);
             }
             else
             {
-                var newslist = _knowledgeLogic.GetKnowledgeList(page, take, query, isLike);
+                var newslist = KnowledgeLogic.GetKnowledgeList(page, take, query, isLike);
                 return Json(newslist);
             }
         }
@@ -53,7 +51,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var asklist = _knowledgeLogic.GetMessageList(id, page, take);
+            var asklist = KnowledgeLogic.GetMessageList(id, page, take);
 
             return Json(asklist);
         }
@@ -67,7 +65,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult DetailInit(int id)
         {
-            var result = _knowledgeLogic.GetKnowledge(id);
+            var result = KnowledgeLogic.GetKnowledge(id);
 
             return Json(result);
         }

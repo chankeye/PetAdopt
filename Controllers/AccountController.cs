@@ -12,16 +12,16 @@ namespace PetAdopt.Controllers
         /// <summary>
         /// UserLogic
         /// </summary>
-        UserLogic _userLogic
+        UserLogic UserLogic
         {
             get
             {
-                if (@userLogic == null)
-                    @userLogic = new UserLogic(GetOperation());
-                return @userLogic;
+                if (_userLogic == null)
+                    _userLogic = new UserLogic(GetOperation());
+                return _userLogic;
             }
         }
-        UserLogic @userLogic;
+        UserLogic _userLogic;
 
         public ActionResult Index()
         {
@@ -89,7 +89,6 @@ namespace PetAdopt.Controllers
         /// </summary>
         /// <param name="account">帳號</param>
         /// <param name="password">密碼</param>
-        /// <param name="remember">記住我?</param>
         /// <param name="returnUrl">重導路徑</param>
         /// <returns></returns>
         [HttpPost]
@@ -97,7 +96,7 @@ namespace PetAdopt.Controllers
         public ActionResult Login(string account, string password, string returnUrl)
         {
             #region 驗證帳密
-            var isValid = _userLogic.IsValid(account, password, false);
+            var isValid = UserLogic.IsValid(account, password, false);
             if (isValid.IsSuccess == false)
             {
                 ModelState.AddModelError("", isValid.ErrorMessage);
@@ -107,7 +106,7 @@ namespace PetAdopt.Controllers
 
             // 取得資訊
             var id = isValid.ReturnObject;
-            var user = _userLogic.GetLoginInfo(id);
+            var user = UserLogic.GetLoginInfo(id);
 
             #region 登入系統
             var userData = ParseToUserDataString(user);
@@ -165,7 +164,7 @@ namespace PetAdopt.Controllers
 
         public ActionResult ChangePasswordSubmit(string oldPassword, string newPassword)
         {
-            var result = _userLogic.ChangePassword(LoginInfo.Id, oldPassword, newPassword);
+            var result = UserLogic.ChangePassword(LoginInfo.Id, oldPassword, newPassword);
 
             if (result.IsSuccess == false)
                 return JsonError(result.ErrorMessage);

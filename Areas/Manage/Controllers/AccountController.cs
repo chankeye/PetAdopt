@@ -13,16 +13,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// UserLogic
         /// </summary>
-        UserLogic _userLogic
+        UserLogic UserLogic
         {
             get
             {
-                if (@userLogic == null)
-                    @userLogic = new UserLogic(GetOperation());
-                return @userLogic;
+                if (_userLogic == null)
+                    _userLogic = new UserLogic(GetOperation());
+                return _userLogic;
             }
         }
-        UserLogic @userLogic;
+        UserLogic _userLogic;
 
         /// <summary>
         /// 登入畫面
@@ -36,7 +36,7 @@ namespace PetAdopt.Areas.Manage.Controllers
             // 如果已經登入了，就直接幫進入系統，不用看到登入畫面
             if (Request.IsAuthenticated)
                 return redirect(returnUrl);
-            
+
             return View();
         }
 
@@ -53,7 +53,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         public ActionResult Login(string account, string password, string returnUrl)
         {
             #region 驗證帳密
-            var isValid = _userLogic.IsValid(account, password, true);
+            var isValid = UserLogic.IsValid(account, password, true);
             if (isValid.IsSuccess == false)
             {
                 ModelState.AddModelError("", isValid.ErrorMessage);
@@ -63,7 +63,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             // 取得資訊
             var id = isValid.ReturnObject;
-            var user = _userLogic.GetLoginInfo(id);
+            var user = UserLogic.GetLoginInfo(id);
 
             #region 登入系統
             var userData = ParseToUserDataString(user);
@@ -121,7 +121,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult ChangePasswordSubmit(string oldPassword, string newPassword)
         {
-            var result = _userLogic.ChangePassword(LoginInfo.Id, oldPassword, newPassword);
+            var result = UserLogic.ChangePassword(LoginInfo.Id, oldPassword, newPassword);
 
             if (result.IsSuccess == false)
                 return JsonError(result.ErrorMessage);

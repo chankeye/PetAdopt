@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// ActivityLogic
         /// </summary>
-        ActivityLogic _activityLogic
+        ActivityLogic ActivityLogic
         {
             get
             {
-                if (@activityLogic == null)
-                    @activityLogic = new ActivityLogic(GetOperation());
-                return @activityLogic;
+                if (_activityLogic == null)
+                    _activityLogic = new ActivityLogic(GetOperation());
+                return _activityLogic;
             }
         }
-        ActivityLogic @activityLogic;
+        ActivityLogic _activityLogic;
         #endregion //_activityLogic
 
         public ActionResult Index()
@@ -31,28 +31,28 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetActivities(int page, int take, string query, bool isLike)
         {
-            var newslist = _activityLogic.GetActivities(page, take, query, isLike);
+            var newslist = ActivityLogic.GetActivities(page, take, query, isLike);
 
             return Json(newslist);
         }
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _activityLogic.GetMessageList(id, page, take);
+            var result = ActivityLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _activityLogic.DeleteActivity(Server.MapPath("~/Content/uploads"), id);
+            var result = ActivityLogic.DeleteActivity(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _activityLogic.DeleteMessage(id, messageId);
+            var result = ActivityLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
@@ -64,7 +64,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _activityLogic.GetActivity(id);
+            var result = ActivityLogic.GetActivity(id);
 
             return Json(result);
         }
@@ -72,7 +72,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult AddActivity(CreateActivity data)
         {
-            var result = _activityLogic.AddActivity(data);
+            var result = ActivityLogic.AddActivity(data);
 
             return Json(result);
         }
@@ -80,7 +80,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult EditActivity(int id, CreateActivity data)
         {
-            var result = _activityLogic.EditActivity(id, data);
+            var result = ActivityLogic.EditActivity(id, data);
 
             return Json(result);
         }

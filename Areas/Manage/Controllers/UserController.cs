@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// _userLogic
         /// </summary>
-        UserLogic _userLogic
+        UserLogic UserLogic
         {
             get
             {
-                if (@userLogic == null)
-                    @userLogic = new UserLogic(GetOperation());
-                return @userLogic;
+                if (_userLogic == null)
+                    _userLogic = new UserLogic(GetOperation());
+                return _userLogic;
             }
         }
-        UserLogic @userLogic;
+        UserLogic _userLogic;
         #endregion //_userLogic
 
         public ActionResult Index()
@@ -31,14 +31,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetUserList(int page, int take, string query, bool isLike)
         {
-            var newslist = _userLogic.GetUserList(page, take, query, isLike);
+            var newslist = UserLogic.GetUserList(page, take, query, isLike);
 
             return Json(newslist);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _userLogic.DeleteUser(id);
+            var result = UserLogic.DeleteUser(id);
 
             return Json(result);
         }
@@ -50,21 +50,21 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _userLogic.GetUser(id);
+            var result = UserLogic.GetUser(id);
 
             return Json(result);
         }
 
         public ActionResult AddUser(CreateUser data)
         {
-            var result = _userLogic.AddUser(data);
+            var result = UserLogic.AddUser(data);
 
             return Json(result);
         }
 
         public ActionResult EditUser(int id, CreateUser data)
         {
-            var result = _userLogic.EditUser(id, data);
+            var result = UserLogic.EditUser(id, data);
 
             return Json(result);
         }

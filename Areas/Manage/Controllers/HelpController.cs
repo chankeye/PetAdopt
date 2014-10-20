@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// HelpLogic
         /// </summary>
-        HelpLogic _helpLogic
+        HelpLogic HelpLogic
         {
             get
             {
-                if (@helpLogic == null)
-                    @helpLogic = new HelpLogic(GetOperation());
-                return @helpLogic;
+                if (_helpLogic == null)
+                    _helpLogic = new HelpLogic(GetOperation());
+                return _helpLogic;
             }
         }
-        HelpLogic @helpLogic;
+        HelpLogic _helpLogic;
         #endregion //_helpLogic
 
         public ActionResult Index()
@@ -31,28 +31,28 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetHelpList(int page, int take, string query, bool isLike)
         {
-            var helplist = _helpLogic.GetHelpList(page, take, query, isLike);
+            var helplist = HelpLogic.GetHelpList(page, take, query, isLike);
 
             return Json(helplist);
         }
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _helpLogic.GetMessageList(id, page, take);
+            var result = HelpLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _helpLogic.DeleteHelp(Server.MapPath("~/Content/uploads"), id);
+            var result = HelpLogic.DeleteHelp(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _helpLogic.DeleteMessage(id, messageId);
+            var result = HelpLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
@@ -64,21 +64,21 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _helpLogic.GetHelp(id);
+            var result = HelpLogic.GetHelp(id);
 
             return Json(result);
         }
 
         public ActionResult AddHelp(CreateHelp data)
         {
-            var result = _helpLogic.AddHelp(data);
+            var result = HelpLogic.AddHelp(data);
 
             return Json(result);
         }
 
         public ActionResult EditHelp(int id, CreateHelp data)
         {
-            var result = _helpLogic.EditHelp(id, data);
+            var result = HelpLogic.EditHelp(id, data);
 
             return Json(result);
         }

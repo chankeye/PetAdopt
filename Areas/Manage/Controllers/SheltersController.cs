@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// SheltersLogic
         /// </summary>
-        SheltersLogic _sheltersLogic
+        SheltersLogic SheltersLogic
         {
             get
             {
-                if (@sheltersLogic == null)
-                    @sheltersLogic = new SheltersLogic(GetOperation());
-                return @sheltersLogic;
+                if (_sheltersLogic == null)
+                    _sheltersLogic = new SheltersLogic(GetOperation());
+                return _sheltersLogic;
             }
         }
-        SheltersLogic @sheltersLogic;
+        SheltersLogic _sheltersLogic;
         #endregion //_sheltersLogic
 
         public ActionResult Index()
@@ -31,28 +31,28 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetSheltersList(int page, int take, string query, bool isLike)
         {
-            var shelterslist = _sheltersLogic.GetSheltersList(page, take, query, isLike);
+            var shelterslist = SheltersLogic.GetSheltersList(page, take, query, isLike);
 
             return Json(shelterslist);
         }
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _sheltersLogic.GetMessageList(id, page, take);
+            var result = SheltersLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _sheltersLogic.DeleteShelters(Server.MapPath("~/Content/uploads"), id);
+            var result = SheltersLogic.DeleteShelters(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _sheltersLogic.DeleteMessage(id, messageId);
+            var result = SheltersLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
@@ -64,21 +64,21 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _sheltersLogic.GetShelters(id);
+            var result = SheltersLogic.GetShelters(id);
 
             return Json(result);
         }
 
         public ActionResult AddShelters(CreateShelters data)
         {
-            var result = _sheltersLogic.AddShelters(data);
+            var result = SheltersLogic.AddShelters(data);
 
             return Json(result);
         }
 
         public ActionResult EditShelters(int id, CreateShelters data)
         {
-            var result = _sheltersLogic.EditShelters(id, data);
+            var result = SheltersLogic.EditShelters(id, data);
 
             return Json(result);
         }

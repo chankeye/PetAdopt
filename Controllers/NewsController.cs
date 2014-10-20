@@ -10,16 +10,16 @@ namespace PetAdopt.Controllers
         /// <summary>
         /// NewsLogic
         /// </summary>
-        NewsLogic _newsLogic
+        NewsLogic NewsLogic
         {
             get
             {
-                if (@newsLogic == null)
-                    @newsLogic = new NewsLogic(GetOperation());
-                return @newsLogic;
+                if (_newsLogic == null)
+                    _newsLogic = new NewsLogic(GetOperation());
+                return _newsLogic;
             }
         }
-        NewsLogic @newsLogic;
+        NewsLogic _newsLogic;
         #endregion //_newsLogic
 
         [AllowAnonymous]
@@ -38,12 +38,12 @@ namespace PetAdopt.Controllers
         {
             if (memberOnly)
             {
-                var newslist = _newsLogic.GetNewsList(page, take, query, isLike, LoginInfo.Id);
+                var newslist = NewsLogic.GetNewsList(page, take, query, isLike, LoginInfo.Id);
                 return Json(newslist);
             }
             else
             {
-                var newslist = _newsLogic.GetNewsList(page, take, query, isLike);
+                var newslist = NewsLogic.GetNewsList(page, take, query, isLike);
                 return Json(newslist);
             }
         }
@@ -51,7 +51,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _newsLogic.GetMessageList(id, page, take);
+            var result = NewsLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
@@ -65,7 +65,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult DetailInit(int id)
         {
-            var result = _newsLogic.GetNews(id);
+            var result = NewsLogic.GetNews(id);
 
             return Json(result);
         }

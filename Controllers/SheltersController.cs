@@ -1,5 +1,4 @@
-﻿using System.Web.UI.WebControls;
-using PetAdopt.Logic;
+﻿using PetAdopt.Logic;
 using System.Web.Mvc;
 
 namespace PetAdopt.Controllers
@@ -11,16 +10,16 @@ namespace PetAdopt.Controllers
         /// <summary>
         /// SheltersLogic
         /// </summary>
-        SheltersLogic _sheltersLogic
+        SheltersLogic SheltersLogic
         {
             get
             {
-                if (@sheltersLogic == null)
-                    @sheltersLogic = new SheltersLogic(GetOperation());
-                return @sheltersLogic;
+                if (_sheltersLogic == null)
+                    _sheltersLogic = new SheltersLogic(GetOperation());
+                return _sheltersLogic;
             }
         }
-        SheltersLogic @sheltersLogic;
+        SheltersLogic _sheltersLogic;
         #endregion //_sheltersLogic
 
         [AllowAnonymous]
@@ -39,12 +38,12 @@ namespace PetAdopt.Controllers
         {
             if (memberOnly)
             {
-                var shelterslist = _sheltersLogic.GetSheltersList(page, take, query, isLike, LoginInfo.Id);
+                var shelterslist = SheltersLogic.GetSheltersList(page, take, query, isLike, LoginInfo.Id);
                 return Json(shelterslist);
             }
             else
             {
-                var shelterslist = _sheltersLogic.GetSheltersList(page, take, query, isLike);
+                var shelterslist = SheltersLogic.GetSheltersList(page, take, query, isLike);
                 return Json(shelterslist);
             }
         }
@@ -52,7 +51,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _sheltersLogic.GetMessageList(id, page, take);
+            var result = SheltersLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
@@ -66,7 +65,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult DetailInit(int id)
         {
-            var result = _sheltersLogic.GetShelters(id);
+            var result = SheltersLogic.GetShelters(id);
 
             return Json(result);
         }

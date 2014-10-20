@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// AnimalLogic
         /// </summary>
-        AnimalLogic _animalLogic
+        AnimalLogic AnimalLogic
         {
             get
             {
-                if (@animalLogic == null)
-                    @animalLogic = new AnimalLogic(GetOperation());
-                return @animalLogic;
+                if (_animalLogic == null)
+                    _animalLogic = new AnimalLogic(GetOperation());
+                return _animalLogic;
             }
         }
-        AnimalLogic @animalLogic;
+        AnimalLogic _animalLogic;
         #endregion //_animalLogic
 
         public ActionResult Index()
@@ -31,28 +31,28 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetAnimalList(int page, int take, string query, bool isLike)
         {
-            var animallist = _animalLogic.GetAnimalList(page, take, query, isLike);
+            var animallist = AnimalLogic.GetAnimalList(page, take, query, isLike);
 
             return Json(animallist);
         }
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _animalLogic.GetMessageList(id, page, take);
+            var result = AnimalLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _animalLogic.DeleteAnimal(Server.MapPath("~/Content/uploads"), id);
+            var result = AnimalLogic.DeleteAnimal(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _animalLogic.DeleteMessage(id, messageId);
+            var result = AnimalLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
@@ -64,21 +64,21 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _animalLogic.GetAnimal(id);
+            var result = AnimalLogic.GetAnimal(id);
 
             return Json(result);
         }
 
         public ActionResult AddAnimal(CreateAnimal data)
         {
-            var result = _animalLogic.AddAnimal(data);
+            var result = AnimalLogic.AddAnimal(data);
 
             return Json(result);
         }
 
         public ActionResult EditAnimal(int id, CreateAnimal data)
         {
-            var result = _animalLogic.EditAnimal(id, data);
+            var result = AnimalLogic.EditAnimal(id, data);
 
             return Json(result);
         }

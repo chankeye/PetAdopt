@@ -10,16 +10,16 @@ namespace PetAdopt.Controllers
         /// <summary>
         /// ActivityLogic
         /// </summary>
-        ActivityLogic _activityLogic
+        ActivityLogic ActivityLogic
         {
             get
             {
-                if (@activityLogic == null)
-                    @activityLogic = new ActivityLogic(GetOperation());
-                return @activityLogic;
+                if (_activityLogic == null)
+                    _activityLogic = new ActivityLogic(GetOperation());
+                return _activityLogic;
             }
         }
-        ActivityLogic @activityLogic;
+        ActivityLogic _activityLogic;
         #endregion //_activityLogic
 
         [AllowAnonymous]
@@ -38,12 +38,12 @@ namespace PetAdopt.Controllers
         {
             if (memberOnly)
             {
-                var newslist = _activityLogic.GetActivities(page, take, query, isLike, LoginInfo.Id);
+                var newslist = ActivityLogic.GetActivities(page, take, query, isLike, LoginInfo.Id);
                 return Json(newslist);
             }
             else
             {
-                var newslist = _activityLogic.GetActivities(page, take, query, isLike);
+                var newslist = ActivityLogic.GetActivities(page, take, query, isLike);
                 return Json(newslist);
             }
 
@@ -52,7 +52,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _activityLogic.GetMessageList(id, page, take);
+            var result = ActivityLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
@@ -66,7 +66,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult DetailInit(int id)
         {
-            var result = _activityLogic.GetActivity(id);
+            var result = ActivityLogic.GetActivity(id);
 
             return Json(result);
         }

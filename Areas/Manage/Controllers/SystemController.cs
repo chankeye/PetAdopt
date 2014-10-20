@@ -11,16 +11,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// SystemLogic
         /// </summary>
-        SystemLogic _systemLogic
+        SystemLogic SystemLogic
         {
             get
             {
-                if (@systemLogic == null)
-                    @systemLogic = new SystemLogic(GetOperation());
-                return @systemLogic;
+                if (_systemLogic == null)
+                    _systemLogic = new SystemLogic(GetOperation());
+                return _systemLogic;
             }
         }
-        SystemLogic @systemLogic;
+        SystemLogic _systemLogic;
         #endregion //_systemLogic
 
         public ActionResult Index()
@@ -30,70 +30,70 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetAreaList()
         {
-            var areas = _systemLogic.GetAreaList();
+            var areas = SystemLogic.GetAreaList();
 
             return Json(areas);
         }
 
         public ActionResult DeleteArea(int id)
         {
-            var result = _systemLogic.DeleteArea(id);
+            var result = SystemLogic.DeleteArea(id);
 
             return Json(result);
         }
 
         public ActionResult AddArea(string word)
         {
-            var result = _systemLogic.AddArea(word);
+            var result = SystemLogic.AddArea(word);
 
             return Json(result);
         }
 
         public ActionResult GetStatusList()
         {
-            var statuses = _systemLogic.GetStatusList();
+            var statuses = SystemLogic.GetStatusList();
 
             return Json(statuses);
         }
 
         public ActionResult DeleteStatus(int id)
         {
-            var result = _systemLogic.DeleteStatus(id);
+            var result = SystemLogic.DeleteStatus(id);
 
             return Json(result);
         }
 
         public ActionResult AddStatus(string word)
         {
-            var result = _systemLogic.AddStatus(word);
+            var result = SystemLogic.AddStatus(word);
 
             return Json(result);
         }
 
         public ActionResult GetClassList()
         {
-            var classes = _systemLogic.GetClassList();
+            var classes = SystemLogic.GetClassList();
 
             return Json(classes);
         }
 
         public ActionResult DeleteClass(int id)
         {
-            var result = _systemLogic.DeleteClass(id);
+            var result = SystemLogic.DeleteClass(id);
 
             return Json(result);
         }
 
         public ActionResult AddClass(string word)
         {
-            var result = _systemLogic.AddClass(word);
+            var result = SystemLogic.AddClass(word);
 
             return Json(result);
         }
 
         public void DeletePhoto(string photo)
         {
-            _systemLogic.DeletePhoto(Server.MapPath("~/Content/uploads"), photo);
+            SystemLogic.DeletePhoto(Server.MapPath("~/Content/uploads"), photo);
         }
     }
 }

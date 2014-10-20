@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// BlogLogic
         /// </summary>
-        BlogLogic _blogLogic
+        BlogLogic BlogLogic
         {
             get
             {
-                if (@blogLogic == null)
-                    @blogLogic = new BlogLogic(GetOperation());
-                return @blogLogic;
+                if (_blogLogic == null)
+                    _blogLogic = new BlogLogic(GetOperation());
+                return _blogLogic;
             }
         }
-        BlogLogic @blogLogic;
+        BlogLogic _blogLogic;
         #endregion //_blogLogic
 
         public ActionResult Index()
@@ -31,28 +31,28 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetBlogList(int page, int take, string query, bool isLike)
         {
-            var bloglist = _blogLogic.GetBlogList(page, take, query, isLike);
+            var bloglist = BlogLogic.GetBlogList(page, take, query, isLike);
 
             return Json(bloglist);
         }
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _blogLogic.GetMessageList(id, page, take);
+            var result = BlogLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _blogLogic.DeleteBlog(id);
+            var result = BlogLogic.DeleteBlog(id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _blogLogic.DeleteMessage(id, messageId);
+            var result = BlogLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
@@ -64,7 +64,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _blogLogic.GetBlog(id);
+            var result = BlogLogic.GetBlog(id);
 
             return Json(result);
         }
@@ -72,7 +72,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult AddBlog(CreateBlog data)
         {
-            var result = _blogLogic.AddBlog(data);
+            var result = BlogLogic.AddBlog(data);
 
             return Json(result);
         }
@@ -80,7 +80,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult EditBlog(int id, CreateBlog data)
         {
-            var result = _blogLogic.EditBlog(id, data);
+            var result = BlogLogic.EditBlog(id, data);
 
             return Json(result);
         }

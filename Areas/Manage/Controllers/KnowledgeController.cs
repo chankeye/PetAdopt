@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// HelpLogic
         /// </summary>
-        KnowledgeLogic _knowledgeLogic
+        KnowledgeLogic KnowledgeLogic
         {
             get
             {
-                if (@knowledgeLogic == null)
-                    @knowledgeLogic = new KnowledgeLogic(GetOperation());
-                return @knowledgeLogic;
+                if (_knowledgeLogic == null)
+                    _knowledgeLogic = new KnowledgeLogic(GetOperation());
+                return _knowledgeLogic;
             }
         }
-        KnowledgeLogic @knowledgeLogic;
+        KnowledgeLogic _knowledgeLogic;
         #endregion //_knowledgeLogic
 
         public ActionResult Index()
@@ -31,35 +31,35 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetKnowledgeList(int page, int take, string query, bool isLike)
         {
-            var newslist = _knowledgeLogic.GetKnowledgeList(page, take, query, isLike);
+            var newslist = KnowledgeLogic.GetKnowledgeList(page, take, query, isLike);
 
             return Json(newslist);
         }
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var asklist = _knowledgeLogic.GetMessageList(id, page, take);
+            var asklist = KnowledgeLogic.GetMessageList(id, page, take);
 
             return Json(asklist);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _knowledgeLogic.DeleteKnowledge(id);
+            var result = KnowledgeLogic.DeleteKnowledge(id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _knowledgeLogic.DeleteMessage(id, messageId);
+            var result = KnowledgeLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
 
         public ActionResult AddKnowledge(CreateKnowledge data)
         {
-            var result = _knowledgeLogic.AddKnowledge(data);
+            var result = KnowledgeLogic.AddKnowledge(data);
 
             return Json(result);
         }
@@ -71,14 +71,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _knowledgeLogic.GetKnowledge(id);
+            var result = KnowledgeLogic.GetKnowledge(id);
 
             return Json(result);
         }
 
         public ActionResult EditKnowledge(int id, CreateKnowledge data)
         {
-            var result = _knowledgeLogic.EditKnowledge(id, data);
+            var result = KnowledgeLogic.EditKnowledge(id, data);
 
             return Json(result);
         }

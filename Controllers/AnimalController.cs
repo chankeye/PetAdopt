@@ -10,16 +10,16 @@ namespace PetAdopt.Controllers
         /// <summary>
         /// AnimalLogic
         /// </summary>
-        AnimalLogic _animalLogic
+        AnimalLogic AnimalLogic
         {
             get
             {
-                if (@animalLogic == null)
-                    @animalLogic = new AnimalLogic(GetOperation());
-                return @animalLogic;
+                if (_animalLogic == null)
+                    _animalLogic = new AnimalLogic(GetOperation());
+                return _animalLogic;
             }
         }
-        AnimalLogic @animalLogic;
+        AnimalLogic _animalLogic;
         #endregion //_animalLogic
 
         [AllowAnonymous]
@@ -38,12 +38,12 @@ namespace PetAdopt.Controllers
         {
             if (memberOnly)
             {
-                var animallist = _animalLogic.GetAnimalList(page, take, query, isLike, LoginInfo.Id);
+                var animallist = AnimalLogic.GetAnimalList(page, take, query, isLike, LoginInfo.Id);
                 return Json(animallist);
             }
             else
             {
-                var animallist = _animalLogic.GetAnimalList(page, take, query, isLike);
+                var animallist = AnimalLogic.GetAnimalList(page, take, query, isLike);
                 return Json(animallist);
             }
         }
@@ -51,7 +51,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _animalLogic.GetMessageList(id, page, take);
+            var result = AnimalLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
@@ -65,7 +65,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult DetailInit(int id)
         {
-            var result = _animalLogic.GetAnimal(id);
+            var result = AnimalLogic.GetAnimal(id);
 
             return Json(result);
         }

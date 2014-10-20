@@ -10,16 +10,16 @@ namespace PetAdopt.Controllers
         /// <summary>
         /// HelpLogic
         /// </summary>
-        HelpLogic _helpLogic
+        HelpLogic HelpLogic
         {
             get
             {
-                if (@helpLogic == null)
-                    @helpLogic = new HelpLogic(GetOperation());
-                return @helpLogic;
+                if (_helpLogic == null)
+                    _helpLogic = new HelpLogic(GetOperation());
+                return _helpLogic;
             }
         }
-        HelpLogic @helpLogic;
+        HelpLogic _helpLogic;
         #endregion //_helpLogic
 
         [AllowAnonymous]
@@ -38,12 +38,12 @@ namespace PetAdopt.Controllers
         {
             if (memberOnly)
             {
-                var helplist = _helpLogic.GetHelpList(page, take, query, isLike, LoginInfo.Id);
+                var helplist = HelpLogic.GetHelpList(page, take, query, isLike, LoginInfo.Id);
                 return Json(helplist);
             }
             else
             {
-                var helplist = _helpLogic.GetHelpList(page, take, query, isLike);
+                var helplist = HelpLogic.GetHelpList(page, take, query, isLike);
                 return Json(helplist);
             }
         }
@@ -51,7 +51,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _helpLogic.GetMessageList(id, page, take);
+            var result = HelpLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
@@ -65,7 +65,7 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult DetailInit(int id)
         {
-            var result = _helpLogic.GetHelp(id);
+            var result = HelpLogic.GetHelp(id);
 
             return Json(result);
         }

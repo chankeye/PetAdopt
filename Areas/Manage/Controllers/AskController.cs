@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// HelpLogic
         /// </summary>
-        AskLogic _askLogic
+        AskLogic AskLogic
         {
             get
             {
-                if (@askLogic == null)
-                    @askLogic = new AskLogic(GetOperation());
-                return @askLogic;
+                if (_askLogic == null)
+                    _askLogic = new AskLogic(GetOperation());
+                return _askLogic;
             }
         }
-        AskLogic @askLogic;
+        AskLogic _askLogic;
         #endregion //_askLogic
 
         public ActionResult Index()
@@ -31,35 +31,35 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetAskList(int page, int take, string query, bool isLike)
         {
-            var asklist = _askLogic.GetAskList(page, take, query, isLike);
+            var asklist = AskLogic.GetAskList(page, take, query, isLike);
 
             return Json(asklist);
         }
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _askLogic.GetMessageList(id, page, take);
+            var result = AskLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _askLogic.DeleteAsk(id);
+            var result = AskLogic.DeleteAsk(id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _askLogic.DeleteMessage(id, messageId);
+            var result = AskLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
 
         public ActionResult AddAsk(CreateAsk data)
         {
-            var result = _askLogic.AddAsk(data);
+            var result = AskLogic.AddAsk(data);
 
             return Json(result);
         }
@@ -71,14 +71,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _askLogic.GetAsk(id);
+            var result = AskLogic.GetAsk(id);
 
             return Json(result);
         }
 
         public ActionResult EditAsk(int id, CreateAsk data)
         {
-            var result = _askLogic.EditAsk(id, data);
+            var result = AskLogic.EditAsk(id, data);
 
             return Json(result);
         }

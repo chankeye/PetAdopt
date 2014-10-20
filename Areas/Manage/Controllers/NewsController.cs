@@ -12,16 +12,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         /// <summary>
         /// NewsLogic
         /// </summary>
-        NewsLogic _newsLogic
+        NewsLogic NewsLogic
         {
             get
             {
-                if (@newsLogic == null)
-                    @newsLogic = new NewsLogic(GetOperation());
-                return @newsLogic;
+                if (_newsLogic == null)
+                    _newsLogic = new NewsLogic(GetOperation());
+                return _newsLogic;
             }
         }
-        NewsLogic @newsLogic;
+        NewsLogic _newsLogic;
         #endregion //_newsLogic
 
         public ActionResult Index()
@@ -31,28 +31,28 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult GetNewsList(int page, int take, string query, bool isLike)
         {
-            var newslist = _newsLogic.GetNewsList(page, take, query, isLike);
+            var newslist = NewsLogic.GetNewsList(page, take, query, isLike);
 
             return Json(newslist);
         }
 
         public ActionResult GetMessageList(int id, int page, int take)
         {
-            var result = _newsLogic.GetMessageList(id, page, take);
+            var result = NewsLogic.GetMessageList(id, page, take);
 
             return Json(result);
         }
 
         public ActionResult Delete(int id)
         {
-            var result = _newsLogic.DeleteNews(Server.MapPath("~/Content/uploads"), id);
+            var result = NewsLogic.DeleteNews(Server.MapPath("~/Content/uploads"), id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = _newsLogic.DeleteMessage(id, messageId);
+            var result = NewsLogic.DeleteMessage(id, messageId);
 
             return Json(result);
         }
@@ -64,7 +64,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditInit(int id)
         {
-            var result = _newsLogic.GetNews(id);
+            var result = NewsLogic.GetNews(id);
 
             return Json(result);
         }
@@ -72,7 +72,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult AddNews(CreateNews data)
         {
-            var result = _newsLogic.AddNews(data);
+            var result = NewsLogic.AddNews(data);
 
             return Json(result);
         }
@@ -80,7 +80,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult EditNews(int id, CreateNews data)
         {
-            var result = _newsLogic.EditNews(id, data);
+            var result = NewsLogic.EditNews(id, data);
 
             return Json(result);
         }

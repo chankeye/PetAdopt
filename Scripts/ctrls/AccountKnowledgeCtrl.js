@@ -52,6 +52,15 @@ $(function () {
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
 
+    // 返回
+    $("#btn2").click(
+    function () {
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Account';
+    });
+
     // 查詢
     $("#btn3").click(function () {
         var $btn = $("#btn3");

@@ -5,8 +5,8 @@
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
     self.history = ko.observableArray();
 
-    self.detail = function (News) {
-        window.location = "/News/Detail?id=" + News.Id;
+    self.detail = function (data) {
+        window.location = "/News/Detail?id=" + data.Id;
     }
 
     //Add PaginationModel
@@ -51,6 +51,15 @@ $(function () {
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
+
+    // 返回
+    $("#btn2").click(
+    function () {
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Account';
+    });
 
     // 查詢
     $("#btn3").click(function () {

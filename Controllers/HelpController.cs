@@ -34,11 +34,18 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetHelpList(int page, int take, string query, bool isLike)
+        public ActionResult GetHelpList(int page, int take, string query, bool isLike, bool memberOnly = false)
         {
-            var helplist = _helpLogic.GetHelpList(page, take, query, isLike);
-
-            return Json(helplist);
+            if (memberOnly)
+            {
+                var helplist = _helpLogic.GetHelpList(page, take, query, isLike, LoginInfo.Id);
+                return Json(helplist);
+            }
+            else
+            {
+                var helplist = _helpLogic.GetHelpList(page, take, query, isLike);
+                return Json(helplist);
+            }
         }
 
         [AllowAnonymous]

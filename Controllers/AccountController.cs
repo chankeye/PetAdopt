@@ -23,6 +23,11 @@ namespace PetAdopt.Controllers
         }
         UserLogic @userLogic;
 
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         public ActionResult Animal()
         {
             return View();
@@ -34,6 +39,31 @@ namespace PetAdopt.Controllers
         }
 
         public ActionResult Blog()
+        {
+            return View();
+        }
+
+        public ActionResult Activity()
+        {
+            return View();
+        }
+
+        public ActionResult News()
+        {
+            return View();
+        }
+
+        public ActionResult Help()
+        {
+            return View();
+        }
+
+        public ActionResult Ask()
+        {
+            return View();
+        }
+
+        public ActionResult Knowledge()
         {
             return View();
         }

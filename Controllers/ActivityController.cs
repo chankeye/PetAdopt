@@ -34,11 +34,19 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetActivities(int page, int take, string query, bool isLike)
+        public ActionResult GetActivities(int page, int take, string query, bool isLike, bool memberOnly = false)
         {
-            var newslist = _activityLogic.GetActivities(page, take, query, isLike);
+            if (memberOnly)
+            {
+                var newslist = _activityLogic.GetActivities(page, take, query, isLike, LoginInfo.Id);
+                return Json(newslist);
+            }
+            else
+            {
+                var newslist = _activityLogic.GetActivities(page, take, query, isLike);
+                return Json(newslist);
+            }
 
-            return Json(newslist);
         }
 
         [AllowAnonymous]

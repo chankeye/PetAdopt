@@ -19,7 +19,7 @@ namespace PetAdopt.Logic
         /// 取得問與答列表
         /// </summary>
         /// <returns></returns>
-        public AskList GetAskList(int page = 1, int take = 10, string query = "", bool isLike = true)
+        public AskList GetAskList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
         {
             var log = GetLogger();
             log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
@@ -41,11 +41,24 @@ namespace PetAdopt.Logic
                     {
                         r.Id,
                         r.Title,
-                        r.OperationInfo.Date
+                        r.OperationInfo
                     });
+
+                // 指定誰發佈的
+                if (userId != -1)
+                {
+                    asks = asks
+                        .Where(r => r.OperationInfo.UserId == userId);
+                }
 
                 var templist = asks
                     .OrderByDescending(r => r.Id)
+                    .Select(r => new
+                    {
+                        r.Id,
+                        r.Title,
+                        r.OperationInfo.Date
+                    })
                     .Skip((page - 1) * take)
                     .Take(take)
                     .ToList();
@@ -73,11 +86,24 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Title,
-                            r.OperationInfo.Date
+                            r.OperationInfo
                         });
+
+                    // 指定誰發佈的
+                    if (userId != -1)
+                    {
+                        asks = asks
+                            .Where(r => r.OperationInfo.UserId == userId);
+                    }
 
                     var templist = asks
                         .OrderByDescending(r => r.Id)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        })
                         .Skip((page - 1) * take)
                         .Take(take)
                         .ToList();
@@ -102,11 +128,24 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Title,
-                            r.OperationInfo.Date
+                            r.OperationInfo
                         });
+
+                    // 指定誰發佈的
+                    if (userId != -1)
+                    {
+                        asks = asks
+                            .Where(r => r.OperationInfo.UserId == userId);
+                    }
 
                     var templist = asks
                         .OrderByDescending(r => r.Id)
+                        .Select(r => new
+                        {
+                            r.Id,
+                            r.Title,
+                            r.OperationInfo.Date
+                        })
                         .Skip((page - 1) * take)
                         .Take(take)
                         .ToList();

@@ -96,6 +96,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\ctrls\AccountKnowledgeCtrl.js" />
+    <Content Include="Scripts\ctrls\AccountAskCtrl.js" />
+    <Content Include="Scripts\ctrls\AccountHelpCtrl.js" />
+    <Content Include="Scripts\ctrls\AccountNewsCtrl.js" />
+    <Content Include="Scripts\ctrls\AccountActivityCtrl.js" />
     <Content Include="Scripts\ctrls\AccountBlogCtrl.js" />
     <Content Include="Scripts\ctrls\AccountSheltersCtrl.js" />
     <Content Include="Scripts\ctrls\ActivityCtrl.js" />
@@ -798,6 +803,12 @@
     <Content Include="Views\Account\Animal.cshtml" />
     <Content Include="Views\Account\Shelters.cshtml" />
     <Content Include="Views\Account\Blog.cshtml" />
+    <Content Include="Views\Account\Activity.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\News.cshtml" />
+    <Content Include="Views\Account\Help.cshtml" />
+    <Content Include="Views\Account\Ask.cshtml" />
+    <Content Include="Views\Account\Knowledge.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

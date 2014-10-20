@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "發佈的問與答";
+    Layout = "../Shared/_Layout.cshtml";
+}
+@section Scripts
+{
+    <script src="../../Scripts/ctrls/AccountAskCtrl.js"></script>
+}
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+<div>
+    <div>
+        <p>
+            <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
+            <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>
+        </p>
+    </div>
+    <input id="checkAll" name="checkAll" type="checkbox" />
+    <label for="checkAll">完全比對</label>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>標題</th>
+                <th>日期</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: history">
+            <tr>
+                <td hidden="true"><span data-bind="text: Id"></span></td>
+                <td><a href="#" data-bind="text: Title, click: $root.detail"></a></td>
+                <td><span data-bind="text: Date"></span></td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr><td data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></td></tr>
+        </tfoot>
+    </table>
+    <!--pagination-->
+    @Html.Partial("_Pagination")
+    <!--pagination-->
+</div>

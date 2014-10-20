@@ -34,11 +34,18 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetAskList(int page, int take, string query, bool isLike)
+        public ActionResult GetAskList(int page, int take, string query, bool isLike, bool memberOnly = false)
         {
-            var asklist = _askLogic.GetAskList(page, take, query, isLike);
-
-            return Json(asklist);
+            if (memberOnly)
+            {
+                var asklist = _askLogic.GetAskList(page, take, query, isLike, LoginInfo.Id);
+                return Json(asklist);
+            }
+            else
+            {
+                var asklist = _askLogic.GetAskList(page, take, query, isLike);
+                return Json(asklist);
+            }
         }
 
         [AllowAnonymous]

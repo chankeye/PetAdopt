@@ -4,6 +4,7 @@ using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Data.Entity;
 using System.Linq;
 
 namespace PetAdopt.Logic
@@ -19,6 +20,11 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得即刻救援列表
         /// </summary>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <param name="query">查詢條件(只能查標題)</param>
+        /// <param name="isLike">非完全比對</param>
+        /// <param name="userId">指定某user發佈的</param>
         /// <returns></returns>
         public HelpList GetHelpList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
         {
@@ -185,26 +191,32 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得救援文章
         /// </summary>
+        /// <param name="id">Help.Id</param>
         /// <returns></returns>
-        public IsSuccessResult<CreateHelp> GetHelp(int id)
+        public IsSuccessResult<GetHelp> GetHelp(int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
-            var help = PetContext.Helps.SingleOrDefault(r => r.Id == id);
+            var help = PetContext.Helps
+                .Include(r => r.Area)
+                .Include(r => r.Class)
+                .SingleOrDefault(r => r.Id == id);
             if (help == null)
-                return new IsSuccessResult<CreateHelp>("找不到此救援文章");
+                return new IsSuccessResult<GetHelp>("找不到此救援文章");
 
-            return new IsSuccessResult<CreateHelp>
+            return new IsSuccessResult<GetHelp>
             {
-                ReturnObject = new CreateHelp
+                ReturnObject = new GetHelp
                 {
                     Photo = help.CoverPhoto,
                     Title = help.Title,
                     Message = help.Message,
-                    AreaId = help.AreaId,
                     Address = help.Address,
-                    ClassId = help.ClassId
+                    AreaId = help.AreaId,
+                    Area = help.Area.Word,
+                    ClassId = help.ClassId,
+                    Class = help.Class.Word
                 }
             };
         }

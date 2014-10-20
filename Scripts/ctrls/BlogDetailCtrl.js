@@ -59,9 +59,10 @@ $(function () {
         success: function (data) {
             if (data.IsSuccess) {
                 $("#title").text(data.ReturnObject.Title);
-                $("#selOptionsClasses").text(data.ReturnObject.ClassId);
+                $("#selOptionsClasses").text(data.ReturnObject.Class);
                 $("#content").html(data.ReturnObject.Message);
-                $("#animalId").text(data.ReturnObject.AnimalId);
+                $("#animalId").text(data.ReturnObject.Animal);
+                $("#animalId").attr("href","/Animal/Detail?id=" + data.ReturnObject.AnimalId);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Blog';

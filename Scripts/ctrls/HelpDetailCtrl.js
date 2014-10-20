@@ -57,8 +57,8 @@ $(function () {
             if (data.IsSuccess) {
                 photo = data.ReturnObject.Photo;
                 $("#title").text(data.ReturnObject.Title);
-                $("#selOptionsAreas").text(data.ReturnObject.AreaId);
-                $("#selOptionsClasses").text(data.ReturnObject.ClassId);
+                $("#selOptionsAreas").text(data.ReturnObject.Area);
+                $("#selOptionsClasses").text(data.ReturnObject.Class);
                 $("#message").html(data.ReturnObject.Message);
                 $("#address").text(data.ReturnObject.Address);
             } else {

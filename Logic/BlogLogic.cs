@@ -3,6 +3,7 @@ using PetAdopt.DTO.Blog;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace PetAdopt.Logic
@@ -18,6 +19,11 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得部落格列表
         /// </summary>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <param name="query">查詢條件(只能查標題)</param>
+        /// <param name="isLike">非完全比對</param>
+        /// <param name="userId">指定某user發佈的</param>
         /// <returns></returns>
         public BlogList GetBlogList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
         {
@@ -175,24 +181,29 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得文章
         /// </summary>
+        /// <param name="id">Blog.Id</param>
         /// <returns></returns>
-        public IsSuccessResult<CreateBlog> GetBlog(int id)
+        public IsSuccessResult<GetBlog> GetBlog(int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
-            var blog = PetContext.Blogs.SingleOrDefault(r => r.Id == id);
+            var blog = PetContext.Blogs
+                .Include(r => r.Class)
+                .SingleOrDefault(r => r.Id == id);
             if (blog == null)
-                return new IsSuccessResult<CreateBlog>("找不到此文章");
+                return new IsSuccessResult<GetBlog>("找不到此文章");
 
-            return new IsSuccessResult<CreateBlog>
+            return new IsSuccessResult<GetBlog>
             {
-                ReturnObject = new CreateBlog
+                ReturnObject = new GetBlog
                 {
                     Title = blog.Title,
                     Message = blog.Message,
                     ClassId = blog.ClassId,
-                    AnimalId = blog.AnimalId
+                    Class = blog.Class.Word,
+                    AnimalId = blog.AnimalId,
+                    Animal = blog.AnimalId.HasValue ? blog.Animal.Title : null
                 }
             };
         }

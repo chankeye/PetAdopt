@@ -1,9 +1,9 @@
 ﻿using PetAdopt.DTO;
-using PetAdopt.DTO.Ask;
 using PetAdopt.DTO.Shelters;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 
@@ -20,6 +20,11 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得收容所列表
         /// </summary>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <param name="query">查詢條件(只能查標題)</param>
+        /// <param name="isLike">非完全比對</param>
+        /// <param name="userId">指定某user發佈的</param>
         /// <returns></returns>
         public SheltersList GetSheltersList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
         {
@@ -180,24 +185,28 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得收容所資訊
         /// </summary>
+        /// <param name="id">Shelters.Id</param>
         /// <returns></returns>
-        public IsSuccessResult<CreateShelters> GetShelters(int id)
+        public IsSuccessResult<GetShelters> GetShelters(int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
-            var shelters = PetContext.Shelters.SingleOrDefault(r => r.Id == id);
+            var shelters = PetContext.Shelters
+                .Include(r => r.Area)
+                .SingleOrDefault(r => r.Id == id);
             if (shelters == null)
-                return new IsSuccessResult<CreateShelters>("找不到此活動");
+                return new IsSuccessResult<GetShelters>("找不到此活動");
 
-            return new IsSuccessResult<CreateShelters>
+            return new IsSuccessResult<GetShelters>
             {
-                ReturnObject = new CreateShelters
+                ReturnObject = new GetShelters
                 {
                     Photo = shelters.CoverPhoto,
                     Name = shelters.Name,
                     Introduction = shelters.Introduction,
                     AreaId = shelters.AreaId,
+                    Area = shelters.Area.Word,
                     Address = shelters.Address,
                     Url = shelters.Url,
                     Phone = shelters.Phone

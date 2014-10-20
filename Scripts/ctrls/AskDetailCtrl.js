@@ -58,7 +58,7 @@ $(function () {
         success: function (data) {
             if (data.IsSuccess) {
                 $("#title").text(data.ReturnObject.Title);
-                $("#selOptionsClasses").text(data.ReturnObject.ClassId);
+                $("#selOptionsClasses").text(data.ReturnObject.Class);
                 $("#message").html(data.ReturnObject.Message);
             } else {
                 alert(data.ErrorMessage);

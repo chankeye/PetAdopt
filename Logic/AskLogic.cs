@@ -3,6 +3,7 @@ using PetAdopt.DTO.Ask;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace PetAdopt.Logic
@@ -175,23 +176,27 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得問與答
         /// </summary>
+        /// <param name="id">Ask.Id</param>
         /// <returns></returns>
-        public IsSuccessResult<CreateAsk> GetAsk(int id)
+        public IsSuccessResult<GetAsk> GetAsk(int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
-            var ask = PetContext.Asks.SingleOrDefault(r => r.Id == id);
+            var ask = PetContext.Asks
+                .Include(r => r.Class)
+                .SingleOrDefault(r => r.Id == id);
             if (ask == null)
-                return new IsSuccessResult<CreateAsk>("找不到此問與答");
+                return new IsSuccessResult<GetAsk>("找不到此問與答");
 
-            return new IsSuccessResult<CreateAsk>
+            return new IsSuccessResult<GetAsk>
             {
-                ReturnObject = new CreateAsk
+                ReturnObject = new GetAsk
                 {
                     Title = ask.Title,
                     Message = ask.Message,
                     ClassId = ask.ClassId,
+                    Class = ask.Class.Word
                 }
             };
         }

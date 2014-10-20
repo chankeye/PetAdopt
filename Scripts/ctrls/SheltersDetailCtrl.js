@@ -63,7 +63,7 @@ $(function () {
                     $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
                 }
                 $("#name").text(data.ReturnObject.Name);
-                $("#selOptionsAreas").text(data.ReturnObject.AreaId);
+                $("#selOptionsAreas").text(data.ReturnObject.Area);
                 $("#introduction").html(data.ReturnObject.Introduction);
                 $("#address").text(data.ReturnObject.Address);
                 $("#phone").text(data.ReturnObject.Phone);

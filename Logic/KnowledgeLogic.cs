@@ -3,6 +3,7 @@ using PetAdopt.DTO.Knowledge;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace PetAdopt.Logic
@@ -18,6 +19,11 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得知識列表
         /// </summary>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <param name="query">查詢條件(只能查標題)</param>
+        /// <param name="isLike">非完全比對</param>
+        /// <param name="userId">指定某user發佈的</param>
         /// <returns></returns>
         public KnowledgeList GetKnowledgeList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
         {
@@ -175,23 +181,27 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得知識
         /// </summary>
+        /// <param name="id">Knowledge.Id</param>
         /// <returns></returns>
-        public IsSuccessResult<CreateKnowledge> GetKnowledge(int id)
+        public IsSuccessResult<GetKnowledge> GetKnowledge(int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
-            var knowledge = PetContext.Knowledges.SingleOrDefault(r => r.Id == id);
+            var knowledge = PetContext.Knowledges
+                .Include(r => r.Class)
+                .SingleOrDefault(r => r.Id == id);
             if (knowledge == null)
-                return new IsSuccessResult<CreateKnowledge>("找不到此知識");
+                return new IsSuccessResult<GetKnowledge>("找不到此知識");
 
-            return new IsSuccessResult<CreateKnowledge>
+            return new IsSuccessResult<GetKnowledge>
             {
-                ReturnObject = new CreateKnowledge
+                ReturnObject = new GetKnowledge
                 {
                     Title = knowledge.Title,
                     Message = knowledge.Message,
                     ClassId = knowledge.ClassId,
+                    Class = knowledge.Class.Word,
                 }
             };
         }

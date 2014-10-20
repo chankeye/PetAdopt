@@ -61,7 +61,7 @@ $(function () {
                     $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
                 }
                 $("#title").text(data.ReturnObject.Title);
-                $("#selOptionsAreas").text(data.ReturnObject.AreaId);
+                $("#selOptionsAreas").text(data.ReturnObject.Area);
                 $("#content").html(data.ReturnObject.Message);
                 $("#source").text(data.ReturnObject.Url);
             } else {

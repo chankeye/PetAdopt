@@ -60,7 +60,7 @@ $(function () {
                     $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
                 }
                 $("#title").text(data.ReturnObject.Title);
-                $("#selOptionsAreas").text(data.ReturnObject.AreaId);
+                $("#selOptionsAreas").text(data.ReturnObject.Area);
                 $("#content").html(data.ReturnObject.Message);
                 $("#address").text(data.ReturnObject.Address);
             } else {

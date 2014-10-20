@@ -4,6 +4,7 @@ using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Data.Entity;
 using System.Linq;
 
 namespace PetAdopt.Logic
@@ -186,23 +187,27 @@ namespace PetAdopt.Logic
         /// 取得最新活動
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult<CreateActivity> GetActivity(int id)
+        public IsSuccessResult<GetActivity> GetActivity(int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
-            var activity = PetContext.Activities.SingleOrDefault(r => r.Id == id);
-            if (activity == null)
-                return new IsSuccessResult<CreateActivity>("找不到此活動");
+            var activity = PetContext.Activities
+                .Include(r => r.Area)
+                .SingleOrDefault(r => r.Id == id);
 
-            return new IsSuccessResult<CreateActivity>
+            if (activity == null)
+                return new IsSuccessResult<GetActivity>("找不到此活動");
+
+            return new IsSuccessResult<GetActivity>
             {
-                ReturnObject = new CreateActivity
+                ReturnObject = new GetActivity
                 {
                     Photo = activity.CoverPhoto,
                     Title = activity.Title,
                     Message = activity.Message,
                     AreaId = activity.AreaId,
+                    Area = activity.AreaId.HasValue ? activity.Area.Word : null,
                     Address = activity.Address
                 }
             };

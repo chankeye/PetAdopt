@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Data.Entity;
 using System.Text.RegularExpressions;
 
 namespace PetAdopt.Logic
@@ -21,6 +22,11 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得最新消息列表
         /// </summary>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <param name="query">查詢條件(只能查標題)</param>
+        /// <param name="isLike">非完全比對</param>
+        /// <param name="userId">指定某user發佈的</param>
         /// <returns></returns>
         public NewsList GetNewsList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
         {
@@ -187,24 +193,28 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得最新消息
         /// </summary>
+        /// <param name="id">News.Id</param>
         /// <returns></returns>
-        public IsSuccessResult<CreateNews> GetNews(int id)
+        public IsSuccessResult<GetNews> GetNews(int id)
         {
             var log = GetLogger();
             log.Debug("id: {0}", id);
 
-            var news = PetContext.News.SingleOrDefault(r => r.Id == id);
+            var news = PetContext.News
+                .Include(r => r.Area)
+                .SingleOrDefault(r => r.Id == id);
             if (news == null)
-                return new IsSuccessResult<CreateNews>("找不到此消息");
+                return new IsSuccessResult<GetNews>("找不到此消息");
 
-            return new IsSuccessResult<CreateNews>
+            return new IsSuccessResult<GetNews>
             {
-                ReturnObject = new CreateNews
+                ReturnObject = new GetNews
                 {
                     Photo = news.CoverPhoto,
                     Title = news.Title,
                     Message = news.Message,
                     AreaId = news.AreaId,
+                    Area = news.AreaId.HasValue ? news.Area.Word : null,
                     Url = news.Url
                 }
             };

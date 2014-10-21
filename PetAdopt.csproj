@@ -818,6 +818,8 @@
     <Content Include="Views\Account\Help.cshtml" />
     <Content Include="Views\Account\Ask.cshtml" />
     <Content Include="Views\Account\Knowledge.cshtml" />
+    <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\Shared\_Message.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

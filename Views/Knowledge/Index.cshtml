@@ -10,15 +10,8 @@
     <h2>@ViewBag.Title</h2>
 </div>
 <div>
-    <div>
-        <p><a href="/Knowledge/New" class="btn btn-primary">發表知識文章</a></p>
-        <p>
-            <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
-            <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>
-        </p>
-        <input id="checkAll" name="checkAll" type="checkbox" />
-        <label for="checkAll">完全比對</label>
-    </div>
+    <a href="/Knowledge/New" class="btn btn-primary">發表知識文章</a>
+    @Html.Partial("_Search")
     <table class="table table-hover">
         <thead>
             <tr>

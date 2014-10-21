@@ -92,46 +92,6 @@
 
     <hr />
 
-    <div>
-        <div class="page-header">
-            <h2>留言</h2>
-        </div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>日期</th>
-                    <th>內容</th>
-                    <th>發佈者</th>
-                </tr>
-            </thead>
-            <tbody data-bind="foreach: $root.history">
-                <tr>
-                    <td hidden="true"><span data-bind="text: Id"></span></td>
-                    <td><span data-bind="text: Date"></span></td>
-                    <td><span data-bind="text: Message"></span></td>
-                    <td><span data-bind="text: Account"></span></td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr><td data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></td></tr>
-            </tfoot>
-        </table>
-        <!--pagination-->
-        @Html.Partial("_Pagination")
-        <!--pagination-->
-    </div>
+    @Html.Partial("_Message")
 
-    <form id="commentForm" class="form-horizontal" method="POST" name="form1">
-        <div class="container">
-            <div class="form-group">
-                <textarea id="message" name="message" class="form-control required" maxlength="100" required></textarea>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-5 col-sm-7">
-                    <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
-                    <button id="btnReset" type="reset" class="btn btn-default">清除</button>
-                </div>
-            </div>
-        </div>
-    </form>
 </div>

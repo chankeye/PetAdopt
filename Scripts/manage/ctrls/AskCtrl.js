@@ -101,7 +101,7 @@ $(function () {
                 url: '/Manage/Ask/AddAsk',
                 data: {
                     Title: $("#title").val(),
-                    Message: $("#message").val(),
+                    Message: $("#content").val(),
                     ClassId: $("#selOptionsClasses").val()
                 },
                 success: function (data) {
@@ -110,7 +110,7 @@ $(function () {
                         //window.vm.history.push(data.ReturnObject);
                         window.vm.loadHistory();
                         $("#title").val('');
-                        $("#message").val(''),
+                        $("#content").val(''),
                         $("#selOptionsClasses option:first").attr("selected", true);
 
                         alert("新增成功");

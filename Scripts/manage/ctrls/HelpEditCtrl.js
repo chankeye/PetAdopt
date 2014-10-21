@@ -108,7 +108,7 @@ $(function () {
                         this.selected = true;
                     }
                 });
-                $("#message").val(data.ReturnObject.Message);
+                $("#content").val(data.ReturnObject.Message);
                 $("#address").val(data.ReturnObject.Address);
             } else {
                 alert(data.ErrorMessage);
@@ -161,7 +161,7 @@ $(function () {
                     id: window.id,
                     Photo: photo,
                     Title: $("#title").val(),
-                    Message: $("#message").val(),
+                    Message: $("#content").val(),
                     Address: $("#address").val(),
                     AreaId: $("#selOptionsAreas").val(),
                     ClassId: $("#selOptionsClasses").val()
@@ -169,12 +169,6 @@ $(function () {
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        $("#title").val('');
-                        $("#message").val('');
-                        $("#address").val('');
-                        $("#selOptionsClasses option:first").attr("selected", true);
-                        $("#selOptionsAreas option:first").attr("selected", true);
-
                         alert("修改完成");
                         window.location = '/Manage/Help';
                     } else {

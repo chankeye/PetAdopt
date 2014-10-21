@@ -284,6 +284,8 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="Areas\Manage\Views\Shared\_Pagination.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Search.cshtml" />
+    <Content Include="Areas\Manage\Views\Shared\_Message.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\ckeditor\ckeditor_source.js" />
     <Content Include="Scripts\ckeditor\config.js" />

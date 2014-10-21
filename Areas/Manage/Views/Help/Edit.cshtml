@@ -34,7 +34,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">內容</label>
             <div class="col-sm-4">
-                <textarea id="message" name="message" class="form-control required" maxlength="200" placeholder="請輸入內容" required></textarea>
+                <textarea id="content" name="content" class="form-control required" maxlength="200" placeholder="請輸入內容" required></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -67,33 +67,6 @@
 
     <hr />
 
-    <div class="page-header">
-        <h2>留言</h2>
-    </div>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th></th>
-                <th>序號</th>
-                <th>日期</th>
-                <th>內容</th>
-                <th>發佈者</th>
-            </tr>
-        </thead>
-        <tbody data-bind="foreach: $root.history">
-            <tr>
-                <td><a href='#' data-bind="click: $root.removeMessage">移除</a></td>
-                <td><span data-bind="text: Id"></span></td>
-                <td><span data-bind="text: Date"></span></td>
-                <td><span data-bind="text: Message"></span></td>
-                <td><span data-bind="text: Account"></span></td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr><td data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></td></tr>
-        </tfoot>
-    </table>
-    <!--pagination-->
-    @Html.Partial("_Pagination")
-    <!--pagination-->
+    @Html.Partial("_Message")
+
 </div>

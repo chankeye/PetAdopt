@@ -94,7 +94,7 @@ $(function () {
                         this.selected = true;
                     }
                 });
-                $("#message").val(data.ReturnObject.Message);
+                $("#content").val(data.ReturnObject.Message);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Manage/Knowledge';
@@ -128,16 +128,12 @@ $(function () {
                 data: {
                     id: window.id,
                     Title: $("#title").val(),
-                    Message: $("#message").val(),
+                    Message: $("#content").val(),
                     ClassId: $("#selOptionsClasses").val()
                 },
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        $("#title").val('');
-                        $("#message").val(''),
-                        $("#selOptionsClasses option:first").attr("selected", true);
-
                         alert("修改完成");
                         window.location = '/Manage/Knowledge';
                     } else {

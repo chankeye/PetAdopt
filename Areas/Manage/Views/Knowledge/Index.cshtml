@@ -24,7 +24,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">內容</label>
             <div class="col-sm-4">
-                <textarea id="message" name="message" class="form-control required" maxlength="500" placeholder="請輸入內容" required></textarea>
+                <textarea id="content" name="content" class="form-control required" maxlength="500" placeholder="請輸入內容" required></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -47,13 +47,7 @@
     <div class="page-header">
         <h2>知識文章列表</h2>
     </div>
-    <div>
-        <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
-        <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>
-        <br />
-        <input id="checkAll" name="checkAll" type="checkbox" />
-        <label for="checkAll">完全比對</label>
-    </div>
+    @Html.Partial("_Search")
     <table class="table table-hover">
         <thead>
             <tr>

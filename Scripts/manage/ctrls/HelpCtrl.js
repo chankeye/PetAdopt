@@ -113,7 +113,7 @@ $(function () {
                 data: {
                     Photo: photo,
                     Title: $("#title").val(),
-                    Message: $("#message").val(),
+                    Message: $("#content").val(),
                     Address: $("#address").val(),
                     ClassId: $("#selOptionsClasses").val(),
                     AreaId: $("#selOptionsAreas").val()
@@ -124,7 +124,7 @@ $(function () {
                         //window.vm.history.push(data.ReturnObject);
                         window.vm.loadHistory();
                         $("#title").val('');
-                        $("#message").val(''),
+                        $("#content").val(''),
                         $("#address").val('');
                         $("#selOptionsClasses option:first").attr("selected", true);
                         $("#selOptionsAreas option:first").attr("selected", true);

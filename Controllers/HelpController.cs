@@ -70,6 +70,13 @@ namespace PetAdopt.Controllers
             return Json(result);
         }
 
+        public ActionResult AddMessage(int id, string message)
+        {
+            var result = HelpLogic.AddMessage(id, message);
+
+            return Json(result);
+        }
+
         /*public ActionResult Delete(int id)
         {
             var result = _helpLogic.DeleteHelp(Server.MapPath("~/Content/uploads"), id);

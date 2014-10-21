@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using PetAdopt.DTO;
+﻿using PetAdopt.DTO;
 using PetAdopt.DTO.User;
 using PetAdopt.Models;
 using PetAdopt.Utilities;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 

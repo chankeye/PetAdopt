@@ -563,5 +563,48 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
+
+        /// <summary>
+        /// 留言
+        /// </summary>
+        /// <param name="id">Animal.Id</param>
+        /// <param name="message">留言內容</param>
+        /// <returns></returns>
+        public IsSuccessResult AddMessage(int id, string message)
+        {
+            var log = GetLogger();
+            log.Debug("id: {0}, message: {1}", id, message);
+
+            if (string.IsNullOrWhiteSpace(message))
+                return new IsSuccessResult("請輸入留言");
+            message = message.Trim();
+
+            var animal = PetContext.Animals.SingleOrDefault(r => r.Id == id);
+            if (animal == null)
+                return new IsSuccessResult("找不到此待認養動物，暫時無法留言");
+
+            try
+            {
+                animal.Messages.Add(new Message
+                {
+                    Message1 = message,
+                    OperationInfo = new OperationInfo
+                    {
+                        Date = DateTime.Now,
+                        UserId = GetOperationInfo().UserId
+                    }
+                });
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
+            }
+        }
     }
 }

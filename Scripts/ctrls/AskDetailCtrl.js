@@ -59,7 +59,7 @@ $(function () {
             if (data.IsSuccess) {
                 $("#title").text(data.ReturnObject.Title);
                 $("#selOptionsClasses").text(data.ReturnObject.Class);
-                $("#message").html(data.ReturnObject.Message);
+                $("#content").html(data.ReturnObject.Message);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Ask';
@@ -70,6 +70,38 @@ $(function () {
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
+
+    // 新增留言
+    $("#btn1").click(
+        function () {
+            var $btn = $("#btn1");
+
+            if ($("#commentForm").valid() == false) {
+                return;
+            }
+
+            $btn.button("loading");
+
+            $.ajax({
+                type: 'post',
+                url: '/Ask/AddMessage',
+                data: {
+                    Id: window.id,
+                    Message: $("#message").val()
+                },
+                success: function (data) {
+                    $btn.button("reset");
+                    if (data.IsSuccess) {
+                        window.vm.loadHistory();
+                        $("#message").val('');
+
+                        alert("已新增留言");
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        });
 
     // 返回
     $("#btn2").click(

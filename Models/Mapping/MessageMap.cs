@@ -13,7 +13,7 @@ namespace PetAdopt.Models.Mapping
             // Properties
             this.Property(t => t.Message1)
                 .IsRequired()
-                .HasMaxLength(10);
+                .HasMaxLength(100);
 
             // Table & Column Mappings
             this.ToTable("Message");

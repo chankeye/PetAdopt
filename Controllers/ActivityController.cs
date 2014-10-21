@@ -71,6 +71,13 @@ namespace PetAdopt.Controllers
             return Json(result);
         }
 
+        public ActionResult AddMessage(int id, string message)
+        {
+            var result = ActivityLogic.AddMessage(id, message);
+
+            return Json(result);
+        }
+
         /*public ActionResult Delete(int id)
         {
             var result = _activityLogic.DeleteActivity(Server.MapPath("~/Content/uploads"), id);

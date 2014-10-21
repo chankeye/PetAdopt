@@ -750,6 +750,7 @@
     <Compile Include="Models\Mapping\PictureMap.cs" />
     <Compile Include="Models\Mapping\ShelterMap.cs" />
     <Compile Include="Models\Mapping\StatusMap.cs" />
+    <Compile Include="Models\Mapping\sysdiagramMap.cs" />
     <Compile Include="Models\Mapping\UserMap.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\News.cs" />
@@ -758,6 +759,7 @@
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Shelter.cs" />
     <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Constant.cs" />
@@ -825,6 +827,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />
+    <Folder Include="Enum\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

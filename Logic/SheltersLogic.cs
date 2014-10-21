@@ -540,5 +540,24 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
+
+        public List<Suggestion> GetSheltersSuggestion(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return new List<Suggestion>();
+            query = query.Trim();
+
+            var sheltersList = PetContext.Shelters
+                .Where(r => r.Name.Contains(query))
+                .Take(10)
+                .Select(r => new Suggestion
+                {
+                    Display = r.Name,
+                    Value = r.Id.ToString()
+                })
+                .ToList();
+
+            return sheltersList;
+        }
     }
 }

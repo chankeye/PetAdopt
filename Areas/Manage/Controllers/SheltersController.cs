@@ -1,4 +1,6 @@
-﻿using PetAdopt.Controllers;
+﻿using System.Collections.Generic;
+using System.Linq;
+using PetAdopt.Controllers;
 using PetAdopt.DTO.Shelters;
 using PetAdopt.Logic;
 using System.Web.Mvc;
@@ -81,6 +83,13 @@ namespace PetAdopt.Areas.Manage.Controllers
             var result = SheltersLogic.EditShelters(id, data);
 
             return Json(result);
+        }
+
+        public ActionResult GetSheltersSuggestion(string query)
+        {
+            var result = SheltersLogic.GetSheltersSuggestion(query);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

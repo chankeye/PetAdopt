@@ -96,6 +96,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\typeahead.js-bootstrap.css" />
+    <Content Include="Content\typeahead.js-bootstrap.fixed.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ctrls\AccountKnowledgeCtrl.js" />
     <Content Include="Scripts\ctrls\AccountAskCtrl.js" />
     <Content Include="Scripts\ctrls\AccountHelpCtrl.js" />
@@ -126,6 +130,7 @@
     <Content Include="Scripts\ctrls\SheltersCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersDetailCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersNewCtrl.js" />
+    <Content Include="Scripts\hogan-2.0.0.js" />
     <Content Include="Scripts\manage\ctrls\ActivityCtrl.js" />
     <Content Include="Scripts\manage\ctrls\AnimalEditCtrl.js" />
     <Content Include="Scripts\manage\ctrls\SheltersEditCtrl.js" />
@@ -146,6 +151,8 @@
     <Content Include="Scripts\manage\ctrls\SystemCtrl.js" />
     <Content Include="Scripts\manage\ctrls\AccountChangePasswordCtrl.js" />
     <Content Include="Scripts\manage\ctrls\UserEditCtrl.js" />
+    <Content Include="Scripts\typeahead.js" />
+    <Content Include="Scripts\typeahead.min.js" />
     <Content Include="Scripts\_app.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
@@ -156,10 +163,6 @@
     <Content Include="Scripts\ctrls\AnimalCtrl.js" />
     <Content Include="Scripts\ctrls\AnimalDetailCtrl.js" />
     <Content Include="Scripts\locale\common.js" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Views\Manage\Account\Login.css" />
     <Content Include="Content\mvcfileupload\blueimp\jquery.fileupload-noscript.css" />
     <Content Include="Content\mvcfileupload\blueimp\jquery.fileupload-ui-noscript.css" />
@@ -234,18 +237,10 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Content\_site.css" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Manage\Views\web.config" />
     <Content Include="Areas\Manage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Manage\Views\Home\Index.cshtml" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Manage\Views\Account\ChangePassword.cshtml" />
     <Content Include="Areas\Manage\Views\System\Index.cshtml" />
     <Content Include="Areas\Manage\Views\News\Index.cshtml" />
@@ -708,6 +703,7 @@
     <Compile Include="DTO\News\CreateNews.cs" />
     <Compile Include="DTO\News\NewsList.cs" />
     <Compile Include="DTO\News\NewsMessageList.cs" />
+    <Compile Include="DTO\Suggestion.cs" />
     <Compile Include="DTO\Operation.cs" />
     <Compile Include="DTO\Shelters\GetShelters.cs" />
     <Compile Include="DTO\Shelters\SheltersMessageList.cs" />

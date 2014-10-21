@@ -88,6 +88,22 @@ $(function () {
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
 
+    // 自動完成
+    var timestamp = new Date().getTime();
+    $("#shelters")
+        .typeahead({
+            remote: {
+                url: '/Manage/Shelters/GetSheltersSuggestion',
+                replace: function (url, uriEncodedQuery) {
+                    return url + "?query=" + uriEncodedQuery + "&_=" + timestamp;
+                }
+            },
+            valueKey: 'Value',
+            template: '<p>{{Display}}</p>',
+            engine: Hogan,
+            limit: 10
+        });
+
     // 新增動物
     $("#btn1").click(
         function () {

@@ -1,0 +1,11 @@
+﻿/*.twitter-typeahead {
+    display: block !important;
+}
+
+.twitter-typeahead .tt-hint {
+    display: none;
+}*/
+
+.twitter-typeahead .tt-dropdown-menu {
+    width: 100%;
+}

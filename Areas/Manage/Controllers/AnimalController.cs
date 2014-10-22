@@ -82,5 +82,12 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             return Json(result);
         }
+
+        public ActionResult GetAnimalSuggestion(string title)
+        {
+            var result = AnimalLogic.GetAnimalSuggestion(title);
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

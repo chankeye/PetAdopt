@@ -85,9 +85,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
-        public ActionResult GetSheltersSuggestion(string query)
+        public ActionResult GetSheltersSuggestion(string name)
         {
-            var result = SheltersLogic.GetSheltersSuggestion(query);
+            var result = SheltersLogic.GetSheltersSuggestion(name);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }

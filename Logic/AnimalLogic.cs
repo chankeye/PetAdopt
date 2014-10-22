@@ -606,5 +606,29 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult("發生不明錯誤，請稍候再試");
             }
         }
+
+        /// <summary>
+        /// 取得認養動物的自動完成
+        /// </summary>
+        /// <param name="title">認養文章標題</param>
+        /// <returns></returns>
+        public List<Suggestion> GetAnimalSuggestion(string title)
+        {
+            if (string.IsNullOrWhiteSpace(title))
+                return new List<Suggestion>();
+            title = title.Trim();
+
+            var animalList = PetContext.Animals
+                .Where(r => r.Title.Contains(title))
+                .Take(10)
+                .Select(r => new Suggestion
+                {
+                    Display = r.Title,
+                    Value = r.Id.ToString()
+                })
+                .ToList();
+
+            return animalList;
+        }
     }
 }

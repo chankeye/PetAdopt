@@ -95,7 +95,7 @@ $(function () {
             remote: {
                 url: '/Manage/Shelters/GetSheltersSuggestion',
                 replace: function (url, uriEncodedQuery) {
-                    return url + "?query=" + uriEncodedQuery + "&_=" + timestamp;
+                    return url + "?name=" + uriEncodedQuery + "&_=" + timestamp;
                 }
             },
             valueKey: 'Value',

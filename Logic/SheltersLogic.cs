@@ -541,14 +541,19 @@ namespace PetAdopt.Logic
             }
         }
 
-        public List<Suggestion> GetSheltersSuggestion(string query)
+        /// <summary>
+        /// 取得收容所的自動完成
+        /// </summary>
+        /// <param name="name">收容所名稱</param>
+        /// <returns></returns>
+        public List<Suggestion> GetSheltersSuggestion(string name)
         {
-            if (string.IsNullOrWhiteSpace(query))
+            if (string.IsNullOrWhiteSpace(name))
                 return new List<Suggestion>();
-            query = query.Trim();
+            name = name.Trim();
 
             var sheltersList = PetContext.Shelters
-                .Where(r => r.Name.Contains(query))
+                .Where(r => r.Name.Contains(name))
                 .Take(10)
                 .Select(r => new Suggestion
                 {

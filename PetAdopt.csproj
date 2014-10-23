@@ -98,7 +98,7 @@
   <ItemGroup>
     <Content Include="Content\typeahead.js-bootstrap.css" />
     <Content Include="Content\typeahead.js-bootstrap.fixed.css" />
-    <Content Include="Content\Views\Index\carousel.css" />
+    <Content Include="Content\carousel.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ctrls\AccountKnowledgeCtrl.js" />
@@ -828,6 +828,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />
+    <Folder Include="Content\Views\Index\" />
     <Folder Include="Enum\" />
   </ItemGroup>
   <PropertyGroup>

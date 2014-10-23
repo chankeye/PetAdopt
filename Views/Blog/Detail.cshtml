@@ -6,44 +6,46 @@
 {
     <script src="../../Scripts/ctrls/BlogDetailCtrl.js"></script>
 }
-<div class="page-header">
-    <h2>@ViewBag.Title</h2>
-</div>
-<div>
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">標題</label>
-            <div class="col-sm-4">
-                <label id="title" name="title"></label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">內容</label>
-            <div class="col-sm-4">
-                <label id="content" name="content"></label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">分類</label>
-            <div class="col-sm-4">
-                <label id="selOptionsClasses" name="selOptionsClasses"></label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">動物編號</label>
-            <div class="col-sm-4">
-                <a href="#" id="animalId" name="animalId"></a>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button id="btn2" type="button" class="btn btn-primary">返回</button>
-            </div>
-        </div>
+<div class="container">
+    <div class="page-header">
+        <h2>@ViewBag.Title</h2>
     </div>
+    <div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">標題</label>
+                <div class="col-sm-4">
+                    <label id="title" name="title"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">內容</label>
+                <div class="col-sm-4">
+                    <label id="content" name="content"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">分類</label>
+                <div class="col-sm-4">
+                    <label id="selOptionsClasses" name="selOptionsClasses"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">動物編號</label>
+                <div class="col-sm-4">
+                    <a href="#" id="animalId" name="animalId"></a>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button id="btn2" type="button" class="btn btn-primary">返回</button>
+                </div>
+            </div>
+        </div>
 
-    <hr />
+        <hr />
 
-    @Html.Partial("_Message")
+        @Html.Partial("_Message")
 
+    </div>
 </div>

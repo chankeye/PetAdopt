@@ -6,40 +6,42 @@
 {
     <script src="../../Scripts/ctrls/KnowledgeNewCtrl.js"></script>
 }
-<div class="page-header">
-    <h2>@ViewBag.Title</h2>
-</div>
-<div>
-    <form id="commentForm" class="form-horizontal" method="POST" name="form1">
-        <legend class="text-info">
-            <i class="fa fa-check"></i>
-            必填欄位
-        </legend>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">標題</label>
-            <div class="col-sm-4">
-                <input id="title" name="title" class="form-control required" maxlength="50" placeholder="請輸入標題" required autofocus />
+<div class="container">
+    <div class="page-header">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div>
+        <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+            <legend class="text-info">
+                <i class="fa fa-check"></i>
+                必填欄位
+            </legend>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">標題</label>
+                <div class="col-sm-4">
+                    <input id="title" name="title" class="form-control required" maxlength="50" placeholder="請輸入標題" required autofocus />
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">內容</label>
-            <div class="col-sm-4">
-                <textarea id="message" name="message" class="form-control required" maxlength="500" placeholder="請輸入內容" required></textarea>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">內容</label>
+                <div class="col-sm-4">
+                    <textarea id="message" name="message" class="form-control required" maxlength="500" placeholder="請輸入內容" required></textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">分類</label>
-            <div class="col-sm-4">
-                <select id="selOptionsClasses" class="form-control required"
-                        data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">分類</label>
+                <div class="col-sm-4">
+                    <select id="selOptionsClasses" class="form-control required"
+                            data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
-                <button id="btn2" type="reset" class="btn btn-danger">清除</button>
-                <a href="/Knowledge" class="btn btn-default">返回</a>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
+                    <button id="btn2" type="reset" class="btn btn-danger">清除</button>
+                    <a href="/Knowledge" class="btn btn-default">返回</a>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>

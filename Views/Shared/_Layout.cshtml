@@ -47,31 +47,32 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">愛認養</a>
+                        <a class="navbar-brand" href="/">艾認養</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="/Animal">帶我回家</a></li>
-                            <li><a href="/Shelters">收容所</a></li>
-                            <li><a href="/Activity">最新活動</a></li>
-                            <li><a href="/News">最新消息</a></li>
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown">看更多 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/Blog">他與它的故事</a></li>
-                                    <li><a href="/Help">即刻救援</a></li>
-                                    <li><a href="/Ask">我有問題</a></li>
-                                    <li><a href="/Knowledge">增廣見聞</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="/News" title="最新消息">最新消息</a></li>
+                            <li><a href="/Activity" title="最新活動">最新活動</a></li>
+                            <li><a href="/Animal" title="待認養動物">帶它回家</a></li>
+                            <li><a href="/Shelters" title="全台收容所資訊">收容所</a></li>
+                            <li><a href="/Help" title="需要你立即前往救援的動物們">即刻救援</a></li>
+                            <li><a href="/Blog" title="部落格文章">它與他的故事</a></li>
+                            <li><a href="/Ask" title="問與答">我有問題</a></li>
+                            <li><a href="/Knowledge" title="相關知識">增廣見聞</a></li>
+                            @*<li class="dropdown">
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">看更多 <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+
+                                    </ul>
+                                </li>*@
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">哈囉!! @User.Identity.Name 您好 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Account/ChangePassword">變更密碼</a></li>
-                                    <li><a href="/Account/Index">會員管理</a></li>
-                                    <li><a href="/Account/SignOut" target="_self">登出</a></li>
+                                    <li><a href="/Account/ChangePassword" title="變更密碼">變更密碼</a></li>
+                                    <li><a href="/Account" title="會員中心">會員中心</a></li>
+                                    <li><a href="/Account/SignOut" title="登出" target="_self">登出</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -80,7 +81,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Carousel
     ================================================== -->
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -125,7 +126,6 @@
         <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
         <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
     </div><!-- /.carousel -->
-
     @* container *@
     <div>
         @RenderBody()
@@ -134,7 +134,7 @@
     </div>
     <hr>
     <footer class="container">
-        <p>&copy; LoveAdopt 2014</p>
+        <p>&copy; LoveAdopt 2014 認養代替購買，就從"艾認養"開始…</p>
     </footer>
 </body>
 </html>

@@ -1,11 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "艾認養";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-@section style
-{
-    <style id="holderjs-style" type="text/css"></style>
 }
 
 <!-- Marketing messaging and featurettes
@@ -18,21 +13,21 @@
     <div class="row">
         <div class="col-lg-4">
             <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+            <h2>最新消息</h2>
+            <p>全台各地動物認養的相關消息</p>
+            <p><a class="btn btn-default" href="/News" role="button">詳細資訊 »</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-            <h2>Heading</h2>
-            <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+            <h2>最新活動</h2>
+            <p>全台各地舉行的動物認養活動資訊</p>
+            <p><a class="btn btn-default" href="/Activity" role="button">詳細資訊 »</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
-            <h2>Heading</h2>
-            <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-            <p><a class="btn btn-default" href="#" role="button">View details »</a></p>
+            <h2>請帶我回家</h2>
+            <p>它，需要一個家，正在等待著有緣的人</p>
+            <p><a class="btn btn-default" href="/Animal" role="button">帶它回家 »</a></p>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
     <!-- START THE FEATURETTES -->
@@ -41,8 +36,13 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <h2 class="featurette-heading">使用方法</h2>
+            <p class="lead">
+                在"艾認養"，你可以查詢到全台的收容所資訊、待認養的動物，全台灣的認養活動、消息…
+                不只是一個可以找到資訊的平台，更希望大家可以多多分享資訊，幫助更多的流浪動物找到自己的家。
+                舉凡動物相關的訊息、知識、文章，想認養動物，有動物等待認養，有動物等待求救，
+                都歡迎利用"艾認養"，將您的資訊讓全台灣的人知道。
+            </p>
         </div>
         <div class="col-md-5">
             <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4=">
@@ -56,8 +56,12 @@
             <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4=">
         </div>
         <div class="col-md-7">
-            <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <h2 class="featurette-heading">關於艾認養</h2><h4><span class="text-muted">認養待替購買…從這裡開始…</span></h4>
+            <p class="lead">
+                汪星人…憨厚忠心，是人類最好的朋友。喵星人…雖然高傲，卻傻得很可愛。兔星人…不擅長表達言語，但你對它的好，它都懂。
+                在台灣有許多的流浪動物，它們沒有品種，看起來好像髒髒的…但是它們其實很可愛，一樣有著一顆善良的心，可愛的笑容，
+                正在等待著一個能給它幸福的人…而不是剩下12天的餘命…
+            </p>
         </div>
     </div>
 
@@ -65,8 +69,14 @@
 
     <div class="row featurette">
         <div class="col-md-7">
-            <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-            <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            <h2 class="featurette-heading">作者</h2><h4><span class="text-muted">Elliott Chen</span></h4>
+            <p class="lead">
+                從小喜歡汪星人，但從來沒有養過狗狗，家裡有一隻高傲的高齡兔星人，現年7歲，總是以為世界以它為中心、卻高傲的惹人愛。
+                還有一隻認養了來的喵星人，十分平凡的米克斯，但卻十分黏人，你給它滿滿的愛，它也會用一生回報你。
+                一直希望可以為流浪動物做點什麼，但是既沒有錢…還要為活下去努力。因此盡自己最大的能力，
+                發揮自己的專長，不為別人，只希望因為"艾認養"這個網站，世界上可以多一、兩隻流浪動物獲得幸福，
+                那"艾認養"的出現，就是有價值的。
+            </p>
         </div>
         <div class="col-md-5">
             <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="500x500" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSIvPjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4=">
@@ -76,5 +86,5 @@
     <hr class="featurette-divider">
 
     <!-- /END THE FEATURETTES -->
-    
+
 </div><!-- /.container -->

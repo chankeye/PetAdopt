@@ -1,5 +1,4 @@
 ﻿@{
-    ViewBag.Title = "問題詳細";
     Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
@@ -8,38 +7,33 @@
 }
 <div class="container">
     <div class="page-header">
-        <h2>@ViewBag.Title</h2>
+        <h2>問與答詳細資訊</h2>
     </div>
-    <div>
-        <div class="form-horizontal">
-            <div class="form-group">
-                <label class="col-sm-2 control-label">標題</label>
-                <div class="col-sm-4">
-                    <label id="title" name="title"></label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">內容</label>
-                <div class="col-sm-4">
-                    <label id="content" name="content"></label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">分類</label>
-                <div class="col-sm-4">
-                    <label id="selOptionsClasses" name="selOptionsClasses"></label>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button id="btn2" type="button" class="btn btn-primary">返回</button>
-                </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">標題</label>
+            <div class="col-sm-4">
+                <label id="title" name="title"></label>
             </div>
         </div>
-
-        <hr />
-
-        @Html.Partial("_Message")
-
+        <div class="form-group">
+            <label class="col-sm-2 control-label">內容</label>
+            <div class="col-sm-4">
+                <label id="content" name="content"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">分類</label>
+            <div class="col-sm-4">
+                <label id="selOptionsClasses" name="selOptionsClasses"></label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="btn2" type="button" class="btn btn-primary">返回</button>
+            </div>
+        </div>
     </div>
+    <hr />
+    @Html.Partial("_Message")
 </div>

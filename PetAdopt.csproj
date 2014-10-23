@@ -645,6 +645,7 @@
     <Content Include="Scripts\mvcfileupload\vendor\bootstrap.min.js" />
     <Content Include="Scripts\mvcfileupload\vendor\jquery.ui.widget.js" />
     <Content Include="Scripts\_site.js" />
+    <Content Include="Views\Shared\_MvcFileUpload.cshtml" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -779,7 +780,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_MvcFileUploaderLayout_jui.cshtml" />
     <Content Include="Views\Shared\_MvcFileUploaderLayout.cshtml" />
-    <Content Include="Views\Shared\_MvcFileUpload.cshtml" />
     <Content Include="Views\MvcUploaderTest\Demo.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
@@ -828,7 +828,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />
-    <Folder Include="Content\Views\Index\" />
     <Folder Include="Enum\" />
   </ItemGroup>
   <PropertyGroup>

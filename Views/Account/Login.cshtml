@@ -10,8 +10,7 @@
     <title>會員登入</title>
 
     @* load css *@
-    <link href="../../Content/bootstrap.css" rel="stylesheet" />
-    <link href="../../Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="../../Content/mvcfileupload/vendor/bootstrap.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -22,8 +21,8 @@
                 <span>會員登入</span>
                 <small>登入</small>
             </h2>
-            <input type="text" class="form-control" placeholder="請輸入帳號" autofocus name="account" required />
-            <input type="password" class="form-control" placeholder="請輸入密碼" name="password" required />
+            <input type="text" class="form-control" minlength="6" placeholder="請輸入帳號" autofocus name="account" required />
+            <input type="password" class="form-control" minlength="6" placeholder="請輸入密碼" name="password" required />
             <button class="btn btn-lg btn-primary btn-block">登入</button>
             <div class="text-danger">
                 @Html.ValidationSummary()

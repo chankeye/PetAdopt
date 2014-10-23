@@ -1,5 +1,4 @@
 ﻿@{
-    ViewBag.Title = "新增部落格文章";
     Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
@@ -8,51 +7,49 @@
 }
 <div class="container">
     <div class="page-header">
-        <h2>@ViewBag.Title</h2>
+        <h2>發表故事</h2>
     </div>
-    <div>
-        <form id="commentForm" class="form-horizontal" method="POST" name="form1">
-            <legend class="text-info">
-                <i class="fa fa-check"></i>
-                必填欄位
-            </legend>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">標題</label>
-                <div class="col-sm-4">
-                    <input id="title" name="title" class="form-control required" maxlength="50" placeholder="請輸入標題" required autofocus />
-                </div>
+    <form id="commentForm" class="form-horizontal" method="POST" name="form1">
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            必填欄位
+        </legend>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">標題</label>
+            <div class="col-sm-4">
+                <input id="title" name="title" class="form-control required" maxlength="50" placeholder="請輸入標題" required autofocus />
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">內容</label>
-                <div class="col-sm-4">
-                    <textarea id="content" name="content" class="form-control ckeditor"></textarea>
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">內容</label>
+            <div class="col-sm-4">
+                <textarea id="content" name="content" class="form-control ckeditor"></textarea>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">分類</label>
-                <div class="col-sm-4">
-                    <select id="selOptionsClasses" class="form-control required"
-                            data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">分類</label>
+            <div class="col-sm-4">
+                <select id="selOptionsClasses" class="form-control required"
+                        data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
             </div>
-            <legend class="text-info">
-                <i class="fa fa-check"></i>
-                選填欄位
-            </legend>
-            <div class="form-group">
-                <label class="col-sm-2 control-label">動物編號</label>
-                <div class="col-sm-4">
-                    <input id="animalId" name="animalId" class="form-control" placeholder="請輸入動物編號 或 輸入認養動物標題進行查詢" />
-                </div>
-                (如與本站送養動物有關，建議填入編號，進行連結)
+        </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">動物編號</label>
+            <div class="col-sm-4">
+                <input id="animalId" name="animalId" class="form-control" placeholder="請輸入動物編號 或 輸入認養動物標題進行查詢" />
             </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
-                    <button id="btn2" type="reset" class="btn btn-danger">清除</button>
-                    <a href="/Blog" class="btn btn-default">返回</a>
-                </div>
+            (如與本站送養動物有關，建議填入編號，進行連結)
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">新增</button>
+                <button id="btn2" type="reset" class="btn btn-danger">清除</button>
+                <a href="/Blog" class="btn btn-default">返回</a>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>

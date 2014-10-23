@@ -1,5 +1,4 @@
 ﻿@{
-    ViewBag.Title = "最新活動";
     Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
@@ -7,12 +6,14 @@
     <script src="../../Scripts/ctrls/ActivityCtrl.js"></script>
 }
 <div class="container">
-    <div class="page-header">
-        <h2>@ViewBag.Title</h2>
-    </div>
     <div>
         <a href="/Activity/New" class="btn btn-primary">發佈新活動</a>
         @Html.Partial("_Search")
+    </div>
+    <div class="page-header">
+        <h2>最新活動</h2>
+    </div>
+    <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>

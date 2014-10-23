@@ -79,3 +79,12 @@ C:\Users\Chankeye Chen\Documents\GitHub\PetAdopt\bin\PetAdopt.pdb
 C:\Users\Chankeye Chen\Documents\GitHub\PetAdopt\bin\MvcFileUploader.dll
 C:\Users\Chankeye Chen\Documents\GitHub\PetAdopt\bin\MvcFileUploader.pdb
 C:\Users\Chankeye Chen\Documents\GitHub\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
+D:\Projects\PetAdopt\bin\NLog.config
+D:\Projects\PetAdopt\bin\PetAdopt.dll.config
+D:\Projects\PetAdopt\bin\PetAdopt.dll
+D:\Projects\PetAdopt\bin\PetAdopt.pdb
+D:\Projects\PetAdopt\bin\MvcFileUploader.dll
+D:\Projects\PetAdopt\bin\MvcFileUploader.pdb
+D:\Projects\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
+D:\Projects\PetAdopt\obj\Debug\PetAdopt.dll
+D:\Projects\PetAdopt\obj\Debug\PetAdopt.pdb

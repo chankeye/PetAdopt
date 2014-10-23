@@ -1,19 +1,19 @@
 ﻿@{
-    ViewBag.Title = "我有問題";
     Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
 {
     <script src="../../Scripts/ctrls/AskCtrl.js"></script>
 }
-
 <div class="container">
-    <div class="page-header">
-        <h2>@ViewBag.Title</h2>
-    </div>
     <div>
-        <a href="/Ask/New" class="btn btn-primary">發問</a>
+        <a href="/Ask/New" class="btn btn-primary">我要發問</a>
         @Html.Partial("_Search")
+    </div>
+    <div class="page-header">
+        <h2>我有問題</h2>
+    </div>
+    <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>

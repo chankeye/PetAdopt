@@ -1,5 +1,4 @@
 ﻿@{
-    ViewBag.Title = "增廣見聞";
     Layout = "../Shared/_Layout.cshtml";
 }
 @section Scripts
@@ -7,12 +6,14 @@
     <script src="../../Scripts/ctrls/KnowledgeCtrl.js"></script>
 }
 <div class="container">
-    <div class="page-header">
-        <h2>@ViewBag.Title</h2>
-    </div>
     <div>
-        <a href="/Knowledge/New" class="btn btn-primary">發表知識文章</a>
+        <a href="/Knowledge/New" class="btn btn-primary">新知識</a>
         @Html.Partial("_Search")
+    </div>
+    <div class="page-header">
+        <h2>增廣見聞</h2>
+    </div>
+    <div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>

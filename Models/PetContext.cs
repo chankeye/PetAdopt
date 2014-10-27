@@ -35,7 +35,6 @@ namespace PetAdopt.Models
         public DbSet<Picture> Pictures { get; set; }
         public DbSet<Shelter> Shelters { get; set; }
         public DbSet<Status> Status { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -54,7 +53,6 @@ namespace PetAdopt.Models
             modelBuilder.Configurations.Add(new PictureMap());
             modelBuilder.Configurations.Add(new ShelterMap());
             modelBuilder.Configurations.Add(new StatusMap());
-            modelBuilder.Configurations.Add(new sysdiagramMap());
             modelBuilder.Configurations.Add(new UserMap());
         }
     }

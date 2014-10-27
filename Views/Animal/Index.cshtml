@@ -13,7 +13,7 @@
     <div class="page-header">
         <h2>帶它回家</h2>
     </div>
-    <div class="table-responsive">
+    @*<div class="table-responsive">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -44,5 +44,24 @@
         <!--pagination-->
         @Html.Partial("_Pagination")
         <!--pagination-->
+    </div>*@
+    <div class="row" data-bind="foreach: history">
+        <div class="col-md-7">
+            <a href="#">
+                <div data-bind="if:Photo">
+                    <img alt="封面圖" class="img-responsive" data-bind="attr:{src: '../../Content/uploads/' + Photo}">
+                </div>
+                <div data-bind="ifnot:Photo">
+                    <img alt="封面圖" class="img-responsive" src="../../Content/Images/default.jpg">
+                </div>
+                @*<img class="img-responsive" src="http://placehold.it/700x300" alt="">*@
+            </a>
+        </div>
+        <div class="col-md-5">
+            <h3><a href="#" data-bind="text: Title, click: $root.detail"></a></h3>
+            <h4><label data-bind="text: Date"></label></h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, quo, minima, inventore voluptatum saepe quos nostrum provident ex quisquam hic odio repellendus atque porro distinctio quae id laboriosam facilis dolorum.</p>
+            <a class="btn btn-primary" href="#" data-bind="click: $root.detail">詳細內容 <span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
     </div>
 </div>

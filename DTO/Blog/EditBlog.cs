@@ -1,12 +1,14 @@
 ﻿namespace PetAdopt.DTO.Blog
 {
-    public class CreateBlog
+    public class EditBlog
     {
+        public int Id { get; set; }
+
         public string Title { get; set; }
 
         public string Message { get; set; }
 
-        public string AnimalTitle { get; set; }
+        public int? AnimalId { get; set; }
 
         public short ClassId { get; set; }
     }

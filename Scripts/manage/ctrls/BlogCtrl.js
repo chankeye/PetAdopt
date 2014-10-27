@@ -90,7 +90,7 @@ $(function () {
                     return url + "?title=" + uriEncodedQuery + "&_=" + timestamp;
                 }
             },
-            valueKey: 'Value',
+            valueKey: 'Display',
             template: '<p>{{Display}}</p>',
             engine: Hogan,
             limit: 10
@@ -129,7 +129,7 @@ $(function () {
                 data: {
                     Title: $("#title").val(),
                     Message: oEditor.getData(),
-                    AnimalId: $("#animalId").val(),
+                    AnimalTitle: $("#animalTitle").val(),
                     ClassId: $("#selOptionsClasses").val()
                 },
                 success: function (data) {
@@ -139,7 +139,7 @@ $(function () {
                         window.vm.loadHistory();
                         $("#title").val('');
                         oEditor.setData('');
-                        $("#animalId").val('');
+                        $("#animalTitle").val('');
                         $("#selOptionsClasses option:first").attr("selected", true);
 
                         alert("新增成功");

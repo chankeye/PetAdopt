@@ -345,8 +345,8 @@ namespace PetAdopt.Logic
         public IsSuccessResult<BlogItem> AddBlog(CreateBlog data)
         {
             var log = GetLogger();
-            log.Debug("title: {0}, message:{1}, animalId:{2}, classId:{3}",
-                data.Title, data.Message, data.AnimalId, data.ClassId);
+            log.Debug("title: {0}, message:{1}, animaltitle:{2}, classId:{3}",
+                data.Title, data.Message, data.AnimalTitle, data.ClassId);
 
             if (string.IsNullOrWhiteSpace(data.Title))
                 return new IsSuccessResult<BlogItem>("請輸入標題");
@@ -364,11 +364,16 @@ namespace PetAdopt.Logic
             if (hasClass == false)
                 return new IsSuccessResult<BlogItem>("請選擇正確的分類");
 
-            if (data.AnimalId.HasValue)
+            int? animalId = 0;
+            if (string.IsNullOrWhiteSpace(data.AnimalTitle) == false)
             {
-                var hasAnimal = PetContext.Animals.Any(r => r.Id == data.AnimalId);
-                if (hasAnimal == false)
-                    return new IsSuccessResult<BlogItem>("請輸入正確的動物編號");
+                data.AnimalTitle = data.AnimalTitle.Trim();
+                animalId = PetContext.Animals
+                    .Where(r => r.Title == data.AnimalTitle)
+                    .Select(r => r.Id)
+                    .SingleOrDefault();
+                if (animalId == 0)
+                    return new IsSuccessResult<BlogItem>("請輸入正確的動物文章標題");
             }
 
             try
@@ -377,7 +382,7 @@ namespace PetAdopt.Logic
                 {
                     Title = data.Title,
                     Message = data.Message,
-                    AnimalId = data.AnimalId,
+                    AnimalId = animalId == 0 ? null : animalId,
                     ClassId = data.ClassId,
                     OperationInfo = new OperationInfo
                     {
@@ -408,13 +413,13 @@ namespace PetAdopt.Logic
         /// 修改部落格文章
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult EditBlog(int id, CreateBlog data)
+        public IsSuccessResult EditBlog(EditBlog data)
         {
             var log = GetLogger();
             log.Debug("title: {0}, message:{1}, classId:{2}, animalId:{3}, id:{4}",
-                data.Title, data.Message, data.ClassId, data.AnimalId, id);
+                data.Title, data.Message, data.ClassId, data.AnimalId, data.Id);
 
-            var blog = PetContext.Blogs.SingleOrDefault(r => r.Id == id);
+            var blog = PetContext.Blogs.SingleOrDefault(r => r.Id == data.Id);
             if (blog == null)
                 return new IsSuccessResult("找不到此文章");
 
@@ -426,7 +431,7 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult("請輸入內容");
             data.Message = data.Message.Trim();
 
-            var isAny = PetContext.Blogs.Any(r => r.Title == data.Title && r.Id != id);
+            var isAny = PetContext.Blogs.Any(r => r.Title == data.Title && r.Id != data.Id);
             if (isAny)
                 return new IsSuccessResult(string.Format("已經有 {0} 這篇文章了", data.Title));
 

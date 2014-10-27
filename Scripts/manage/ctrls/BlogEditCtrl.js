@@ -107,6 +107,22 @@ $(function () {
     window.vm.loadHistory();
     ko.applyBindings(window.vm);
 
+    // 自動完成
+    var timestamp = new Date().getTime();
+    $("#animalId")
+        .typeahead({
+            remote: {
+                url: '/Manage/Animal/GetAnimalSuggestion',
+                replace: function (url, uriEncodedQuery) {
+                    return url + "?title=" + uriEncodedQuery + "&_=" + timestamp;
+                }
+            },
+            valueKey: 'Value',
+            template: '<p>{{Display}}</p>',
+            engine: Hogan,
+            limit: 10
+        });
+
     // 修改文章
     $("#btn1").click(
         function () {

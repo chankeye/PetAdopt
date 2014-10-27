@@ -680,6 +680,7 @@
     <Compile Include="DTO\Activity\GetActivity.cs" />
     <Compile Include="DTO\Animal\AnimalList.cs" />
     <Compile Include="DTO\Animal\AnimalMessageList.cs" />
+    <Compile Include="DTO\Animal\EditAnimal.cs" />
     <Compile Include="DTO\Animal\GetAnimal.cs" />
     <Compile Include="DTO\Animal\CreateAnimal.cs" />
     <Compile Include="DTO\Ask\AskMessageList.cs" />
@@ -687,6 +688,7 @@
     <Compile Include="DTO\Ask\GetAsk.cs" />
     <Compile Include="DTO\Ask\CreateAsk.cs" />
     <Compile Include="DTO\Blog\BlogList.cs" />
+    <Compile Include="DTO\Blog\EditBlog.cs" />
     <Compile Include="DTO\Blog\GetBlog.cs" />
     <Compile Include="DTO\Blog\CreateBlog.cs" />
     <Compile Include="DTO\Blog\BlogMessageList.cs" />

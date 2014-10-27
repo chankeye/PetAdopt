@@ -2,8 +2,10 @@
 
 namespace PetAdopt.DTO.Animal
 {
-    public class CreateAnimal
+    public class EditAnimal
     {
+        public int Id { get; set; }
+
         public string Photo { get; set; }
 
         public string Title { get; set; }
@@ -12,7 +14,7 @@ namespace PetAdopt.DTO.Animal
 
         public string Introduction { get; set; }
 
-        public string Shelters { get; set; }
+        public int? SheltersId { get; set; }
 
         public short ClassId { get; set; }
 

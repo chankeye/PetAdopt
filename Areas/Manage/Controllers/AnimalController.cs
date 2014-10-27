@@ -76,9 +76,9 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
-        public ActionResult EditAnimal(int id, CreateAnimal data)
+        public ActionResult EditAnimal(EditAnimal data)
         {
-            var result = AnimalLogic.EditAnimal(id, data);
+            var result = AnimalLogic.EditAnimal(data);
 
             return Json(result);
         }

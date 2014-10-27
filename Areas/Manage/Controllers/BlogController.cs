@@ -78,9 +78,9 @@ namespace PetAdopt.Areas.Manage.Controllers
         }
 
         [ValidateInput(false)]
-        public ActionResult EditBlog(int id, CreateBlog data)
+        public ActionResult EditBlog(EditBlog data)
         {
-            var result = BlogLogic.EditBlog(id, data);
+            var result = BlogLogic.EditBlog(data);
 
             return Json(result);
         }

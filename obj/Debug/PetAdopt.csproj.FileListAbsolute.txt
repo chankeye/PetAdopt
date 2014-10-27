@@ -85,6 +85,5 @@ D:\Projects\PetAdopt\bin\PetAdopt.dll
 D:\Projects\PetAdopt\bin\PetAdopt.pdb
 D:\Projects\PetAdopt\bin\MvcFileUploader.dll
 D:\Projects\PetAdopt\bin\MvcFileUploader.pdb
-D:\Projects\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
 D:\Projects\PetAdopt\obj\Debug\PetAdopt.dll
 D:\Projects\PetAdopt\obj\Debug\PetAdopt.pdb

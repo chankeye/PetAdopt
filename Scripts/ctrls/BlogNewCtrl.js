@@ -24,7 +24,7 @@ $(function () {
                     return url + "?title=" + uriEncodedQuery + "&_=" + timestamp;
                 }
             },
-            valueKey: 'Value',
+            valueKey: 'Display',
             template: '<p>{{Display}}</p>',
             engine: Hogan,
             limit: 10
@@ -63,7 +63,7 @@ $(function () {
                 data: {
                     Title: $("#title").val(),
                     Message: oEditor.getData(),
-                    AnimalId: $("#animalId").val(),
+                    AnimalTitle: $("#animalTitle").val(),
                     ClassId: $("#selOptionsClasses").val()
                 },
                 success: function (data) {

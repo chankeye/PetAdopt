@@ -98,7 +98,7 @@ $(function () {
                     return url + "?name=" + uriEncodedQuery + "&_=" + timestamp;
                 }
             },
-            valueKey: 'Value',
+            valueKey: 'Display',
             template: '<p>{{Display}}</p>',
             engine: Hogan,
             limit: 10
@@ -143,7 +143,7 @@ $(function () {
                     StartDate: $("#startDate").val(),
                     EndDate: $("#endDate").val(),
                     Introduction: $("#introduction").val(),
-                    SheltersId: $("#shelters").val(),
+                    Shelters: $("#shelters").val(),
                     Phone: $("#phone").val(),
                     Address: $("#address").val(),
                     AreaId: $("#selOptionsAreas").val(),

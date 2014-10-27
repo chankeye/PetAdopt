@@ -1,4 +1,14 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+
+    var isLogin = false;
+    if (authCookie != null)
+    {
+        isLogin = true;
+    }
+}
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -11,9 +21,11 @@
 
     @* load css *@
     <link href="../../Content/mvcfileupload/vendor/bootstrap.min.css" rel="stylesheet" />
+    <link href="../../Content/font-awesome.css" rel="stylesheet" />
+    <link href="../../Content/typeahead.js-bootstrap.css" rel="stylesheet" />
+    <link href="../../Content/typeahead.js-bootstrap.fixed.css" rel="stylesheet" />
     <link href="../../Content/carousel.css" rel="stylesheet">
     <link href="../../Content/_site.css" rel="stylesheet" />
-    <link href="../../Content/font-awesome.css" rel="stylesheet" />
 
     @RenderSection("style", false)
 
@@ -23,9 +35,11 @@
     <script src="../../Scripts/jquery.validate.js"></script>
     <script src="../../Scripts/knockout-3.1.0.debug.js"></script>
     <script src="../../Scripts/mvcfileupload/vendor/bootstrap.min.js"></script>
+    <script src="../../Scripts/typeahead.js"></script>
     <script src="../../Scripts/ckeditor/ckeditor.js"></script>
     <script src="../../Scripts/ctrls/pagination.js"></script>
     <script src="../../Scripts/locale/common.js"></script>
+    <script src="../../Scripts/hogan-2.0.0.js"></script>
     <script src="//www.google.com/jsapi"></script>
 
     <script src="../../Scripts/_app.js"></script>
@@ -60,14 +74,23 @@
                             <li><a href="/Knowledge" title="相關知識">增廣見聞</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown">哈囉!! @User.Identity.Name 您好 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="/Account/ChangePassword" title="變更密碼">變更密碼</a></li>
-                                    <li><a href="/Account" title="會員中心">會員中心</a></li>
-                                    <li><a href="/Account/SignOut" title="登出" target="_self">登出</a></li>
-                                </ul>
-                            </li>
+                            @if (isLogin)
+                            {
+                                <li class="dropdown">
+
+                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">哈囉!! @User.Identity.Name 您好 <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/Account/ChangePassword" title="變更密碼">變更密碼</a></li>
+                                        <li><a href="/Account" title="會員中心">會員中心</a></li>
+                                        <li><a href="/Account/SignOut" title="登出" target="_self">登出</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li><a href="/Register" title="註冊會員">註冊會員</a></li>
+                                <li><a href="/Account/Login" title="登入">登入</a></li>
+                            }
                         </ul>
                     </div>
                 </div>

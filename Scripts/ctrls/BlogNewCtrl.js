@@ -14,6 +14,22 @@ $(function () {
     window.vm = new MyViewModel();
     ko.applyBindings(window.vm);
 
+    // 自動完成
+    var timestamp = new Date().getTime();
+    $("#animalId")
+        .typeahead({
+            remote: {
+                url: '/Manage/Animal/GetAnimalSuggestion',
+                replace: function (url, uriEncodedQuery) {
+                    return url + "?title=" + uriEncodedQuery + "&_=" + timestamp;
+                }
+            },
+            valueKey: 'Value',
+            template: '<p>{{Display}}</p>',
+            engine: Hogan,
+            limit: 10
+        });
+
     // 新增Blog
     $("#btn1").click(
         function () {

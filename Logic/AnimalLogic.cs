@@ -206,6 +206,7 @@ namespace PetAdopt.Logic
                 .Include(r => r.Class)
                 .Include(r => r.Status)
                 .Include(r => r.Area)
+                .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
 
             if (animal == null)
@@ -230,7 +231,9 @@ namespace PetAdopt.Logic
                     Phone = animal.Phone,
                     StartDate = animal.StartDate.ToString("yyyy-MM-dd"),
                     EndDate = animal.EndDate.HasValue ? animal.EndDate.Value.ToString("yyyy-MM-dd") : null,
-                    Age = animal.Age
+                    Age = animal.Age,
+                    Date = animal.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    UserDisplay = animal.OperationInfo.User.Display
                 }
             };
         }

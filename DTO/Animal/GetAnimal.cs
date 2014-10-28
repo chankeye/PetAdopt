@@ -33,5 +33,9 @@
         public string StartDate { get; set; }
 
         public string EndDate { get; set; }
+
+        public string Date { get; set; }
+
+        public string UserDisplay { get; set; }
     }
 }

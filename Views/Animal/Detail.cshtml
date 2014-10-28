@@ -8,21 +8,21 @@
 
 <div class="container">
 
-    <div>
+    <div class="col-sm-offset-2 col-sm-10">
 
         <!-- Blog Post -->
         <!-- Title -->
         <h1><label id="title" name="title"></label></h1>
 
         <!-- Author -->
-        <p class="lead">
-            作者 <a href="#">Start Bootstrap</a>
+        <p>
+            作者 <a href="#"><label id="userDisplay" name="userDisplay"></label></a>
         </p>
 
         <hr>
 
         <!-- Date/Time -->
-        <p><span class="glyphicon glyphicon-time"></span> 發佈時間 August 24, 2013 at 9:00 PM</p>
+        <p><span class="glyphicon glyphicon-time"></span> 發佈時間 <label id="date" name="date"></label></p>
 
         <hr>
 
@@ -63,10 +63,12 @@
             電話：<label id="phone" name="phone"></label>
         </p>
 
+        <button id="btn2" type="button" class="btn btn-default">返回</button>
+
         <hr>
-        
+
     </div>
-    
+
     @Html.Partial("_Message")
 
     @*<div class="form-horizontal">

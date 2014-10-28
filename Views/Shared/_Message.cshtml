@@ -1,33 +1,35 @@
 ﻿<!-- Blog Comments -->
 <!-- Comments Form -->
 
-<div class="well">
-    <h4>留言：</h4>
-    <form role="form" id="commentForm" class="form-horizontal" method="POST" name="form1">
-        <div class="form-group">
-            <textarea id="message" name="message" class="form-control required" rows="3" maxlength="100" required></textarea>
-        </div>
-        <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">留言</button>
-    </form>
-</div>
-
-<hr>
-
-<!-- Posted Comments -->
-<!-- Comment -->
-<div class="media" data-bind="foreach: $root.history">
-    <div class="media-body">
-        <h4 class="media-heading">
-            <label data-bind="text: Account"></label>
-            <small><label data-bind="text: Date"></label></small>
-        </h4>
-        <label data-bind="text: Message"></label>
+<div class="col-sm-offset-2 col-sm-10">
+    <div class="well">
+        <h4>留言：</h4>
+        <form role="form" id="commentForm" class="form-horizontal" method="POST" name="form1">
+            <div class="form-group">
+                <textarea id="message" name="message" class="form-control required" rows="3" maxlength="100" required></textarea>
+            </div>
+            <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">留言</button>
+        </form>
     </div>
-    <br>
+
+    <hr>
+
+    <!-- Posted Comments -->
+    <!-- Comment -->
+    <div class="media" data-bind="foreach: $root.history">
+        <div class="media-body">
+            <h4 class="media-heading">
+                <label data-bind="text: Account"></label>
+                <small><label data-bind="text: Date"></label></small>
+            </h4>
+            <label data-bind="text: Message"></label>
+        </div>
+        <br>
+    </div>
+    <!--pagination-->
+    @Html.Partial("_Pagination")
+    <!--pagination-->
 </div>
-<!--pagination-->
-@Html.Partial("_Pagination")
-<!--pagination-->
 @*<div class="page-header">
         <h2>留言</h2>
     </div>

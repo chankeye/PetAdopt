@@ -72,6 +72,8 @@ $(function () {
                 $("#selOptionsStatuses").text(data.ReturnObject.Status),
                 $("#age").text(data.ReturnObject.Age);
                 $("#address").text(data.ReturnObject.Address);
+                $("#date").text(data.ReturnObject.Date);
+                $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Animal';

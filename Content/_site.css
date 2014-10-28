@@ -86,9 +86,60 @@ ul.ul-padding-vertical-05 {
 }
 /* /分頁 */
 
-/*--------------------------------------------------------*/
-/* 列表縮圖 */
-.list-img {
-    width: 700px;
-    height: 300px;
+/* 列表 */
+.warp {
+    width: 100%;
+    max-width: 990px;
+    margin: 0 auto;
+    padding: 20px 0;
+    background-color:#f5f5f5;
 }
+
+.list-img {
+    width: 400px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+    .list-img img {
+        display: block;
+        width: 100%;
+    }
+
+.list-text {
+    width: 590px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+@media only screen and (min-width:769px) and (max-width:990px) {
+    .list-img {
+        width: 30%;
+    }
+
+    .list-text {
+        width: 70%;
+    }
+}
+
+@media only screen and (min-width:451px) and (max-width:768px) {
+    .list-img {
+        width: 50%;
+    }
+
+    .list-text {
+        width: 50%;
+    }
+}
+
+@media only screen and (min-width:1px) and (max-width:450px) {
+    .list-img {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .list-text {
+        width: 100%;
+    }
+}
+/* 列表 */

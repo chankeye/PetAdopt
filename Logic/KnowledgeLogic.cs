@@ -190,6 +190,7 @@ namespace PetAdopt.Logic
 
             var knowledge = PetContext.Knowledges
                 .Include(r => r.Class)
+                .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
             if (knowledge == null)
                 return new IsSuccessResult<GetKnowledge>("找不到此知識");
@@ -202,6 +203,8 @@ namespace PetAdopt.Logic
                     Message = knowledge.Message,
                     ClassId = knowledge.ClassId,
                     Class = knowledge.Class.Word,
+                    Date = knowledge.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    UserDisplay = knowledge.OperationInfo.User.Display,
                 }
             };
         }

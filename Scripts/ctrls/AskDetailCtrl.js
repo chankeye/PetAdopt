@@ -60,6 +60,8 @@ $(function () {
                 $("#title").text(data.ReturnObject.Title);
                 $("#selOptionsClasses").text(data.ReturnObject.Class);
                 $("#content").html(data.ReturnObject.Message);
+                $("#date").text(data.ReturnObject.Date);
+                $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Ask';

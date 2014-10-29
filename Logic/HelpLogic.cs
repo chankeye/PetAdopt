@@ -219,6 +219,7 @@ namespace PetAdopt.Logic
             var help = PetContext.Helps
                 .Include(r => r.Area)
                 .Include(r => r.Class)
+                .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
             if (help == null)
                 return new IsSuccessResult<GetHelp>("找不到此救援文章");
@@ -234,7 +235,9 @@ namespace PetAdopt.Logic
                     AreaId = help.AreaId,
                     Area = help.Area.Word,
                     ClassId = help.ClassId,
-                    Class = help.Class.Word
+                    Class = help.Class.Word,
+                    Date = help.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    UserDisplay = help.OperationInfo.User.Display
                 }
             };
         }

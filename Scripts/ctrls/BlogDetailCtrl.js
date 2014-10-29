@@ -62,7 +62,9 @@ $(function () {
                 $("#selOptionsClasses").text(data.ReturnObject.Class);
                 $("#content").html(data.ReturnObject.Message);
                 $("#animalId").text(data.ReturnObject.Animal);
-                $("#animalId").attr("href","/Animal/Detail?id=" + data.ReturnObject.AnimalId);
+                $("#date").text(data.ReturnObject.Date);
+                $("#userDisplay").text(data.ReturnObject.UserDisplay);
+                $("#animalId").attr("href", "/Animal/Detail?id=" + data.ReturnObject.AnimalId);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Blog';

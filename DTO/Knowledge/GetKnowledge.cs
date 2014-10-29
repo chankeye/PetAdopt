@@ -9,5 +9,9 @@
         public short ClassId { get; set; }
 
         public string Class { get; set; }
+
+        public string Date { get; set; }
+
+        public string UserDisplay { get; set; }
     }
 }

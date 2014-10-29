@@ -190,6 +190,7 @@ namespace PetAdopt.Logic
 
             var blog = PetContext.Blogs
                 .Include(r => r.Class)
+                .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
             if (blog == null)
                 return new IsSuccessResult<GetBlog>("找不到此文章");
@@ -203,6 +204,8 @@ namespace PetAdopt.Logic
                     ClassId = blog.ClassId,
                     Class = blog.Class.Word,
                     AnimalId = blog.AnimalId,
+                    Date = blog.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    UserDisplay = blog.OperationInfo.User.Display,
                     Animal = blog.AnimalId.HasValue ? blog.Animal.Title : null
                 }
             };

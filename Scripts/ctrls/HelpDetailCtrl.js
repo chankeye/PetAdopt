@@ -56,11 +56,16 @@ $(function () {
         success: function (data) {
             if (data.IsSuccess) {
                 photo = data.ReturnObject.Photo;
+                if (photo != null) {
+                    $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
+                }
                 $("#title").text(data.ReturnObject.Title);
                 $("#selOptionsAreas").text(data.ReturnObject.Area);
                 $("#selOptionsClasses").text(data.ReturnObject.Class);
                 $("#content").html(data.ReturnObject.Message);
                 $("#address").text(data.ReturnObject.Address);
+                $("#date").text(data.ReturnObject.Date);
+                $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Help';

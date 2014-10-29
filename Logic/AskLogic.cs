@@ -185,6 +185,7 @@ namespace PetAdopt.Logic
 
             var ask = PetContext.Asks
                 .Include(r => r.Class)
+                .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
             if (ask == null)
                 return new IsSuccessResult<GetAsk>("找不到此問與答");
@@ -196,7 +197,9 @@ namespace PetAdopt.Logic
                     Title = ask.Title,
                     Message = ask.Message,
                     ClassId = ask.ClassId,
-                    Class = ask.Class.Word
+                    Class = ask.Class.Word,
+                    Date = ask.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    UserDisplay = ask.OperationInfo.User.Display
                 }
             };
         }

@@ -49,6 +49,7 @@ namespace PetAdopt.Logic
                         r.Id,
                         r.Name,
                         r.Area.Word,
+                        r.Introduction,
                         r.OperationInfo
                     });
 
@@ -65,6 +66,7 @@ namespace PetAdopt.Logic
                     {
                         r.Id,
                         r.Name,
+                        r.Introduction,
                         Area = r.Word,
                     })
                     .Skip((page - 1) * take)
@@ -76,6 +78,7 @@ namespace PetAdopt.Logic
                     {
                         Id = r.Id,
                         Name = r.Name,
+                        Introduction = r.Introduction,
                         Area = r.Area
                     })
                     .ToList();
@@ -95,6 +98,7 @@ namespace PetAdopt.Logic
                             r.Id,
                             r.Name,
                             r.Area.Word,
+                            r.Introduction,
                             r.OperationInfo
                         });
 
@@ -111,6 +115,7 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Name,
+                            r.Introduction,
                             Area = r.Word
                         })
                         .Skip((page - 1) * take)
@@ -122,6 +127,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Name = r.Name,
+                            Introduction = r.Introduction,
                             Area = r.Area
                         })
                         .ToList();
@@ -138,6 +144,7 @@ namespace PetAdopt.Logic
                             r.Id,
                             r.Name,
                             r.Area.Word,
+                            r.Introduction,
                             r.OperationInfo
                         });
 
@@ -154,6 +161,7 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Name,
+                            r.Introduction,
                             Area = r.Word
                         })
                         .Skip((page - 1) * take)
@@ -165,6 +173,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Name = r.Name,
+                            Introduction = r.Introduction,
                             Area = r.Area
                         })
                         .ToList();

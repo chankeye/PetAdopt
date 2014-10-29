@@ -49,6 +49,8 @@ namespace PetAdopt.Logic
                         r.Id,
                         r.CoverPhoto,
                         r.Title,
+                        r.Message,
+                        r.Area.Word,
                         r.OperationInfo
                     });
 
@@ -66,6 +68,8 @@ namespace PetAdopt.Logic
                         r.Id,
                         r.CoverPhoto,
                         r.Title,
+                        r.Message,
+                        r.Word,
                         r.OperationInfo.Date
                     })
                     .Skip((page - 1) * take)
@@ -78,6 +82,8 @@ namespace PetAdopt.Logic
                         Id = r.Id,
                         Photo = r.CoverPhoto,
                         Title = r.Title,
+                        Message = r.Message,
+                        Area = r.Word,
                         Date = r.Date.ToString("yyyy/MM/dd")
                     })
                     .ToList();
@@ -97,6 +103,8 @@ namespace PetAdopt.Logic
                             r.Id,
                             r.CoverPhoto,
                             r.Title,
+                            r.Message,
+                            r.Area.Word,
                             r.OperationInfo
                         });
 
@@ -114,6 +122,8 @@ namespace PetAdopt.Logic
                             r.Id,
                             r.CoverPhoto,
                             r.Title,
+                            r.Message,
+                            r.Word,
                             r.OperationInfo.Date
                         })
                         .Skip((page - 1) * take)
@@ -126,6 +136,8 @@ namespace PetAdopt.Logic
                             Id = r.Id,
                             Photo = r.CoverPhoto,
                             Title = r.Title,
+                            Message = r.Message,
+                            Area = r.Word,
                             Date = r.Date.ToString("yyyy/MM/dd")
                         })
                         .ToList();
@@ -142,6 +154,8 @@ namespace PetAdopt.Logic
                             r.Id,
                             r.CoverPhoto,
                             r.Title,
+                            r.Message,
+                            r.Area.Word,
                             r.OperationInfo
                         });
 
@@ -159,6 +173,8 @@ namespace PetAdopt.Logic
                             r.Id,
                             r.CoverPhoto,
                             r.Title,
+                            r.Message,
+                            r.Word,
                             r.OperationInfo.Date
                         })
                         .Skip((page - 1) * take)
@@ -171,6 +187,8 @@ namespace PetAdopt.Logic
                             Id = r.Id,
                             Photo = r.CoverPhoto,
                             Title = r.Title,
+                            Message = r.Message,
+                            Area = r.Word,
                             Date = r.Date.ToString("yyyy/MM/dd")
                         })
                         .ToList();

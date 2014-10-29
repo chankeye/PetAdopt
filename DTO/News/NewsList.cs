@@ -11,6 +11,8 @@ namespace PetAdopt.DTO.News
         public string Title { get; set; }
 
         public string Date { get; set; }
+
+        public string Message { get; set; }
     }
 
     public class NewsList

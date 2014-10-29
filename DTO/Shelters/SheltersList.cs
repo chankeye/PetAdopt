@@ -11,6 +11,8 @@ namespace PetAdopt.DTO.Shelters
         public string Name { get; set; }
 
         public string Area { get; set; }
+
+        public string Introduction { get; set; }
     }
 
     public class SheltersList

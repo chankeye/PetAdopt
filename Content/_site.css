@@ -92,7 +92,7 @@ ul.ul-padding-vertical-05 {
     max-width: 990px;
     margin: 0 auto;
     padding: 20px 0;
-    background-color:#f5f5f5;
+    background-color: #f5f5f5;
 }
 
 .list-img {
@@ -110,6 +110,11 @@ ul.ul-padding-vertical-05 {
     width: 590px;
     display: inline-block;
     vertical-align: top;
+}
+
+.list-msg {
+    height: 80px;
+    overflow: hidden;
 }
 
 @media only screen and (min-width:769px) and (max-width:990px) {

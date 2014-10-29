@@ -64,14 +64,30 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li><a href="/News" title="最新消息">最新消息</a></li>
-                            <li><a href="/Activity" title="最新活動">最新活動</a></li>
-                            <li><a href="/Animal" title="待認養動物">帶它回家</a></li>
-                            <li><a href="/Shelters" title="全台收容所資訊">收容所</a></li>
-                            <li><a href="/Help" title="需要你立即前往救援的動物們">即刻救援</a></li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">最新資訊 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/News" title="最新消息">一定要知道</a></li>
+                                    <li><a href="/Activity" title="最新活動">趕快去參加</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">動物資訊 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Animal/New" title="送養動物">尋找有緣人</a></li>
+                                    <li><a href="/Animal" title="待認養動物">帶它回家</a></li>
+                                    <li><a href="/Help" title="需要你立即前往救援的動物們">即刻救援</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/Shelters" title="全台收容所資訊">收容所資訊</a></li>
                             <li><a href="/Blog" title="部落格文章">它與他的故事</a></li>
-                            <li><a href="/Ask" title="問與答">我有問題</a></li>
-                            <li><a href="/Knowledge" title="相關知識">增廣見聞</a></li>
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">知識問答 <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Ask" title="問與答">我有問題</a></li>
+                                    <li><a href="/Knowledge" title="相關知識">增廣見聞</a></li>
+                                </ul>
+                            </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             @if (isLogin)

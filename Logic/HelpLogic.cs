@@ -298,6 +298,7 @@ namespace PetAdopt.Logic
 
             try
             {
+                PetContext.Messages.RemoveRange(help.Messages);
                 PetContext.Helps.Remove(help);
                 PetContext.SaveChanges();
                 return result;

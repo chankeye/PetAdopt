@@ -1,4 +1,5 @@
-﻿using PetAdopt.DTO;
+﻿using System;
+using PetAdopt.DTO;
 using PetAdopt.DTO.System;
 using PetAdopt.Models;
 using System.Collections.Generic;
@@ -46,10 +47,7 @@ namespace PetAdopt.Logic
             log.Debug("id: {0}", id);
 
             var result = new IsSuccessResult();
-            var area = PetContext
-                .Areas
-                .Where(r => r.Id == id)
-                .SingleOrDefault();
+            var area = PetContext.Areas.SingleOrDefault(r => r.Id == id);
             if (area == null)
             {
                 result.IsSuccess = false;
@@ -57,9 +55,21 @@ namespace PetAdopt.Logic
                 return result;
             }
 
-            PetContext.Areas.Remove(area);
-            PetContext.SaveChanges();
-            return result;
+            try
+            {
+                PetContext.Areas.Remove(area);
+                PetContext.SaveChanges();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                result.IsSuccess = false;
+                result.ErrorMessage = "已在使用中，無法刪除";
+                return result;
+            }
+
         }
 
         /// <summary>
@@ -128,10 +138,7 @@ namespace PetAdopt.Logic
             log.Debug("id: {0}", id);
 
             var result = new IsSuccessResult();
-            var status = PetContext
-                .Status
-                .Where(r => r.Id == id)
-                .SingleOrDefault();
+            var status = PetContext.Status.SingleOrDefault(r => r.Id == id);
             if (status == null)
             {
                 result.IsSuccess = false;
@@ -139,9 +146,20 @@ namespace PetAdopt.Logic
                 return result;
             }
 
-            PetContext.Status.Remove(status);
-            PetContext.SaveChanges();
-            return result;
+            try
+            {
+                PetContext.Status.Remove(status);
+                PetContext.SaveChanges();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                result.IsSuccess = false;
+                result.ErrorMessage = "已在使用中，無法刪除";
+                return result;
+            }
         }
 
         /// <summary>
@@ -210,10 +228,7 @@ namespace PetAdopt.Logic
             log.Debug("id: {0}", id);
 
             var result = new IsSuccessResult();
-            var clas = PetContext
-                .Classes
-                .Where(r => r.Id == id)
-                .SingleOrDefault();
+            var clas = PetContext.Classes.SingleOrDefault(r => r.Id == id);
             if (clas == null)
             {
                 result.IsSuccess = false;
@@ -221,9 +236,20 @@ namespace PetAdopt.Logic
                 return result;
             }
 
-            PetContext.Classes.Remove(clas);
-            PetContext.SaveChanges();
-            return result;
+            try
+            {
+                PetContext.Classes.Remove(clas);
+                PetContext.SaveChanges();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                result.IsSuccess = false;
+                result.ErrorMessage = "已在使用中，無法刪除";
+                return result;
+            }
         }
 
         /// <summary>

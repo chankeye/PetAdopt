@@ -307,6 +307,13 @@ namespace PetAdopt.Logic
                 return result;
             }
 
+            if (animal.Blogs.Any())
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "有關於此動物的文章，無法刪除";
+                return result;
+            }
+
             // 有上傳圖片，就把圖片刪掉
             if (string.IsNullOrWhiteSpace(animal.CoverPhoto) == false)
             {
@@ -315,6 +322,7 @@ namespace PetAdopt.Logic
 
             try
             {
+                PetContext.Messages.RemoveRange(animal.Messages);
                 PetContext.Animals.Remove(animal);
                 PetContext.SaveChanges();
                 return result;

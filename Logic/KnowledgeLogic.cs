@@ -277,6 +277,7 @@ namespace PetAdopt.Logic
 
             try
             {
+                PetContext.Messages.RemoveRange(knowledge.Messages);
                 PetContext.Knowledges.Remove(knowledge);
                 PetContext.SaveChanges();
                 return result;

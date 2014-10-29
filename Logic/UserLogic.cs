@@ -312,10 +312,7 @@ namespace PetAdopt.Logic
             log.Debug("id: {0}", id);
 
             var result = new IsSuccessResult();
-            var user = PetContext
-                .Users
-                .Where(r => r.Id == id)
-                .SingleOrDefault();
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == id);
             if (user == null)
             {
                 result.IsSuccess = false;

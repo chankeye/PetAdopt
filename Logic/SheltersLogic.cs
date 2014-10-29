@@ -275,11 +275,20 @@ namespace PetAdopt.Logic
             log.Debug("id: {0}", id);
 
             var result = new IsSuccessResult();
-            var shelters = PetContext.Shelters.SingleOrDefault(r => r.Id == id);
+            var shelters = PetContext.Shelters
+                .Include(r => r.Messages)
+                .SingleOrDefault(r => r.Id == id);
             if (shelters == null)
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此收容所資訊";
+                return result;
+            }
+
+            if (shelters.Animals.Any())
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "收容所已有待認養動物，無法刪除";
                 return result;
             }
 
@@ -291,6 +300,7 @@ namespace PetAdopt.Logic
 
             try
             {
+                PetContext.Messages.RemoveRange(shelters.Messages);
                 PetContext.Shelters.Remove(shelters);
                 PetContext.SaveChanges();
                 return result;

@@ -68,6 +68,8 @@ $(function () {
                 $("#address").text(data.ReturnObject.Address);
                 $("#phone").text(data.ReturnObject.Phone);
                 $("#source").text(data.ReturnObject.url);
+                $("#date").text(data.ReturnObject.Date);
+                $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Shelters';

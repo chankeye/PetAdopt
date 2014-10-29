@@ -63,6 +63,8 @@ $(function () {
                 $("#selOptionsAreas").text(data.ReturnObject.Area);
                 $("#content").html(data.ReturnObject.Message);
                 $("#address").text(data.ReturnObject.Address);
+                $("#date").text(data.ReturnObject.Date);
+                $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Activity';

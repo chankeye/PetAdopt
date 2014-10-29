@@ -203,6 +203,7 @@ namespace PetAdopt.Logic
 
             var activity = PetContext.Activities
                 .Include(r => r.Area)
+                .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
 
             if (activity == null)
@@ -217,7 +218,9 @@ namespace PetAdopt.Logic
                     Message = activity.Message,
                     AreaId = activity.AreaId,
                     Area = activity.AreaId.HasValue ? activity.Area.Word : null,
-                    Address = activity.Address
+                    Address = activity.Address,
+                    Date = activity.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    UserDisplay = activity.OperationInfo.User.Display
                 }
             };
         }

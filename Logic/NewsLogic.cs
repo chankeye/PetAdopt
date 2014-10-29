@@ -211,6 +211,7 @@ namespace PetAdopt.Logic
 
             var news = PetContext.News
                 .Include(r => r.Area)
+                .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
             if (news == null)
                 return new IsSuccessResult<GetNews>("找不到此消息");
@@ -224,7 +225,9 @@ namespace PetAdopt.Logic
                     Message = news.Message,
                     AreaId = news.AreaId,
                     Area = news.AreaId.HasValue ? news.Area.Word : null,
-                    Url = news.Url
+                    Url = news.Url,
+                    Date = news.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    UserDisplay = news.OperationInfo.User.Display
                 }
             };
         }

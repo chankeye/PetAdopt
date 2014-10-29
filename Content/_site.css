@@ -3,6 +3,10 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Microsoft JhengHei','微軟正黑體';
 }
 
+body {
+    background-color: #F2F2F2
+}
+
 /* ul.ul-padding-vertical-05 */
 ul.ul-padding-vertical-05 {
     margin: 0.5em 0;
@@ -92,7 +96,7 @@ ul.ul-padding-vertical-05 {
     max-width: 990px;
     margin: 0 auto;
     padding: 20px 0;
-    background-color: #f5f5f5;
+    background-color: #E6E6E6;
 }
 
 .list-img {

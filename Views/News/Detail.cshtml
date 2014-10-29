@@ -10,43 +10,47 @@
     <div class="page-header">
         <h2>消息詳細資訊</h2>
     </div>
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label class="col-sm-2 control-label">封面圖</label>
-            <div class="col-sm-4">
-                <img id="coverPhoto" name="coverPhoto" alt="封面圖" class="img-responsive img-thumbnail" src="../../Content/Images/default.jpg">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">標題</label>
-            <div class="col-sm-4">
-                <label id="title" name="title"></label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">內容</label>
-            <div class="col-sm-4">
-                <label id="content" name="content"></label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">地區</label>
-            <div class="col-sm-4">
-                <label id="selOptionsAreas" name="selOptionsAreas"></label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">消息來源</label>
-            <div class="col-sm-4">
-                <label id="source" name="source"></label>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button id="btn2" type="button" class="btn btn-primary">返回</button>
-            </div>
-        </div>
+    <div class="col-sm-offset-2 col-sm-10 ">
+
+        <!-- Blog Post -->
+        <!-- Title -->
+        <h1><label id="title" name="title"></label></h1>
+
+        <!-- Author -->
+        <p>
+            作者 <a href="#"><label id="userDisplay" name="userDisplay"></label></a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p><span class="glyphicon glyphicon-time"></span> 發佈時間 <label id="date" name="date"></label></p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        @*<img class="img-responsive" src="http://placehold.it/900x300" alt="">*@
+        <img id="coverPhoto" name="coverPhoto" alt="封面圖" class="img-responsive img-thumbnail" src="../../Content/Images/default.jpg">
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">
+            <label id="content" name="content"></label>
+        </p>
+        <p>
+            地區：<label id="selOptionsAreas" name="selOptionsAreas"></label>
+        </p>
+        <p>
+            地址：<label id="address" name="address"></label>
+        </p>
+        <p>
+            消息來源：<label id="source" name="source"></label>
+        </p>
+        <button id="btn2" type="button" class="btn btn-default">返回</button>
+
+        <hr>
+
     </div>
-    <hr />
+
     @Html.Partial("_Message")
 </div>

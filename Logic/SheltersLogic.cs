@@ -203,6 +203,7 @@ namespace PetAdopt.Logic
 
             var shelters = PetContext.Shelters
                 .Include(r => r.Area)
+                .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
             if (shelters == null)
                 return new IsSuccessResult<GetShelters>("找不到此活動");
@@ -218,7 +219,9 @@ namespace PetAdopt.Logic
                     Area = shelters.Area.Word,
                     Address = shelters.Address,
                     Url = shelters.Url,
-                    Phone = shelters.Phone
+                    Phone = shelters.Phone,
+                    Date = shelters.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    UserDisplay = shelters.OperationInfo.User.Display
                 }
             };
         }

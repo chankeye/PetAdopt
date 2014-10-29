@@ -5,6 +5,10 @@
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
     self.history = ko.observableArray();
 
+    self.areas = ko.observableArray();
+    self.classes = ko.observableArray();
+    self.statuses = ko.observableArray();
+
     self.detail = function (ask) {
         window.location = "/Ask/Detail?id=" + ask.Id;
     }
@@ -47,6 +51,12 @@
 }
 
 $(function () {
+    // 取得分類列表
+    window.utils.getClassList();
+
+    $("#selOptionsAreas").hide();
+    $("#selOptionsStatuses").hide();
+
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);

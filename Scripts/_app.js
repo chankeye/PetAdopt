@@ -8,7 +8,7 @@
             success: function (area) {
                 window.vm.areas(area);
                 window.vm.areas.unshift({
-                    "Word": "請選擇",
+                    "Word": "請選擇地區",
                     "Id": ""
                 });
                 $("#selOptionsAreas option:first").attr("selected", true);
@@ -24,7 +24,7 @@
             success: function (classes) {
                 window.vm.classes(classes);
                 window.vm.classes.unshift({
-                    "Word": "請選擇",
+                    "Word": "請選擇分類",
                     "Id": ""
                 });
                 $("#selOptionsClasses option:first").attr("selected", true);
@@ -40,7 +40,7 @@
             success: function (statuses) {
                 window.vm.statuses(statuses);
                 window.vm.statuses.unshift({
-                    "Word": "請選擇",
+                    "Word": "請選擇狀態",
                     "Id": ""
                 });
                 $("#selOptionsStatuses option:first").attr("selected", true);

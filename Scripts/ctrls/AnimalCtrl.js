@@ -5,6 +5,10 @@
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
     self.history = ko.observableArray();
 
+    self.areas = ko.observableArray();
+    self.classes = ko.observableArray();
+    self.statuses = ko.observableArray();
+
     self.detail = function (animal) {
         window.location = "/Animal/Detail?id=" + animal.Id;
     }
@@ -47,6 +51,15 @@
 }
 
 $(function () {
+    // 取得地區列表
+    window.utils.getAreaList();
+
+    // 取得分類列表
+    window.utils.getClassList();
+
+    // 取得狀態列表
+    window.utils.getStatusList();
+
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);

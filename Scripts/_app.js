@@ -63,3 +63,16 @@
         return urlParams[data];
     }
 }
+
+window.utils.optionsAreas = '<div class="col-sm-4">' +
+    '<select id="selOptionsAreas" class="form-control" data-bind="options: areas, optionsText:' + "'Word', optionsValue: 'Id'" + '"></select>' +
+    '</div>';
+
+window.utils.optionsClasses = '<div class="col-sm-4">' +
+    '<select id="selOptionsClasses" class="form-control" data-bind="options: classes, optionsText:' + "'Word', optionsValue: 'Id'" + '"></select>' +
+    '</div>';
+
+window.utils.optionsStatuses = '<div class="col-sm-4">' +
+    '<select id="selOptionsStatuses" class="form-control" data-bind="options: statuses, optionsText:' + "'Word', optionsValue: 'Id'" + '"></select>' +
+    '</div>';
+

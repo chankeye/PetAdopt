@@ -6,8 +6,6 @@
     self.history = ko.observableArray();
 
     self.areas = ko.observableArray();
-    self.classes = ko.observableArray();
-    self.statuses = ko.observableArray();
 
     self.detail = function (activity) {
         window.location = "/Activity/Detail?id=" + activity.Id;
@@ -52,10 +50,8 @@
 
 $(function () {
     // 取得地區列表
+    $("#selOptionsSearch").append(window.utils.optionsAreas);
     window.utils.getAreaList();
-
-    $("#selOptionsClasses").hide();
-    $("#selOptionsStatuses").hide();
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

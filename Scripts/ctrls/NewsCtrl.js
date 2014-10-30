@@ -5,6 +5,8 @@
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
     self.history = ko.observableArray();
 
+    self.areas = ko.observableArray();
+
     self.detail = function (news) {
         window.location = "/News/Detail?id=" + news.Id;
     }
@@ -47,6 +49,10 @@
 };
 
 $(function () {
+    // 取得地區列表
+    $("#selOptionsSearch").append(window.utils.optionsAreas);
+    window.utils.getAreaList();
+
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);

@@ -5,6 +5,8 @@
     self.responseMessage = ko.observable($.commonLocalization.noRecord);
     self.history = ko.observableArray();
 
+    self.classes = ko.observableArray();
+
     self.detail = function (knowledge) {
         window.location = "/Knowledge/Detail?id=" + knowledge.Id;
     }
@@ -47,6 +49,10 @@
 }
 
 $(function () {
+    // 取得分類列表
+    $("#selOptionsSearch").append(window.utils.optionsClasses);
+    window.utils.getClassList();
+
     window.vm = new MyViewModel();
     window.vm.loadHistory();
     ko.applyBindings(window.vm);

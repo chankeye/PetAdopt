@@ -52,12 +52,15 @@
 
 $(function () {
     // 取得地區列表
+    $("#selOptionsSearch").append(window.utils.optionsAreas);
     window.utils.getAreaList();
 
     // 取得分類列表
+    $("#selOptionsSearch").append(window.utils.optionsClasses);
     window.utils.getClassList();
 
     // 取得狀態列表
+    $("#selOptionsSearch").append(window.utils.optionsStatuses);
     window.utils.getStatusList();
 
     window.vm = new MyViewModel();

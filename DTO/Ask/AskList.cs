@@ -9,6 +9,8 @@ namespace PetAdopt.DTO.Ask
         public string Title { get; set; }
 
         public string Date { get; set; }
+
+        public string Classes { get; set; }
     }
 
     public class AskList

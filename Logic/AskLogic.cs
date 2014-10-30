@@ -20,10 +20,10 @@ namespace PetAdopt.Logic
         /// 取得問與答列表
         /// </summary>
         /// <returns></returns>
-        public AskList GetAskList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
+        public AskList GetAskList(int page = 1, int take = 10, string query = "", bool isLike = true, int classId = -1, int userId = -1)
         {
             var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}, classId={4}, userId={5}", page, take, query, isLike, classId, userId);
 
             if (page <= 0)
                 page = 1;
@@ -42,7 +42,8 @@ namespace PetAdopt.Logic
                     {
                         r.Id,
                         r.Title,
-                        r.OperationInfo
+                        r.OperationInfo,
+                        r.Class
                     });
 
                 // 指定誰發佈的
@@ -52,13 +53,21 @@ namespace PetAdopt.Logic
                         .Where(r => r.OperationInfo.UserId == userId);
                 }
 
+                // 指定地區
+                if (classId != -1)
+                {
+                    asks = asks
+                        .Where(r => r.Class.Id == classId);
+                }
+
                 var templist = asks
                     .OrderByDescending(r => r.Id)
                     .Select(r => new
                     {
                         r.Id,
                         r.Title,
-                        r.OperationInfo.Date
+                        r.OperationInfo.Date,
+                        r.Class.Word
                     })
                     .Skip((page - 1) * take)
                     .Take(take)
@@ -69,7 +78,8 @@ namespace PetAdopt.Logic
                     {
                         Id = r.Id,
                         Title = r.Title,
-                        Date = r.Date.ToString("yyyy/MM/dd")
+                        Date = r.Date.ToString("yyyy/MM/dd"),
+                        Classes = r.Word
                     })
                     .ToList();
 
@@ -87,7 +97,8 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Title,
-                            r.OperationInfo
+                            r.OperationInfo,
+                            r.Class
                         });
 
                     // 指定誰發佈的
@@ -97,13 +108,21 @@ namespace PetAdopt.Logic
                             .Where(r => r.OperationInfo.UserId == userId);
                     }
 
+                    // 指定地區
+                    if (classId != -1)
+                    {
+                        asks = asks
+                            .Where(r => r.Class.Id == classId);
+                    }
+
                     var templist = asks
                         .OrderByDescending(r => r.Id)
                         .Select(r => new
                         {
                             r.Id,
                             r.Title,
-                            r.OperationInfo.Date
+                            r.OperationInfo.Date,
+                            r.Class.Word
                         })
                         .Skip((page - 1) * take)
                         .Take(take)
@@ -114,7 +133,8 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = r.Date.ToString("yyyy/MM/dd")
+                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Classes = r.Word
                         })
                         .ToList();
 
@@ -129,7 +149,8 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Title,
-                            r.OperationInfo
+                            r.OperationInfo,
+                            r.Class
                         });
 
                     // 指定誰發佈的
@@ -139,13 +160,21 @@ namespace PetAdopt.Logic
                             .Where(r => r.OperationInfo.UserId == userId);
                     }
 
+                    // 指定地區
+                    if (classId != -1)
+                    {
+                        asks = asks
+                            .Where(r => r.Class.Id == classId);
+                    }
+
                     var templist = asks
                         .OrderByDescending(r => r.Id)
                         .Select(r => new
                         {
                             r.Id,
                             r.Title,
-                            r.OperationInfo.Date
+                            r.OperationInfo.Date,
+                            r.Class.Word
                         })
                         .Skip((page - 1) * take)
                         .Take(take)
@@ -156,7 +185,8 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = r.Date.ToString("yyyy/MM/dd")
+                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Classes = r.Word
                         })
                         .ToList();
 

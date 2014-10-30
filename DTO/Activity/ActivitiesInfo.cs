@@ -13,6 +13,8 @@ namespace PetAdopt.DTO.Activity
         public string Date { get; set; }
 
         public string Message { get; set; }
+
+        public string Area { get; set; }
     }
 
     public class ActivityList

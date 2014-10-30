@@ -26,10 +26,10 @@ namespace PetAdopt.Logic
         /// <param name="isLike">非完全比對</param>
         /// <param name="userId">指定某user發佈的</param>
         /// <returns></returns>
-        public HelpList GetHelpList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
+        public HelpList GetHelpList(int page = 1, int take = 10, string query = "", bool isLike = true, int areaId = -1, int classId = -1, int userId = -1)
         {
             var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}, areaId={4}, classId={5}, userId={6}", page, take, query, isLike, areaId, classId, userId);
 
             if (page < 1)
                 page = 1;
@@ -50,7 +50,8 @@ namespace PetAdopt.Logic
                         r.CoverPhoto,
                         r.Title,
                         r.Message,
-                        r.Area.Word,
+                        r.Area,
+                        r.Class,
                         r.OperationInfo
                     });
 
@@ -61,6 +62,20 @@ namespace PetAdopt.Logic
                         .Where(r => r.OperationInfo.UserId == userId);
                 }
 
+                // 指定地區
+                if (areaId != -1)
+                {
+                    helps = helps
+                        .Where(r => r.Area.Id == areaId);
+                }
+
+                // 指定分類
+                if (classId != -1)
+                {
+                    helps = helps
+                        .Where(r => r.Class.Id == classId);
+                }
+
                 var templist = helps
                     .OrderByDescending(r => r.Id)
                     .Select(r => new
@@ -69,7 +84,8 @@ namespace PetAdopt.Logic
                         r.CoverPhoto,
                         r.Title,
                         r.Message,
-                        r.Word,
+                        Area = r.Area.Word,
+                        Classes = r.Class.Word,
                         r.OperationInfo.Date
                     })
                     .Skip((page - 1) * take)
@@ -83,7 +99,8 @@ namespace PetAdopt.Logic
                         Photo = r.CoverPhoto,
                         Title = r.Title,
                         Message = r.Message,
-                        Area = r.Word,
+                        Area = r.Area,
+                        Classes = r.Classes,
                         Date = r.Date.ToString("yyyy/MM/dd")
                     })
                     .ToList();
@@ -104,7 +121,8 @@ namespace PetAdopt.Logic
                             r.CoverPhoto,
                             r.Title,
                             r.Message,
-                            r.Area.Word,
+                            r.Area,
+                            r.Class,
                             r.OperationInfo
                         });
 
@@ -115,6 +133,20 @@ namespace PetAdopt.Logic
                             .Where(r => r.OperationInfo.UserId == userId);
                     }
 
+                    // 指定地區
+                    if (areaId != -1)
+                    {
+                        helps = helps
+                            .Where(r => r.Area.Id == areaId);
+                    }
+
+                    // 指定分類
+                    if (classId != -1)
+                    {
+                        helps = helps
+                            .Where(r => r.Class.Id == classId);
+                    }
+
                     var templist = helps
                         .OrderByDescending(r => r.Id)
                         .Select(r => new
@@ -123,7 +155,8 @@ namespace PetAdopt.Logic
                             r.CoverPhoto,
                             r.Title,
                             r.Message,
-                            r.Word,
+                            Area = r.Area.Word,
+                            Classes = r.Class.Word,
                             r.OperationInfo.Date
                         })
                         .Skip((page - 1) * take)
@@ -137,7 +170,8 @@ namespace PetAdopt.Logic
                             Photo = r.CoverPhoto,
                             Title = r.Title,
                             Message = r.Message,
-                            Area = r.Word,
+                            Area = r.Area,
+                            Classes = r.Classes,
                             Date = r.Date.ToString("yyyy/MM/dd")
                         })
                         .ToList();
@@ -155,7 +189,8 @@ namespace PetAdopt.Logic
                             r.CoverPhoto,
                             r.Title,
                             r.Message,
-                            r.Area.Word,
+                            r.Area,
+                            r.Class,
                             r.OperationInfo
                         });
 
@@ -166,6 +201,20 @@ namespace PetAdopt.Logic
                             .Where(r => r.OperationInfo.UserId == userId);
                     }
 
+                    // 指定地區
+                    if (areaId != -1)
+                    {
+                        helps = helps
+                            .Where(r => r.Area.Id == areaId);
+                    }
+
+                    // 指定分類
+                    if (classId != -1)
+                    {
+                        helps = helps
+                            .Where(r => r.Class.Id == classId);
+                    }
+
                     var templist = helps
                         .OrderByDescending(r => r.Id)
                         .Select(r => new
@@ -174,7 +223,8 @@ namespace PetAdopt.Logic
                             r.CoverPhoto,
                             r.Title,
                             r.Message,
-                            r.Word,
+                            Area = r.Area.Word,
+                            Classes = r.Class.Word,
                             r.OperationInfo.Date
                         })
                         .Skip((page - 1) * take)
@@ -188,7 +238,8 @@ namespace PetAdopt.Logic
                             Photo = r.CoverPhoto,
                             Title = r.Title,
                             Message = r.Message,
-                            Area = r.Word,
+                            Area = r.Area,
+                            Classes = r.Classes,
                             Date = r.Date.ToString("yyyy/MM/dd")
                         })
                         .ToList();

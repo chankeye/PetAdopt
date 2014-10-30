@@ -35,6 +35,7 @@
         </div>
         <hr>
     </div>
+    <div data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></div>
     <!--pagination-->
     @Html.Partial("_Pagination")
     <!--pagination-->

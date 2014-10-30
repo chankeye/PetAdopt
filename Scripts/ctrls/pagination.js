@@ -34,7 +34,7 @@ $(function () {
         var current = parseInt($(".pagination .pagi .active").html());
         if (page !== current)
             currentPageIndex = page;
-        window.vm.loadHistory(page, 10, $("#search").val(), !$("#checkAll").is(':checked'));
+        window.vm.loadHistory(page, 10, $("#search").val(), !$("#checkAll").is(':checked'), area = $("#selOptionsAreas").val(), classes = $("#selOptionsClasses").val(), status = $("#selOptionsStatuses").val());
     });
     $(".pagination .prev").click(function (e) {
         e.preventDefault();
@@ -42,7 +42,7 @@ $(function () {
         var current = parseInt($(".pagination .pagi .active").html());
         if (current - 1 > 0) {
             currentPageIndex = current - 1;
-            window.vm.loadHistory(current - 1, 10, $("#search").val(), !$("#checkAll").is(':checked'));
+            window.vm.loadHistory(current - 1, 10, $("#search").val(), !$("#checkAll").is(':checked'), area = $("#selOptionsAreas").val(), classes = $("#selOptionsClasses").val(), status = $("#selOptionsStatuses").val());
         }
     });
     $(".pagination .next").click(function (e) {
@@ -51,7 +51,7 @@ $(function () {
         var current = parseInt($(".pagination .pagi .active").html());
         if (current < $(".pagination .pagi li").length) {
             currentPageIndex = current + 1;
-            window.vm.loadHistory(current + 1, 10, $("#search").val(), !$("#checkAll").is(':checked'));
+            window.vm.loadHistory(current + 1, 10, $("#search").val(), !$("#checkAll").is(':checked'), area = $("#selOptionsAreas").val(), classes = $("#selOptionsClasses").val(), status = $("#selOptionsStatuses").val());
         }
     });
 });

@@ -34,16 +34,16 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetKnowledgeList(int page, int take, string query, bool isLike, bool memberOnly = false)
+        public ActionResult GetKnowledgeList(int page, int take, string query, bool isLike, int classId, bool memberOnly = false)
         {
             if (memberOnly)
             {
-                var newslist = KnowledgeLogic.GetKnowledgeList(page, take, query, isLike, LoginInfo.Id);
+                var newslist = KnowledgeLogic.GetKnowledgeList(page, take, query, isLike, classId, LoginInfo.Id);
                 return Json(newslist);
             }
             else
             {
-                var newslist = KnowledgeLogic.GetKnowledgeList(page, take, query, isLike);
+                var newslist = KnowledgeLogic.GetKnowledgeList(page, take, query, isLike, classId);
                 return Json(newslist);
             }
         }

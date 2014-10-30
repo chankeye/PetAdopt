@@ -9,6 +9,8 @@ namespace PetAdopt.DTO.Knowledge
         public string Title { get; set; }
 
         public string Date { get; set; }
+
+        public string Classes { get; set; }
     }
 
     public class KnowledgeList

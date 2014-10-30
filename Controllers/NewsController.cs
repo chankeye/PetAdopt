@@ -34,16 +34,16 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetNewsList(int page, int take, string query, bool isLike, bool memberOnly = false)
+        public ActionResult GetNewsList(int page, int take, string query, bool isLike, int areaId, bool memberOnly = false)
         {
             if (memberOnly)
             {
-                var newslist = NewsLogic.GetNewsList(page, take, query, isLike, LoginInfo.Id);
+                var newslist = NewsLogic.GetNewsList(page, take, query, isLike, areaId, LoginInfo.Id);
                 return Json(newslist);
             }
             else
             {
-                var newslist = NewsLogic.GetNewsList(page, take, query, isLike);
+                var newslist = NewsLogic.GetNewsList(page, take, query, isLike, areaId);
                 return Json(newslist);
             }
         }

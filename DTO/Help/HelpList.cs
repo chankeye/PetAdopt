@@ -15,6 +15,8 @@ namespace PetAdopt.DTO.Help
         public string Message { get; set; }
 
         public string Area { get; set; }
+
+        public string Classes { get; set; }
     }
 
     public class HelpList

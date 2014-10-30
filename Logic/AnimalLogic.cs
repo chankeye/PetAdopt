@@ -21,10 +21,10 @@ namespace PetAdopt.Logic
         /// 取得動物列表
         /// </summary>
         /// <returns></returns>
-        public AnimalList GetAnimalList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
+        public AnimalList GetAnimalList(int page = 1, int take = 10, string query = "", bool isLike = true, int areaId = -1, int classId = -1, int statusId = -1, int userId = -1)
         {
             var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}, areaId={4}, classId={5}, statusId={6}, userId={7}", page, take, query, isLike, areaId, classId, statusId, userId);
 
             if (page < 1)
                 page = 1;
@@ -45,7 +45,10 @@ namespace PetAdopt.Logic
                         r.CoverPhoto,
                         r.Title,
                         r.Introduction,
-                        r.OperationInfo
+                        r.OperationInfo,
+                        r.Area,
+                        r.Class,
+                        r.Status
                     });
 
                 // 指定誰發佈的
@@ -53,6 +56,27 @@ namespace PetAdopt.Logic
                 {
                     animals = animals
                         .Where(r => r.OperationInfo.UserId == userId);
+                }
+
+                // 指定地區
+                if (areaId != -1)
+                {
+                    animals = animals
+                        .Where(r => r.Area.Id == areaId);
+                }
+
+                // 指定分類
+                if (classId != -1)
+                {
+                    animals = animals
+                        .Where(r => r.Class.Id == classId);
+                }
+
+                // 指定狀態
+                if (statusId != -1)
+                {
+                    animals = animals
+                        .Where(r => r.Status.Id == statusId);
                 }
 
                 var templist = animals
@@ -63,7 +87,10 @@ namespace PetAdopt.Logic
                         r.CoverPhoto,
                         r.Title,
                         r.Introduction,
-                        r.OperationInfo.Date
+                        r.OperationInfo.Date,
+                        Area = r.Area.Word,
+                        Classes = r.Class.Word,
+                        Status = r.Status.Word
                     })
                     .Skip((page - 1) * take)
                     .Take(take)
@@ -76,7 +103,10 @@ namespace PetAdopt.Logic
                         Photo = r.CoverPhoto,
                         Title = r.Title,
                         Introduction = r.Introduction,
-                        Date = r.Date.ToString("yyyy/MM/dd")
+                        Date = r.Date.ToString("yyyy/MM/dd"),
+                        Area = r.Area,
+                        Classes = r.Classes,
+                        Status = r.Status
                     })
                     .ToList();
 
@@ -96,7 +126,10 @@ namespace PetAdopt.Logic
                             r.CoverPhoto,
                             r.Title,
                             r.Introduction,
-                            r.OperationInfo
+                            r.OperationInfo,
+                            r.Area,
+                            r.Class,
+                            r.Status
                         });
 
                     // 指定誰發佈的
@@ -104,6 +137,27 @@ namespace PetAdopt.Logic
                     {
                         animals = animals
                             .Where(r => r.OperationInfo.UserId == userId);
+                    }
+
+                    // 指定地區
+                    if (areaId != -1)
+                    {
+                        animals = animals
+                            .Where(r => r.Area.Id == areaId);
+                    }
+
+                    // 指定分類
+                    if (classId != -1)
+                    {
+                        animals = animals
+                            .Where(r => r.Class.Id == classId);
+                    }
+
+                    // 指定狀態
+                    if (statusId != -1)
+                    {
+                        animals = animals
+                            .Where(r => r.Status.Id == statusId);
                     }
 
                     var templist = animals
@@ -114,7 +168,10 @@ namespace PetAdopt.Logic
                             r.CoverPhoto,
                             r.Title,
                             r.Introduction,
-                            r.OperationInfo.Date
+                            r.OperationInfo.Date,
+                            Area = r.Area.Word,
+                            Classes = r.Class.Word,
+                            Status = r.Status.Word
                         })
                         .Skip((page - 1) * take)
                         .Take(take)
@@ -127,7 +184,10 @@ namespace PetAdopt.Logic
                             Photo = r.CoverPhoto,
                             Title = r.Title,
                             Introduction = r.Introduction,
-                            Date = r.Date.ToString("yyyy/MM/dd")
+                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Area = r.Area,
+                            Classes = r.Classes,
+                            Status = r.Status
                         })
                         .ToList();
 
@@ -144,7 +204,10 @@ namespace PetAdopt.Logic
                             r.CoverPhoto,
                             r.Title,
                             r.Introduction,
-                            r.OperationInfo
+                            r.OperationInfo,
+                            r.Area,
+                            r.Class,
+                            r.Status
                         });
 
                     // 指定誰發佈的
@@ -154,6 +217,28 @@ namespace PetAdopt.Logic
                             .Where(r => r.OperationInfo.UserId == userId);
                     }
 
+                    // 指定地區
+                    if (areaId != -1)
+                    {
+                        animals = animals
+                            .Where(r => r.Area.Id == areaId);
+                    }
+
+                    // 指定分類
+                    if (classId != -1)
+                    {
+                        animals = animals
+                            .Where(r => r.Class.Id == classId);
+                    }
+
+                    // 指定狀態
+                    if (statusId != -1)
+                    {
+                        animals = animals
+                            .Where(r => r.Status.Id == statusId);
+                    }
+
+
                     var templist = animals
                         .OrderByDescending(r => r.Id)
                         .Select(r => new
@@ -162,7 +247,10 @@ namespace PetAdopt.Logic
                             r.CoverPhoto,
                             r.Title,
                             r.Introduction,
-                            r.OperationInfo.Date
+                            r.OperationInfo.Date,
+                            Area = r.Area.Word,
+                            Classes = r.Class.Word,
+                            Status = r.Status.Word
                         })
                         .Skip((page - 1) * take)
                         .Take(take)
@@ -175,7 +263,10 @@ namespace PetAdopt.Logic
                             Photo = r.CoverPhoto,
                             Title = r.Title,
                             Introduction = r.Introduction,
-                            Date = r.Date.ToString("yyyy/MM/dd")
+                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Area = r.Area,
+                            Classes = r.Classes,
+                            Status = r.Status
                         })
                         .ToList();
 

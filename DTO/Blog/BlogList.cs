@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PetAdopt.DTO.Blog
 {
@@ -10,6 +9,8 @@ namespace PetAdopt.DTO.Blog
         public string Title { get; set; }
 
         public string Date { get; set; }
+
+        public string Classes { get; set; }
     }
 
     public class BlogList

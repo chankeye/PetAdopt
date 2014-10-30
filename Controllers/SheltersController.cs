@@ -34,16 +34,16 @@ namespace PetAdopt.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult GetSheltersList(int page, int take, string query, bool isLike, bool memberOnly = false)
+        public ActionResult GetSheltersList(int page, int take, string query, bool isLike, int areaId, bool memberOnly = false)
         {
             if (memberOnly)
             {
-                var shelterslist = SheltersLogic.GetSheltersList(page, take, query, isLike, LoginInfo.Id);
+                var shelterslist = SheltersLogic.GetSheltersList(page, take, query, isLike, areaId, LoginInfo.Id);
                 return Json(shelterslist);
             }
             else
             {
-                var shelterslist = SheltersLogic.GetSheltersList(page, take, query, isLike);
+                var shelterslist = SheltersLogic.GetSheltersList(page, take, query, isLike, areaId);
                 return Json(shelterslist);
             }
         }

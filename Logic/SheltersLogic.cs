@@ -26,10 +26,10 @@ namespace PetAdopt.Logic
         /// <param name="isLike">非完全比對</param>
         /// <param name="userId">指定某user發佈的</param>
         /// <returns></returns>
-        public SheltersList GetSheltersList(int page = 1, int take = 10, string query = "", bool isLike = true, int userId = -1)
+        public SheltersList GetSheltersList(int page = 1, int take = 10, string query = "", bool isLike = true, int areaId = -1, int userId = -1)
         {
             var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}", page, take, query, isLike);
+            log.Debug("page:{0}, take:{1}, query={2}, isLike={3}, areaId={4}, userId={5}", page, take, query, isLike, areaId, userId);
 
             if (page < 1)
                 page = 1;
@@ -48,7 +48,7 @@ namespace PetAdopt.Logic
                     {
                         r.Id,
                         r.Name,
-                        r.Area.Word,
+                        r.Area,
                         r.Introduction,
                         r.OperationInfo
                     });
@@ -60,6 +60,13 @@ namespace PetAdopt.Logic
                         .Where(r => r.OperationInfo.UserId == userId);
                 }
 
+                // 指定地區
+                if (areaId != -1)
+                {
+                    shelterses = shelterses
+                        .Where(r => r.Area.Id == areaId);
+                }
+
                 var templist = shelterses
                     .OrderByDescending(r => r.Id)
                     .Select(r => new
@@ -67,7 +74,7 @@ namespace PetAdopt.Logic
                         r.Id,
                         r.Name,
                         r.Introduction,
-                        Area = r.Word,
+                        r.Area.Word
                     })
                     .Skip((page - 1) * take)
                     .Take(take)
@@ -79,7 +86,7 @@ namespace PetAdopt.Logic
                         Id = r.Id,
                         Name = r.Name,
                         Introduction = r.Introduction,
-                        Area = r.Area
+                        Area = r.Word
                     })
                     .ToList();
 
@@ -97,7 +104,7 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Name,
-                            r.Area.Word,
+                            r.Area,
                             r.Introduction,
                             r.OperationInfo
                         });
@@ -109,6 +116,13 @@ namespace PetAdopt.Logic
                             .Where(r => r.OperationInfo.UserId == userId);
                     }
 
+                    // 指定地區
+                    if (areaId != -1)
+                    {
+                        shelterses = shelterses
+                            .Where(r => r.Area.Id == areaId);
+                    }
+
                     var templist = shelterses
                         .OrderByDescending(r => r.Id)
                         .Select(r => new
@@ -116,7 +130,7 @@ namespace PetAdopt.Logic
                             r.Id,
                             r.Name,
                             r.Introduction,
-                            Area = r.Word
+                            r.Area.Word
                         })
                         .Skip((page - 1) * take)
                         .Take(take)
@@ -128,7 +142,7 @@ namespace PetAdopt.Logic
                             Id = r.Id,
                             Name = r.Name,
                             Introduction = r.Introduction,
-                            Area = r.Area
+                            Area = r.Word
                         })
                         .ToList();
 
@@ -143,7 +157,7 @@ namespace PetAdopt.Logic
                         {
                             r.Id,
                             r.Name,
-                            r.Area.Word,
+                            r.Area,
                             r.Introduction,
                             r.OperationInfo
                         });
@@ -155,6 +169,13 @@ namespace PetAdopt.Logic
                             .Where(r => r.OperationInfo.UserId == userId);
                     }
 
+                    // 指定地區
+                    if (areaId != -1)
+                    {
+                        shelterses = shelterses
+                            .Where(r => r.Area.Id == areaId);
+                    }
+
                     var templist = shelterses
                         .OrderByDescending(r => r.Id)
                         .Select(r => new
@@ -162,7 +183,7 @@ namespace PetAdopt.Logic
                             r.Id,
                             r.Name,
                             r.Introduction,
-                            Area = r.Word
+                            r.Area.Word
                         })
                         .Skip((page - 1) * take)
                         .Take(take)
@@ -174,7 +195,7 @@ namespace PetAdopt.Logic
                             Id = r.Id,
                             Name = r.Name,
                             Introduction = r.Introduction,
-                            Area = r.Area
+                            Area = r.Word
                         })
                         .ToList();
 

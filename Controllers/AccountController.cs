@@ -1,4 +1,5 @@
-﻿using PetAdopt.Logic;
+﻿using PetAdopt.DTO.User;
+using PetAdopt.Logic;
 using System;
 using System.Web;
 using System.Web.Mvc;
@@ -67,6 +68,29 @@ namespace PetAdopt.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterSumit(string account, string display, string mobile, string email, string password)
+        {
+            var data = new CreateUser
+            {
+                Account = account,
+                Display = display,
+                Mobile = mobile,
+                Email = email,
+                IsAdmin = false
+            };
+            var result = UserLogic.AddUser(data, password);
+
+            return Json(result);
+        }
+
 
         /// <summary>
         /// 登入畫面

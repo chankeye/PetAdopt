@@ -57,7 +57,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult AddUser(CreateUser data)
         {
-            var result = UserLogic.AddUser(data);
+            var result = UserLogic.AddUser(data, null);
 
             return Json(result);
         }

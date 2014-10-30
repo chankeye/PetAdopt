@@ -131,6 +131,7 @@
     <Content Include="Scripts\ctrls\SheltersCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersDetailCtrl.js" />
     <Content Include="Scripts\ctrls\SheltersNewCtrl.js" />
+    <Content Include="Scripts\ctrls\RegisterCtrl.js" />
     <Content Include="Scripts\hogan-2.0.0.js" />
     <Content Include="Scripts\manage\ctrls\ActivityCtrl.js" />
     <Content Include="Scripts\manage\ctrls\AnimalEditCtrl.js" />
@@ -820,6 +821,7 @@
     <Content Include="Views\Account\Knowledge.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
     <Content Include="Views\Shared\_Message.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

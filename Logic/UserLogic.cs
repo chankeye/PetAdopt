@@ -24,7 +24,7 @@ namespace PetAdopt.Logic
         /// <param name="password">密碼</param>
         /// <param name="isAmdin">是否為管理者</param>
         /// <returns>Master.Id</returns>
-        public IsSuccessResult<int> IsValid(string account, string password, bool isAdmin)
+        public IsSuccessResult<int> IsValid(string account, string password, bool isAdmin = false)
         {
             #region 檢查參數
             // account
@@ -340,11 +340,11 @@ namespace PetAdopt.Logic
         /// 新增使用者
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult<UserItem> AddUser(CreateUser data)
+        public IsSuccessResult<UserItem> AddUser(CreateUser data, string password)
         {
             var log = GetLogger();
-            log.Debug("account: {0}, display: {1}, mobile:{2}, email:{3}, isAdmin:{4}", data.Account, data.Display, data.Mobile,
-                data.Email, data.IsAdmin);
+            log.Debug("account: {0}, display: {1}, mobile:{2}, email:{3}, isAdmin:{4}, password:{5}",
+                data.Account, data.Display, data.Mobile, data.Email, data.IsAdmin, password);
 
             if (string.IsNullOrWhiteSpace(data.Account))
                 return new IsSuccessResult<UserItem>("請輸入帳號");
@@ -360,6 +360,11 @@ namespace PetAdopt.Logic
                 return new IsSuccessResult<UserItem>("請輸入Email");
             data.Email = data.Email.Trim();
 
+            if (string.IsNullOrWhiteSpace(password))
+                password = Constant.DefaultPassword;
+            else
+                password = password.Trim();
+
             if (Regex.IsMatch(data.Email, Constant.PatternEmail) == false)
                 return new IsSuccessResult<UserItem>("請輸入正確的Email");
 
@@ -373,7 +378,7 @@ namespace PetAdopt.Logic
                 var user = PetContext.Users.Add(new User
                 {
                     Account = data.Account,
-                    Password = Cryptography.EncryptBySHA1(Constant.DefaultPassword),
+                    Password = Cryptography.EncryptBySHA1(password),
                     Display = data.Display,
                     Mobile = data.Mobile,
                     Email = data.Email,

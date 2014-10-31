@@ -164,11 +164,6 @@ $(function () {
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        $("#title").val('');
-                        oEditor.setData('');
-                        $("#animalId").val('');
-                        $("#selOptionsClasses option:first").attr("selected", true);
-
                         alert("修改完成");
                         window.location = '/Manage/Blog';
                     } else {

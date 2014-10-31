@@ -101,7 +101,7 @@ $(function () {
                 $("#introduction").val(data.ReturnObject.Introduction);
                 $("#address").val(data.ReturnObject.Address);
                 $("#phone").val(data.ReturnObject.Phone);
-                $("#source").val(data.ReturnObject.url);
+                $("#source").val(data.ReturnObject.Url);
             } else {
                 alert(data.ErrorMessage);
                 window.location = '/Manage/Shelters';
@@ -157,13 +157,6 @@ $(function () {
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        $("#name").val('');
-                        $("#introduction").val('');
-                        $("#address").val('');
-                        $("#source").val('');
-                        $("#phone").val('');
-                        $("#selOptionsAreas option:first").attr("selected", true);
-
                         alert("修改完成");
                         window.location = '/Manage/Shelters';
                     } else {

@@ -67,7 +67,7 @@ $(function () {
                 $("#introduction").html(data.ReturnObject.Introduction);
                 $("#address").text(data.ReturnObject.Address);
                 $("#phone").text(data.ReturnObject.Phone);
-                $("#source").text(data.ReturnObject.url);
+                $("#source").text(data.ReturnObject.Url);
                 $("#date").text(data.ReturnObject.Date);
                 $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {

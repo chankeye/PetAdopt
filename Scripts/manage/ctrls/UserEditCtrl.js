@@ -62,10 +62,6 @@ $(function () {
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        $("#display").val('');
-                        $("#mobile").val('');
-                        $("#email").val('');
-                        $("#checkbox").prop("checked", '');
                         alert("修改完成");
                         window.location = '/Manage/User';
                     } else {

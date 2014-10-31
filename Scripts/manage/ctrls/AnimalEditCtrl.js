@@ -220,21 +220,8 @@ $(function () {
                 success: function (data) {
                     $btn.button("reset");
                     if (data.IsSuccess) {
-                        $("#title").val('');
-                        $("#startDate").val('');
-                        $("#endDate").val('');
-                        $("#introduction").val('');
-                        $("#address").val('');
-                        $("#phone").val('');
-                        $("#shelters").val('');
-                        $("#age").val('');
-                        $("#selOptionsAreas option:first").attr("selected", true);
-                        $("#selOptionsClasses option:first").attr("selected", true);
-                        $("#selOptionsStatuses option:first").attr("selected", true);
-
                         alert("修改完成");
                         window.location = '/Manage/Animal';
-
                     } else {
                         alert(data.ErrorMessage);
                     }

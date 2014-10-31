@@ -12,7 +12,7 @@ $(function () {
     window.utils.getClassList();
 
     window.vm = new MyViewModel();
-    ko.applyBindings(window.vm);
+    ko.applyBindings(window.vm, $("#mainContiner")[0]);
 
     // 新增
     $("#btn1").click(

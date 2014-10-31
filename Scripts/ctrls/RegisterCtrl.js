@@ -7,7 +7,7 @@
 $(function () {
 
     window.vm = new MyViewModel();
-    ko.applyBindings(window.vm);
+    ko.applyBindings(window.vm, $("#mainContiner")[0]);
 
     $("#commentForm").validate({
         rules: {

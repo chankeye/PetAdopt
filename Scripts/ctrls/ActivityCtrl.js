@@ -61,7 +61,7 @@ $(function () {
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();
-    ko.applyBindings(window.vm);
+    ko.applyBindings(window.vm, $("#mainContiner")[0]);
 
     // 取消
     $("#btn2").click(

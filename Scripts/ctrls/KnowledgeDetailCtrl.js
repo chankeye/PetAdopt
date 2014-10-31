@@ -69,7 +69,7 @@ $(function () {
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();
-    ko.applyBindings(window.vm);
+    ko.applyBindings(window.vm, $("#mainContiner")[0]);
 
     // 新增留言
     $("#btn1").click(

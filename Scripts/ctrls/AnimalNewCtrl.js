@@ -19,7 +19,7 @@ $(function () {
     window.utils.getStatusList();
 
     window.vm = new MyViewModel();
-    ko.applyBindings(window.vm);
+    ko.applyBindings(window.vm, $("#mainContiner")[0]);
 
     // 自動完成
     var timestamp = new Date().getTime();

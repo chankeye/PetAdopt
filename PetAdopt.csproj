@@ -119,6 +119,7 @@
     <Content Include="Scripts\ctrls\BlogCtrl.js" />
     <Content Include="Scripts\ctrls\BlogDetailCtrl.js" />
     <Content Include="Scripts\ctrls\BlogNewCtrl.js" />
+    <Content Include="Scripts\ctrls\Carousel.js" />
     <Content Include="Scripts\ctrls\HelpCtrl.js" />
     <Content Include="Scripts\ctrls\HelpDetailCtrl.js" />
     <Content Include="Scripts\ctrls\HelpNewCtrl.js" />
@@ -709,6 +710,7 @@
     <Compile Include="DTO\News\CreateNews.cs" />
     <Compile Include="DTO\News\NewsList.cs" />
     <Compile Include="DTO\News\NewsMessageList.cs" />
+    <Compile Include="DTO\Carousel.cs" />
     <Compile Include="DTO\Suggestion.cs" />
     <Compile Include="DTO\Operation.cs" />
     <Compile Include="DTO\Shelters\GetShelters.cs" />

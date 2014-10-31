@@ -746,5 +746,35 @@ namespace PetAdopt.Logic
 
             return animalList;
         }
+
+        public List<Carousel> GetCarouselList()
+        {
+            var data = PetContext.Animals
+                .OrderByDescending(r => r.EndDate)
+                .Where(r => r.EndDate >= DateTime.Now)
+                .Select(r => new
+                {
+                    r.Id,
+                    r.CoverPhoto,
+                    r.EndDate,
+                    r.Title
+                })
+                .Take(5)
+                .ToList();
+
+            var result = data.Select(r => new Carousel
+            {
+                Id = r.Id,
+                Photo = r.CoverPhoto,
+                EndDate = r.EndDate.HasValue ? r.EndDate.Value.ToString("yyyy-MM-dd") : null,
+                Title = r.Title,
+                Class = "item"
+            })
+                .ToList();
+
+            result.First().Class += " active";
+
+            return result;
+        }
     }
 }

@@ -77,6 +77,14 @@ namespace PetAdopt.Controllers
             return Json(result);
         }
 
+        public ActionResult GetCarouselList()
+        {
+            var result = AnimalLogic.GetCarouselList();
+
+            return Json(result);
+        }
+
+
         /*public ActionResult Delete(int id)
         {
             var result = _animalLogic.DeleteAnimal(Server.MapPath("~/Content/uploads"), id);

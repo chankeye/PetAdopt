@@ -9,49 +9,34 @@
     <div class="page-header">
         <h2>發佈過的救援資訊</h2>
     </div>
-    <div>
-        <div class="col-sm-5">
-            <p>
-                <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
-                <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>
-            </p>
-            <input id="checkAll" name="checkAll" type="checkbox" />
-            <label for="checkAll">完全比對</label>
-        </div>
-        <div class="col-sm-offset-5 col-sm-2">
-            <button id="btn2" type="button" class="btn btn-primary">返回</button>
-        </div>
-        <div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>標題</th>
-                        <th>日期</th>
-                    </tr>
-                </thead>
-                <tbody data-bind="foreach: history">
-                    <tr>
-                        <td hidden="true"><span data-bind="text: Id"></span></td>
-                        <td>
-                            <div data-bind="if:Photo">
-                                <img alt="封面圖" class="list-img" data-bind="attr:{src: '../../Content/uploads/' + Photo}">
-                            </div>
-                            <div data-bind="ifnot:Photo">
-                                <img alt="封面圖" class="list-img" src="../../Content/Images/default.jpg">
-                            </div>
-                        </td>
-                        <td><a href="#" data-bind="text: Title, click: $root.detail"></a></td>
-                        <td><span data-bind="text: Date"></span></td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr><td data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></td></tr>
-                </tfoot>
-            </table>
-            <!--pagination-->
-            @Html.Partial("_Pagination")
-            <!--pagination-->
-        </div>
+    <div class="navbar-right">
+        <button id="btn2" type="button" class="btn btn-primary">返回</button>
     </div>
+    @Html.Partial("_Search")
+    <div data-bind="foreach: history">
+        <div class="row warp">
+            <div class="col-md-5 list-img">
+                <a href="#" data-bind="click: $root.detail">
+                    <div data-bind="if:Photo">
+                        <img alt="封面圖" class="img-responsive" data-bind="attr:{src: '../../Content/uploads/' + Photo}">
+                    </div>
+                    <div data-bind="ifnot:Photo">
+                        <img alt="封面圖" class="img-responsive" src="../../Content/Images/default.jpg">
+                    </div>
+                    @*<img class="img-responsive" src="http://placehold.it/700x300" alt="">*@
+                </a>
+            </div>
+            <div class="col-md-7 list-text">
+                <h3><a href="#" data-bind="text: Title, click: $root.detail"></a></h3>
+                <h4><label data-bind="text: Date"></label> - <label data-bind="text: Classes"></label> - <label data-bind="text: Area"></label></h4>
+                <p><label class="list-msg" data-bind="html: Message"></label></p>
+                <a class="btn btn-primary" href="#" data-bind="click: $root.detail">詳細內容 <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <div data-bind="visible: responseMessage().trim() !== '', text: responseMessage"></div>
+    <!--pagination-->
+    @Html.Partial("_Pagination")
+    <!--pagination-->
 </div>

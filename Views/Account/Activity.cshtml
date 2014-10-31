@@ -10,17 +10,19 @@
         <h2>發佈過的活動資訊</h2>
     </div>
     <div>
-        <div class="col-sm-5">
-            <p>
-                <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
-                <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>
-            </p>
-            <input id="checkAll" name="checkAll" type="checkbox" />
-            <label for="checkAll">完全比對</label>
-        </div>
-        <div class="col-sm-offset-5 col-sm-2">
+        @*<div class="col-sm-5">
+                <p>
+                    <input id="search" name="search" type="search" placeholder="請輸入文章標題" />
+                    <button id="btn3" type="button" data-loading-text="查詢中...">查詢</button>
+                </p>
+                <input id="checkAll" name="checkAll" type="checkbox" />
+                <label for="checkAll">完全比對</label>
+            </div>*@
+        <div class="navbar-right">
             <button id="btn2" type="button" class="btn btn-primary">返回</button>
         </div>
+        @Html.Partial("_Search")
+        @*<div class="col-sm-offset-5 col-sm-2">*@
         <div>
             <table class="table table-hover">
                 <thead>

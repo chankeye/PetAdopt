@@ -15,7 +15,7 @@
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());
 
-    self.loadHistory = function (page, take, query, isLike, areaId) {
+    self.loadHistory = function (page, take, query, isLike, areaId, classId, statusId) {
         self.responseMessage($.commonLocalization.loading);
         self.loading(true);
         self.history.removeAll();
@@ -24,6 +24,8 @@
         take = take || 10;
         query = query || "";
         areaId = areaId || -1;
+        classId = classId || -1;
+        statusId = statusId || -1;
         if (isLike == null)
             isLike = true;
         $.ajax({
@@ -34,7 +36,9 @@
                 take: take,
                 query: query,
                 isLike: isLike,
-                areaId: areaId
+                areaId: areaId,
+                classId: classId,
+                statusId: statusId
             }
         }).done(function (response) {
             self.responseMessage('');
@@ -65,7 +69,7 @@ $(function () {
             var $btn = $("#btn3");
 
             $btn.button("loading");
-            window.vm.loadHistory(1, 10, $("#search").val(), !$("#checkAll").is(':checked'), $("#selOptionsAreas").val());
+            window.vm.loadHistory(1, 10, $("#search").val(), !$("#checkAll").is(':checked'), $("#selOptionsAreas").val(), "", "");
             $btn.button("reset");
         });
 });

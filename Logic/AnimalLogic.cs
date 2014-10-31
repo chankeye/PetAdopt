@@ -747,6 +747,10 @@ namespace PetAdopt.Logic
             return animalList;
         }
 
+        /// <summary>
+        /// 取得輪播的資訊
+        /// </summary>
+        /// <returns></returns>
         public List<Carousel> GetCarouselList()
         {
             var data = PetContext.Animals
@@ -762,18 +766,35 @@ namespace PetAdopt.Logic
                 .Take(5)
                 .ToList();
 
-            var result = data.Select(r => new Carousel
-            {
-                Id = r.Id,
-                Photo = r.CoverPhoto,
-                EndDate = r.EndDate.HasValue ? r.EndDate.Value.ToString("yyyy-MM-dd") : null,
-                Title = r.Title,
-                Class = "item"
-            })
+            var result = data
+                .Select(r => new Carousel
+                {
+                    Id = r.Id,
+                    Photo = r.CoverPhoto,
+                    EndDate = r.EndDate.HasValue ? r.EndDate.Value.ToString("yyyy-MM-dd") : null,
+                    Title = r.Title,
+                    Class = "item"
+                })
                 .ToList();
 
-            result.First().Class += " active";
+            // 沒取到半比，就回傳一個空的list回去
+            if (result.Any() == false)
+            {
+                result = new List<Carousel>
+                {
+                    new Carousel
+                    {
+                        Id = 0,
+                        Photo = "",
+                        EndDate = "",
+                        Title = "",
+                    }
+                };
 
+                return result;
+            }
+
+            result.First().Class += " active";
             return result;
         }
     }

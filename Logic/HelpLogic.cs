@@ -348,10 +348,10 @@ namespace PetAdopt.Logic
         /// 刪除即刻救援
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteHelp(string path, int id)
+        public IsSuccessResult DeleteHelp(string path, int id, int userId)
         {
             var log = GetLogger();
-            log.Debug("id: {0}", id);
+            log.Debug("path: {0}, id: {1}, userId: {2}", path, id, userId);
 
             var result = new IsSuccessResult();
             var help = PetContext.Helps.SingleOrDefault(r => r.Id == id);
@@ -362,14 +362,30 @@ namespace PetAdopt.Logic
                 return result;
             }
 
-            // 有上傳圖片，就把圖片刪掉
-            if (string.IsNullOrWhiteSpace(help.CoverPhoto) == false)
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
             {
-                File.Delete(path + "//" + help.CoverPhoto);
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false && help.OperationInfo.UserId != userId)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
             }
 
             try
             {
+
+                // 有上傳圖片，就把圖片刪掉
+                if (string.IsNullOrWhiteSpace(help.CoverPhoto) == false)
+                {
+                    File.Delete(path + "//" + help.CoverPhoto);
+                }
+
                 PetContext.Messages.RemoveRange(help.Messages);
                 PetContext.Helps.Remove(help);
                 PetContext.SaveChanges();
@@ -391,10 +407,10 @@ namespace PetAdopt.Logic
         /// <param name="id">Help.id</param>
         /// <param name="messageId"></param>
         /// <returns></returns>
-        public IsSuccessResult DeleteMessage(int id, int messageId)
+        public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
             var log = GetLogger();
-            log.Debug("id:{0}, messageId:{1}", id, messageId);
+            log.Debug("id: {0}, messageId: {1}, userId: {2}", id, messageId, userId);
 
             var result = new IsSuccessResult();
 
@@ -403,6 +419,21 @@ namespace PetAdopt.Logic
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此救援文章";
+                return result;
+            }
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
                 return result;
             }
 
@@ -506,11 +537,11 @@ namespace PetAdopt.Logic
         /// 修改救援
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult EditHelp(int id, CreateHelp data)
+        public IsSuccessResult EditHelp(int id, CreateHelp data, int userId)
         {
             var log = GetLogger();
-            log.Debug("photo: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}, classId:{5}, id:{6}",
-                data.Photo, data.Title, data.Message, data.AreaId, data.Address, data.ClassId, id);
+            log.Debug("photo: {0}, title: {1}, message: {2}, areaId: {3}, address: {4}, classId: {5}, id: {6}, userId: {7}",
+                data.Photo, data.Title, data.Message, data.AreaId, data.Address, data.ClassId, id, userId);
 
             var help = PetContext.Helps.SingleOrDefault(r => r.Id == id);
             if (help == null)
@@ -527,6 +558,13 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Address))
                 return new IsSuccessResult<HelpItem>("請輸入地址");
             data.Address = data.Address.Trim();
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+                return new IsSuccessResult<HelpItem>("沒有權限");
+            if (user.IsAdmin == false && help.OperationInfo.UserId != userId)
+                return new IsSuccessResult<HelpItem>("沒有權限");
 
             if (string.IsNullOrWhiteSpace(data.Photo) == false)
                 data.Photo = data.Photo.Trim();

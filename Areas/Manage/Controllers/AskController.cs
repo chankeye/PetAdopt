@@ -45,14 +45,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = AskLogic.DeleteAsk(id);
+            var result = AskLogic.DeleteAsk(id, LoginInfo.Id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = AskLogic.DeleteMessage(id, messageId);
+            var result = AskLogic.DeleteMessage(id, messageId, LoginInfo.Id);
 
             return Json(result);
         }
@@ -78,7 +78,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditAsk(int id, CreateAsk data)
         {
-            var result = AskLogic.EditAsk(id, data);
+            var result = AskLogic.EditAsk(id, data, LoginInfo.Id);
 
             return Json(result);
         }

@@ -45,14 +45,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = KnowledgeLogic.DeleteKnowledge(id);
+            var result = KnowledgeLogic.DeleteKnowledge(id, LoginInfo.Id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = KnowledgeLogic.DeleteMessage(id, messageId);
+            var result = KnowledgeLogic.DeleteMessage(id, messageId, LoginInfo.Id);
 
             return Json(result);
         }
@@ -78,7 +78,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditKnowledge(int id, CreateKnowledge data)
         {
-            var result = KnowledgeLogic.EditKnowledge(id, data);
+            var result = KnowledgeLogic.EditKnowledge(id, data, LoginInfo.Id);
 
             return Json(result);
         }

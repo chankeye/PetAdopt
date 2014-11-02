@@ -296,10 +296,10 @@ namespace PetAdopt.Logic
         /// 刪除部落格文章
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteBlog(int id)
+        public IsSuccessResult DeleteBlog(int id, int userId)
         {
             var log = GetLogger();
-            log.Debug("id: {0}", id);
+            log.Debug("id: {0}, userId: {1}", id, userId);
 
             var result = new IsSuccessResult();
             var blog = PetContext.Blogs.SingleOrDefault(r => r.Id == id);
@@ -307,6 +307,21 @@ namespace PetAdopt.Logic
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此部落格文章";
+                return result;
+            }
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false && blog.OperationInfo.UserId != userId)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
                 return result;
             }
 
@@ -333,10 +348,10 @@ namespace PetAdopt.Logic
         /// <param name="id">Blog.id</param>
         /// <param name="messageId"></param>
         /// <returns></returns>
-        public IsSuccessResult DeleteMessage(int id, int messageId)
+        public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
             var log = GetLogger();
-            log.Debug("id:{0}, messageId:{1}", id, messageId);
+            log.Debug("id: {0}, messageId: {1}, userId: {2}", id, messageId, userId);
 
             var result = new IsSuccessResult();
 
@@ -345,6 +360,21 @@ namespace PetAdopt.Logic
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此問與答";
+                return result;
+            }
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
                 return result;
             }
 
@@ -447,11 +477,11 @@ namespace PetAdopt.Logic
         /// 修改部落格文章
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult EditBlog(EditBlog data)
+        public IsSuccessResult EditBlog(EditBlog data, int userId)
         {
             var log = GetLogger();
-            log.Debug("title: {0}, message:{1}, classId:{2}, animalId:{3}, id:{4}",
-                data.Title, data.Message, data.ClassId, data.AnimalId, data.Id);
+            log.Debug("title: {0}, message: {1}, classId: {2}, animalId: {3}, id: {4}, userId: {5}",
+                data.Title, data.Message, data.ClassId, data.AnimalId, data.Id, userId);
 
             var blog = PetContext.Blogs.SingleOrDefault(r => r.Id == data.Id);
             if (blog == null)
@@ -464,6 +494,13 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Message))
                 return new IsSuccessResult("請輸入內容");
             data.Message = data.Message.Trim();
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+                return new IsSuccessResult("沒有權限");
+            if (user.IsAdmin == false && blog.OperationInfo.UserId != userId)
+                return new IsSuccessResult("沒有權限");
 
             var isAny = PetContext.Blogs.Any(r => r.Title == data.Title && r.Id != data.Id);
             if (isAny)

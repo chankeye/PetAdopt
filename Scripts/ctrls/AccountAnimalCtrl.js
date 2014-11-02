@@ -13,6 +13,33 @@
         window.location = "/Animal/Detail?id=" + data.Id;
     }
 
+    self.removeAnimal = function (animal) {
+        if (confirm('確定要刪除？')) {
+
+            if (animal.IsDisable == true)
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Animal/Delete',
+                data: {
+                    id: animal.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(animal);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    self.editAnimal = function (animal) {
+        window.location = "/Animal/Edit?id=" + animal.Id;
+    }
+
     //Add PaginationModel
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());

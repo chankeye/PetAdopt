@@ -11,6 +11,33 @@
         window.location = "/Blog/Detail?id=" + data.Id;
     }
 
+    self.removeBlog = function (blog) {
+        if (confirm('確定要刪除？')) {
+
+            if (blog.IsDisable == true)
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Blog/Delete',
+                data: {
+                    id: blog.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(blog);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    self.editBlog = function (blog) {
+        window.location = "/Blog/Edit?id=" + blog.Id;
+    }
+
     //Add PaginationModel
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());

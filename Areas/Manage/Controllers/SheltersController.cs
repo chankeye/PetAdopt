@@ -47,14 +47,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = SheltersLogic.DeleteShelters(Server.MapPath("~/Content/uploads"), id);
+            var result = SheltersLogic.DeleteShelters(Server.MapPath("~/Content/uploads"), id, LoginInfo.Id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = SheltersLogic.DeleteMessage(id, messageId);
+            var result = SheltersLogic.DeleteMessage(id, messageId, LoginInfo.Id);
 
             return Json(result);
         }
@@ -80,7 +80,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditShelters(int id, CreateShelters data)
         {
-            var result = SheltersLogic.EditShelters(id, data);
+            var result = SheltersLogic.EditShelters(id, data, LoginInfo.Id);
 
             return Json(result);
         }

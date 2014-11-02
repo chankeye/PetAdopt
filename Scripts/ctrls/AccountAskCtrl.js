@@ -11,6 +11,33 @@
         window.location = "/Ask/Detail?id=" + data.Id;
     }
 
+    self.removeAsk = function (ask) {
+        if (confirm('確定要刪除？')) {
+
+            if (ask.IsDisable == true)
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Ask/Delete',
+                data: {
+                    id: ask.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(ask);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    self.editAsk = function (ask) {
+        window.location = "/Ask/Edit?id=" + ask.Id;
+    }
+
     //Add PaginationModel
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());

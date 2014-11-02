@@ -45,14 +45,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = AnimalLogic.DeleteAnimal(Server.MapPath("~/Content/uploads"), id);
+            var result = AnimalLogic.DeleteAnimal(Server.MapPath("~/Content/uploads"), id, LoginInfo.Id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = AnimalLogic.DeleteMessage(id, messageId);
+            var result = AnimalLogic.DeleteMessage(id, messageId, LoginInfo.Id);
 
             return Json(result);
         }
@@ -78,7 +78,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditAnimal(EditAnimal data)
         {
-            var result = AnimalLogic.EditAnimal(data);
+            var result = AnimalLogic.EditAnimal(data, LoginInfo.Id);
 
             return Json(result);
         }

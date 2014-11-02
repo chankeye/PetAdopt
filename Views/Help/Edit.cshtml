@@ -3,12 +3,12 @@
 }
 @section Scripts
 {
-    <script src="../../../../Scripts/manage/ctrls/HelpEditCtrl.js"></script>
+    <script src="../../Scripts/ctrls/HelpEditCtrl.js"></script>
 }
-<div class="page-header">
-    <h2>修改即刻救援資訊</h2>
-</div>
-<div>
+<div class="container">
+    <div class="page-header">
+        <h2>修改即刻救援資訊</h2>
+    </div>
     <form id="commentForm" class="form-horizontal" method="POST" name="form1">
         <legend class="text-info">
             <i class="fa fa-check"></i>
@@ -27,7 +27,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">封面圖</label>
             <div class="col-sm-4">
-                <img id="coverPhoto" name="coverPhoto" alt="封面圖" class="img-responsive img-thumbnail" src="../../../../Content/Images/default.jpg">
+                <img id="coverPhoto" name="coverPhoto" alt="封面圖" class="img-responsive img-thumbnail" src="../../Content/Images/default.jpg">
             </div>
         </div>
         <div class="form-group">
@@ -69,9 +69,4 @@
             </div>
         </div>
     </form>
-
-    <hr />
-
-    @Html.Partial("_Message")
-
 </div>

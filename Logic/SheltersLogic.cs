@@ -302,10 +302,10 @@ namespace PetAdopt.Logic
         /// 刪除收容所
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteShelters(string path, int id)
+        public IsSuccessResult DeleteShelters(string path, int id, int userId)
         {
             var log = GetLogger();
-            log.Debug("id: {0}", id);
+            log.Debug("path: {0}, id: {1}, userId: {2}", path, id, userId);
 
             var result = new IsSuccessResult();
             var shelters = PetContext.Shelters
@@ -318,6 +318,21 @@ namespace PetAdopt.Logic
                 return result;
             }
 
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false && shelters.OperationInfo.UserId != userId)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+
             if (shelters.Animals.Any())
             {
                 result.IsSuccess = false;
@@ -325,14 +340,14 @@ namespace PetAdopt.Logic
                 return result;
             }
 
-            // 有上傳圖片，就把圖片刪掉
-            if (string.IsNullOrWhiteSpace(shelters.CoverPhoto) == false)
-            {
-                File.Delete(path + "//" + shelters.CoverPhoto);
-            }
-
             try
             {
+                // 有上傳圖片，就把圖片刪掉
+                if (string.IsNullOrWhiteSpace(shelters.CoverPhoto) == false)
+                {
+                    File.Delete(path + "//" + shelters.CoverPhoto);
+                }
+
                 PetContext.Messages.RemoveRange(shelters.Messages);
                 PetContext.Shelters.Remove(shelters);
                 PetContext.SaveChanges();
@@ -354,10 +369,10 @@ namespace PetAdopt.Logic
         /// <param name="id">Shelters.id</param>
         /// <param name="messageId"></param>
         /// <returns></returns>
-        public IsSuccessResult DeleteMessage(int id, int messageId)
+        public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
             var log = GetLogger();
-            log.Debug("id:{0}, messageId:{1}", id, messageId);
+            log.Debug("id: {0}, messageId: {1}, userId: {2}", id, messageId, userId);
 
             var result = new IsSuccessResult();
 
@@ -366,6 +381,21 @@ namespace PetAdopt.Logic
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此問與答";
+                return result;
+            }
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
                 return result;
             }
 
@@ -473,11 +503,11 @@ namespace PetAdopt.Logic
         /// 修改收容所資訊
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult EditShelters(int id, CreateShelters data)
+        public IsSuccessResult EditShelters(int id, CreateShelters data, int userId)
         {
             var log = GetLogger();
-            log.Debug("photo: {0}, name: {1}, intorduction:{2}, areaId:{3}, address:{4}, phone:{5}, url:{6}, id:{7}",
-                data.Photo, data.Name, data.Introduction, data.AreaId, data.Address, data.Phone, data.Url, id);
+            log.Debug("photo: {0}, name: {1}, intorduction: {2}, areaId: {3}, address: {4}, phone: {5}, url: {6}, id: {7}, userId: {8}",
+                data.Photo, data.Name, data.Introduction, data.AreaId, data.Address, data.Phone, data.Url, id, userId);
 
             var shelters = PetContext.Shelters.SingleOrDefault(r => r.Id == id);
             if (shelters == null)
@@ -498,6 +528,13 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Phone))
                 return new IsSuccessResult<SheltersItem>("請輸入收容所電話");
             data.Phone = data.Phone.Trim();
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+                return new IsSuccessResult<SheltersItem>("沒有權限");
+            if (user.IsAdmin == false && shelters.OperationInfo.UserId != userId)
+                return new IsSuccessResult<SheltersItem>("沒有權限");
 
             if (string.IsNullOrWhiteSpace(data.Photo) == false)
                 data.Photo = data.Photo.Trim();

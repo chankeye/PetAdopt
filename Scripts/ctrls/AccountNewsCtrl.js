@@ -11,6 +11,29 @@
         window.location = "/News/Detail?id=" + data.Id;
     }
 
+    self.removeNews = function (news) {
+        if (confirm('確定要刪除？')) {
+            $.ajax({
+                type: 'post',
+                url: '/Manage/News/Delete',
+                data: {
+                    id: news.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(news);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    self.editNews = function (news) {
+        window.location = "/News/Edit?id=" + news.Id;
+    }
+
     //Add PaginationModel
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());

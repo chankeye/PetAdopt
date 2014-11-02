@@ -8,70 +8,18 @@
     self.areas = ko.observableArray();
     self.classes = ko.observableArray();
     self.statuses = ko.observableArray();
-
-    self.removeMessage = function (message) {
-        if (confirm('確定要刪除？')) {
-
-            if (message.IsDisable == true)
-                return;
-
-            $.ajax({
-                type: 'post',
-                url: '/Manage/Animal/DeleteMessage',
-                data: {
-                    Id: window.id,
-                    MessageId: message.Id
-                },
-                success: function (data) {
-                    if (data.IsSuccess) {
-                        self.history.remove(message);
-                    } else {
-                        alert(data.ErrorMessage);
-                    }
-                }
-            });
-        }
-    }
-
-    //Add PaginationModel
-    //from pagination.js
-    ko.utils.extend(self, new PaginationModel());
-
-    self.loadHistory = function (page, take) {
-        self.responseMessage($.commonLocalization.loading);
-        self.loading(true);
-        self.history.removeAll();
-        self.pagination(0, 0, 0);
-        page = page || 1; // if page didn't send
-        take = take || 10;
-        $.ajax({
-            type: 'post',
-            url: '/Manage/Animal/GetMessageList',
-            data: {
-                id: window.id,
-                page: page,
-                take: take
-            }
-        }).done(function (response) {
-            self.responseMessage('');
-            self.history(response.List);
-            self.pagination(page, response.Count, take);
-
-            if (response.Count == 0)
-                self.responseMessage($.commonLocalization.noRecord);
-
-        }).always(function () {
-            self.loading(false);
-        });
-    };
 };
 
 $(function () {
 
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
-    if (window.id == null)
-        window.location = '/Manage/Animal';
+    if (window.id == null) {
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Animal';
+    }
 
     // 取得認養資訊
     var photo;
@@ -86,7 +34,7 @@ $(function () {
                 if (data.IsSuccess) {
                     photo = data.ReturnObject.Photo;
                     if (photo != null) {
-                        $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
+                        $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
                     }
                     $("#title").val(data.ReturnObject.Title);
                     $("#startDate").val(data.ReturnObject.StartDate),
@@ -139,8 +87,7 @@ $(function () {
         .then(init());
 
     window.vm = new MyViewModel();
-    window.vm.loadHistory();
-    ko.applyBindings(window.vm);
+    ko.applyBindings(window.vm, $("#mainContiner")[0]);
 
     // 自動完成
     var timestamp = new Date().getTime();
@@ -220,7 +167,10 @@ $(function () {
                     $btn.button("reset");
                     if (data.IsSuccess) {
                         alert("修改完成");
-                        window.location = '/Manage/Animal';
+                        if (history.length > 1)
+                            history.back();
+                        else
+                            window.location = '/Animal';
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -234,6 +184,6 @@ $(function () {
         if (history.length > 1)
             history.back();
         else
-            window.location = '/Manage/Animal';
+            window.location = '/Animal';
     });
 });

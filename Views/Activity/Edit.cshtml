@@ -3,12 +3,12 @@
 }
 @section Scripts
 {
-    <script src="../../../../Scripts/manage/ctrls/HelpEditCtrl.js"></script>
+    <script src="../../Scripts/ctrls/ActivityEditCtrl.js"></script>
 }
-<div class="page-header">
-    <h2>修改即刻救援資訊</h2>
-</div>
-<div>
+<div class="container">
+    <div class="page-header">
+        <h2>修改活動資訊</h2>
+    </div>
     <form id="commentForm" class="form-horizontal" method="POST" name="form1">
         <legend class="text-info">
             <i class="fa fa-check"></i>
@@ -27,7 +27,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">封面圖</label>
             <div class="col-sm-4">
-                <img id="coverPhoto" name="coverPhoto" alt="封面圖" class="img-responsive img-thumbnail" src="../../../../Content/Images/default.jpg">
+                <img id="coverPhoto" name="coverPhoto" alt="封面圖" class="img-responsive img-thumbnail" src="../../Content/Images/default.jpg">
             </div>
         </div>
         <div class="form-group">
@@ -39,39 +39,31 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">內容</label>
             <div class="col-sm-4">
-                <textarea id="content" name="content" class="form-control required" maxlength="200" placeholder="請輸入內容" required></textarea>
+                <textarea id="content" name="content" class="form-control ckeditor"></textarea>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">分類</label>
-            <div class="col-sm-4">
-                <select id="selOptionsClasses" class="form-control required"
-                        data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
-            </div>
-        </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
         <div class="form-group">
             <label class="col-sm-2 control-label">地區</label>
             <div class="col-sm-4">
-                <select id="selOptionsAreas" class="form-control required"
+                <select id="selOptionsAreas" class="form-control"
                         data-bind="options: areas, optionsText: 'Word', optionsValue: 'Id'"></select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">地址</label>
             <div class="col-sm-4">
-                <input id="address" name="address" class="form-control required" maxlength="30" placeholder="請輸入地址" required />
+                <input id="address" name="address" class="form-control" maxlength="30" placeholder="請輸入地址" />
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">更新</button>
+                <button id="btn1" type="button" class="btn btn-primary" data-loading-text="處理中...">修改</button>
                 <button id="btn2" type="button" class="btn btn-default">取消</button>
             </div>
         </div>
     </form>
-
-    <hr />
-
-    @Html.Partial("_Message")
-
 </div>

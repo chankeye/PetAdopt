@@ -317,10 +317,10 @@ namespace PetAdopt.Logic
         /// 刪除最新消息
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteNews(string path, int id)
+        public IsSuccessResult DeleteNews(string path, int id, int userId)
         {
             var log = GetLogger();
-            log.Debug("id: {0}", id);
+            log.Debug("path: {0}, id: {1}, userId: {2}", path, id, userId);
 
             var result = new IsSuccessResult();
             var news = PetContext.News.SingleOrDefault(r => r.Id == id);
@@ -331,14 +331,30 @@ namespace PetAdopt.Logic
                 return result;
             }
 
-            // 有上傳圖片，就把圖片刪掉
-            if (string.IsNullOrWhiteSpace(news.CoverPhoto) == false)
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
             {
-                File.Delete(path + "//" + news.CoverPhoto);
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false && news.OperationInfo.UserId != userId)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
             }
 
             try
             {
+
+                // 有上傳圖片，就把圖片刪掉
+                if (string.IsNullOrWhiteSpace(news.CoverPhoto) == false)
+                {
+                    File.Delete(path + "//" + news.CoverPhoto);
+                }
+
                 PetContext.Messages.RemoveRange(news.Messages);
                 PetContext.News.Remove(news);
                 PetContext.SaveChanges();
@@ -360,22 +376,37 @@ namespace PetAdopt.Logic
         /// <param name="id">News.id</param>
         /// <param name="messageId"></param>
         /// <returns></returns>
-        public IsSuccessResult DeleteMessage(int id, int messageId)
+        public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
             var log = GetLogger();
-            log.Debug("id:{0}, messageId:{1}", id, messageId);
+            log.Debug("id: {0}, messageId: {1}, userId: {2}", id, messageId, userId);
 
             var result = new IsSuccessResult();
 
-            var ask = PetContext.News.SingleOrDefault(r => r.Id == id);
-            if (ask == null)
+            var news = PetContext.News.SingleOrDefault(r => r.Id == id);
+            if (news == null)
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此問與答";
                 return result;
             }
 
-            var message = ask.Messages.SingleOrDefault(r => r.Id == messageId);
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+
+            var message = news.Messages.SingleOrDefault(r => r.Id == messageId);
             if (message == null)
             {
                 result.IsSuccess = false;
@@ -478,11 +509,11 @@ namespace PetAdopt.Logic
         /// 修改最新消息
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult EditNews(int id, CreateNews data)
+        public IsSuccessResult EditNews(int id, CreateNews data, int userId)
         {
             var log = GetLogger();
-            log.Debug("photo: {0}, title: {1}, message:{2}, areaId:{3}, url:{4}, id:{5}",
-                data.Photo, data.Title, data.Message, data.AreaId, data.Url, id);
+            log.Debug("photo: {0}, title: {1}, message: {2}, areaId: {3}, url: {4}, id: {5}, userId: {6}",
+                data.Photo, data.Title, data.Message, data.AreaId, data.Url, id, userId);
 
             var news = PetContext.News.SingleOrDefault(r => r.Id == id);
             if (news == null)
@@ -495,6 +526,13 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Message))
                 return new IsSuccessResult("請輸入內容");
             data.Message = data.Message.Trim();
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+                return new IsSuccessResult("沒有權限");
+            if (user.IsAdmin == false && news.OperationInfo.UserId != userId)
+                return new IsSuccessResult("沒有權限");
 
             if (string.IsNullOrWhiteSpace(data.Photo) == false)
                 data.Photo = data.Photo.Trim();

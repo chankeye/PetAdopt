@@ -41,7 +41,7 @@ $(function () {
                     Introduction: $("#introduction").val(),
                     Phone: $("#phone").val(),
                     Address: $("#address").val(),
-                    AreaId: $("#selOptions").val(),
+                    AreaId: $("#selOptionsAreas").val(),
                     Url: $("#source").val()
                 },
                 success: function (data) {

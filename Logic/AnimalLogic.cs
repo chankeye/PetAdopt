@@ -384,10 +384,10 @@ namespace PetAdopt.Logic
         /// 刪除動物
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteAnimal(string path, int id)
+        public IsSuccessResult DeleteAnimal(string path, int id, int userId)
         {
             var log = GetLogger();
-            log.Debug("id: {0}", id);
+            log.Debug("path: {0}, id: {1}, userId: {2}", path, id, userId);
 
             var result = new IsSuccessResult();
             var animal = PetContext.Animals.SingleOrDefault(r => r.Id == id);
@@ -395,6 +395,21 @@ namespace PetAdopt.Logic
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此動物資訊";
+                return result;
+            }
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false && animal.OperationInfo.UserId != userId)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
                 return result;
             }
 
@@ -434,10 +449,10 @@ namespace PetAdopt.Logic
         /// <param name="id">Animal.id</param>
         /// <param name="messageId"></param>
         /// <returns></returns>
-        public IsSuccessResult DeleteMessage(int id, int messageId)
+        public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
             var log = GetLogger();
-            log.Debug("id:{0}, messageId:{1}", id, messageId);
+            log.Debug("id: {0}, messageId: {1}, userId: {2}", id, messageId, userId);
 
             var result = new IsSuccessResult();
 
@@ -446,6 +461,21 @@ namespace PetAdopt.Logic
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此問與答";
+                return result;
+            }
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
                 return result;
             }
 
@@ -588,11 +618,11 @@ namespace PetAdopt.Logic
         /// 修改認養動物資訊
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult EditAnimal(EditAnimal data)
+        public IsSuccessResult EditAnimal(EditAnimal data, int userId)
         {
             var log = GetLogger();
-            log.Debug("photo: {0}, title: {1}, introduction:{2}, areaId:{3}, address:{4}, phone:{5}, classId:{6}, sheltersId:{7}, startDate:{8}, endDate:{9}, statusId:{10}, age:{11}, id:{12}",
-                data.Photo, data.Title, data.Introduction, data.AreaId, data.Address, data.Phone, data.ClassId, data.SheltersId, data.StartDate, data.EndDate, data.StartDate, data.Age, data.Id);
+            log.Debug("photo: {0}, title: {1}, introduction: {2}, areaId: {3}, address: {4}, phone: {5}, classId: {6}, sheltersId: {7}, startDate: {8}, endDate: {9}, statusId: {10}, age: {11}, id: {12}, user: {13}",
+                data.Photo, data.Title, data.Introduction, data.AreaId, data.Address, data.Phone, data.ClassId, data.SheltersId, data.StartDate, data.EndDate, data.StartDate, data.Age, data.Id, userId);
 
             var animal = PetContext.Animals.SingleOrDefault(r => r.Id == data.Id);
             if (animal == null)
@@ -605,6 +635,13 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Introduction))
                 return new IsSuccessResult<AnimalItem>("請輸入介紹");
             data.Introduction = data.Introduction.Trim();
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+                return new IsSuccessResult<AnimalItem>("沒有權限");
+            if (user.IsAdmin == false && animal.OperationInfo.UserId != userId)
+                return new IsSuccessResult<AnimalItem>("沒有權限");
 
             if (data.EndDate.HasValue)
             {

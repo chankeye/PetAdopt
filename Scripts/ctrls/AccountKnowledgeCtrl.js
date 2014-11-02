@@ -11,6 +11,33 @@
         window.location = "/Knowledge/Detail?id=" + data.Id;
     }
 
+    self.removeKnowledge = function (knowledge) {
+        if (confirm('確定要刪除？')) {
+
+            if (knowledge.IsDisable == true)
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Knowledge/Delete',
+                data: {
+                    id: knowledge.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(knowledge);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    self.editKnowledge = function (knowledge) {
+        window.location = "/Knowledge/Edit?id=" + knowledge.Id;
+    }
+
     //Add PaginationModel
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());

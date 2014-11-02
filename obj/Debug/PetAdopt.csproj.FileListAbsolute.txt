@@ -87,13 +87,12 @@ D:\Projects\PetAdopt\bin\MvcFileUploader.dll
 D:\Projects\PetAdopt\bin\MvcFileUploader.pdb
 D:\Projects\PetAdopt\obj\Debug\PetAdopt.dll
 D:\Projects\PetAdopt\obj\Debug\PetAdopt.pdb
+D:\Projects\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
 D:\PetAdopt\bin\NLog.config
 D:\PetAdopt\bin\PetAdopt.dll.config
 D:\PetAdopt\bin\PetAdopt.dll
 D:\PetAdopt\bin\PetAdopt.pdb
 D:\PetAdopt\bin\MvcFileUploader.dll
 D:\PetAdopt\bin\MvcFileUploader.pdb
-D:\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache
 D:\PetAdopt\obj\Debug\PetAdopt.dll
 D:\PetAdopt\obj\Debug\PetAdopt.pdb
-D:\Projects\PetAdopt\obj\Debug\PetAdopt.csprojResolveAssemblyReference.cache

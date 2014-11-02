@@ -45,14 +45,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = HelpLogic.DeleteHelp(Server.MapPath("~/Content/uploads"), id);
+            var result = HelpLogic.DeleteHelp(Server.MapPath("~/Content/uploads"), id, LoginInfo.Id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = HelpLogic.DeleteMessage(id, messageId);
+            var result = HelpLogic.DeleteMessage(id, messageId, LoginInfo.Id);
 
             return Json(result);
         }
@@ -78,7 +78,7 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult EditHelp(int id, CreateHelp data)
         {
-            var result = HelpLogic.EditHelp(id, data);
+            var result = HelpLogic.EditHelp(id, data, LoginInfo.Id);
 
             return Json(result);
         }

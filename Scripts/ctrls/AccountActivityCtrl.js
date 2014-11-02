@@ -7,6 +7,29 @@
 
     self.areas = ko.observableArray();
 
+    self.removeActivity = function (activity) {
+        if (confirm('確定要刪除？')) {
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Activity/Delete',
+                data: {
+                    id: activity.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(activity);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    self.editActivity = function (activity) {
+        window.location = "/Activity/Edit?id=" + activity.Id;
+    }
+
     self.detail = function (data) {
         window.location = "/Activity/Detail?id=" + data.Id;
     }

@@ -11,6 +11,33 @@
         window.location = "/Shelters/Detail?id=" + data.Id;
     }
 
+    self.removeShelters = function (shelters) {
+        if (confirm('確定要刪除？')) {
+
+            if (shelters.IsDisable == true)
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Shelters/Delete',
+                data: {
+                    id: shelters.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(shelters);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    self.editShelters = function (shelters) {
+        window.location = "/Shelters/Edit?id=" + shelters.Id;
+    }
+
     //Add PaginationModel
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());

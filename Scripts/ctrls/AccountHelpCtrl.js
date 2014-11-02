@@ -12,6 +12,33 @@
         window.location = "/Help/Detail?id=" + data.Id;
     }
 
+    self.removeHelp = function (help) {
+        if (confirm('確定要刪除？')) {
+
+            if (help.IsDisable == true)
+                return;
+
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Help/Delete',
+                data: {
+                    id: help.Id,
+                },
+                success: function (data) {
+                    if (data.IsSuccess) {
+                        self.history.remove(help);
+                    } else {
+                        alert(data.ErrorMessage);
+                    }
+                }
+            });
+        }
+    }
+
+    self.editHelp = function (help) {
+        window.location = "/Help/Edit?id=" + help.Id;
+    }
+
     //Add PaginationModel
     //from pagination.js
     ko.utils.extend(self, new PaginationModel());

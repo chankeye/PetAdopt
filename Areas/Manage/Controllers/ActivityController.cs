@@ -45,14 +45,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = ActivityLogic.DeleteActivity(Server.MapPath("~/Content/uploads"), id);
+            var result = ActivityLogic.DeleteActivity(Server.MapPath("~/Content/uploads"), id, LoginInfo.Id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = ActivityLogic.DeleteMessage(id, messageId);
+            var result = ActivityLogic.DeleteMessage(id, messageId, LoginInfo.Id);
 
             return Json(result);
         }
@@ -80,7 +80,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult EditActivity(int id, CreateActivity data)
         {
-            var result = ActivityLogic.EditActivity(id, data);
+            var result = ActivityLogic.EditActivity(id, data, LoginInfo.Id);
 
             return Json(result);
         }

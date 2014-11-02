@@ -28,6 +28,11 @@ namespace PetAdopt.Controllers
             return View();
         }
 
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
         public ActionResult New()
         {
             return View();

@@ -310,30 +310,46 @@ namespace PetAdopt.Logic
         /// 刪除最新活動
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult DeleteActivity(string path, int id)
+        public IsSuccessResult DeleteActivity(string path, int id, int userId)
         {
             var log = GetLogger();
-            log.Debug("id: {0}", id);
+            log.Debug("id: {0}, user: {1}, path: {2}", id, userId, path);
 
             var result = new IsSuccessResult();
-            var activitiy = PetContext.Activities.SingleOrDefault(r => r.Id == id);
-            if (activitiy == null)
+
+            var activity = PetContext.Activities.SingleOrDefault(r => r.Id == id);
+            if (activity == null)
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此活動";
                 return result;
             }
 
-            // 有上傳圖片，就把圖片刪掉
-            if (string.IsNullOrWhiteSpace(activitiy.CoverPhoto) == false)
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
             {
-                File.Delete(path + "//" + activitiy.CoverPhoto);
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false && activity.OperationInfo.UserId != userId)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
             }
 
             try
             {
-                PetContext.Messages.RemoveRange(activitiy.Messages);
-                PetContext.Activities.Remove(activitiy);
+                // 有上傳圖片，就把圖片刪掉
+                if (string.IsNullOrWhiteSpace(activity.CoverPhoto) == false)
+                {
+                    File.Delete(path + "//" + activity.CoverPhoto);
+                }
+
+                PetContext.Messages.RemoveRange(activity.Messages);
+                PetContext.Activities.Remove(activity);
                 PetContext.SaveChanges();
                 return result;
             }
@@ -353,10 +369,10 @@ namespace PetAdopt.Logic
         /// <param name="id">Activity.id</param>
         /// <param name="messageId"></param>
         /// <returns></returns>
-        public IsSuccessResult DeleteMessage(int id, int messageId)
+        public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
             var log = GetLogger();
-            log.Debug("id:{0}, messageId:{1}", id, messageId);
+            log.Debug("id:{0}, messageId:{1}, user: {2}", id, messageId, userId);
 
             var result = new IsSuccessResult();
 
@@ -365,6 +381,29 @@ namespace PetAdopt.Logic
             {
                 result.IsSuccess = false;
                 result.ErrorMessage = "找不到此問與答";
+                return result;
+            }
+
+            var activitiy = PetContext.Activities.SingleOrDefault(r => r.Id == id);
+            if (activitiy == null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "找不到此活動";
+                return result;
+            }
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
+                return result;
+            }
+            if (user.IsAdmin == false)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "沒有權限";
                 return result;
             }
 
@@ -465,11 +504,11 @@ namespace PetAdopt.Logic
         /// 修改最新活動
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult EditActivity(int id, CreateActivity data)
+        public IsSuccessResult EditActivity(int id, CreateActivity data, int userId)
         {
             var log = GetLogger();
             log.Debug("photo: {0}, title: {1}, message:{2}, areaId:{3}, address:{4}, id:{5}",
-                data.Photo, data.Title, data.Message, data.AreaId, data.Address, id);
+                data.Photo, data.Title, data.Message, data.AreaId, data.Address, id, userId);
 
             var activity = PetContext.Activities.SingleOrDefault(r => r.Id == id);
             if (activity == null)
@@ -482,6 +521,13 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Message))
                 return new IsSuccessResult("請輸入內容");
             data.Message = data.Message.Trim();
+
+            //檢查權限
+            var user = PetContext.Users.SingleOrDefault(r => r.Id == userId);
+            if (user == null || user.IsDisable)
+                return new IsSuccessResult("沒有權限");
+            if (user.IsAdmin == false && activity.OperationInfo.UserId != userId)
+                return new IsSuccessResult("沒有權限");
 
             if (string.IsNullOrWhiteSpace(data.Photo) == false)
                 data.Photo = data.Photo.Trim();

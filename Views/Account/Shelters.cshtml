@@ -15,6 +15,10 @@
     @Html.Partial("_Search")
     <div data-bind="foreach: history">
         <div class="row warp">
+            <div class="navbar-right">
+                <a href='#' data-bind="click: $root.editShelters" class="btn btn-primary">編輯</a>
+                <a href='#' data-bind="click: $root.removeShelters" class="btn btn-danger">移除</a>
+            </div>
             <div class="col-md-5 list-img">
                 <a href="#" data-bind="click: $root.detail">
                     <div data-bind="if:Photo">

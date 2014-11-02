@@ -45,14 +45,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = NewsLogic.DeleteNews(Server.MapPath("~/Content/uploads"), id);
+            var result = NewsLogic.DeleteNews(Server.MapPath("~/Content/uploads"), id, LoginInfo.Id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = NewsLogic.DeleteMessage(id, messageId);
+            var result = NewsLogic.DeleteMessage(id, messageId, LoginInfo.Id);
 
             return Json(result);
         }
@@ -80,7 +80,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult EditNews(int id, CreateNews data)
         {
-            var result = NewsLogic.EditNews(id, data);
+            var result = NewsLogic.EditNews(id, data, LoginInfo.Id);
 
             return Json(result);
         }

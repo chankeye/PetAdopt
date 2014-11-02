@@ -45,14 +45,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
         public ActionResult Delete(int id)
         {
-            var result = BlogLogic.DeleteBlog(id);
+            var result = BlogLogic.DeleteBlog(id, LoginInfo.Id);
 
             return Json(result);
         }
 
         public ActionResult DeleteMessage(int id, int messageId)
         {
-            var result = BlogLogic.DeleteMessage(id, messageId);
+            var result = BlogLogic.DeleteMessage(id, messageId, LoginInfo.Id);
 
             return Json(result);
         }
@@ -80,7 +80,7 @@ namespace PetAdopt.Areas.Manage.Controllers
         [ValidateInput(false)]
         public ActionResult EditBlog(EditBlog data)
         {
-            var result = BlogLogic.EditBlog(data);
+            var result = BlogLogic.EditBlog(data, LoginInfo.Id);
 
             return Json(result);
         }

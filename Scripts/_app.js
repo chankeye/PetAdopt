@@ -2,7 +2,7 @@
 
     // 取得地區列表
     getAreaList: function () {
-        $.ajax({
+        return $.ajax({
             type: 'post',
             url: '/Manage/System/GetAreaList',
             success: function (area) {
@@ -18,7 +18,7 @@
 
     // 取得分類列表
     getClassList: function () {
-        $.ajax({
+        return $.ajax({
             type: 'post',
             url: '/Manage/System/GetClassList',
             success: function (classes) {
@@ -34,7 +34,7 @@
 
     // 取得狀態列表
     getStatusList: function () {
-        $.ajax({
+        return $.ajax({
             type: 'post',
             url: '/Manage/System/GetStatusList',
             success: function (statuses) {

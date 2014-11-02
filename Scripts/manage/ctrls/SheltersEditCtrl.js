@@ -66,9 +66,6 @@
 
 $(function () {
 
-    // 取得地區列表
-    window.utils.getAreaList();
-
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
     if (window.id == null)
@@ -76,38 +73,44 @@ $(function () {
 
     // 取得收容所資訊
     var photo;
-    $.ajax({
-        type: 'post',
-        url: '/Manage/Shelters/EditInit',
-        data: {
-            id: window.id
-        },
-        success: function (data) {
-            if (data.IsSuccess) {
-                photo = data.ReturnObject.Photo;
-                if (photo != null) {
-                    $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
-                }
-                $("#name").val(data.ReturnObject.Name);
-                $("#selOptionsAreas").children().each(function () {
-                    if ($(this).val() == data.ReturnObject.AreaId) {
-                        //jQuery給法
-                        $(this).attr("selected", true); //或是給"selected"也可
-
-                        //javascript給法
-                        this.selected = true;
+    function init() {
+        $.ajax({
+            type: 'post',
+            url: '/Manage/Shelters/EditInit',
+            data: {
+                id: window.id
+            },
+            success: function (data) {
+                if (data.IsSuccess) {
+                    photo = data.ReturnObject.Photo;
+                    if (photo != null) {
+                        $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
                     }
-                });
-                $("#introduction").val(data.ReturnObject.Introduction);
-                $("#address").val(data.ReturnObject.Address);
-                $("#phone").val(data.ReturnObject.Phone);
-                $("#source").val(data.ReturnObject.Url);
-            } else {
-                alert(data.ErrorMessage);
-                window.location = '/Manage/Shelters';
+                    $("#name").val(data.ReturnObject.Name);
+                    $("#selOptionsAreas").children().each(function () {
+                        if ($(this).val() == data.ReturnObject.AreaId) {
+                            //jQuery給法
+                            $(this).attr("selected", true); //或是給"selected"也可
+
+                            //javascript給法
+                            this.selected = true;
+                        }
+                    });
+                    $("#introduction").val(data.ReturnObject.Introduction);
+                    $("#address").val(data.ReturnObject.Address);
+                    $("#phone").val(data.ReturnObject.Phone);
+                    $("#source").val(data.ReturnObject.Url);
+                } else {
+                    alert(data.ErrorMessage);
+                    window.location = '/Manage/Shelters';
+                }
             }
-        }
-    });
+        });
+    }
+
+    // 取得地區列表
+    window.utils.getAreaList()
+        .done(init());
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

@@ -67,9 +67,6 @@
 
 $(function () {
 
-    // 取得地區列表
-    window.utils.getAreaList();
-
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
     if (window.id == null)
@@ -77,36 +74,44 @@ $(function () {
 
     // 取得最新消息
     var photo;
-    $.ajax({
-        type: 'post',
-        url: '/Manage/News/EditInit',
-        data: {
-            id: window.id
-        },
-        success: function (data) {
-            if (data.IsSuccess) {
-                photo = data.ReturnObject.Photo;
-                if (photo != null) {
-                    $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
-                }
-                $("#title").val(data.ReturnObject.Title);
-                $("#selOptionsAreas").children().each(function () {
-                    if ($(this).val() == data.ReturnObject.AreaId) {
-                        //jQuery給法
-                        $(this).attr("selected", true); //或是給"selected"也可
-
-                        //javascript給法
-                        this.selected = true;
+    function init() {
+        $.ajax({
+            type: 'post',
+            url: '/Manage/News/EditInit',
+            data: {
+                id: window.id
+            },
+            success: function (data) {
+                if (data.IsSuccess) {
+                    photo = data.ReturnObject.Photo;
+                    if (photo != null) {
+                        $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
                     }
-                });
-                $("#content").val(data.ReturnObject.Message);
-                $("#source").val(data.ReturnObject.Url);
-            } else {
-                alert(data.ErrorMessage);
-                window.location = '/Manage/News';
+                    $("#title").val(data.ReturnObject.Title);
+                    $("#selOptionsAreas").children().each(function () {
+                        if ($(this).val() == data.ReturnObject.AreaId) {
+                            //jQuery給法
+                            $(this).attr("selected", true); //或是給"selected"也可
+
+                            //javascript給法
+                            this.selected = true;
+                        }
+                    });
+                    $("#content").val(data.ReturnObject.Message);
+                    $("#source").val(data.ReturnObject.Url);
+                } else {
+                    alert(data.ErrorMessage);
+                    window.location = '/Manage/News';
+                }
             }
-        }
-    });
+        });
+    }
+
+
+    // 取得地區列表
+    window.utils.getAreaList()
+        .done(init());
+
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

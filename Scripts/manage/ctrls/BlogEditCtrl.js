@@ -66,9 +66,6 @@
 
 $(function () {
 
-    // 取得分類列表
-    window.utils.getClassList();
-
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
     if (window.id == null)
@@ -76,32 +73,39 @@ $(function () {
 
     // 取得文章
     var photo;
-    $.ajax({
-        type: 'post',
-        url: '/Manage/Blog/EditInit',
-        data: {
-            id: window.id
-        },
-        success: function (data) {
-            if (data.IsSuccess) {
-                $("#title").val(data.ReturnObject.Title);
-                $("#selOptionsClasses").children().each(function () {
-                    if ($(this).val() == data.ReturnObject.ClassId) {
-                        //jQuery給法
-                        $(this).attr("selected", true); //或是給"selected"也可
 
-                        //javascript給法
-                        this.selected = true;
-                    }
-                });
-                $("#content").val(data.ReturnObject.Message);
-                $("#animalId").val(data.ReturnObject.AnimalId);
-            } else {
-                alert(data.ErrorMessage);
-                window.location = '/Manage/Blog';
+    function init() {
+        $.ajax({
+            type: 'post',
+            url: '/Manage/Blog/EditInit',
+            data: {
+                id: window.id
+            },
+            success: function (data) {
+                if (data.IsSuccess) {
+                    $("#title").val(data.ReturnObject.Title);
+                    $("#selOptionsClasses").children().each(function () {
+                        if ($(this).val() == data.ReturnObject.ClassId) {
+                            //jQuery給法
+                            $(this).attr("selected", true); //或是給"selected"也可
+
+                            //javascript給法
+                            this.selected = true;
+                        }
+                    });
+                    $("#content").val(data.ReturnObject.Message);
+                    $("#animalId").val(data.ReturnObject.AnimalId);
+                } else {
+                    alert(data.ErrorMessage);
+                    window.location = '/Manage/Blog';
+                }
             }
-        }
-    });
+        });
+    }
+
+    // 取得分類列表
+    window.utils.getClassList()
+        .done(init());
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

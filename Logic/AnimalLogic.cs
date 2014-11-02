@@ -766,6 +766,10 @@ namespace PetAdopt.Logic
                 .Take(5)
                 .ToList();
 
+            // 沒取到半比，就回傳一個空的list回去
+            if (data.Any() == false)
+                return new List<Carousel>();
+
             var result = data
                 .Select(r => new Carousel
                 {
@@ -777,22 +781,6 @@ namespace PetAdopt.Logic
                 })
                 .ToList();
 
-            // 沒取到半比，就回傳一個空的list回去
-            if (result.Any() == false)
-            {
-                result = new List<Carousel>
-                {
-                    new Carousel
-                    {
-                        Id = 0,
-                        Photo = "",
-                        EndDate = "",
-                        Title = "",
-                    }
-                };
-
-                return result;
-            }
 
             result.First().Class += " active";
             return result;

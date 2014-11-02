@@ -67,12 +67,6 @@
 
 $(function () {
 
-    // 取得分類列表
-    window.utils.getClassList();
-
-    // 取得地區列表
-    window.utils.getAreaList();
-
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
     if (window.id == null)
@@ -80,42 +74,49 @@ $(function () {
 
     // 取得最新救援
     var photo;
-    $.ajax({
-        type: 'post',
-        url: '/Manage/Help/EditInit',
-        data: {
-            id: window.id
-        },
-        success: function (data) {
-            if (data.IsSuccess) {
-                photo = data.ReturnObject.Photo;
-                $("#title").val(data.ReturnObject.Title);
-                $("#selOptionsAreas").children().each(function () {
-                    if ($(this).val() == data.ReturnObject.AreaId) {
-                        //jQuery給法
-                        $(this).attr("selected", true); //或是給"selected"也可
+    function init() {
+        $.ajax({
+            type: 'post',
+            url: '/Manage/Help/EditInit',
+            data: {
+                id: window.id
+            },
+            success: function(data) {
+                if (data.IsSuccess) {
+                    photo = data.ReturnObject.Photo;
+                    $("#title").val(data.ReturnObject.Title);
+                    $("#selOptionsAreas").children().each(function() {
+                        if ($(this).val() == data.ReturnObject.AreaId) {
+                            //jQuery給法
+                            $(this).attr("selected", true); //或是給"selected"也可
 
-                        //javascript給法
-                        this.selected = true;
-                    }
-                });
-                $("#selOptionsClasses").children().each(function () {
-                    if ($(this).val() == data.ReturnObject.ClassId) {
-                        //jQuery給法
-                        $(this).attr("selected", true); //或是給"selected"也可
+                            //javascript給法
+                            this.selected = true;
+                        }
+                    });
+                    $("#selOptionsClasses").children().each(function() {
+                        if ($(this).val() == data.ReturnObject.ClassId) {
+                            //jQuery給法
+                            $(this).attr("selected", true); //或是給"selected"也可
 
-                        //javascript給法
-                        this.selected = true;
-                    }
-                });
-                $("#content").val(data.ReturnObject.Message);
-                $("#address").val(data.ReturnObject.Address);
-            } else {
-                alert(data.ErrorMessage);
-                window.location = '/Manage/Help';
+                            //javascript給法
+                            this.selected = true;
+                        }
+                    });
+                    $("#content").val(data.ReturnObject.Message);
+                    $("#address").val(data.ReturnObject.Address);
+                } else {
+                    alert(data.ErrorMessage);
+                    window.location = '/Manage/Help';
+                }
             }
-        }
-    });
+        });
+    }
+
+    // 取得初始化資料
+    window.utils.getClassList()
+        .then(window.utils.getAreaList())
+        .then(init());
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

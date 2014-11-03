@@ -456,7 +456,7 @@ namespace PetAdopt.Logic
             {
                 data.Url = data.Url.Trim();
 
-                if (Regex.IsMatch(data.Url, Constant.PatternEmail) == false)
+                if (Regex.IsMatch(data.Url, Constant.PatternUrl) == false)
                     return new IsSuccessResult<NewsItem>("資料來源請輸入正確網址");
             }
 
@@ -542,7 +542,7 @@ namespace PetAdopt.Logic
             {
                 data.Url = data.Url.Trim();
 
-                if (Regex.IsMatch(data.Url, Constant.PatternEmail) == false)
+                if (Regex.IsMatch(data.Url, Constant.PatternUrl) == false)
                     return new IsSuccessResult("資料來源請輸入正確網址");
             }
 

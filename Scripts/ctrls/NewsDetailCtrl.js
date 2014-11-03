@@ -63,7 +63,11 @@ $(function () {
                 $("#title").text(data.ReturnObject.Title);
                 $("#selOptionsAreas").text(data.ReturnObject.Area);
                 $("#content").html(data.ReturnObject.Message);
-                $("#source").text(data.ReturnObject.Url);
+                if (data.ReturnObject.Url != null) {
+                    $("#source").attr('href', data.ReturnObject.Url);
+                } else {
+                    $("#source").hide();
+                }
                 $("#date").text(data.ReturnObject.Date);
                 $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {

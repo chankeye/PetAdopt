@@ -28,13 +28,24 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.OperationId).HasColumnName("OperationId");
 
             // Relationships
+            this.HasMany(t => t.Messages)
+                .WithMany(t => t.Asks)
+                .Map(m =>
+                    {
+                        m.ToTable("Ask_Message_Mapping");
+                        m.MapLeftKey("AskId");
+                        m.MapRightKey("MessageId");
+                    });
+
             this.HasRequired(t => t.Class)
                 .WithMany(t => t.Asks)
-                .HasForeignKey(d => d.ClassId);
+                .HasForeignKey(d => d.ClassId)
+                .WillCascadeOnDelete(false);
+
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Asks)
-                .HasForeignKey(d => d.OperationId);
-
+                .HasForeignKey(d => d.OperationId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

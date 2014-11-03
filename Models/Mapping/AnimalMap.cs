@@ -46,22 +46,48 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.Title).HasColumnName("Title");
 
             // Relationships
-            this.HasOptional(t => t.Area)
+            this.HasMany(t => t.Messages)
                 .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.AreaId);
-            this.HasRequired(t => t.Class)
+                .Map(m =>
+                    {
+                        m.ToTable("Animal_Message_Mapping");
+                        m.MapLeftKey("AnimalId");
+                        m.MapRightKey("MessageId");
+                    });
+
+            this.HasMany(t => t.Pictures)
                 .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.ClassId);
-            this.HasRequired(t => t.OperationInfo)
-                .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.OperationId);
+                .Map(m =>
+                    {
+                        m.ToTable("Animal_Picture_Mapping");
+                        m.MapLeftKey("AnimalId");
+                        m.MapRightKey("PictureId");
+                    });
+
             this.HasOptional(t => t.Shelter)
                 .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.SheltersId);
+                .HasForeignKey(d => d.SheltersId)
+                .WillCascadeOnDelete(false);
+
+            this.HasOptional(t => t.Area)
+                .WithMany(t => t.Animals)
+                .HasForeignKey(d => d.AreaId)
+                .WillCascadeOnDelete(false);
+
+            this.HasRequired(t => t.Class)
+                .WithMany(t => t.Animals)
+                .HasForeignKey(d => d.ClassId)
+                .WillCascadeOnDelete(false);
+
+            this.HasRequired(t => t.OperationInfo)
+                .WithMany(t => t.Animals)
+                .HasForeignKey(d => d.OperationId)
+                .WillCascadeOnDelete(false);
+
             this.HasRequired(t => t.Status)
                 .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.StatusId);
-
+                .HasForeignKey(d => d.StatusId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

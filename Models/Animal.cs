@@ -26,12 +26,12 @@ namespace PetAdopt.Models
         public int OperationId { get; set; }
         public short ClassId { get; set; }
         public string Title { get; set; }
+        public virtual Shelter Shelter { get; set; }
+        public virtual ICollection<Blog> Blogs { get; set; }
         public virtual Area Area { get; set; }
         public virtual Class Class { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
-        public virtual Shelter Shelter { get; set; }
         public virtual Status Status { get; set; }
-        public virtual ICollection<Blog> Blogs { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Picture> Pictures { get; set; }
     }

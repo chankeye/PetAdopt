@@ -29,16 +29,29 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.ClassId).HasColumnName("ClassId");
 
             // Relationships
+            this.HasMany(t => t.Messages)
+                .WithMany(t => t.Blogs)
+                .Map(m =>
+                    {
+                        m.ToTable("Blog_Message_Mapping");
+                        m.MapLeftKey("BlogId");
+                        m.MapRightKey("MessageId");
+                    });
+
             this.HasOptional(t => t.Animal)
                 .WithMany(t => t.Blogs)
-                .HasForeignKey(d => d.AnimalId);
+                .HasForeignKey(d => d.AnimalId)
+                .WillCascadeOnDelete(false);
+
             this.HasRequired(t => t.Class)
                 .WithMany(t => t.Blogs)
-                .HasForeignKey(d => d.ClassId);
+                .HasForeignKey(d => d.ClassId)
+                .WillCascadeOnDelete(false);
+
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Blogs)
-                .HasForeignKey(d => d.OperationId);
-
+                .HasForeignKey(d => d.OperationId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -22,46 +22,28 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.OperationId).HasColumnName("OperationId");
 
             // Relationships
-            this.HasMany(t => t.Activities)
+            this.HasMany(t => t.News)
                 .WithMany(t => t.Messages)
                 .Map(m =>
                     {
-                        m.ToTable("Activity_Message_Mapping");
+                        m.ToTable("News_Message_Mapping");
                         m.MapLeftKey("MessageId");
-                        m.MapRightKey("ActivityId");
+                        m.MapRightKey("NewsId");
                     });
 
-            this.HasMany(t => t.Animals)
+            this.HasMany(t => t.Shelters)
                 .WithMany(t => t.Messages)
                 .Map(m =>
                     {
-                        m.ToTable("Animal_Message_Mapping");
+                        m.ToTable("Shelter_Message_Mapping");
                         m.MapLeftKey("MessageId");
-                        m.MapRightKey("AnimalId");
-                    });
-
-            this.HasMany(t => t.Asks)
-                .WithMany(t => t.Messages)
-                .Map(m =>
-                    {
-                        m.ToTable("Ask_Message_Mapping");
-                        m.MapLeftKey("MessageId");
-                        m.MapRightKey("AskId");
-                    });
-
-            this.HasMany(t => t.Blogs)
-                .WithMany(t => t.Messages)
-                .Map(m =>
-                    {
-                        m.ToTable("Blog_Message_Mapping");
-                        m.MapLeftKey("MessageId");
-                        m.MapRightKey("BlogId");
+                        m.MapRightKey("ShelterId");
                     });
 
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Messages)
-                .HasForeignKey(d => d.OperationId);
-
+                .HasForeignKey(d => d.OperationId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -36,13 +36,24 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.CoverPhoto).HasColumnName("CoverPhoto");
 
             // Relationships
+            this.HasMany(t => t.Messages)
+                .WithMany(t => t.Activities)
+                .Map(m =>
+                    {
+                        m.ToTable("Activity_Message_Mapping");
+                        m.MapLeftKey("ActivityId");
+                        m.MapRightKey("MessageId");
+                    });
+
             this.HasOptional(t => t.Area)
                 .WithMany(t => t.Activities)
-                .HasForeignKey(d => d.AreaId);
+                .HasForeignKey(d => d.AreaId)
+                .WillCascadeOnDelete(false);
+
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Activities)
-                .HasForeignKey(d => d.OperationId);
-
+                .HasForeignKey(d => d.OperationId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -67,7 +67,11 @@ $(function () {
                 $("#introduction").html(data.ReturnObject.Introduction);
                 $("#address").text(data.ReturnObject.Address);
                 $("#phone").text(data.ReturnObject.Phone);
-                $("#source").text(data.ReturnObject.Url);
+                if (data.ReturnObject.Url != null) {
+                    $("#source").attr('href', data.ReturnObject.Url);
+                } else {
+                    $("#source").hide();
+                }
                 $("#date").text(data.ReturnObject.Date);
                 $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {

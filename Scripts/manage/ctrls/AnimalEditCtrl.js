@@ -70,8 +70,25 @@ $(function () {
 
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
-    if (window.id == null)
-        window.location = '/Manage/Animal';
+    if (window.id == null) {
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Manage/Animal';
+    }
+
+    // 判斷有沒有輸入收容所
+    function sheltersInput() {
+        if ($("#shelters").val() != "") {
+            $("#selOptionsAreas").attr('disabled', true);
+            $("#phone").attr('disabled', true);
+            $("#address").attr('disabled', true);
+        } else {
+            $("#selOptionsAreas").attr('disabled', false);
+            $("#phone").attr('disabled', false);
+            $("#address").attr('disabled', false);
+        }
+    }
 
     // 取得認養資訊
     var photo;
@@ -92,7 +109,7 @@ $(function () {
                     $("#startDate").val(data.ReturnObject.StartDate),
                         $("#endDate").val(data.ReturnObject.EndDate),
                         $("#introduction").val(data.ReturnObject.Introduction),
-                        $("#shelters").val(data.ReturnObject.SheltersId),
+                        $("#shelters").val(data.ReturnObject.Shelters),
                         $("#phone").val(data.ReturnObject.Phone),
                         $("#address").val(data.ReturnObject.Address),
                         $("#selOptionsAreas").children().each(function () {
@@ -124,9 +141,14 @@ $(function () {
                     });
                     $("#age").val(data.ReturnObject.Age);
                     $("#address").val(data.ReturnObject.Address);
+                    sheltersInput();
                 } else {
                     alert(data.ErrorMessage);
-                    window.location = '/Manage/Animal';
+
+                    if (history.length > 1)
+                        history.back();
+                    else
+                        window.location = '/Manage/Animal';
                 }
             }
         });
@@ -152,11 +174,14 @@ $(function () {
                     return url + "?name=" + uriEncodedQuery + "&_=" + timestamp;
                 }
             },
-            valueKey: 'Value',
+            valueKey: 'Display',
             template: '<p>{{Display}}</p>',
             engine: Hogan,
             limit: 10
         });
+
+    // 有填入收容所，地區、地址、電話就不需要填
+    $("#shelters").keyup(sheltersInput);
 
     // 修改活動
     $("#btn1").click(
@@ -208,7 +233,7 @@ $(function () {
                     StartDate: $("#startDate").val(),
                     EndDate: $("#endDate").val(),
                     Introduction: $("#introduction").val(),
-                    SheltersId: $("#shelters").val(),
+                    Shelters: $("#shelters").val(),
                     Phone: $("#phone").val(),
                     Address: $("#address").val(),
                     AreaId: $("#selOptionsAreas").val(),
@@ -220,7 +245,11 @@ $(function () {
                     $btn.button("reset");
                     if (data.IsSuccess) {
                         alert("修改完成");
-                        window.location = '/Manage/Animal';
+
+                        if (history.length > 1)
+                            history.back();
+                        else
+                            window.location = '/Manage/Animal';
                     } else {
                         alert(data.ErrorMessage);
                     }
@@ -228,7 +257,7 @@ $(function () {
             });
         });
 
-    // 取消
+    // 返回
     $("#btn2").click(
     function () {
         if (history.length > 1)

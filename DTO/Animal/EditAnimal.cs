@@ -14,7 +14,7 @@ namespace PetAdopt.DTO.Animal
 
         public string Introduction { get; set; }
 
-        public int? SheltersId { get; set; }
+        public string Shelters { get; set; }
 
         public short ClassId { get; set; }
 

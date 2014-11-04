@@ -42,8 +42,12 @@ $(function () {
 
     // 沒有輸入id直接導回
     window.id = window.utils.urlParams("id");
-    if (window.id == null)
-        window.location = '/Animal';
+    if (window.id == null) {
+        if (history.length > 1)
+            history.back();
+        else
+            window.location = '/Animal';
+    }
 
     // 取得動物資訊
     var photo;
@@ -60,23 +64,32 @@ $(function () {
                     $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
                 }
                 $("#title").text(data.ReturnObject.Title);
-                $("#startDate").text(data.ReturnObject.StartDate),
-                $("#endDate").text(data.ReturnObject.EndDate),
-                $("#introduction").html(data.ReturnObject.Introduction),
-                $("#shelters").text(data.ReturnObject.Shelters),
-                $("#shelters").attr("href", "/Shelters/Detail?id=" + data.ReturnObject.SheltersId),
-                $("#phone").text(data.ReturnObject.Phone),
-                $("#address").text(data.ReturnObject.Address),
-                $("#selOptionsAreas").text(data.ReturnObject.Area),
-                $("#selOptionsClasses").text(data.ReturnObject.Class),
-                $("#selOptionsStatuses").text(data.ReturnObject.Status),
+                $("#startDate").text(data.ReturnObject.StartDate);
+                $("#endDate").text(data.ReturnObject.EndDate);
+                $("#introduction").html(data.ReturnObject.Introduction);
+                if (data.ReturnObject.Shelters == null) {
+                    $("#phone").text(data.ReturnObject.Phone);
+                    $("#address").text(data.ReturnObject.Address);
+                    $("#selOptionsAreas").text(data.ReturnObject.Area);
+                    $("#sheltersLab").hide();
+                } else {
+                    $("#areaLab").hide();
+                    $("#addressLab").hide();
+                    $("#phoneLab").hide();
+                    $("#shelters").text(data.ReturnObject.Shelters);
+                    $("#shelters").attr("href", "/Shelters/Detail?id=" + data.ReturnObject.SheltersId);
+                }
+                $("#selOptionsClasses").text(data.ReturnObject.Class);
+                $("#selOptionsStatuses").text(data.ReturnObject.Status);
                 $("#age").text(data.ReturnObject.Age);
-                $("#address").text(data.ReturnObject.Address);
                 $("#date").text(data.ReturnObject.Date);
                 $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {
                 alert(data.ErrorMessage);
-                window.location = '/Animal';
+                if (history.length > 1)
+                    history.back();
+                else
+                    window.location = '/Animal';
             }
         }
     });

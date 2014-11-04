@@ -104,6 +104,20 @@ $(function () {
             limit: 10
         });
 
+    // 有填入收容所，地區、地址、電話就不需要填
+    $("#shelters").keyup(
+        function () {
+            if ($("#shelters").val() != "") {
+                $("#selOptionsAreas").attr('disabled', true);
+                $("#phone").attr('disabled', true);
+                $("#address").attr('disabled', true);
+            } else {
+                $("#selOptionsAreas").attr('disabled', false);
+                $("#phone").attr('disabled', false);
+                $("#address").attr('disabled', false);
+            }
+        });
+
     // 新增動物
     $("#btn1").click(
         function () {

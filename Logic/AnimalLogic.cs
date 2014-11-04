@@ -621,8 +621,8 @@ namespace PetAdopt.Logic
         public IsSuccessResult EditAnimal(EditAnimal data, int userId)
         {
             var log = GetLogger();
-            log.Debug("photo: {0}, title: {1}, introduction: {2}, areaId: {3}, address: {4}, phone: {5}, classId: {6}, sheltersId: {7}, startDate: {8}, endDate: {9}, statusId: {10}, age: {11}, id: {12}, user: {13}",
-                data.Photo, data.Title, data.Introduction, data.AreaId, data.Address, data.Phone, data.ClassId, data.SheltersId, data.StartDate, data.EndDate, data.StartDate, data.Age, data.Id, userId);
+            log.Debug("photo: {0}, title: {1}, introduction: {2}, areaId: {3}, address: {4}, phone: {5}, classId: {6}, shelters: {7}, startDate: {8}, endDate: {9}, statusId: {10}, age: {11}, id: {12}, user: {13}",
+                data.Photo, data.Title, data.Introduction, data.AreaId, data.Address, data.Phone, data.ClassId, data.Shelters, data.StartDate, data.EndDate, data.StartDate, data.Age, data.Id, userId);
 
             var animal = PetContext.Animals.SingleOrDefault(r => r.Id == data.Id);
             if (animal == null)
@@ -657,11 +657,16 @@ namespace PetAdopt.Logic
             if (hasStatus == false)
                 return new IsSuccessResult<AnimalItem>("請選擇正確的狀態");
 
-            if (data.SheltersId.HasValue)
+            int? sheltersId = 0;
+            if (string.IsNullOrWhiteSpace(data.Shelters) == false)
             {
-                var hasShelters = PetContext.Shelters.Any(r => r.Id == data.SheltersId);
-                if (hasShelters == false)
-                    return new IsSuccessResult<AnimalItem>("找不到此收容所編號");
+                data.Shelters = data.Shelters.Trim();
+                sheltersId = PetContext.Shelters
+                    .Where(r => r.Name == data.Shelters)
+                    .Select(r => r.Id)
+                    .SingleOrDefault();
+                if (sheltersId == 0)
+                    return new IsSuccessResult<AnimalItem>("找不到此收容所，請輸入正確名稱");
             }
             else
             {
@@ -698,7 +703,7 @@ namespace PetAdopt.Logic
                 animal.Address = data.Address;
                 animal.AreaId = data.AreaId;
                 animal.ClassId = data.ClassId;
-                animal.SheltersId = data.SheltersId;
+                animal.SheltersId = sheltersId == 0 ? null : sheltersId;
                 animal.Phone = data.Phone;
                 animal.StartDate = data.StartDate;
                 animal.EndDate = data.EndDate;

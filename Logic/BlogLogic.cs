@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace PetAdopt.Logic
 {
+    /// <summary>
+    /// Blog Logic
+    /// </summary>
     public class BlogLogic : _BaseLogic
     {
         /// <summary>
@@ -20,10 +23,11 @@ namespace PetAdopt.Logic
         /// 取得部落格列表
         /// </summary>
         /// <param name="page">第幾頁(1是第一頁)</param>
-        /// <param name="take">取幾筆資料</param>
-        /// <param name="query">查詢條件(只能查標題)</param>
-        /// <param name="isLike">非完全比對</param>
-        /// <param name="userId">指定某user發佈的</param>
+        /// <param name="take">取幾筆</param>
+        /// <param name="query">查標題</param>
+        /// <param name="isLike">模糊比對</param>
+        /// <param name="classId">Class.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public BlogList GetBlogList(int page = 1, int take = 10, string query = "", bool isLike = true, int classId = -1, int userId = -1)
         {
@@ -295,6 +299,8 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除部落格文章
         /// </summary>
+        /// <param name="id">Blog.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteBlog(int id, int userId)
         {
@@ -345,8 +351,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除留言
         /// </summary>
-        /// <param name="id">Blog.id</param>
-        /// <param name="messageId"></param>
+        /// <param name="id">Blog.Id</param>
+        /// <param name="messageId">Message.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
@@ -405,6 +412,7 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 新增Blog文章
         /// </summary>
+        /// <param name="data">文章資訊</param>
         /// <returns></returns>
         public IsSuccessResult<BlogItem> AddBlog(CreateBlog data)
         {
@@ -566,6 +574,7 @@ namespace PetAdopt.Logic
                 blog.Messages.Add(new Message
                 {
                     Message1 = message,
+                    IsRead = false,
                     OperationInfo = new OperationInfo
                     {
                         Date = DateTime.Now,

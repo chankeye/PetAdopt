@@ -8,6 +8,9 @@ using System.Linq;
 
 namespace PetAdopt.Logic
 {
+    /// <summary>
+    /// 問答Logic
+    /// </summary>
     public class AskLogic : _BaseLogic
     {
         /// <summary>
@@ -19,6 +22,12 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得問與答列表
         /// </summary>
+        /// <param name="page">取第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆</param>
+        /// <param name="query">查標題</param>
+        /// <param name="isLike">模糊比對</param>
+        /// <param name="classId">Class.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public AskList GetAskList(int page = 1, int take = 10, string query = "", bool isLike = true, int classId = -1, int userId = -1)
         {
@@ -288,6 +297,8 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除問與答
         /// </summary>
+        /// <param name="id">Ask.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteAsk(int id, int userId)
         {
@@ -338,8 +349,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除留言
         /// </summary>
-        /// <param name="id">Ask.id</param>
-        /// <param name="messageId"></param>
+        /// <param name="id">Ask.Id</param>
+        /// <param name="messageId">Message.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
@@ -398,6 +410,7 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 新增問與答
         /// </summary>
+        /// <param name="data">問與答資訊</param>
         /// <returns></returns>
         public IsSuccessResult<AskItem> AddAsk(CreateAsk data)
         {
@@ -455,6 +468,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 修改問與答
         /// </summary>
+        /// <param name="id">Ask.Id</param>
+        /// <param name="data">問與答資訊</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult EditAsk(int id, CreateAsk data, int userId)
         {
@@ -533,6 +549,7 @@ namespace PetAdopt.Logic
                 ask.Messages.Add(new Message
                 {
                     Message1 = message,
+                    IsRead = false,
                     OperationInfo = new OperationInfo
                     {
                         Date = DateTime.Now,

@@ -3,12 +3,15 @@ using PetAdopt.DTO.Activity;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 
 namespace PetAdopt.Logic
 {
+    /// <summary>
+    /// 活動Logic
+    /// </summary>
     public class ActivityLogic : _BaseLogic
     {
         /// <summary>
@@ -20,6 +23,12 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得最新活動列表
         /// </summary>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆資料</param>
+        /// <param name="query">查詢標題</param>
+        /// <param name="isLike">模糊比對</param>
+        /// <param name="areaId">Area.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public ActivityList GetActivities(int page = 1, int take = 10, string query = "", bool isLike = true, int areaId = -1, int userId = -1)
         {
@@ -225,6 +234,7 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得最新活動
         /// </summary>
+        /// <param name="id">Activity.Id</param>
         /// <returns></returns>
         public IsSuccessResult<GetActivity> GetActivity(int id)
         {
@@ -265,7 +275,7 @@ namespace PetAdopt.Logic
         public ActivityMessageList GetMessageList(int id, int page = 1, int take = 10)
         {
             var log = GetLogger();
-            log.Debug("page:{0}, take:{1}, id:{2}", page, take, id);
+            log.Debug("page: {0}, take: {1}, id: {2}", page, take, id);
 
             if (page <= 0)
                 page = 1;
@@ -309,6 +319,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除最新活動
         /// </summary>
+        /// <param name="path">圖片路徑</param>
+        /// <param name="id">Activity.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteActivity(string path, int id, int userId)
         {
@@ -366,8 +379,8 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除留言
         /// </summary>
-        /// <param name="id">Activity.id</param>
-        /// <param name="messageId"></param>
+        /// <param name="id">Activity.Id</param>
+        /// <param name="messageId">Message.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
@@ -434,6 +447,7 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 新增最新活動
         /// </summary>
+        /// <param name="data">活動的資料</param>
         /// <returns></returns>
         public IsSuccessResult<ActivityItem> AddActivity(CreateActivity data)
         {
@@ -503,6 +517,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 修改最新活動
         /// </summary>
+        /// <param name="id">Activity.Id</param>
+        /// <param name="data">活動的資料</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult EditActivity(int id, CreateActivity data, int userId)
         {
@@ -596,6 +613,7 @@ namespace PetAdopt.Logic
                 activity.Messages.Add(new Message
                 {
                     Message1 = message,
+                    IsRead = false,
                     OperationInfo = new OperationInfo
                     {
                         Date = DateTime.Now,

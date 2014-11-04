@@ -3,12 +3,15 @@ using PetAdopt.DTO.Animal;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 
 namespace PetAdopt.Logic
 {
+    /// <summary>
+    /// 動物Logic
+    /// </summary>
     public class AnimalLogic : _BaseLogic
     {
         /// <summary>
@@ -20,6 +23,14 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 取得動物列表
         /// </summary>
+        /// <param name="page">第幾頁(1是第一頁)</param>
+        /// <param name="take">取幾筆</param>
+        /// <param name="query">標題查詢</param>
+        /// <param name="isLike">模糊比對</param>
+        /// <param name="areaId">Area.Id</param>
+        /// <param name="classId">Class.Id</param>
+        /// <param name="statusId">Status.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public AnimalList GetAnimalList(int page = 1, int take = 10, string query = "", bool isLike = true, int areaId = -1, int classId = -1, int statusId = -1, int userId = -1)
         {
@@ -383,6 +394,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除動物
         /// </summary>
+        /// <param name="path">圖片路徑</param>
+        /// <param name="id">Animal.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteAnimal(string path, int id, int userId)
         {
@@ -446,8 +460,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除留言
         /// </summary>
-        /// <param name="id">Animal.id</param>
-        /// <param name="messageId"></param>
+        /// <param name="id">Animal.Id</param>
+        /// <param name="messageId">Message.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
@@ -506,6 +521,7 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 新增認養動物
         /// </summary>
+        /// <param name="data">動物資訊</param>
         /// <returns></returns>
         public IsSuccessResult<AnimalItem> AddAnimal(CreateAnimal data)
         {
@@ -617,6 +633,8 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 修改認養動物資訊
         /// </summary>
+        /// <param name="data">修改動物資訊</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult EditAnimal(EditAnimal data, int userId)
         {
@@ -746,6 +764,7 @@ namespace PetAdopt.Logic
                 animal.Messages.Add(new Message
                 {
                     Message1 = message,
+                    IsRead = false,
                     OperationInfo = new OperationInfo
                     {
                         Date = DateTime.Now,

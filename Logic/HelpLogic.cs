@@ -3,12 +3,15 @@ using PetAdopt.DTO.Help;
 using PetAdopt.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 
 namespace PetAdopt.Logic
 {
+    /// <summary>
+    /// 救援Logic
+    /// </summary>
     public class HelpLogic : _BaseLogic
     {
         /// <summary>
@@ -21,10 +24,12 @@ namespace PetAdopt.Logic
         /// 取得即刻救援列表
         /// </summary>
         /// <param name="page">第幾頁(1是第一頁)</param>
-        /// <param name="take">取幾筆資料</param>
-        /// <param name="query">查詢條件(只能查標題)</param>
-        /// <param name="isLike">非完全比對</param>
-        /// <param name="userId">指定某user發佈的</param>
+        /// <param name="take">取幾筆</param>
+        /// <param name="query">查標題</param>
+        /// <param name="isLike">模糊比對</param>
+        /// <param name="areaId">Area.Id</param>
+        /// <param name="classId">Class.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public HelpList GetHelpList(int page = 1, int take = 10, string query = "", bool isLike = true, int areaId = -1, int classId = -1, int userId = -1)
         {
@@ -347,6 +352,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 刪除即刻救援
         /// </summary>
+        /// <param name="path">圖片路徑</param>
+        /// <param name="id">Help.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteHelp(string path, int id, int userId)
         {
@@ -405,7 +413,8 @@ namespace PetAdopt.Logic
         /// 刪除留言
         /// </summary>
         /// <param name="id">Help.id</param>
-        /// <param name="messageId"></param>
+        /// <param name="messageId">Message.Id</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult DeleteMessage(int id, int messageId, int userId)
         {
@@ -464,6 +473,7 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 新增救援
         /// </summary>
+        /// <param name="data">救援資訊</param>
         /// <returns></returns>
         public IsSuccessResult<HelpItem> AddHelp(CreateHelp data)
         {
@@ -536,6 +546,9 @@ namespace PetAdopt.Logic
         /// <summary>
         /// 修改救援
         /// </summary>
+        /// <param name="id">Help.Id</param>
+        /// <param name="data">救援資訊</param>
+        /// <param name="userId">User.Id</param>
         /// <returns></returns>
         public IsSuccessResult EditHelp(int id, CreateHelp data, int userId)
         {
@@ -632,6 +645,7 @@ namespace PetAdopt.Logic
                 help.Messages.Add(new Message
                 {
                     Message1 = message,
+                    IsRead = false,
                     OperationInfo = new OperationInfo
                     {
                         Date = DateTime.Now,

@@ -539,6 +539,7 @@ namespace PetAdopt.Logic
                 knowledge.Messages.Add(new Message
                 {
                     Message1 = message,
+                    IsRead = false,
                     OperationInfo = new OperationInfo
                     {
                         Date = DateTime.Now,

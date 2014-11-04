@@ -20,6 +20,7 @@ namespace PetAdopt.Models
         public int Id { get; set; }
         public string Message1 { get; set; }
         public int OperationId { get; set; }
+        public bool IsRead { get; set; }
         public virtual OperationInfo OperationInfo { get; set; }
         public virtual ICollection<Activity> Activities { get; set; }
         public virtual ICollection<Animal> Animals { get; set; }

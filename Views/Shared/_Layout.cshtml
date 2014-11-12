@@ -8,15 +8,14 @@
     }
 }
 
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="http://rdf.data-vocabulary.org/#">
 <head>
     @* meta *@
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    @*<link rel="icon" href="../../favicon.ico">*@
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="狗狗,貓咪,兔子,天竺鼠,寵物,動物,認養,認養代替購買,艾認養,愛認養,Love,Adopt,LoveAdopt" />
+    <meta name="description" content="艾認養，一個以認養代替購買為理念的網站，希望可以減少流浪動物，給他們一個溫暖的家，讓他們成為你的家人吧，混血的動物們，健康又帥氣。" />
     <title>艾認養</title>
 
     @* load css *@
@@ -61,32 +60,32 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">艾認養</a>
+                        <a class="navbar-brand" href="/" rel="v:url" property="v:Title">艾認養</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown">最新資訊 <b class="caret"></b></a>
+                            <li class="dropdown" typeof="v:Breadcrumb">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">最新資訊 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/News" title="最新消息">一定要知道</a></li>
-                                    <li><a href="/Activity" title="最新活動">趕快去參加</a></li>
+                                    <li typeof="v:Breadcrumb"><a href="/News" title="最新消息" rel="v:url" property="v:Title">一定要知道</a></li>
+                                    <li typeof="v:Breadcrumb"><a href="/Activity" title="最新活動" rel="v:url" property="v:Title">趕快去參加</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown">動物資訊 <b class="caret"></b></a>
+                            <li class="dropdown" typeof="v:Breadcrumb">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">動物資訊 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Animal/New" title="送養動物">尋找有緣人</a></li>
-                                    <li><a href="/Animal" title="待認養動物">帶它回家</a></li>
-                                    <li><a href="/Help" title="需要你立即前往救援的動物們">即刻救援</a></li>
+                                    <li typeof="v:Breadcrumb"><a href="/Animal/New" title="送養動物" rel="v:url" property="v:Title">尋找有緣人</a></li>
+                                    <li typeof="v:Breadcrumb"><a href="/Animal" title="待認養動物" rel="v:url" property="v:Title">帶它回家</a></li>
+                                    <li typeof="v:Breadcrumb"><a href="/Help" title="需要你立即前往救援的動物們" rel="v:url" property="v:Title">即刻救援</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/Shelters" title="全台收容所資訊">收容所資訊</a></li>
-                            <li><a href="/Blog" title="部落格文章">它與他的故事</a></li>
-                            <li class="dropdown">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown">知識問答 <b class="caret"></b></a>
+                            <li typeof="v:Breadcrumb"><a href="/Shelters" title="全台收容所資訊" rel="v:url" property="v:Title">收容所資訊</a></li>
+                            <li typeof="v:Breadcrumb"><a href="/Blog" title="部落格文章" rel="v:url" property="v:Title">它與他的故事</a></li>
+                            <li class="dropdown" typeof="v:Breadcrumb">
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">知識問答 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Ask" title="問與答">我有問題</a></li>
-                                    <li><a href="/Knowledge" title="相關知識">增廣見聞</a></li>
+                                    <li typeof="v:Breadcrumb"><a href="/Ask" title="問與答" rel="v:url" property="v:Title">我有問題</a></li>
+                                    <li typeof="v:Breadcrumb"><a href="/Knowledge" title="相關知識" rel="v:url" property="v:Title">增廣見聞</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -105,8 +104,8 @@
                             }
                             else
                             {
-                                <li><a href="/Account/Register" title="註冊會員">註冊會員</a></li>
-                                <li><a href="/Account/Login" title="登入">登入</a></li>
+                                <li><a href="/Account/Register" title="註冊會員" rel="v:url" property="v:Title">註冊會員</a></li>
+                                <li><a href="/Account/Login" title="登入" rel="v:url" property="v:Title">登入</a></li>
                             }
                         </ul>
                     </div>
@@ -128,10 +127,10 @@
         </ol>
         <div class="carousel-inner" data-bind="foreach: imgList">
             <div data-bind="attr:{class: Class}">
-                <img data-bind="attr:{src: '../../Content/uploads/' + Photo}" alt="即將安樂死動物">
+                <img data-bind="attr:{src: '../../Content/uploads/' + Photo}" alt="即將安樂死動物" property="v:Title">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1>處死日：<label data-bind="text: EndDate"></label></h1>
+                        <h1>處死日：<label data-bind="text: EndDate" property="v:Date"></label></h1>
                         @*<p><label data-bind="text: Title"></label></p>*@
                         <p><a class="btn btn-lg btn-primary" href="#" data-bind="click: $root.detail" role="button">立即認養</a></p>
                     </div>

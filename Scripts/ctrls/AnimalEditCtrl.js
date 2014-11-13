@@ -34,6 +34,57 @@ $(function () {
         }
     }
 
+    $("#commentForm").validate({
+        rules: {
+            title: {
+                required: true,
+                maxlength: 50
+            },
+            introduction: {
+                required: true,
+                maxlength: 200
+            },
+            startDate: {
+                required: true,
+                date: true
+            },
+            selOptionsClasses: {
+                required: true
+            },
+            selOptionsStatuses: {
+                required: true
+            },
+            shelters: {
+                maxlength: 30
+            },
+            address: {
+                maxlength: 30
+            },
+            endDate: {
+                date: true
+            }
+        },
+        messages: {
+            title: {
+                required: "請輸入標題",
+                maxlength: "不得大於50個字"
+            },
+            introduction: {
+                required: "請輸入內容",
+                maxlength: "不得大於200個字"
+            },
+            startDate: {
+                required: "請輸入開始送養日期",
+                date: "請輸入正確的日期格式yyyy/mm/dd"
+            },
+            selOptionsClasses: "請選擇分類",
+            selOptionsStatuses: "請選擇狀態",
+            shelters: "不得大於30個字",
+            address: "不得大於30個字",
+            endDate: "請輸入正確的日期格式yyyy/mm/dd",
+        }
+    });
+
     // 取得認養資訊
     var photo;
     function init() {

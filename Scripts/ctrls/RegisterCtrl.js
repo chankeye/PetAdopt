@@ -51,7 +51,7 @@ $(function () {
                 maxlength: "不得大於20個字"
             },
             // 暱稱
-            diaplay: {
+            display: {
                 required: "請輸入暱稱",
                 minlength: "不得小於6個字",
                 maxlength: "不得大於20個字"

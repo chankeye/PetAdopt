@@ -4,7 +4,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-    background-color: #F2F2F2
+    background-color: #F2F2F2;
 }
 
 /* ul.ul-padding-vertical-05 */
@@ -152,3 +152,8 @@ ul.ul-padding-vertical-05 {
     }
 }
 /* 列表 */
+
+/* Jquery Vaildation error 改為紅色 */
+#commentForm label.error {
+    color: red;
+}

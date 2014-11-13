@@ -1,5 +1,36 @@
 ﻿$(document).ready(function () {
 
+    $("#commentForm").validate({
+        rules: {
+            oldPwd: {
+                required: true,
+                minlength: 6,
+                maxlength: 20
+            },
+            newPwd: {
+                required: true,
+                minlength: 6,
+                maxlength: 20
+            },
+            comPwd: {
+                equalTo: "#newPwd"
+            }
+        },
+        messages: {
+            oldPwd: {
+                required: "請輸入舊密碼",
+                minlength: "不得小於6個字",
+                maxlength: "不得大於20個字"
+            },
+            newPwd: {
+                required: "請輸入新密碼",
+                minlength: "不得小於6個字",
+                maxlength: "不得大於20個字"
+            },
+            comPwd: "輸入的密碼不一致"
+        }
+    });
+
     $("#btn1").click(
         function () {
             var $btn = $("#btn1");
@@ -10,7 +41,7 @@
             if ($("#commentForm").valid() == false) {
                 return;
             }
-            
+
             if ($comPWD.val() != $newPWD.val()) {
                 alert("新密碼與確認密碼不相同");
                 return;

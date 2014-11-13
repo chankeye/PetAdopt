@@ -63,6 +63,29 @@ $(function () {
     window.vm = new MyViewModel();
     ko.applyBindings(window.vm, $("#mainContiner")[0]);
 
+    $("#commentForm").validate({
+        rules: {
+            title: {
+                required: true,
+                maxlength: 50
+            },
+            content: {
+                required: true,
+                maxlength: 1000
+            }
+        },
+        messages: {
+            title: {
+                required: "請輸入標題",
+                maxlength: "不得大於50個字"
+            },
+            content: {
+                required: "請輸入內容",
+                maxlength: "不得大於1000個字"
+            }
+        }
+    });
+
     // 修改活動
     $("#btn1").click(
         function () {

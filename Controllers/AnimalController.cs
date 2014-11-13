@@ -82,6 +82,7 @@ namespace PetAdopt.Controllers
             return Json(result);
         }
 
+        [AllowAnonymous]
         public ActionResult GetCarouselList()
         {
             var result = AnimalLogic.GetCarouselList();

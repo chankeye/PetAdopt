@@ -100,6 +100,12 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\about.jpg" />
+    <Content Include="Content\Images\writer.jpg" />
+    <Content Include="Content\Images\using.jpg" />
+    <Content Include="Content\Images\activity.jpg" />
+    <Content Include="Content\Images\adopt.jpg" />
+    <Content Include="Content\Images\news.jpg" />
     <Content Include="Content\typeahead.js-bootstrap.css" />
     <Content Include="Content\typeahead.js-bootstrap.fixed.css" />
     <Content Include="Content\carousel.css" />

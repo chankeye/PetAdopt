@@ -57,10 +57,12 @@ body {
 }
 
 .carousel-inner > .item > img {
-    position: absolute;
+    /*position: absolute;
     top: 0;
     left: 0;
-    min-width: 100%;
+    min-width: 100%;*/
+    display:block;
+    margin:auto;
     height: 500px;
 }
 

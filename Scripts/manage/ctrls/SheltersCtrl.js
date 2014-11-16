@@ -120,7 +120,7 @@ $(function () {
                         $("#phone").val(''),
                         $("#address").val('');
                         $("#selOptionsAreas option:first").attr("selected", true);
-                        $("#source").val();
+                        $("#source").val('');
 
                         alert("新增成功");
                     } else {

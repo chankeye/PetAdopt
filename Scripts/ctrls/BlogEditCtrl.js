@@ -84,7 +84,7 @@ $(function () {
             },
             content: {
                 required: true,
-                maxlength: 1000
+                maxlength: 2000
             },
             selOptionsClasses: {
                 required: true
@@ -97,7 +97,7 @@ $(function () {
             },
             content: {
                 required: "請輸入內容",
-                maxlength: "不得大於1000個字"
+                maxlength: "不得大於2000個字"
             },
             selOptionsClasses: "請選擇分類",
         }
@@ -123,7 +123,7 @@ $(function () {
                 return;
             }
 
-            if (oEditor.getData().length > 1000) {
+            if (oEditor.getData().length > 2000) {
                 alert('內容過長，請重新輸入');
                 return;
             }

@@ -116,7 +116,7 @@ $(function () {
                 return;
             }
 
-            if (oEditor.getData().length > 1000) {
+            if (oEditor.getData().length > 2000) {
                 alert('內容過長，請重新輸入');
                 return;
             }

@@ -16,8 +16,7 @@ namespace PetAdopt.Models.Mapping
                 .HasMaxLength(50);
 
             this.Property(t => t.Message)
-                .IsRequired()
-                .HasMaxLength(2000);
+                .IsRequired();
 
             // Table & Column Mappings
             this.ToTable("Blog");

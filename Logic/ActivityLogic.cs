@@ -255,7 +255,7 @@ namespace PetAdopt.Logic
                 {
                     Photo = activity.CoverPhoto,
                     Title = activity.Title,
-                    Message = activity.Message,
+                    Message = activity.Message.Replace("\n", "<br>"),
                     AreaId = activity.AreaId,
                     Area = activity.AreaId.HasValue ? activity.Area.Word : null,
                     Address = activity.Address,

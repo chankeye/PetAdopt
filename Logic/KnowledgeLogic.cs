@@ -230,7 +230,7 @@ namespace PetAdopt.Logic
                 ReturnObject = new GetKnowledge
                 {
                     Title = knowledge.Title,
-                    Message = knowledge.Message,
+                    Message = knowledge.Message.Replace("\n", "<br>"),
                     ClassId = knowledge.ClassId,
                     Class = knowledge.Class.Word,
                     Date = knowledge.OperationInfo.Date.ToString("yyyy-MM-dd"),

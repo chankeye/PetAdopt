@@ -252,7 +252,7 @@ namespace PetAdopt.Logic
                 {
                     Photo = news.CoverPhoto,
                     Title = news.Title,
-                    Message = news.Message,
+                    Message = news.Message.Replace("\n", "<br>"),
                     AreaId = news.AreaId,
                     Area = news.AreaId.HasValue ? news.Area.Word : null,
                     Url = news.Url,

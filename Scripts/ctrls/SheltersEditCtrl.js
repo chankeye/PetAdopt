@@ -68,7 +68,7 @@ $(function () {
 
     $("#commentForm").validate({
         rules: {
-            title: {
+            name: {
                 required: true,
                 maxlength: 50
             },
@@ -93,7 +93,7 @@ $(function () {
             }
         },
         messages: {
-            title: {
+            name: {
                 required: "請輸入標題",
                 maxlength: "不得大於50個字"
             },

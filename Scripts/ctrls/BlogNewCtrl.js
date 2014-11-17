@@ -30,6 +30,33 @@ $(function () {
             limit: 10
         });
 
+    $("#commentForm").validate({
+        rules: {
+            title: {
+                required: true,
+                maxlength: 50
+            },
+            content: {
+                required: true,
+                maxlength: 1000
+            },
+            selOptionsClasses: {
+                required: true
+            }
+        },
+        messages: {
+            title: {
+                required: "請輸入標題",
+                maxlength: "不得大於50個字"
+            },
+            content: {
+                required: "請輸入內容",
+                maxlength: "不得大於1000個字"
+            },
+            selOptionsClasses: "請選擇分類",
+        }
+    });
+
     // 新增Blog
     $("#btn1").click(
         function () {

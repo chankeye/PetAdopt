@@ -131,7 +131,7 @@ ul.ul-padding-vertical-05 {
     }
 }
 
-@media only screen and (min-width:451px) and (max-width:768px) {
+/*@media only screen and (min-width:451px) and (max-width:768px) {
     .list-img {
         width: 50%;
     }
@@ -139,9 +139,10 @@ ul.ul-padding-vertical-05 {
     .list-text {
         width: 50%;
     }
-}
+}*/
 
-@media only screen and (min-width:1px) and (max-width:450px) {
+/*@media only screen and (min-width:1px) and (max-width:450px)*/
+@media only screen and (min-width:451px) and (max-width:768px) {
     .list-img {
         width: 100%;
         margin-bottom: 10px;
@@ -156,4 +157,9 @@ ul.ul-padding-vertical-05 {
 /* Jquery Vaildation error 改為紅色 */
 #commentForm label.error {
     color: red;
+}
+
+/* 圖片最大只能30em */
+.fullImage {
+    max-height: 30em
 }

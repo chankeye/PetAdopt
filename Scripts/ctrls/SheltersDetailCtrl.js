@@ -64,7 +64,7 @@ $(function () {
                 }
                 $("#name").text(data.ReturnObject.Name);
                 $("#selOptionsAreas").text(data.ReturnObject.Area);
-                $("#introduction").html(data.ReturnObject.Introduction.replace("\n", "<br>"));
+                $("#introduction").html(data.ReturnObject.Introduction.replace(/\n/g, "<br>"));
                 $("#address").text(data.ReturnObject.Address);
                 $("#phone").text(data.ReturnObject.Phone);
                 if (data.ReturnObject.Url != null) {

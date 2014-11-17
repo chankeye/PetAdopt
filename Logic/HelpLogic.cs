@@ -286,7 +286,7 @@ namespace PetAdopt.Logic
                 {
                     Photo = help.CoverPhoto,
                     Title = help.Title,
-                    Message = help.Message.Replace("\n", "<br>"),
+                    Message = help.Message,
                     Address = help.Address,
                     AreaId = help.AreaId,
                     Area = help.Area.Word,

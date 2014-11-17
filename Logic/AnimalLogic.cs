@@ -320,7 +320,7 @@ namespace PetAdopt.Logic
                 {
                     Photo = animal.CoverPhoto,
                     Title = animal.Title,
-                    Introduction = animal.Introduction.Replace("\n", "<br>"),
+                    Introduction = animal.Introduction,
                     Address = animal.Address,
                     AreaId = animal.AreaId,
                     ClassId = animal.ClassId,

@@ -62,7 +62,7 @@ $(function () {
                 }
                 $("#title").text(data.ReturnObject.Title);
                 $("#selOptionsAreas").text(data.ReturnObject.Area);
-                $("#content").html(data.ReturnObject.Message);
+                $("#content").html(data.ReturnObject.Message.replace("\n", "<br>"));
                 if (data.ReturnObject.Url != null) {
                     $("#source").attr('href', data.ReturnObject.Url);
                 } else {

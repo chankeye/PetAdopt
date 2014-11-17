@@ -234,7 +234,7 @@ namespace PetAdopt.Logic
                 ReturnObject = new GetAsk
                 {
                     Title = ask.Title,
-                    Message = ask.Message.Replace("\n", "<br>"),
+                    Message = ask.Message,
                     ClassId = ask.ClassId,
                     Class = ask.Class.Word,
                     Date = ask.OperationInfo.Date.ToString("yyyy-MM-dd"),

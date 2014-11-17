@@ -235,7 +235,7 @@ namespace PetAdopt.Logic
                 {
                     Photo = shelters.CoverPhoto,
                     Name = shelters.Name,
-                    Introduction = shelters.Introduction.Replace("\n", "<br>"),
+                    Introduction = shelters.Introduction,
                     AreaId = shelters.AreaId,
                     Area = shelters.Area.Word,
                     Address = shelters.Address,

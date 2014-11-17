@@ -62,7 +62,7 @@ $(function () {
                 $("#title").text(data.ReturnObject.Title);
                 $("#selOptionsAreas").text(data.ReturnObject.Area);
                 $("#selOptionsClasses").text(data.ReturnObject.Class);
-                $("#content").html(data.ReturnObject.Message);
+                $("#content").html(data.ReturnObject.Message.replace("\n", "<br>"));
                 $("#address").text(data.ReturnObject.Address);
                 $("#date").text(data.ReturnObject.Date);
                 $("#userDisplay").text(data.ReturnObject.UserDisplay);

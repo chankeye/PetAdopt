@@ -66,7 +66,7 @@ $(function () {
                 $("#title").text(data.ReturnObject.Title);
                 $("#startDate").text(data.ReturnObject.StartDate);
                 $("#endDate").text(data.ReturnObject.EndDate);
-                $("#introduction").html(data.ReturnObject.Introduction);
+                $("#introduction").html(data.ReturnObject.Introduction.replace("\n", "<br>"));
                 if (data.ReturnObject.Shelters == null) {
                     $("#phone").text(data.ReturnObject.Phone);
                     $("#address").text(data.ReturnObject.Address);

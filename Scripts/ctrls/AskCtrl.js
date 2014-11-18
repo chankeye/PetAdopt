@@ -55,10 +55,18 @@
 }
 
 $(function () {
+
+    (function ($) {
+        var origAppend = $.fn.append;
+
+        $.fn.append = function () {
+            return origAppend.apply(this, arguments).trigger("append");
+        };
+    })(jQuery);
+
     // 取得分類列表
-    $("#selOptionsSearch")
-        .append(window.utils.optionsClasses)
-        .done(window.utils.getClassList());
+    $("#selOptionsSearch").append(window.utils.optionsClasses);
+    $("#optionsClasses").bind("append", window.utils.getClassList());
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

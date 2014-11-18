@@ -56,14 +56,22 @@
 }
 
 $(function () {
+
+    (function ($) {
+        var origAppend = $.fn.append;
+
+        $.fn.append = function () {
+            return origAppend.apply(this, arguments).trigger("append");
+        };
+    })(jQuery);
+
     // 取得地區列表
-    $("#selOptionsSearch")
-        .append(window.utils.optionsAreas)
-        .done(window.utils.getAreaList());
+    $("#selOptionsSearch").append(window.utils.optionsAreas);
+    $("#optionsAreas").bind("append", window.utils.getAreaList());
 
     // 取得分類列表
     $("#selOptionsSearch").append(window.utils.optionsClasses);
-    window.utils.getClassList();
+    $("#optionsClasses").bind("append", window.utils.getClassList());
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

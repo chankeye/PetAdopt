@@ -67,16 +67,16 @@ $(function () {
     })(jQuery);
 
     // 取得地區列表
-    $("#selOptionsSearch").append(window.utils.optionsAreas);
-    $("#optionsAreas").bind("append", window.utils.getAreaList());
+    $("#optionsAreas").bind("append", window.utils.getAreaList);
+    $("#optionsAreas").append(window.utils.optionsAreas);
 
     // 取得分類列表
-    $("#selOptionsSearch").append(window.utils.optionsClasses);
-    $("#optionsClasses").bind("append", window.utils.getClassList());
+    $("#optionsClasses").bind("append", window.utils.getClassList);
+    $("#optionsClasses").append(window.utils.optionsClasses);
 
     // 取得狀態列表
-    $("#selOptionsSearch").append(window.utils.optionsStatuses);
-    $("#optionsStatuses").bind("append", window.utils.getStatusList());
+    $("#optionsStatuses").bind("append", window.utils.getStatusList);
+    $("#optionsStatuses").append(window.utils.optionsStatuses);
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

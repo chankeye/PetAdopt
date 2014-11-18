@@ -67,8 +67,8 @@ $(function () {
     })(jQuery);
 
     // 取得地區列表
-    $("#selOptionsSearch").append(window.utils.optionsAreas);
-    $("#optionsAreas").bind("append", window.utils.getAreaList());
+    $("#optionsAreas").bind("append", window.utils.getAreaList);
+    $("#optionsAreas").append(window.utils.optionsAreas);
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

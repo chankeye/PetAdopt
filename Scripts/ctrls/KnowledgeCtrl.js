@@ -65,8 +65,8 @@ $(function () {
     })(jQuery);
 
     // 取得分類列表
-    $("#selOptionsSearch").append(window.utils.optionsClasses);
-    $("#optionsClasses").bind("append", window.utils.getClassList());
+    $("#optionsClasses").bind("append", window.utils.getClassList);
+    $("#optionsClasses").append(window.utils.optionsClasses);
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

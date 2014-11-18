@@ -28,6 +28,7 @@ namespace PetAdopt.Areas.Manage.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult GetAreaList()
         {
             var areas = SystemLogic.GetAreaList();
@@ -49,6 +50,7 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
+        [AllowAnonymous]
         public ActionResult GetStatusList()
         {
             var statuses = SystemLogic.GetStatusList();
@@ -70,6 +72,7 @@ namespace PetAdopt.Areas.Manage.Controllers
             return Json(result);
         }
 
+        [AllowAnonymous]
         public ActionResult GetClassList()
         {
             var classes = SystemLogic.GetClassList();

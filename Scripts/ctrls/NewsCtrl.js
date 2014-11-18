@@ -56,8 +56,9 @@
 
 $(function () {
     // 取得地區列表
-    $("#selOptionsSearch").append(window.utils.optionsAreas);
-    window.utils.getAreaList();
+    $("#selOptionsSearch")
+        .append(window.utils.optionsAreas)
+        .done(window.utils.getAreaList());
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

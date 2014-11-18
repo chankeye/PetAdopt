@@ -56,8 +56,9 @@
 
 $(function () {
     // 取得分類列表
-    $("#selOptionsSearch").append(window.utils.optionsClasses);
-    window.utils.getClassList();
+    $("#selOptionsSearch")
+        .append(window.utils.optionsClasses)
+        .done(window.utils.getClassList());
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();
@@ -68,7 +69,7 @@ $(function () {
         var $btn = $("#btn3");
 
         $btn.button("loading");
-        window.vm.loadHistory(1, 10, $("#search").val(), !$("#checkAll").is(':checked'), "",$("#selOptionsClasses").val(),"");
+        window.vm.loadHistory(1, 10, $("#search").val(), !$("#checkAll").is(':checked'), "", $("#selOptionsClasses").val(), "");
         $btn.button("reset");
     });
 });

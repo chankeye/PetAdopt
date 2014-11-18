@@ -56,8 +56,9 @@
 
 $(function () {
     // 取得分類列表
-    $("#selOptionsSearch").append(window.utils.optionsClasses);
-    window.utils.getClassList();
+    $("#selOptionsSearch")
+        .append(window.utils.optionsClasses)
+        .done(window.utils.getClassList());
 
     window.vm = new MyViewModel();
     window.vm.loadHistory();

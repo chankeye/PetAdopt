@@ -57,8 +57,9 @@
 
 $(function () {
     // 取得地區列表
-    $("#selOptionsSearch").append(window.utils.optionsAreas);
-    window.utils.getAreaList();
+    $("#selOptionsSearch")
+        .append(window.utils.optionsAreas)
+        .done(window.utils.getAreaList());
 
     // 取得分類列表
     $("#selOptionsSearch").append(window.utils.optionsClasses);

@@ -102,6 +102,7 @@
   <ItemGroup>
     <Content Include="Content\Images\about.jpg" />
     <Content Include="Content\Images\fb.jpg" />
+    <Content Include="Content\Images\icon.ico" />
     <Content Include="Content\Images\writer.jpg" />
     <Content Include="Content\Images\using.jpg" />
     <Content Include="Content\Images\activity.jpg" />

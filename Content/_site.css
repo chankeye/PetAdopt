@@ -114,6 +114,7 @@ ul.ul-padding-vertical-05 {
     width: 590px;
     display: inline-block;
     vertical-align: top;
+    overflow: hidden;
 }
 
 .list-msg {
@@ -162,4 +163,21 @@ ul.ul-padding-vertical-05 {
 /* 圖片最大只能30em */
 .fullImage {
     max-height: 30em
+}
+
+/* 詳細頁的content */
+.contentLabel {
+    width: 600px;
+}
+
+@media only screen and (min-width:451px) and (max-width:768px) {
+    .contentLabel {
+        width: 450px;
+    }
+}
+
+@media only screen and (min-width:1px) and (max-width:450px) {
+    .contentLabel {
+        width: 300px;
+    }
 }

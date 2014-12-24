@@ -97,7 +97,7 @@ $(function () {
             },
             content: {
                 required: "請輸入內容",
-                maxlength: "不得大於10000個字"
+                maxlength: "不得大於1000個字"
             },
             selOptionsClasses: "請選擇分類",
         }

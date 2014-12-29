@@ -183,7 +183,7 @@ $(function () {
     // 有填入收容所，地區、地址、電話就不需要填
     $("#shelters").keyup(sheltersInput);
 
-    // 修改活動
+    // 修改動物
     $("#btn1").click(
         function () {
             var $btn = $("#btn1");
@@ -215,8 +215,8 @@ $(function () {
             }
 
             if ($("#shelters").val() == "") {
-                if ($("#selOptionsAreas").val() == "" || $("#phone").val() == "" || $("#address").val() == "") {
-                    alert('請輸入收容所 或 選擇地區、填入地址、電話');
+                if ($("#selOptionsAreas").val() == "") {
+                    alert('請輸入收容所 或 選擇地區');
                     return;
                 }
             }

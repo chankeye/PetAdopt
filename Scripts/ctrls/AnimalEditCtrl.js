@@ -42,7 +42,7 @@ $(function () {
             },
             introduction: {
                 required: true,
-                maxlength: 200
+                maxlength: 500
             },
             startDate: {
                 required: true,
@@ -71,7 +71,7 @@ $(function () {
             },
             introduction: {
                 required: "請輸入內容",
-                maxlength: "不得大於200個字"
+                maxlength: "不得大於500個字"
             },
             startDate: {
                 required: "請輸入開始送養日期",
@@ -205,8 +205,8 @@ $(function () {
             }
 
             if ($("#shelters").val() == "") {
-                if ($("#selOptionsAreas").val() == "" || $("#phone").val() == "" || $("#address").val() == "") {
-                    alert('請輸入收容所 或 選擇地區、填入地址、電話');
+                if ($("#selOptionsAreas").val() == "") {
+                    alert('請輸入收容所 或 選擇地區');
                     return;
                 }
             }

@@ -45,7 +45,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">介紹</label>
             <div class="col-sm-4">
-                <textarea id="introduction" name="introduction" rows="8" class="form-control required" maxlength="200" placeholder="請輸入動物相關介紹" required></textarea>
+                <textarea id="introduction" name="introduction" rows="8" class="form-control required" maxlength="500" placeholder="請輸入動物相關介紹" required></textarea>
             </div>
         </div>
         <div class="form-group">
@@ -63,16 +63,20 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">所在收容所編號</label>
-            <div class="col-sm-4">
-                <input id="shelters" name="shelters" class="form-control" maxlength="30" placeholder="請輸入收容所編號" />
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-sm-2 control-label">地區</label>
             <div class="col-sm-4">
                 <select id="selOptionsAreas" class="form-control"
                         data-bind="options: areas, optionsText: 'Word', optionsValue: 'Id'"></select>
+            </div>
+        </div>
+        <legend class="text-info">
+            <i class="fa fa-check"></i>
+            選填欄位
+        </legend>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">所在收容所編號</label>
+            <div class="col-sm-4">
+                <input id="shelters" name="shelters" class="form-control" maxlength="30" placeholder="請輸入收容所編號" />
             </div>
         </div>
         <div class="form-group">
@@ -87,10 +91,6 @@
                 <input id="phone" name="phone" type="number" class="form-control" placeholder="0422223333或0912345678" />
             </div>
         </div>
-        <legend class="text-info">
-            <i class="fa fa-check"></i>
-            選填欄位
-        </legend>
         <div class="form-group">
             <label class="col-sm-2 control-label">安樂死日期</label>
             <div class="col-sm-4">
@@ -111,9 +111,6 @@
             </div>
         </div>
     </form>
-
     <hr />
-
     @Html.Partial("_Message")
-
 </div>

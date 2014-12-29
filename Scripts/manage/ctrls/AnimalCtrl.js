@@ -140,8 +140,8 @@ $(function () {
             }
 
             if ($("#shelters").val() == "") {
-                if ($("#selOptionsAreas").val() == "" || $("#phone").val() == "" || $("#address").val() == "") {
-                    alert('請輸入收容所 或 選擇地區、填入地址、電話');
+                if ($("#selOptionsAreas").val()) {
+                    alert('請輸入收容所 或 選擇地區');
                     return;
                 }
             }

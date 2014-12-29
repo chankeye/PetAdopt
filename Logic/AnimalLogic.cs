@@ -572,14 +572,6 @@ namespace PetAdopt.Logic
                     if (hasArea == false)
                         return new IsSuccessResult<AnimalItem>("請選擇正確的地區");
                 }
-
-                if (string.IsNullOrWhiteSpace(data.Phone))
-                    return new IsSuccessResult<AnimalItem>("請輸入電話");
-                data.Phone = data.Phone.Trim();
-
-                if (string.IsNullOrWhiteSpace(data.Address))
-                    return new IsSuccessResult<AnimalItem>("請輸入地址");
-                data.Address = data.Address.Trim();
             }
 
             if (string.IsNullOrWhiteSpace(data.Photo) == false)
@@ -696,14 +688,6 @@ namespace PetAdopt.Logic
                     if (hasArea == false)
                         return new IsSuccessResult<AnimalItem>("請選擇正確的地區");
                 }
-
-                if (string.IsNullOrWhiteSpace(data.Phone))
-                    return new IsSuccessResult<AnimalItem>("請輸入電話");
-                data.Phone = data.Phone.Trim();
-
-                if (string.IsNullOrWhiteSpace(data.Address))
-                    return new IsSuccessResult<AnimalItem>("請輸入地址");
-                data.Address = data.Address.Trim();
             }
 
             if (string.IsNullOrWhiteSpace(data.Photo) == false)

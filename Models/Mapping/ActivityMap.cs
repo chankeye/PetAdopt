@@ -16,8 +16,7 @@ namespace PetAdopt.Models.Mapping
                 .HasMaxLength(50);
 
             this.Property(t => t.Message)
-                .IsRequired()
-                .HasMaxLength(1000);
+                .IsRequired();
 
             this.Property(t => t.Address)
                 .HasMaxLength(30);

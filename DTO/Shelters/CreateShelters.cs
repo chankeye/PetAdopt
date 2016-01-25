@@ -8,7 +8,7 @@
 
         public string Introduction { get; set; }
 
-        public short AreaId { get; set; }
+        public int AreaId { get; set; }
 
         public string Address { get; set; }
 

@@ -12,7 +12,7 @@
 
         public string Class { get; set; }
 
-        public short AreaId { get; set; }
+        public int AreaId { get; set; }
 
         public string Area { get; set; }
 

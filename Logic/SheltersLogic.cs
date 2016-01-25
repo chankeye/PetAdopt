@@ -227,7 +227,7 @@ namespace PetAdopt.Logic
                 .Include(r => r.OperationInfo.User)
                 .SingleOrDefault(r => r.Id == id);
             if (shelters == null)
-                return new IsSuccessResult<GetShelters>("找不到此活動");
+                return new IsSuccessResult<GetShelters>("找不到此收容所");
 
             return new IsSuccessResult<GetShelters>
             {
@@ -463,10 +463,13 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Url) == false)
                 data.Url = data.Url.Trim();
 
+            var lastId = PetContext.Shelters.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault();
+
             try
             {
                 var shelters = PetContext.Shelters.Add(new Shelter
                 {
+                    Id = lastId + 1,
                     CoverPhoto = data.Photo,
                     Name = data.Name,
                     Introduction = data.Introduction,
@@ -511,7 +514,7 @@ namespace PetAdopt.Logic
 
             var shelters = PetContext.Shelters.SingleOrDefault(r => r.Id == id);
             if (shelters == null)
-                return new IsSuccessResult("找不到此最新活動");
+                return new IsSuccessResult("找不到此收容所");
 
             if (string.IsNullOrWhiteSpace(data.Name))
                 return new IsSuccessResult<SheltersItem>("請輸入收容所名稱");

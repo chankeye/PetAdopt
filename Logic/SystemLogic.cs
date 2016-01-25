@@ -91,8 +91,11 @@ namespace PetAdopt.Logic
             if (isAny)
                 return new IsSuccessResult<AreaItem>(string.Format("已經有 {0} 這個區域了", word));
 
+            var lastId = PetContext.Areas.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault();
+
             var area = PetContext.Areas.Add(new Area
             {
+                Id = lastId + 1,
                 Word = word
             });
             PetContext.SaveChanges();

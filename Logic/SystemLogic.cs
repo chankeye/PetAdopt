@@ -76,7 +76,7 @@ namespace PetAdopt.Logic
         /// 新增地區
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult<AreaItem> AddArea(string word)
+        public IsSuccessResult<AreaItem> AddArea(string word, int id = 0)
         {
             var log = GetLogger();
             log.Debug("word: {0}", word);
@@ -91,7 +91,9 @@ namespace PetAdopt.Logic
             if (isAny)
                 return new IsSuccessResult<AreaItem>(string.Format("已經有 {0} 這個區域了", word));
 
-            var lastId = PetContext.Areas.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault();
+            var lastId = id;
+            if (lastId == 0)
+                lastId = PetContext.Areas.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault();
 
             var area = PetContext.Areas.Add(new Area
             {
@@ -298,6 +300,32 @@ namespace PetAdopt.Logic
         public void DeletePhoto(string path, string photo)
         {
             File.Delete(path + "//" + photo);
+        }
+
+        public void AddInitAreas()
+        {
+            AddArea("臺北市", 2);
+            AddArea("新北市", 3);
+            AddArea("基隆市", 4);
+            AddArea("宜蘭縣", 5);
+            AddArea("桃園縣", 6);
+            AddArea("新竹縣", 7);
+            AddArea("新竹市", 8);
+            AddArea("苗栗縣", 9);
+            AddArea("臺中市", 10);
+            AddArea("彰化縣", 11);
+            AddArea("南投縣", 12);
+            AddArea("雲林縣", 13);
+            AddArea("嘉義縣", 14);
+            AddArea("嘉義市", 15);
+            AddArea("臺南市", 16);
+            AddArea("高雄市", 17);
+            AddArea("屏東縣", 18);
+            AddArea("花蓮縣", 19);
+            AddArea("臺東縣", 20);
+            AddArea("澎湖縣", 21);
+            AddArea("金門縣", 22);
+            AddArea("連江縣", 23);
         }
     }
 }

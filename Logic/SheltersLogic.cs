@@ -427,7 +427,7 @@ namespace PetAdopt.Logic
         /// 新增收容所
         /// </summary>
         /// <returns></returns>
-        public IsSuccessResult<SheltersItem> AddShelters(CreateShelters data)
+        public IsSuccessResult<SheltersItem> AddShelters(CreateShelters data, int id = 0)
         {
             var log = GetLogger();
             log.Debug("photo: {0}, name: {1}, intorduction:{2}, areaId:{3}, address:{4}, phone:{5}, url:{6}",
@@ -463,7 +463,9 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Url) == false)
                 data.Url = data.Url.Trim();
 
-            var lastId = PetContext.Shelters.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault();
+            var lastId = id;
+            if (lastId == 0)
+                lastId = PetContext.Shelters.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault();
 
             try
             {
@@ -647,6 +649,380 @@ namespace PetAdopt.Logic
                 .ToList();
 
             return sheltersList;
+        }
+
+        public void AddInitShelters()
+        {
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市新莊動物之家",
+                Introduction = "新北市新莊動物之家",
+                AreaId = 3,
+                Address = "新北市泰山區楓江路191號(中港抽水站內)",
+                Phone = "02-22977814"
+            }, 52);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市新店動物之家 ",
+                Introduction = "新北市新店動物之家 ",
+                AreaId = 3,
+                Address = "新北市新店區安泰路235號",
+                Phone = "02-22159462"
+            }, 51);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市板橋動物之家 ",
+                Introduction = "新北市板橋動物之家 ",
+                AreaId = 3,
+                Address = "新北市板橋區華東路1-9號",
+                Phone = "02-89662158"
+            }, 50);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "臺北市動物之家",
+                Introduction = "臺北市動物之家",
+                AreaId = 2,
+                Address = "台北市內湖區潭美街852號",
+                Phone = "02-87913254",
+                Url = "http://www.tcapo.gov.taipei/"
+            }, 49);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "基隆市政府動物保護防疫所寵物銀行",
+                Introduction = "基隆市政府動物保護防疫所寵物銀行",
+                AreaId = 4,
+                Address = "基隆市信義區信二路241號1樓",
+                Phone = "02-24280677",
+                Url = "http://www.klaphio.gov.tw/"
+            }, 48);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市中和動物之家 ",
+                Introduction = "新北市中和動物之家 ",
+                AreaId = 3,
+                Address = "新北市中和區興南路3段100號",
+                Phone = "02-86685547"
+            }, 53);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市三峽動物之家",
+                Introduction = "新北市三峽動物之家",
+                AreaId = 3,
+                Address = "新北市三峽區隆恩街243號",
+                Phone = "02-26722143"
+            }, 54);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市淡水動物之家",
+                Introduction = "新北市淡水動物之家",
+                AreaId = 3,
+                Address = "新北市淡水區義山里下圭柔山90-7號旁",
+                Phone = "02-26267558"
+            }, 55);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市瑞芳動物之家",
+                Introduction = "新北市瑞芳動物之家",
+                AreaId = 3,
+                Address = "新北市瑞芳區傑魚里八分寮路(垃圾掩埋場旁)",
+                Phone = "02-24063481"
+            }, 56);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市五股動物之家",
+                Introduction = "新北市五股動物之家",
+                AreaId = 3,
+                Address = "新北市五股區外寮路9-9號",
+                Phone = "02-82925265"
+            }, 58);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市八里動物之家",
+                Introduction = "新北市八里動物之家",
+                AreaId = 3,
+                Address = "新北市八里區長坑里長道坑36號",
+                Phone = "02-26194428"
+            }, 59);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市三芝動物之家 ",
+                Introduction = "新北市三芝動物之家 ",
+                AreaId = 3,
+                Address = "新北市三芝區圓山里二坪頂白沙安樂園附近",
+                Phone = "02-26362111"
+            }, 60);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "桃園市動物保護教育園區",
+                Introduction = "桃園市動物保護教育園區",
+                AreaId = 6,
+                Address = "桃園市新屋區永興里三鄰大牛欄117號",
+                Phone = "03-4861760",
+                Url = "http://taw.efarm.org.tw/"
+            }, 61);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新竹市動物收容所",
+                Introduction = "新竹市動物收容所",
+                AreaId = 8,
+                Address = "新竹市海濱路250號",
+                Phone = "03-5368329",
+                Url = "http://puppy.hccg.gov.tw/"
+            }, 62);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新竹縣動物收容所 ",
+                Introduction = "新竹縣動物收容所 ",
+                AreaId = 7,
+                Address = "新竹縣竹北市縣政五路192號",
+                Phone = "03-55195484"
+            }, 63);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "苗栗縣北區動物收容中心（竹南鎮公所）",
+                Introduction = "苗栗縣北區動物收容中心（竹南鎮公所）",
+                AreaId = 9,
+                Address = "苗栗縣竹南鎮垃圾衛生掩埋場",
+                Phone = "037-465193"
+            }, 64);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "苗栗縣苗中區動物收容中心（苗栗市公所）",
+                Introduction = "苗栗縣苗中區動物收容中心（苗栗市公所）",
+                AreaId = 9,
+                Address = "苗栗縣苗栗市苗栗市第四公墓後垃圾衛生掩埋場內",
+                Phone = "037-331910"
+            }, 65);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "苗栗縣南區動物收容中心（苑裡鎮公所）",
+                Introduction = "苗栗縣南區動物收容中心（苑裡鎮公所）",
+                AreaId = 3,
+                Address = "苗栗縣苑裡鎮水坡里(垃圾掩埋場外)",
+                Phone = "037-868930"
+            }, 66);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "臺中市南屯園區動物之家",
+                Introduction = "臺中市南屯園區動物之家",
+                AreaId = 10,
+                Address = "台中市南屯區中台路601號(望高寮)",
+                Phone = "04-23850949",
+                Url = "http://www.animal.taichung.gov.tw/mp.asp?mp=119020"
+            }, 67);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "臺中市后里園區動物之家",
+                Introduction = "臺中市后里園區動物之家",
+                AreaId = 10,
+                Address = "台中市后里區提防路370號",
+                Phone = "04-25581480",
+                Url = "http://www.animal.taichung.gov.tw/mp.asp?mp=119020"
+            }, 68);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "彰化縣流浪狗中途之家",
+                Introduction = "彰化縣流浪狗中途之家",
+                AreaId = 11,
+                Address = "彰化縣員林鎮大峰里阿寶坑426號(請於彰化縣芬園鄉大彰路一段875巷進入)",
+                Phone = "04-8590638",
+                Url = "http://www.chcgadcc.gov.tw/"
+            }, 69);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "南投縣公立動物收容所",
+                Introduction = "南投縣公立動物收容所",
+                AreaId = 12,
+                Address = "南投市嶺興路36-1號",
+                Phone = "049-2225440"
+            }, 70);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "嘉義市流浪犬收容中心",
+                Introduction = "嘉義市流浪犬收容中心",
+                AreaId = 15,
+                Address = "嘉義市彌陀路環保局停車場",
+                Phone = "05-2168661"
+            }, 71);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "嘉義縣流浪犬中途之家",
+                Introduction = "嘉義縣流浪犬中途之家",
+                AreaId = 14,
+                Address = "嘉義縣民雄鄉松山村後山仔37~1號",
+                Phone = "05-3620025"
+            }, 72);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "臺南市灣裡站動物之家",
+                Introduction = "臺南市灣裡站動物之家",
+                AreaId = 16,
+                Address = "台南市南區省躬里萬年路580巷92號",
+                Phone = "06-2964439",
+            }, 73);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "臺南市善化站動物之家",
+                Introduction = "臺南市善化站動物之家",
+                AreaId = 16,
+                Address = "台南市善化區東昌里東勢寮1-19號(肉品市場旁)",
+                Phone = "06-5832399"
+            }, 74);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "高雄市壽山站動物保護教育園區",
+                Introduction = "高雄市壽山站動物保護教育園區",
+                AreaId = 17,
+                Address = "高雄市鼓山區萬壽路350號",
+                Phone = "07-5519059"
+            }, 75);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "高雄市燕巢站動物保護教育園區",
+                Introduction = "高雄市燕巢站動物保護教育園區",
+                AreaId = 17,
+                Address = "高雄市燕巢區深水里縣政府深水農場苗圃地",
+                Phone = "07-7450413"
+            }, 76);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "屏東縣流浪動物收容所",
+                Introduction = "屏東縣流浪動物收容所",
+                AreaId = 18,
+                Address = "屏東縣內埔鄉老埤村學府路1號",
+                Phone = "08-7740588"
+            }, 77);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "宜蘭縣流浪動物中途之家",
+                Introduction = "宜蘭縣流浪動物中途之家",
+                AreaId = 5,
+                Address = "宜蘭縣五結鄉成興村利寶路60號",
+                Phone = "03-9602350",
+                Url = "http://asms.wsn.com.tw/Eland/webClientMain.aspx?Page=0"
+            }, 78);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "花蓮縣流浪犬中途之家",
+                Introduction = "花蓮縣流浪犬中途之家",
+                AreaId = 19,
+                Address = "花蓮市吉安鄉南濱路一段599號旁巷內",
+                Phone = "03-8421452"
+            }, 79);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "臺東縣流浪動物收容中心",
+                Introduction = "臺東縣流浪動物收容中心",
+                AreaId = 20,
+                Address = "台東縣台東市中華路四段861巷350號",
+                Phone = "089-362011"
+            }, 80);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "連江縣流浪犬收容中心",
+                Introduction = "連江縣流浪犬收容中心",
+                AreaId = 23,
+                Address = "連江縣南竿鄉清水村101號",
+                Phone = "0836-25348"
+            }, 81);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "金門縣動物收容中心",
+                Introduction = "金門縣動物收容中心",
+                AreaId = 22,
+                Address = "金門縣金湖鎮裕民農莊20號",
+                Phone = "082-336625",
+                Url = "http://www.kinmen.gov.tw/KinmenWeb/wSite/page/1.html"
+            }, 82);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "澎湖縣流浪動物收容中心",
+                Introduction = "澎湖縣流浪動物收容中心",
+                AreaId = 21,
+                Address = "澎湖縣馬公市烏崁里1073地號",
+                Phone = "06-9213559"
+            }, 83);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "雲林縣動植物防疫所",
+                Introduction = "雲林縣動植物防疫所",
+                AreaId = 13,
+                Address = "雲林縣斗六市雲林路二段517號",
+                Phone = "06-55523250"
+            }, 89);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "臺中市愛心小站",
+                Introduction = "臺中市愛心小站",
+                AreaId = 10,
+                Address = "臺中市",
+                Phone = "04-23850949",
+                Url = "http://163.29.86.4/ct.asp?xItem=174423&ctNode=8026&mp=119020"
+            }, 90);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "臺中市中途動物醫院",
+                Introduction = "臺中市中途動物醫院",
+                AreaId = 10,
+                Address = "臺中市中途動物醫院",
+                Phone = "臺中市中途動物醫院"
+            }, 91);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市政府動物保護防疫處",
+                Introduction = "新北市政府動物保護防疫處",
+                AreaId = 3,
+                Address = "新北市板橋區四川路一段157巷2號",
+                Phone = "02-29596353",
+                Url = "http://www.ahiqo.ntpc.gov.tw/"
+            }, 92);
+
+            AddShelters(new CreateShelters
+            {
+                Name = "新北市金山動物之家",
+                Introduction = "新北市金山動物之家",
+                AreaId = 3,
+                Address = "新北市金山區永興里大水崛7號",
+                Phone = "02-24986784"
+            }, 94);
         }
     }
 }

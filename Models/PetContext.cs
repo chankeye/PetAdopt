@@ -9,7 +9,6 @@ namespace PetAdopt.Models
         static PetContext()
         {
 #if DEBUG
-            // 自動建立Database
             Database.SetInitializer<PetContext>(new CreateDatabaseIfNotExists<PetContext>());
 #else
             Database.SetInitializer<PetContext>(null);

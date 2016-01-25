@@ -14,7 +14,7 @@ namespace PetAdopt.Models
             this.Shelters = new List<Shelter>();
         }
 
-        public short Id { get; set; }
+        public int Id { get; set; }
         public string Word { get; set; }
         public virtual ICollection<Activity> Activities { get; set; }
         public virtual ICollection<Animal> Animals { get; set; }

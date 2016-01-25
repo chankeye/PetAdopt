@@ -20,8 +20,8 @@ namespace PetAdopt.Models.Mapping
             // Relationships
             this.HasRequired(t => t.User)
                 .WithMany(t => t.OperationInfoes)
-                .HasForeignKey(d => d.UserId)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(d => d.UserId);
+
         }
     }
 }

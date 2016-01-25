@@ -16,7 +16,7 @@ namespace PetAdopt.Models
         public string Name { get; set; }
         public string Introduction { get; set; }
         public string Url { get; set; }
-        public short AreaId { get; set; }
+        public int AreaId { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
         public int OperationId { get; set; }

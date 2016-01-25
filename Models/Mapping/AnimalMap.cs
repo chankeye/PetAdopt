@@ -11,9 +11,6 @@ namespace PetAdopt.Models.Mapping
             this.HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.CoverPhoto)
-                .HasMaxLength(100);
-
             this.Property(t => t.Introduction)
                 .IsRequired();
 
@@ -63,30 +60,22 @@ namespace PetAdopt.Models.Mapping
                         m.MapRightKey("PictureId");
                     });
 
-            this.HasOptional(t => t.Shelter)
-                .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.SheltersId)
-                .WillCascadeOnDelete(false);
-
             this.HasOptional(t => t.Area)
                 .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.AreaId)
-                .WillCascadeOnDelete(false);
-
+                .HasForeignKey(d => d.AreaId);
             this.HasRequired(t => t.Class)
                 .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.ClassId)
-                .WillCascadeOnDelete(false);
-
+                .HasForeignKey(d => d.ClassId);
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.OperationId)
-                .WillCascadeOnDelete(false);
-
+                .HasForeignKey(d => d.OperationId);
+            this.HasOptional(t => t.Shelter)
+                .WithMany(t => t.Animals)
+                .HasForeignKey(d => d.SheltersId);
             this.HasRequired(t => t.Status)
                 .WithMany(t => t.Animals)
-                .HasForeignKey(d => d.StatusId)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(d => d.StatusId);
+
         }
     }
 }

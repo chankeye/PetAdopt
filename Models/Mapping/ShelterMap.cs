@@ -11,6 +11,9 @@ namespace PetAdopt.Models.Mapping
             this.HasKey(t => t.Id);
 
             // Properties
+            this.Property(t => t.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
             this.Property(t => t.Name)
                 .IsRequired()
                 .HasMaxLength(20);
@@ -30,9 +33,6 @@ namespace PetAdopt.Models.Mapping
                 .IsRequired()
                 .HasMaxLength(10);
 
-            this.Property(t => t.CoverPhoto)
-                .HasMaxLength(100);
-
             // Table & Column Mappings
             this.ToTable("Shelters");
             this.Property(t => t.Id).HasColumnName("Id");
@@ -48,13 +48,11 @@ namespace PetAdopt.Models.Mapping
             // Relationships
             this.HasRequired(t => t.Area)
                 .WithMany(t => t.Shelters)
-                .HasForeignKey(d => d.AreaId)
-                .WillCascadeOnDelete(false);
-
+                .HasForeignKey(d => d.AreaId);
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Shelters)
-                .HasForeignKey(d => d.OperationId)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(d => d.OperationId);
+
         }
     }
 }

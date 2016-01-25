@@ -20,6 +20,7 @@ namespace PetAdopt.Models.Mapping
             this.Property(t => t.Id).HasColumnName("Id");
             this.Property(t => t.Message1).HasColumnName("Message");
             this.Property(t => t.OperationId).HasColumnName("OperationId");
+            this.Property(t => t.IsRead).HasColumnName("IsRead");
 
             // Relationships
             this.HasMany(t => t.News)
@@ -42,8 +43,8 @@ namespace PetAdopt.Models.Mapping
 
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Messages)
-                .HasForeignKey(d => d.OperationId)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(d => d.OperationId);
+
         }
     }
 }

@@ -38,13 +38,11 @@ namespace PetAdopt.Models.Mapping
             // Relationships
             this.HasOptional(t => t.Area)
                 .WithMany(t => t.News)
-                .HasForeignKey(d => d.AreaId)
-                .WillCascadeOnDelete(false);
-
+                .HasForeignKey(d => d.AreaId);
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.News)
-                .HasForeignKey(d => d.OperationId)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(d => d.OperationId);
+
         }
     }
 }

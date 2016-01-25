@@ -29,6 +29,8 @@ namespace PetAdopt.Models.Mapping
                         m.MapLeftKey("PictureId");
                         m.MapRightKey("ShelterId");
                     });
+
+
         }
     }
 }

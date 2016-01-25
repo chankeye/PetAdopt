@@ -49,18 +49,14 @@ namespace PetAdopt.Models.Mapping
 
             this.HasRequired(t => t.Area)
                 .WithMany(t => t.Helps)
-                .HasForeignKey(d => d.AreaId)
-                .WillCascadeOnDelete(false);
-
+                .HasForeignKey(d => d.AreaId);
             this.HasRequired(t => t.Class)
                 .WithMany(t => t.Helps)
-                .HasForeignKey(d => d.ClassId)
-                .WillCascadeOnDelete(false);
-
+                .HasForeignKey(d => d.ClassId);
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Helps)
-                .HasForeignKey(d => d.OperationId)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(d => d.OperationId);
+
         }
     }
 }

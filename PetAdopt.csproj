@@ -58,6 +58,10 @@
     <Reference Include="NLog">
       <HintPath>packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -675,7 +679,9 @@
     <Content Include="Scripts\mvcfileupload\vendor\jquery.ui.widget.js" />
     <Content Include="Scripts\_site.js" />
     <Content Include="Views\Shared\_MvcFileUpload.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -721,6 +727,7 @@
     <Compile Include="DTO\Blog\GetBlog.cs" />
     <Compile Include="DTO\Blog\CreateBlog.cs" />
     <Compile Include="DTO\Blog\BlogMessageList.cs" />
+    <Compile Include="DTO\AnimalInfo.cs" />
     <Compile Include="DTO\Help\GetHelp.cs" />
     <Compile Include="DTO\Help\CreateHelp.cs" />
     <Compile Include="DTO\Help\HelpList.cs" />
@@ -754,12 +761,14 @@
     <Compile Include="Logic\AskLogic.cs" />
     <Compile Include="Logic\BlogLogic.cs" />
     <Compile Include="Logic\AnimalLogic.cs" />
+    <Compile Include="Logic\OpenDataLogic.cs" />
     <Compile Include="Logic\SheltersLogic.cs" />
     <Compile Include="Logic\HelpLogic.cs" />
     <Compile Include="Logic\KnowledgeLogic.cs" />
     <Compile Include="Logic\NewsLogic.cs" />
     <Compile Include="Logic\SystemLogic.cs" />
     <Compile Include="Logic\UserLogic.cs" />
+    <Compile Include="Logic\Client.cs" />
     <Compile Include="Logic\_BaseLogic.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Animal.cs" />

@@ -39,13 +39,11 @@ namespace PetAdopt.Models.Mapping
 
             this.HasRequired(t => t.Class)
                 .WithMany(t => t.Knowledges)
-                .HasForeignKey(d => d.ClassId)
-                .WillCascadeOnDelete(false);
-
+                .HasForeignKey(d => d.ClassId);
             this.HasRequired(t => t.OperationInfo)
                 .WithMany(t => t.Knowledges)
-                .HasForeignKey(d => d.OperationId)
-                .WillCascadeOnDelete(false);
+                .HasForeignKey(d => d.OperationId);
+
         }
     }
 }

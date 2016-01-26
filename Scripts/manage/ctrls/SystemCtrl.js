@@ -163,5 +163,19 @@ $(function () {
         }
     });
 
+    // init
+    $("#btnInitParameter").click(function () {
+        if ($("#init-form").valid()) {
+            $.ajax({
+                type: 'post',
+                url: '/Manage/System/InitParameter',
+                success: function (data) {
+                    alert("初始化完成");
+                    location.reload();
+                }
+            });
+        }
+    });
+
     ko.applyBindings(vm);
 });

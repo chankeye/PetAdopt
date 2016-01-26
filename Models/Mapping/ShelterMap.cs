@@ -31,7 +31,7 @@ namespace PetAdopt.Models.Mapping
 
             this.Property(t => t.Phone)
                 .IsRequired()
-                .HasMaxLength(10);
+                .HasMaxLength(20);
 
             // Table & Column Mappings
             this.ToTable("Shelters");

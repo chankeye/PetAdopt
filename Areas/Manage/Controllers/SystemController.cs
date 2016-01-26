@@ -98,5 +98,16 @@ namespace PetAdopt.Areas.Manage.Controllers
         {
             SystemLogic.DeletePhoto(Server.MapPath("~/Content/uploads"), photo);
         }
+
+        public bool InitParameter()
+        {
+            var sheltersLogic = new SheltersLogic(GetOperation());
+
+            SystemLogic.InitSystemParameter();
+
+            sheltersLogic.AddInitShelters();
+
+            return true;
+        }
     }
 }

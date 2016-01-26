@@ -91,13 +91,12 @@ namespace PetAdopt.Logic
             if (isAny)
                 return new IsSuccessResult<AreaItem>(string.Format("已經有 {0} 這個區域了", word));
 
-            var lastId = id;
-            if (lastId == 0)
-                lastId = PetContext.Areas.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault();
+            if (id == 0)
+                id = PetContext.Areas.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault() + 1;
 
             var area = PetContext.Areas.Add(new Area
             {
-                Id = lastId + 1,
+                Id = id,
                 Word = word
             });
             PetContext.SaveChanges();
@@ -302,7 +301,7 @@ namespace PetAdopt.Logic
             File.Delete(path + "//" + photo);
         }
 
-        public void AddInitAreas()
+        public void InitSystemParameter()
         {
             AddArea("臺北市", 2);
             AddArea("新北市", 3);
@@ -326,6 +325,18 @@ namespace PetAdopt.Logic
             AddArea("澎湖縣", 21);
             AddArea("金門縣", 22);
             AddArea("連江縣", 23);
+
+            AddClass("狗");
+            AddClass("貓");
+            AddClass("兔");
+            AddClass("鼠");
+            AddClass("鳥");
+            AddClass("其他");
+
+            AddStatus("開放認養");
+            AddStatus("已認養");
+            AddStatus("已安樂死");
+            AddStatus("其他");
         }
     }
 }

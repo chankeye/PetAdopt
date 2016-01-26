@@ -463,15 +463,14 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(data.Url) == false)
                 data.Url = data.Url.Trim();
 
-            var lastId = id;
-            if (lastId == 0)
-                lastId = PetContext.Shelters.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault();
+            if (id == 0)
+                id = PetContext.Shelters.Select(r => r.Id).OrderByDescending(r => r).FirstOrDefault() + 1;
 
             try
             {
                 var shelters = PetContext.Shelters.Add(new Shelter
                 {
-                    Id = lastId + 1,
+                    Id = id,
                     CoverPhoto = data.Photo,
                     Name = data.Name,
                     Introduction = data.Introduction,

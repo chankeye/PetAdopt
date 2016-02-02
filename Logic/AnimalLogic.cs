@@ -830,5 +830,75 @@ namespace PetAdopt.Logic
             result.First().Class += " active";
             return result;
         }
+
+        public void AddAnimalFromOpenData()
+        {
+            var client = new Client();
+            var animalList = client.GetAnimalInfo();
+
+            foreach (var item in animalList)
+            {
+                try
+                {
+                    // convert status
+                    Enum.StatusType myStatus;
+                    System.Enum.TryParse(item.animal_status, true, out myStatus);
+                    short statusId = 0;
+
+                    switch (myStatus)
+                    {
+                        case PetAdopt.Enum.StatusType.NONE:
+                            statusId = PetContext.Status.Where(r => r.Word == "其他").Select(r => r.Id).SingleOrDefault();
+                            break;
+                        case PetAdopt.Enum.StatusType.OPEN:
+                            statusId = PetContext.Status.Where(r => r.Word == "開放認養").Select(r => r.Id).SingleOrDefault();
+                            break;
+                        case PetAdopt.Enum.StatusType.ADOPTED:
+                            statusId = PetContext.Status.Where(r => r.Word == "已認養").Select(r => r.Id).SingleOrDefault();
+                            break;
+                        case PetAdopt.Enum.StatusType.OTHER:
+                            statusId = PetContext.Status.Where(r => r.Word == "其他").Select(r => r.Id).SingleOrDefault();
+                            break;
+                        case PetAdopt.Enum.StatusType.DEAD:
+                            statusId = PetContext.Status.Where(r => r.Word == "已安樂死").Select(r => r.Id).SingleOrDefault();
+                            break;
+                        default:
+                            statusId = PetContext.Status.Where(r => r.Word == "其他").Select(r => r.Id).SingleOrDefault();
+                            break;
+                    }
+
+                    // convert class
+                    var animalClass = PetContext.Classes.Where(r => r.Word.Contains(item.animal_kind)).FirstOrDefault();
+                    if (animalClass == null)
+                        animalClass = PetContext.Classes.Where(r => r.Word == "其他").SingleOrDefault();
+
+                    // combine information
+                    var introduction = "性別：" + item.animal_sex + "\n";
+                    introduction += "體型：" + item.animal_bodytype + "\n";
+                    introduction += "毛色：" + item.animal_colour + "\n";
+                    introduction += "年紀：" + item.animal_age + "\n";
+                    introduction += "是否已絕育：" + item.animal_sterilization + "\n";
+                    introduction += "是否已施打狂犬病疫苗：" + item.animal_bacterin + "\n";
+                    introduction += "備註：" + item.animal_remark + "\n";
+
+                    var newAnimal = new PetAdopt.DTO.Animal.CreateAnimal
+                    {
+                        Photo = item.album_file,
+                        Title = item.animal_title,
+                        Shelters = item.shelter_name,
+                        AreaId = Convert.ToInt16(item.animal_area_pkid),
+                        ClassId = animalClass.Id,
+                        StatusId = statusId,
+                        Address = item.animal_place,
+                        StartDate = Convert.ToDateTime(item.animal_createtime),
+                        Introduction = introduction
+                    };
+
+                    AddAnimal(newAnimal);
+                }
+                catch (Exception)
+                { }
+            }
+        }
     }
 }

@@ -177,5 +177,19 @@ $(function () {
         }
     });
 
+    // init
+    $("#btnInitAnimal").click(function () {
+        if ($("#initAnimal-form").valid()) {
+            $.ajax({
+                type: 'post',
+                url: '/Manage/System/InitAnimal',
+                success: function (data) {
+                    alert("新增完成");
+                    location.reload();
+                }
+            });
+        }
+    });
+
     ko.applyBindings(vm);
 });

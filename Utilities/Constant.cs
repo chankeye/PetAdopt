@@ -15,5 +15,9 @@
         public const string PatternEmail = @"^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$";
 
         public const string PatternUrl = @"^http(s)?://([\w-]+\.)+[\w-]+(/[\w- ./?%&=]*)?$";
+
+        public static string[] InitStatuses = new string[] { "開放認養", "已認養", "已安樂死", "其他" };
+
+        public static string[] InitClasses = new string[] { "狗", "貓", "兔", "鼠", "鳥", "其他" };
     }
 }

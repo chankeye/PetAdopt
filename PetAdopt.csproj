@@ -754,6 +754,7 @@
     <Compile Include="DTO\System\SystemInfo.cs" />
     <Compile Include="DTO\User\UserInfo.cs" />
     <Compile Include="DTO\User\CreateUser.cs" />
+    <Compile Include="Enum\StatusType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -873,7 +874,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\uploads\" />
-    <Folder Include="Enum\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

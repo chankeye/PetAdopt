@@ -326,17 +326,11 @@ namespace PetAdopt.Logic
             AddArea("金門縣", 22);
             AddArea("連江縣", 23);
 
-            AddClass("狗");
-            AddClass("貓");
-            AddClass("兔");
-            AddClass("鼠");
-            AddClass("鳥");
-            AddClass("其他");
+            foreach (var item in Utilities.Constant.InitClasses)
+                AddClass(item);
 
-            AddStatus("開放認養");
-            AddStatus("已認養");
-            AddStatus("已安樂死");
-            AddStatus("其他");
+            foreach (var item in Utilities.Constant.InitStatuses)
+                AddStatus(item);
         }
     }
 }

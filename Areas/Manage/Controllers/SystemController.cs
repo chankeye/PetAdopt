@@ -109,5 +109,14 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             return true;
         }
+
+        public bool InitAnimal()
+        {
+            var animalLogic = new AnimalLogic(GetOperation());
+
+            animalLogic.AddAnimalFromOpenData();
+
+            return true;
+        }
     }
 }

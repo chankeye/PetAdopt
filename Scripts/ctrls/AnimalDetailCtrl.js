@@ -61,7 +61,10 @@ $(function () {
             if (data.IsSuccess) {
                 photo = data.ReturnObject.Photo;
                 if (photo != null) {
-                    $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
+                    if (photo.slice(0, "http://".length) == "http://" || photo.slice(0, "https://".length) == "https://")
+                        $('#coverPhoto').attr('src', photo);
+                    else
+                        $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
                 }
                 $("#title").text(data.ReturnObject.Title);
                 $("#startDate").text(data.ReturnObject.StartDate);

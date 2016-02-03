@@ -111,7 +111,10 @@ namespace PetAdopt.Logic
                     .Select(r => new AnimalItem
                     {
                         Id = r.Id,
-                        Photo = r.CoverPhoto,
+                        Photo = string.IsNullOrWhiteSpace(r.CoverPhoto) ? r.CoverPhoto :
+                            r.CoverPhoto.StartsWith("http://") ? r.CoverPhoto :
+                            r.CoverPhoto.StartsWith("https://") ? r.CoverPhoto :
+                            "../../Content/uploads/" + r.CoverPhoto,
                         Title = r.Title,
                         Introduction = r.Introduction,
                         Date = r.Date.ToString("yyyy/MM/dd"),
@@ -192,7 +195,10 @@ namespace PetAdopt.Logic
                         .Select(r => new AnimalItem
                         {
                             Id = r.Id,
-                            Photo = r.CoverPhoto,
+                            Photo = string.IsNullOrWhiteSpace(r.CoverPhoto) ? r.CoverPhoto :
+                                r.CoverPhoto.StartsWith("http://") ? r.CoverPhoto :
+                                r.CoverPhoto.StartsWith("https://") ? r.CoverPhoto :
+                                "../../Content/uploads/" + r.CoverPhoto,
                             Title = r.Title,
                             Introduction = r.Introduction,
                             Date = r.Date.ToString("yyyy/MM/dd"),
@@ -271,7 +277,10 @@ namespace PetAdopt.Logic
                         .Select(r => new AnimalItem
                         {
                             Id = r.Id,
-                            Photo = r.CoverPhoto,
+                            Photo = string.IsNullOrWhiteSpace(r.CoverPhoto) ? r.CoverPhoto :
+                                r.CoverPhoto.StartsWith("http://") ? r.CoverPhoto :
+                                r.CoverPhoto.StartsWith("https://") ? r.CoverPhoto :
+                                "../../Content/uploads/" + r.CoverPhoto,
                             Title = r.Title,
                             Introduction = r.Introduction,
                             Date = r.Date.ToString("yyyy/MM/dd"),

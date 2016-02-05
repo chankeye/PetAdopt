@@ -77,6 +77,10 @@ ul.ul-padding-vertical-05 {
             color: #d7172f;
         }
 
+        .pagination .active{
+            color: #2E2EFE;
+        }
+
 .prev {
     position: absolute;
     top: 10px;
@@ -162,7 +166,7 @@ ul.ul-padding-vertical-05 {
 
 /* 圖片最大只能30em */
 .fullImage {
-    max-height: 30em
+    max-height: 30em;
 }
 
 /* 詳細頁的content */

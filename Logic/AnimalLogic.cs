@@ -893,7 +893,9 @@ namespace PetAdopt.Logic
                     var newAnimal = new PetAdopt.DTO.Animal.CreateAnimal
                     {
                         Photo = item.album_file,
-                        Title = item.animal_title,
+                        Title = string.IsNullOrWhiteSpace(item.animal_title) ?
+                            item.animal_createtime + " " + item.shelter_name :
+                            item.animal_title,
                         Shelters = item.shelter_name,
                         AreaId = Convert.ToInt16(item.animal_area_pkid),
                         ClassId = animalClass.Id,

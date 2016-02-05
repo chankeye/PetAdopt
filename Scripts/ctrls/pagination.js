@@ -11,8 +11,14 @@ var PaginationModel = function () {
 
         if (count > 0) {
             $(".pagination").show();
-            var btnCount = Math.ceil(count / limit);
-            for (var i = 0; i < btnCount; i++) {
+            var startPage = Math.floor(page / pagingbarItemLimit) * pagingbarItemLimit;
+            var totalCount = Math.ceil(count / limit);
+            var btnLimit = startPage + pagingbarItemLimit;
+            if (btnLimit > totalCount)
+                btnLimit = totalCount;
+            if (startPage > 0)
+                startPage = startPage - 2;
+            for (var i = startPage; i < btnLimit; i++) {
                 //if (IsPageNeededToShow(i)) {
                 if (page === (i + 1)) {
                     $(".pagination .pagi").append('<li><a href="#" class="active">' + (i + 1) + '</a></li>');

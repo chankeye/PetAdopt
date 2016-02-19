@@ -845,7 +845,7 @@ namespace PetAdopt.Logic
             var client = new Client();
             var animalList = client.GetAnimalInfo();
 
-            foreach (var item in animalList)
+            foreach (var item in animalList.OrderBy(r => Convert.ToDateTime(r.animal_createtime)))
             {
                 try
                 {

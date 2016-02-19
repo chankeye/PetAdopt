@@ -91,6 +91,26 @@ namespace PetAdopt.Logic
         }
 
         /// <summary>
+        /// 取得登入要用到的資訊
+        /// </summary>
+        /// <param name="account">FB userID</param>
+        /// <returns>登入使用者的資訊</returns>
+        public LoginInfo GetFBLoginInfo(string account)
+        {
+            var user = PetContext.Users
+                .Where(r => r.Account == account)
+                .Select(r => new LoginInfo
+                {
+                    Id = r.Id,
+                    Account = r.Account,
+                    IsAdmin = r.IsAdmin
+                })
+                .SingleOrDefault();
+
+            return user;
+        }
+
+        /// <summary>
         /// 變更密碼
         /// </summary>
         /// <param name="id">User.Id</param>
@@ -383,6 +403,44 @@ namespace PetAdopt.Logic
                     Mobile = data.Mobile,
                     Email = data.Email,
                     IsAdmin = data.IsAdmin,
+                    Date = DateTime.Now,
+                    IsDisable = false
+                });
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult<UserItem>
+                {
+                    ReturnObject = new UserItem
+                    {
+                        Id = user.Id,
+                        Account = user.Account,
+                        IsDisable = user.IsDisable
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult<UserItem>("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        public IsSuccessResult<UserItem> AddFBUser(string account)
+        {
+            var log = GetLogger();
+            log.Debug("account: {0}", account);
+
+            try
+            {
+                var user = PetContext.Users.Add(new User
+                {
+                    Account = account,
+                    Password = Cryptography.EncryptBySHA1(Constant.DefaultPassword),
+                    Display = "",
+                    Mobile = "",
+                    Email = "",
+                    IsAdmin = false,
                     Date = DateTime.Now,
                     IsDisable = false
                 });

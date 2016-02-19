@@ -11,15 +11,58 @@
 
     @* load css *@
     <link href="../../Content/mvcfileupload/vendor/bootstrap.min.css" rel="stylesheet" />
-
+    <script src="../../Scripts/jquery-2.1.1.js"></script>
 </head>
 <body>
+    <script>
+        function statusChangeCallback(response) {
+            $.ajax({
+                type: 'post',
+                url: '/Account/FBLogin',
+                data: {
+                    response: response,
+                },
+                success: function (result) {
+                    if (result) {
+                        window.location = "/";
+                    }
+                }
+            });
+        }
+
+        function checkLoginState() {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+            });
+        }
+
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1719364618348733',
+                xfbml: true,
+                version: 'v2.5'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
     <link href="~/Content/Views/Account/Login.css" rel="stylesheet" />
     <div class="container">
         <form class="form-signin" method="post" action="@Request.Url.PathAndQuery">
             <h2 class="form-signin-heading">
-                <span>會員登入</span>
-                <small>登入艾認養</small>
+                <span>Facebook登入</span>
+            </h2>
+            <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin="checkLoginState();"></div>
+            <br />
+
+            <h2 class="form-signin-heading">
+                <span>一般登入</span>
             </h2>
             <input type="text" class="form-control" minlength="5" placeholder="請輸入帳號" autofocus name="account" required />
             <input type="password" class="form-control" minlength="6" placeholder="請輸入密碼" name="password" required />

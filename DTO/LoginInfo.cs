@@ -8,4 +8,22 @@
 
         public bool IsAdmin { get; set; }
     }
+
+    public class FBLoginInfo
+    {
+        public string Status { get; set; }
+
+        public AuthResponse AuthResponse { get; set; }
+    }
+
+    public class AuthResponse
+    {
+        public string AccessToken { get; set; }
+
+        public string ExpiresIn { get; set; }
+
+        public string SignedRequest { get; set; }
+
+        public string UserID { get; set; }
+    }
 }

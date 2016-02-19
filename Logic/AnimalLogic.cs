@@ -608,7 +608,7 @@ namespace PetAdopt.Logic
                     StatusId = data.StatusId,
                     OperationInfo = new OperationInfo
                     {
-                        Date = DateTime.Now,
+                        Date = data.StartDate != null ? data.StartDate : DateTime.Now,
                         UserId = GetOperationInfo().UserId
                     }
                 });
@@ -882,7 +882,9 @@ namespace PetAdopt.Logic
                         animalClass = PetContext.Classes.Where(r => r.Word == "其他").SingleOrDefault();
 
                     // combine information
-                    var introduction = "性別：" + item.animal_sex + "\n";
+                    var introduction = "流水編號：" + item.animal_id + "\n";
+                    introduction += "區域編號：" + item.animal_subid + "\n";
+                    introduction += "性別：" + item.animal_sex + "\n";
                     introduction += "體型：" + item.animal_bodytype + "\n";
                     introduction += "毛色：" + item.animal_colour + "\n";
                     introduction += "年紀：" + item.animal_age + "\n";
@@ -894,7 +896,7 @@ namespace PetAdopt.Logic
                     {
                         Photo = item.album_file,
                         Title = string.IsNullOrWhiteSpace(item.animal_title) ?
-                            item.animal_createtime + " " + item.shelter_name :
+                            item.animal_id + " " + item.shelter_name :
                             item.animal_title,
                         Shelters = item.shelter_name,
                         AreaId = Convert.ToInt16(item.animal_area_pkid),

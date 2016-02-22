@@ -11,9 +11,15 @@
 
     public class FBLoginInfo
     {
-        public string Status { get; set; }
+        //public string Status { get; set; }
 
-        public AuthResponse AuthResponse { get; set; }
+        //public AuthResponse AuthResponse { get; set; }
+
+        public string Id { get; set; }
+
+        public string Email { get; set; }
+
+        public string Name { get; set; }
     }
 
     public class AuthResponse

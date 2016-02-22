@@ -16,18 +16,30 @@
 <body>
     <script>
         function statusChangeCallback(response) {
-            $.ajax({
-                type: 'post',
-                url: '/Account/FBLogin',
-                data: {
-                    response: response,
-                },
-                success: function (result) {
-                    if (result) {
-                        window.location = "/";
+            if (response.status === 'connected') {
+
+                FB.api('/me', { locale: 'en_US', fields: 'name, email' },
+                    function (response) {
+                        $.ajax({
+                            type: 'post',
+                            url: '/Account/FBLogin',
+                            data: {
+                                response: response,
+                            },
+                            success: function (result) {
+                                if (result) {
+                                    window.location = "/";
+                                }
+                            }
+                        });
                     }
-                }
-            });
+                );
+            } else if (response.status === 'not_authorized') {
+                alert('沒有權限，登入失敗');
+            } else {
+                alert('發生不明錯誤');
+            }
+
         }
 
         function checkLoginState() {
@@ -38,7 +50,7 @@
 
         window.fbAsyncInit = function () {
             FB.init({
-                appId: '1719364618348733',
+                appId: '1720489524902909', // 1719364618348733 release id
                 xfbml: true,
                 version: 'v2.5'
             });
@@ -58,7 +70,7 @@
             <h2 class="form-signin-heading">
                 <span>Facebook登入</span>
             </h2>
-            <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" onlogin="checkLoginState();"></div>
+            <div class="fb-login-button" scope="public_profile,email" data-max-rows="1" data-size="xlarge" onlogin="checkLoginState();"></div>
             <br />
 
             <h2 class="form-signin-heading">

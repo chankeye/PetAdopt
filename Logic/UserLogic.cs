@@ -426,20 +426,19 @@ namespace PetAdopt.Logic
             }
         }
 
-        public IsSuccessResult<UserItem> AddFBUser(string account)
+        public IsSuccessResult<UserItem> AddFBUser(CreateUser data)
         {
             var log = GetLogger();
-            log.Debug("account: {0}", account);
 
             try
             {
                 var user = PetContext.Users.Add(new User
                 {
-                    Account = account,
+                    Account = data.Account,
                     Password = Cryptography.EncryptBySHA1(Constant.DefaultPassword),
-                    Display = "",
+                    Display = data.Display,
                     Mobile = "",
-                    Email = "",
+                    Email = data.Email,
                     IsAdmin = false,
                     Date = DateTime.Now,
                     IsDisable = false
@@ -507,6 +506,59 @@ namespace PetAdopt.Logic
                 user.Mobile = data.Mobile;
                 user.Email = data.Email;
                 user.IsAdmin = data.IsAdmin;
+
+                PetContext.SaveChanges();
+
+                return new IsSuccessResult();
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex);
+
+                return new IsSuccessResult("發生不明錯誤，請稍候再試");
+            }
+        }
+
+        public IsSuccessResult EditUser(CreateUser data)
+        {
+            var log = GetLogger();
+            log.Debug("account: {0}, display: {1}, mobile:{2}, email:{3}, isadmin:{4}",
+                data.Account, data.Display, data.Mobile, data.Email, data.IsAdmin);
+
+            var user = PetContext.Users.SingleOrDefault(r => r.Account == data.Account);
+            if (user == null)
+                return new IsSuccessResult("找不到此使用者");
+
+            if (data.Account != user.Account)
+                return new IsSuccessResult("使用者帳號不正確，請稍候再試");
+
+            if (string.IsNullOrWhiteSpace(data.Display))
+                return new IsSuccessResult("請輸入暱稱");
+            data.Display = data.Display.Trim();
+
+            if (string.IsNullOrWhiteSpace(data.Email))
+                return new IsSuccessResult<UserItem>("請輸入Email");
+            data.Email = data.Email.Trim();
+
+            if (Regex.IsMatch(data.Email, Constant.PatternEmail) == false)
+                return new IsSuccessResult<UserItem>("請輸入正確的Email");
+
+            if (string.IsNullOrWhiteSpace(data.Mobile) == false)
+                data.Mobile = data.Mobile.Trim();
+
+            if (user.Mobile == data.Mobile && user.Display == data.Display &&
+                user.Email == data.Email && user.IsAdmin == data.IsAdmin && user.IsDisable == false)
+            {
+                return new IsSuccessResult();
+            }
+
+            try
+            {
+                user.Display = data.Display;
+                user.Mobile = data.Mobile;
+                user.Email = data.Email;
+                user.IsAdmin = data.IsAdmin;
+                user.IsDisable = false;
 
                 PetContext.SaveChanges();
 

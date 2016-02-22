@@ -161,57 +161,55 @@ namespace PetAdopt.Controllers
         [AllowAnonymous]
         public ActionResult FBLogin(FBLoginInfo response)
         {
-            if (response.Status == "connected")
+            // 取得資訊
+            var newData = new CreateUser
             {
-                // 取得資訊
-                var user = UserLogic.GetFBLoginInfo(response.AuthResponse.UserID);
-                if (user == null)
+                Account = response.Id,
+                Display = response.Name,
+                Email = response.Email,
+                IsAdmin = false,
+                Mobile = ""
+            };
+            var user = UserLogic.GetFBLoginInfo(response.Id);
+            if (user == null)
+            {
+                var result = UserLogic.AddFBUser(newData);
+                if (result.IsSuccess)
+                    user = UserLogic.GetFBLoginInfo(response.Id);
+                else
                 {
-                    var result = UserLogic.AddFBUser(response.AuthResponse.UserID);
-                    if (result.IsSuccess)
-                        user = UserLogic.GetFBLoginInfo(response.AuthResponse.UserID);
-                    else
-                    {
-                        ModelState.AddModelError("", result.ErrorMessage);
-                        return View();
-                    }
+                    ModelState.AddModelError("", result.ErrorMessage);
+                    return View();
                 }
-
-                #region 登入系統
-
-                var userData = ParseToUserDataString(user);
-
-                var ticket = new FormsAuthenticationTicket(
-                    1,                      // ticket version
-                    user.Account,           // authenticated username
-                    DateTime.Now,           // issueDate
-                    DateTime.MaxValue,      // expiryDate
-                    false,                  // true to persist across browser sessions
-                    userData                // can be used to store additional user data
-                );
-                var encryptedTicket = FormsAuthentication.Encrypt(ticket);
-
-                var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                authCookie.HttpOnly = true;
-                if (ticket.IsPersistent)
-                    authCookie.Expires = ticket.Expiration;
-
-                Response.Cookies.Add(authCookie);
-
-                #endregion //登入系統
-
-                return Json(true);
-            }
-            else if (response.Status == "not_authorized")
-            {
-                ModelState.AddModelError("", "沒有權限，登入失敗");
-                return View();
             }
             else
-            {
-                ModelState.AddModelError("", "發生不明錯誤");
-                return View();
-            }
+                UserLogic.EditUser(newData);
+
+            #region 登入系統
+
+            var userData = ParseToUserDataString(user);
+
+            var ticket = new FormsAuthenticationTicket(
+                1,                      // ticket version
+                user.Account,           // authenticated username
+                DateTime.Now,           // issueDate
+                DateTime.MaxValue,      // expiryDate
+                false,                  // true to persist across browser sessions
+                userData                // can be used to store additional user data
+            );
+            var encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            authCookie.HttpOnly = true;
+            if (ticket.IsPersistent)
+                authCookie.Expires = ticket.Expiration;
+
+            Response.Cookies.Add(authCookie);
+
+            #endregion //登入系統
+
+            return Json(true);
+
         }
 
         /// <summary>

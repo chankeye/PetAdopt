@@ -77,15 +77,23 @@ namespace PetAdopt.Logic
         /// <returns>登入使用者的資訊</returns>
         public LoginInfo GetLoginInfo(int id)
         {
-            var user = PetContext.Users
+            var data = PetContext.Users
                 .Where(r => r.Id == id)
-                .Select(r => new LoginInfo
+                .Select(r => new
                 {
-                    Id = r.Id,
-                    Account = r.Account,
-                    IsAdmin = r.IsAdmin
+                    r.Id,
+                    r.Display,
+                    r.Account,
+                    r.IsAdmin
                 })
                 .Single();
+
+            var user = new LoginInfo
+            {
+                Id = data.Id,
+                Account = string.IsNullOrWhiteSpace(data.Display) ? data.Account : data.Display,
+                IsAdmin = data.IsAdmin
+            };
 
             return user;
         }
@@ -97,15 +105,26 @@ namespace PetAdopt.Logic
         /// <returns>登入使用者的資訊</returns>
         public LoginInfo GetFBLoginInfo(string account)
         {
-            var user = PetContext.Users
+            var data = PetContext.Users
                 .Where(r => r.Account == account)
-                .Select(r => new LoginInfo
+                .Select(r => new
                 {
                     Id = r.Id,
-                    Account = r.Account,
-                    IsAdmin = r.IsAdmin
+                    r.Display,
+                    r.Account,
+                    r.IsAdmin
                 })
                 .SingleOrDefault();
+
+            if (data == null)
+                return new LoginInfo();
+
+            var user = new LoginInfo
+            {
+                Id = data.Id,
+                Account = string.IsNullOrWhiteSpace(data.Display) ? data.Account : data.Display,
+                IsAdmin = data.IsAdmin
+            };
 
             return user;
         }

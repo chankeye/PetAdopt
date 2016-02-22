@@ -706,6 +706,20 @@ namespace PetAdopt.Logic
             if (isAny)
                 return new IsSuccessResult<AnimalItem>(string.Format("已經有 {0} 這個認養資訊了", data.Title));
 
+            if (animal.CoverPhoto == data.Photo &&
+                animal.Title == data.Title &&
+                animal.Introduction == data.Introduction &&
+                animal.Address == data.Address &&
+                animal.AreaId == data.AreaId &&
+                animal.ClassId == data.ClassId &&
+                animal.SheltersId == sheltersId &&
+                animal.Phone == data.Phone &&
+                animal.StartDate == data.StartDate &&
+                animal.EndDate == data.EndDate &&
+                animal.Age == data.Age &&
+                animal.StatusId == data.StatusId)
+                return new IsSuccessResult();
+
             try
             {
                 animal.CoverPhoto = data.Photo;
@@ -907,7 +921,30 @@ namespace PetAdopt.Logic
                         Introduction = introduction
                     };
 
-                    AddAnimal(newAnimal);
+                    var result = AddAnimal(newAnimal);
+                    if (result.IsSuccess == false)
+                    {
+                        var animal = PetContext.Animals.SingleOrDefault(r => r.Title == newAnimal.Title);
+                        if (animal == null)
+                            continue;
+
+                        var editAnimal = new PetAdopt.DTO.Animal.EditAnimal
+                        {
+                            Id = animal.Id,
+                            Photo = item.album_file,
+                            Title = string.IsNullOrWhiteSpace(item.animal_title) ?
+                                item.animal_id + " " + item.shelter_name :
+                                item.animal_title,
+                            Shelters = item.shelter_name,
+                            AreaId = Convert.ToInt16(item.animal_area_pkid),
+                            ClassId = animalClass.Id,
+                            StatusId = statusId,
+                            Address = item.animal_place,
+                            StartDate = Convert.ToDateTime(item.animal_createtime),
+                            Introduction = introduction
+                        };
+                        EditAnimal(editAnimal, GetOperationInfo().UserId);
+                    }
                 }
                 catch (Exception)
                 { }

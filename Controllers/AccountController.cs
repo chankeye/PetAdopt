@@ -179,7 +179,7 @@ namespace PetAdopt.Controllers
                 else
                 {
                     ModelState.AddModelError("", result.ErrorMessage);
-                    return View();
+                    return Json(false);
                 }
             }
             else

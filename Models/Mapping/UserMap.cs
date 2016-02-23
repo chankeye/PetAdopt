@@ -21,10 +21,10 @@ namespace PetAdopt.Models.Mapping
 
             this.Property(t => t.Display)
                 .IsRequired()
-                .HasMaxLength(10);
+                .HasMaxLength(20);
 
             this.Property(t => t.Mobile)
-                .HasMaxLength(10);
+                .HasMaxLength(20);
 
             this.Property(t => t.Email)
                 .IsRequired()

@@ -22,7 +22,6 @@
     <link href="../../Content/font-awesome.css" rel="stylesheet" />
     <link href="../../Content/typeahead.js-bootstrap.css" rel="stylesheet" />
     <link href="../../Content/typeahead.js-bootstrap.fixed.css" rel="stylesheet" />
-    <link href="../../Content/carousel.css" rel="stylesheet">
     <link href="../../Content/_site.css" rel="stylesheet" />
     @RenderSection("style", false)
     @* load js *@
@@ -36,102 +35,72 @@
     <script src="../../Scripts/ctrls/pagination.js"></script>
     <script src="../../Scripts/locale/common.js"></script>
     <script src="../../Scripts/hogan-2.0.0.js"></script>
-    <script src="../../Scripts/ctrls/Carousel.js"></script>
     <script src="//www.google.com/jsapi"></script>
     <script src="../../Scripts/_app.js"></script>
     @RenderSection("Scripts", false)
 </head>
 <body>
     @* navbar *@
-    <div class="navbar-wrapper">
+    <div class="navbar navbar-inverse navbar-static-top">
         <div class="container">
-            <div class="navbar navbar-inverse navbar-static-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="https://www.facebook.com/pages/%E8%89%BE%E8%AA%8D%E9%A4%8A-%E8%AA%8D%E9%A4%8A%E4%BB%A3%E6%9B%BF%E8%B3%BC%E8%B2%B7%E7%B5%90%E7%B4%AE%E5%8F%96%E4%BB%A3%E6%92%B2%E6%AE%BA/583979731732678" target="_blank"><img src="../../Content/Images/fb.jpg" alt="艾認養FB粉絲專頁" style="width: 23px; height: 23px;"></a>
-                        <a class="navbar-brand" href="/" rel="v:url" property="v:Title">艾認養</a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown" typeof="v:Breadcrumb">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">最新資訊 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li typeof="v:Breadcrumb"><a href="/News" title="最新消息" rel="v:url" property="v:Title">最新消息</a></li>
-                                    <li typeof="v:Breadcrumb"><a href="/Activity" title="最新活動" rel="v:url" property="v:Title">最新活動</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown" typeof="v:Breadcrumb">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">認養資訊 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li typeof="v:Breadcrumb"><a href="/Animal" title="待認養動物" rel="v:url" property="v:Title">待認養動物</a></li>
-                                    <li typeof="v:Breadcrumb"><a href="/Animal/New" title="送養動物" rel="v:url" property="v:Title">送養動物</a></li>
-                                    <li typeof="v:Breadcrumb"><a href="/Shelters" title="全台收容所資訊" rel="v:url" property="v:Title">收容所資訊</a></li>
-                                    <li typeof="v:Breadcrumb"><a href="/Help" title="需要你立即前往救援的動物們" rel="v:url" property="v:Title">即刻救援</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown" typeof="v:Breadcrumb">
-                                <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">知識問答 <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li typeof="v:Breadcrumb"><a href="/Ask" title="問與答" rel="v:url" property="v:Title">我有問題</a></li>
-                                    <li typeof="v:Breadcrumb"><a href="/Knowledge" title="相關知識" rel="v:url" property="v:Title">相關知識</a></li>
-                                </ul>
-                            </li>
-                            <li typeof="v:Breadcrumb"><a href="/Blog" title="部落格文章" rel="v:url" property="v:Title">牠與他的故事</a></li>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="https://www.facebook.com/pages/%E8%89%BE%E8%AA%8D%E9%A4%8A-%E8%AA%8D%E9%A4%8A%E4%BB%A3%E6%9B%BF%E8%B3%BC%E8%B2%B7%E7%B5%90%E7%B4%AE%E5%8F%96%E4%BB%A3%E6%92%B2%E6%AE%BA/583979731732678" target="_blank"><img src="../../Content/Images/fb.jpg" alt="艾認養FB粉絲專頁" style="width: 23px; height: 23px;"></a>
+                <a class="navbar-brand" href="/" rel="v:url" property="v:Title">艾認養</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown" typeof="v:Breadcrumb">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">最新資訊 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li typeof="v:Breadcrumb"><a href="/News" title="最新消息" rel="v:url" property="v:Title">最新消息</a></li>
+                            <li typeof="v:Breadcrumb"><a href="/Activity" title="最新活動" rel="v:url" property="v:Title">最新活動</a></li>
                         </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            @if (isLogin)
-                            {
-                                <li class="dropdown">
-                                    <a href="" class="dropdown-toggle" data-toggle="dropdown">哈囉!! @User.Identity.Name 您好 <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="/Account/ChangePassword" title="變更密碼">變更密碼</a></li>
-                                        <li><a href="/Account" title="會員中心">會員中心</a></li>
-                                        <li><a href="/Account/SignOut" title="登出" target="_self">登出</a></li>
-                                    </ul>
-                                </li>
-                            }
-                            else
-                            {
-                                <li><a href="/Account/Register" title="註冊會員" rel="v:url" property="v:Title">註冊會員</a></li>
-                                <li><a href="/Account/Login" title="登入" rel="v:url" property="v:Title">登入</a></li>
-                            }
+                    </li>
+                    <li class="dropdown" typeof="v:Breadcrumb">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">認養資訊 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li typeof="v:Breadcrumb"><a href="/Animal" title="待認養動物" rel="v:url" property="v:Title">待認養動物</a></li>
+                            <li typeof="v:Breadcrumb"><a href="/Animal/New" title="送養動物" rel="v:url" property="v:Title">送養動物</a></li>
+                            <li typeof="v:Breadcrumb"><a href="/Shelters" title="全台收容所資訊" rel="v:url" property="v:Title">收容所資訊</a></li>
+                            <li typeof="v:Breadcrumb"><a href="/Help" title="需要你立即前往救援的動物們" rel="v:url" property="v:Title">即刻救援</a></li>
                         </ul>
-                    </div>
-                </div>
+                    </li>
+                    <li class="dropdown" typeof="v:Breadcrumb">
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown" property="v:Title">知識問答 <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li typeof="v:Breadcrumb"><a href="/Ask" title="問與答" rel="v:url" property="v:Title">我有問題</a></li>
+                            <li typeof="v:Breadcrumb"><a href="/Knowledge" title="相關知識" rel="v:url" property="v:Title">相關知識</a></li>
+                        </ul>
+                    </li>
+                    <li typeof="v:Breadcrumb"><a href="/Blog" title="部落格文章" rel="v:url" property="v:Title">牠與他的故事</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (isLogin)
+                    {
+                        <li class="dropdown">
+                            <a href="" class="dropdown-toggle" data-toggle="dropdown">哈囉!! @User.Identity.Name 您好 <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/Account/ChangePassword" title="變更密碼">變更密碼</a></li>
+                                <li><a href="/Account" title="會員中心">會員中心</a></li>
+                                <li><a href="/Account/SignOut" title="登出" target="_self">登出</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li><a href="/Account/Register" title="註冊會員" rel="v:url" property="v:Title">註冊會員</a></li>
+                        <li><a href="/Account/Login" title="登入" rel="v:url" property="v:Title">登入</a></li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-            <li data-target="#myCarousel" data-slide-to="3"></li>
-            <li data-target="#myCarousel" data-slide-to="4"></li>
-        </ol>
-        <div class="carousel-inner" data-bind="foreach: imgList">
-            <div data-bind="attr:{class: Class}">
-                <img data-bind="attr:{src: Photo, alt: Alt}" property="v:Title">
-                <div class="container">
-                    <div class="carousel-caption">
-                        <h1><label data-bind="text: Title" property="v:Date"></label></h1>
-                        <p><label data-bind="text: Detail"></label></p>
-                        <p><a class="btn btn-lg btn-primary" href="#" data-bind="click: $root.detail" role="button"><label data-bind="text: ButtonText"></label></a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
+
     @* container *@
     <div id="mainContiner">
         @RenderBody()

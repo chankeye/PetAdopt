@@ -117,7 +117,7 @@ namespace PetAdopt.Logic
                 .SingleOrDefault();
 
             if (data == null)
-                return new LoginInfo();
+                return null;
 
             var user = new LoginInfo
             {

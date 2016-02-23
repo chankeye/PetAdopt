@@ -4,7 +4,7 @@
     self.imgList = ko.observableArray();
 
     self.detail = function (data) {
-        window.location = "/Animal/Detail?id=" + data.Id;
+        window.location = data.Link;
     }
 
     self.getDyingAnimal = function () {

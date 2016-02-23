@@ -569,7 +569,10 @@ namespace PetAdopt.Logic
                     .Select(r => r.Id)
                     .SingleOrDefault();
                 if (sheltersId == 0)
-                    return new IsSuccessResult<AnimalItem>("找不到此收容所，請輸入正確名稱");
+                {
+                    if (string.IsNullOrWhiteSpace(data.Address))
+                        return new IsSuccessResult<AnimalItem>("找不到此收容所，請輸入正確名稱");
+                }
             }
             else
             {
@@ -603,7 +606,7 @@ namespace PetAdopt.Logic
                     SheltersId = sheltersId == 0 ? null : sheltersId,
                     Phone = data.Phone,
                     StartDate = data.StartDate,
-                    EndDate = data.EndDate,
+                    EndDate = data.EndDate.HasValue ? data.EndDate.Value : data.StartDate.AddDays(12),
                     Age = data.Age,
                     StatusId = data.StatusId,
                     OperationInfo = new OperationInfo
@@ -834,21 +837,81 @@ namespace PetAdopt.Logic
                 .Take(5)
                 .ToList();
 
-            // 沒取到半比，就回傳一個空的list回去
+            var result = new List<Carousel>();
+
+            // 沒取到半筆，就回傳一個空的list回去
             if (data.Any() == false)
-                return new List<Carousel>();
-
-            var result = data
-                .Select(r => new Carousel
+            {
+                result.Add(new Carousel
                 {
-                    Id = r.Id,
-                    Photo = r.CoverPhoto,
-                    EndDate = r.EndDate.HasValue ? r.EndDate.Value.ToString("yyyy-MM-dd") : null,
-                    Title = r.Title,
-                    Class = "item"
-                })
-                .ToList();
+                    Link = "/Shelters/New",
+                    Photo = "../../Content/Images/news.jpg",
+                    Title = "發佈收容所資訊.",
+                    Detail = "發表全台各地的收容所，中途之家訊息，讓民眾可以前往認養！！",
+                    Alt = "發佈收容所資訊",
+                    Class = "item",
+                    ButtonText = "前往發佈"
+                });
+                result.Add(new Carousel
+                {
+                    Link = "/Animal/New",
+                    Photo = "../../Content/Images/adopt.jpg",
+                    Title = "送養動物.",
+                    Detail = "發佈等待好心人認養的動物，幫它們尋找一個溫暖的家！！",
+                    Alt = "送養動物",
+                    Class = "item",
+                    ButtonText = "前往發佈"
+                });
+                result.Add(new Carousel
+                {
+                    Link = "/Help/New",
+                    Photo = "../../Content/Images/activity.jpg",
+                    Title = "即刻救援.",
+                    Detail = "有動物急需要幫忙，發佈上來讓更多人知道這個消息！！",
+                    Alt = "即刻救援",
+                    Class = "item",
+                    ButtonText = "前往發佈"
+                });
+                result.Add(new Carousel
+                {
+                    Link = "/Blog/New",
+                    Photo = "../../Content/Images/using.jpg",
+                    Title = "牠與他的故事.",
+                    Detail = "發表你與家中小寶貝的溫馨故事，讓其他人羨慕一下！！",
+                    Alt = "牠與他的故事",
+                    Class = "item",
+                    ButtonText = "前往發佈"
+                });
+                result.Add(new Carousel
+                {
+                    Link = "/Knowledge/New",
+                    Photo = "../../Content/Images/about.jpg",
+                    Title = "相關知識.",
+                    Detail = "提供與動物有關的相關知識，讓新手也能輕鬆了解怎麼養小狗、小貓~~",
+                    Alt = "相關知識",
+                    Class = "item",
+                    ButtonText = "前往發佈"
+                });
+            }
+            else
+            {
+                result = data
+                    .Select(r => new Carousel
+                    {
+                        Link = "/Animal/Detail?id=" + r.Id,
+                        Photo = string.IsNullOrWhiteSpace(r.CoverPhoto) ? r.CoverPhoto :
+                                r.CoverPhoto.StartsWith("http://") ? r.CoverPhoto :
+                                r.CoverPhoto.StartsWith("https://") ? r.CoverPhoto :
+                                "../../Content/uploads/" + r.CoverPhoto,
+                        Title = "處死日：" + (r.EndDate.HasValue ? r.EndDate.Value.ToString("yyyy-MM-dd") : null),
+                        Detail = "",
+                        Alt = "即將安樂死動物",
+                        Class = "item",
+                        ButtonText = "立即認養"
+                    })
+                    .ToList();
 
+            }
 
             result.First().Class += " active";
             return result;

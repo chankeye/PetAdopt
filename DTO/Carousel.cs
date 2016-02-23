@@ -6,9 +6,9 @@
     public class Carousel
     {
         /// <summary>
-        /// Animal.Id
+        /// 
         /// </summary>
-        public int Id { get; set; }
+        public string Link { get; set; }
 
         /// <summary>
         /// 封面圖
@@ -21,9 +21,13 @@
         public string Title { get; set; }
 
         /// <summary>
-        /// 安樂死日期
+        /// 內文
         /// </summary>
-        public string EndDate { get; set; }
+        public string Detail { get; set; }
+
+        public string Alt { get; set; }
+
+        public string ButtonText { get; set; }
 
         /// <summary>
         /// 分類

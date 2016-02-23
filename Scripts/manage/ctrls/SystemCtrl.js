@@ -165,44 +165,38 @@ $(function () {
 
     // init
     $("#btnInitParameter").click(function () {
-        if ($("#init-form").valid()) {
-            $.ajax({
-                type: 'post',
-                url: '/Manage/System/InitParameter',
-                success: function (data) {
-                    alert("初始化完成");
-                    location.reload();
-                }
-            });
-        }
+        $.ajax({
+            type: 'post',
+            url: '/Manage/System/InitParameter',
+            success: function (data) {
+                alert("初始化完成");
+                location.reload();
+            }
+        });
     });
 
     // init
     $("#btnInitAnimal").click(function () {
-        if ($("#initAnimal-form").valid()) {
-            $.ajax({
-                type: 'post',
-                url: '/Manage/System/InitAnimal',
-                success: function (data) {
-                    alert("新增完成");
-                    location.reload();
-                }
-            });
-        }
+        $.ajax({
+            type: 'post',
+            url: '/Manage/System/InitAnimal',
+            success: function (data) {
+                alert("新增完成");
+                location.reload();
+            }
+        });
     });
 
     // delete animal
     $("#btnDeleteAnimal").click(function () {
-        if ($("#deleteAnimal-form").valid()) {
-            $.ajax({
-                type: 'post',
-                url: '/Manage/System/DeleteAnimals',
-                success: function (data) {
-                    alert("刪除完成");
-                    location.reload();
-                }
-            });
-        }
+        $.ajax({
+            type: 'post',
+            url: '/Manage/System/DeleteAnimals',
+            success: function (data) {
+                alert("刪除完成");
+                location.reload();
+            }
+        });
     });
 
     ko.applyBindings(vm);

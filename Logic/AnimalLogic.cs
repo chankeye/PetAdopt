@@ -50,6 +50,7 @@ namespace PetAdopt.Logic
             if (string.IsNullOrWhiteSpace(query))
             {
                 var animals = PetContext.Animals
+                    .OrderByDescending(r => r.Id)
                     .Select(r => new
                     {
                         r.Id,
@@ -91,7 +92,6 @@ namespace PetAdopt.Logic
                 }
 
                 var templist = animals
-                    .OrderByDescending(r => r.Id)
                     .Select(r => new
                     {
                         r.Id,
@@ -134,6 +134,7 @@ namespace PetAdopt.Logic
                 {
                     var animals = PetContext.Animals
                         .Where(r => r.Title == query)
+                        .OrderByDescending(r => r.Id)
                         .Select(r => new
                         {
                             r.Id,
@@ -175,7 +176,6 @@ namespace PetAdopt.Logic
                     }
 
                     var templist = animals
-                        .OrderByDescending(r => r.Id)
                         .Select(r => new
                         {
                             r.Id,
@@ -1012,6 +1012,15 @@ namespace PetAdopt.Logic
                 catch (Exception)
                 { }
             }
+        }
+
+        /// <summary>
+        /// 刪除半年外的動物
+        /// </summary>
+        public void DeleteAnimals()
+        {
+            var sql = @"delete from Animal where StartDate < DateAdd(""m"", -6, GetDate())";
+            PetContext.Database.ExecuteSqlCommand(sql);
         }
     }
 }

@@ -191,5 +191,19 @@ $(function () {
         }
     });
 
+    // delete animal
+    $("#btnDeleteAnimal").click(function () {
+        if ($("#deleteAnimal-form").valid()) {
+            $.ajax({
+                type: 'post',
+                url: '/Manage/System/DeleteAnimals',
+                success: function (data) {
+                    alert("刪除完成");
+                    location.reload();
+                }
+            });
+        }
+    });
+
     ko.applyBindings(vm);
 });

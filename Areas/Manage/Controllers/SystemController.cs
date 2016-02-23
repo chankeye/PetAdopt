@@ -118,5 +118,15 @@ namespace PetAdopt.Areas.Manage.Controllers
 
             return true;
         }
+
+        public bool DeleteAnimals()
+        {
+            var animalLogic = new AnimalLogic(GetOperation());
+
+            animalLogic.DeleteAnimals();
+
+            return true;
+        }
+
     }
 }

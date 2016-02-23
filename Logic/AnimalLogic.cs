@@ -920,9 +920,11 @@ namespace PetAdopt.Logic
         public void AddAnimalFromOpenData()
         {
             var client = new Client();
-            var animalList = client.GetAnimalInfo();
+            var animalList = client.GetAnimalInfo()
+                .Where(r => Convert.ToDateTime(r.animal_createtime) > DateTime.Now.AddMonths(-6))
+                .OrderBy(r => Convert.ToDateTime(r.animal_createtime));
 
-            foreach (var item in animalList.OrderBy(r => Convert.ToDateTime(r.animal_createtime)))
+            foreach (var item in animalList)
             {
                 try
                 {

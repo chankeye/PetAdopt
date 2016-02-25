@@ -1,29 +1,21 @@
-﻿<form class="form-horizontal" role="form">
+﻿<form class="form-inline">
     <div class="form-group">
-        <div class="input-group col-sm-4">
+        <div class="input-group">
             <span class="glyphicon glyphicon-search input-group-addon"></span>
             <input id="search" class="form-control" name="search" type="search" placeholder="請輸入標題查詢" />
         </div>
+    </div>
+    <div class="checkbox">
         <label>
             <input id="checkAll" name="checkAll" type="checkbox"> 完全比對
         </label>
-        <button id="btn3" type="button" class="btn btn-default" data-loading-text="查詢中...">查詢</button>
     </div>
-    <div id="selOptionsSearch" class="form-group">
-        <div id="optionsAreas"></div>
-        <div id="optionsClasses"></div>
-        <div id="optionsStatuses"></div>
-        @*<div class="col-sm-4">
-            <select id="selOptionsAreas" class="form-control"
-                    data-bind="options: areas, optionsText: 'Word', optionsValue: 'Id'"></select>
-        </div>
-        <div class="col-sm-4">
-            <select id="selOptionsClasses" class="form-control"
-                    data-bind="options: classes, optionsText: 'Word', optionsValue: 'Id'"></select>
-        </div>
-        <div class="col-sm-4">
-            <select id="selOptionsStatuses" class="form-control"
-                    data-bind="options: statuses, optionsText: 'Word', optionsValue: 'Id'"></select>
-        </div>*@
-    </div>
+    <button id="btn3" type="button" class="btn btn-default" data-loading-text="查詢中...">查詢</button>
 </form>
+<br />
+<div id="selOptionsSearch">
+    <div id="optionsAreas"></div>
+    <div id="optionsClasses"></div>
+    <div id="optionsStatuses"></div>
+</div>
+<br />

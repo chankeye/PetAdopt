@@ -6,12 +6,12 @@
     <script src="../../Scripts/ctrls/HelpCtrl.js"></script>
 }
 <div class="container">
-    <div class="navbar-right">
-        <a href="/Help/New" class="btn btn-primary">請求救援</a>
-    </div>
     @Html.Partial("_Search")
     <div class="page-header">
-        <h2>即刻救援</h2>
+        <h2 style="display:inline">即刻救援</h2>
+        <div class="navbar-right">
+            <a href="/Help/New" class="btn btn-primary">請求救援</a>
+        </div>
     </div>
     <div data-bind="foreach: history">
         <div class="row warp">

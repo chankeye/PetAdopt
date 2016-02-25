@@ -6,12 +6,12 @@
     <script src="../../Scripts/ctrls/NewsCtrl.js"></script>
 }
 <div class="container">
-    <div class="navbar-right">
-        <a href="/News/New" class="btn btn-primary">發佈消息</a>
-    </div>
     @Html.Partial("_Search")
     <div class="page-header">
-        <h2>最新消息</h2>
+        <h2 style="display:inline">最新消息</h2>
+        <div class="navbar-right">
+            <a href="/News/New" class="btn btn-primary">發佈消息</a>
+        </div>
     </div>
     <div data-bind="foreach: history">
         <div class="row warp">

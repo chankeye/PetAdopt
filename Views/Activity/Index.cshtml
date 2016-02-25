@@ -6,12 +6,12 @@
     <script src="../../Scripts/ctrls/ActivityCtrl.js"></script>
 }
 <div class="container">
-    <div class="navbar-right">
-        <a href="/Activity/New" class="btn btn-primary">發佈新活動</a>
-    </div>
     @Html.Partial("_Search")
     <div class="page-header">
-        <h2>最新活動</h2>
+        <h2 style="display:inline">最新活動</h2>
+        <div class="navbar-right">
+            <a href="/Activity/New" class="btn btn-primary">發佈新活動</a>
+        </div>
     </div>
     <div data-bind="foreach: history">
         <div class="row warp">

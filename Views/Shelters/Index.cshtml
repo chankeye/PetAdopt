@@ -6,12 +6,12 @@
     <script src="../../Scripts/ctrls/SheltersCtrl.js"></script>
 }
 <div class="container">
-    <div class="navbar-right">
-        <a href="/Shelters/New" class="btn btn-primary">新增收容所</a>
-    </div>
     @Html.Partial("_Search")
     <div class="page-header">
-        <h2>收容所列表</h2>
+        <h2 style="display:inline">收容所列表</h2>
+        <div class="navbar-right">
+            <a href="/Shelters/New" class="btn btn-primary">新增收容所</a>
+        </div>
     </div>
     <div data-bind="foreach: history">
         <div class="row warp">

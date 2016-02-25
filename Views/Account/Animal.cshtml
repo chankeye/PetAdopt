@@ -9,13 +9,14 @@
     <div class="page-header">
         <h2>發佈過的認養動物資訊</h2>
     </div>
-    <div class="navbar-right">
+    <div class="navbar-right form-group">
         <button id="btn2" type="button" class="btn btn-primary">返回</button>
     </div>
     @Html.Partial("_Search")
+    <br />
     <div data-bind="foreach: history">
         <div class="row warp">
-            <div class="navbar-right">
+            <div class="navbar-right form-group">
                 <a href='#' data-bind="click: $root.editAnimal" class="btn btn-primary">編輯</a>
                 <a href='#' data-bind="click: $root.removeAnimal" class="btn btn-danger">移除</a>
             </div>

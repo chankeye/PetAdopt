@@ -6,14 +6,13 @@
     <script src="../../Scripts/ctrls/AnimalCtrl.js"></script>
 }
 <div class="container">
-    <div class="navbar-right">
-        <a href="/Animal/New" class="btn btn-primary">送養動物</a>
-    </div>
     @Html.Partial("_Search")
     <div class="page-header">
-        <h2>帶它回家</h2>
+        <h2 style="display:inline">帶它回家</h2>
+        <div class="navbar-right">
+            <a href="/Animal/New" class="btn btn-primary">送養動物</a>
+        </div>
     </div>
-
     <div data-bind="foreach: history">
         <div class="row warp">
             <div class="col-md-5 list-img">

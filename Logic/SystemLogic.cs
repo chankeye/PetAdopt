@@ -340,7 +340,7 @@ namespace PetAdopt.Logic
                 ActivityCount = PetContext.Activities.Count(),
                 AnimalCount = PetContext.Animals.Count(),
                 AskCount = PetContext.Asks.Count(),
-                BlogCount = PetContext.Asks.Count(),
+                BlogCount = PetContext.Blogs.Count(),
                 HelpCount = PetContext.Helps.Count(),
                 KnowledgeCount = PetContext.Knowledges.Count(),
                 NewsCount = PetContext.News.Count(),

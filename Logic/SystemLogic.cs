@@ -332,5 +332,23 @@ namespace PetAdopt.Logic
             foreach (var item in Utilities.Constant.InitStatuses)
                 AddStatus(item);
         }
+
+        public SiteInfo GetSiteInformation()
+        {
+            var result = new SiteInfo()
+            {
+                ActivityCount = PetContext.Activities.Count(),
+                AnimalCount = PetContext.Animals.Count(),
+                AskCount = PetContext.Asks.Count(),
+                BlogCount = PetContext.Asks.Count(),
+                HelpCount = PetContext.Helps.Count(),
+                KnowledgeCount = PetContext.Knowledges.Count(),
+                NewsCount = PetContext.News.Count(),
+                ShelterCount = PetContext.Shelters.Count(),
+                MemberCount = PetContext.Users.Count()
+            };
+
+            return result;
+        }
     }
 }

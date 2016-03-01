@@ -1,5 +1,52 @@
 ﻿@{
     Layout = "../Shared/_Layout.cshtml";
 }
-
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: 'post',
+                url: '/Manage/Home/GetHomeInfo'
+            }).done(function (response) {
+                $("#MemberCount").text(response.MemberCount)
+                $("#AnimalCount").text(response.AnimalCount)
+                $("#ShelterCount").text(response.ShelterCount)
+                $("#ActivityCount").text(response.ActivityCount)
+                $("#NewsCount").text(response.NewsCount)
+                $("#AskCount").text(response.AskCount)
+                $("#BlogCount").text(response.BlogCount)
+                $("#HelpCount").text(response.HelpCount)
+                $("#KnowledgeCount").text(response.KnowledgeCount)
+            });
+        });
+    </script>
+}
 <h2>艾認養 - 管理系統</h2>
+<div class="form-group">
+    會員數：<label id="MemberCount"></label>
+</div>
+<div class="form-group">
+    動物數：<label id="AnimalCount"></label>
+</div>
+<div class="form-group">
+    收容所數：<label id="ShelterCount"></label>
+</div>
+<div class="form-group">
+    活動數：<label id="ActivityCount"></label>
+</div>
+<div class="form-group">
+    消息數：<label id="NewsCount"></label>
+</div>
+<div class="form-group">
+    問題數：<label id="AskCount"></label>
+</div>
+<div class="form-group">
+    BLOG數：<label id="BlogCount"></label>
+</div>
+<div class="form-group">
+    救援數：<label id="HelpCount"></label>
+</div>
+<div class="form-group">
+    知識數：<label id="KnowledgeCount"></label>
+</div>

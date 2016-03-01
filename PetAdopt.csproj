@@ -751,6 +751,7 @@
     <Compile Include="DTO\Shelters\SheltersMessageList.cs" />
     <Compile Include="DTO\Shelters\CreateShelters.cs" />
     <Compile Include="DTO\Shelters\SheltersList.cs" />
+    <Compile Include="DTO\System\SiteInfo.cs" />
     <Compile Include="DTO\System\SystemInfo.cs" />
     <Compile Include="DTO\User\UserInfo.cs" />
     <Compile Include="DTO\User\CreateUser.cs" />

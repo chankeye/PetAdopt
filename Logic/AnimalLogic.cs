@@ -961,8 +961,7 @@ namespace PetAdopt.Logic
                         animalClass = PetContext.Classes.Where(r => r.Word == "其他").SingleOrDefault();
 
                     // combine information
-                    var introduction = "流水編號：" + item.animal_id + "\n";
-                    introduction += "區域編號：" + item.animal_subid + "\n";
+                    var introduction = "動物編號：" + item.animal_subid + " (請將此編號告知收容所，以便快速找到此浪浪)\n";
                     introduction += "性別：" + item.animal_sex + "\n";
                     introduction += "體型：" + item.animal_bodytype + "\n";
                     introduction += "毛色：" + item.animal_colour + "\n";

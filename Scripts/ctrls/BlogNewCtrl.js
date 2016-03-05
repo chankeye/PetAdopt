@@ -37,8 +37,7 @@ $(function () {
                 maxlength: 50
             },
             content: {
-                required: true,
-                maxlength: 10000
+                required: true
             },
             selOptionsClasses: {
                 required: true
@@ -49,10 +48,7 @@ $(function () {
                 required: "請輸入標題",
                 maxlength: "不得大於50個字"
             },
-            content: {
-                required: "請輸入內容",
-                maxlength: "不得大於1000個字"
-            },
+            content: "請輸入內容",
             selOptionsClasses: "請選擇分類",
         }
     });
@@ -74,11 +70,6 @@ $(function () {
             var oEditor = CKEDITOR.instances.content;
             if (oEditor.getData() == '') {
                 alert('請輸入內容');
-                return;
-            }
-
-            if (oEditor.getData().length > 10000) {
-                alert('內容過長，請重新輸入');
                 return;
             }
 

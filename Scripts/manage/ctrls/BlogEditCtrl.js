@@ -147,11 +147,6 @@ $(function () {
                 return;
             }
 
-            if (oEditor.getData().length > 10000) {
-                alert('內容過長，請重新輸入');
-                return;
-            }
-
             $btn.button("loading");
 
             $.ajax({

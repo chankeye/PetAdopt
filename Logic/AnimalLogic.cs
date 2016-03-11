@@ -857,7 +857,7 @@ namespace PetAdopt.Logic
                     Link = "/Animal/New",
                     Photo = "../../Content/Images/adopt.jpg",
                     Title = "送養動物.",
-                    Detail = "發佈等待好心人認養的動物，幫它們尋找一個溫暖的家！！",
+                    Detail = "發佈等待好心人認養的動物，幫牠們尋找一個溫暖的家！！",
                     Alt = "送養動物",
                     Class = "item",
                     ButtonText = "前往發佈"

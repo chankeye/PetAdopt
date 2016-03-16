@@ -110,22 +110,18 @@ namespace PetAdopt.Areas.Manage.Controllers
             return true;
         }
 
-        public bool InitAnimal()
+        public int InitAnimal()
         {
             var animalLogic = new AnimalLogic(GetOperation());
 
-            animalLogic.AddAnimalFromOpenData();
-
-            return true;
+            return animalLogic.AddAnimalFromOpenData();
         }
 
-        public bool DeleteAnimals()
+        public int DeleteAnimals()
         {
             var animalLogic = new AnimalLogic(GetOperation());
 
-            animalLogic.DeleteAnimals();
-
-            return true;
+            return animalLogic.DeleteAnimals();
         }
     }
 }

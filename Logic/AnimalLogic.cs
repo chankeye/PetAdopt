@@ -917,8 +917,10 @@ namespace PetAdopt.Logic
             return result;
         }
 
-        public void AddAnimalFromOpenData()
+        public int AddAnimalFromOpenData()
         {
+            var newAnimalCount = 0;
+
             var client = new Client();
             var animalList = client.GetAnimalInfo()
                 .Where(r => Convert.ToDateTime(r.animal_createtime) > DateTime.Now.AddMonths(-6))
@@ -1009,19 +1011,23 @@ namespace PetAdopt.Logic
                         };
                         EditAnimal(editAnimal, GetOperationInfo().UserId);
                     }
+
+                    newAnimalCount++;
                 }
                 catch (Exception)
                 { }
             }
+
+            return newAnimalCount;
         }
 
         /// <summary>
         /// 刪除半年外的動物
         /// </summary>
-        public void DeleteAnimals()
+        public int DeleteAnimals()
         {
             var sql = @"delete from Animal where StartDate < DateAdd(""m"", -6, GetDate())";
-            PetContext.Database.ExecuteSqlCommand(sql);
+            return PetContext.Database.ExecuteSqlCommand(sql);
         }
     }
 }

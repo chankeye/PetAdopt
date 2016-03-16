@@ -180,8 +180,8 @@ $(function () {
         $.ajax({
             type: 'post',
             url: '/Manage/System/InitAnimal',
-            success: function (data) {
-                alert("新增完成");
+            success: function (count) {
+                alert("新增了" + count + "筆資料");
                 location.reload();
             }
         });
@@ -192,8 +192,8 @@ $(function () {
         $.ajax({
             type: 'post',
             url: '/Manage/System/DeleteAnimals',
-            success: function (data) {
-                alert("刪除完成");
+            success: function (count) {
+                alert("刪除了" + count + "筆資料");
                 location.reload();
             }
         });

@@ -1,6 +1,7 @@
 ﻿using PetAdopt.DTO;
 using PetAdopt.DTO.Animal;
 using PetAdopt.Models;
+using PetAdopt.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -117,7 +118,7 @@ namespace PetAdopt.Logic
                             "../../Content/uploads/" + r.CoverPhoto,
                         Title = r.Title,
                         Introduction = r.Introduction,
-                        Date = r.Date.ToString("yyyy/MM/dd"),
+                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                         Area = r.Area,
                         Classes = r.Classes,
                         Status = r.Status
@@ -201,7 +202,7 @@ namespace PetAdopt.Logic
                                 "../../Content/uploads/" + r.CoverPhoto,
                             Title = r.Title,
                             Introduction = r.Introduction,
-                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                             Area = r.Area,
                             Classes = r.Classes,
                             Status = r.Status
@@ -283,7 +284,7 @@ namespace PetAdopt.Logic
                                 "../../Content/uploads/" + r.CoverPhoto,
                             Title = r.Title,
                             Introduction = r.Introduction,
-                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                             Area = r.Area,
                             Classes = r.Classes,
                             Status = r.Status
@@ -340,10 +341,10 @@ namespace PetAdopt.Logic
                     Shelters = animal.SheltersId.HasValue ? animal.Shelter.Name : null,
                     Status = animal.Status.Word,
                     Phone = animal.Phone,
-                    StartDate = animal.StartDate.ToString("yyyy-MM-dd"),
-                    EndDate = animal.EndDate.HasValue ? animal.EndDate.Value.ToString("yyyy-MM-dd") : null,
+                    StartDate = TransformTime.UtcToLocalTime(animal.StartDate).ToString("yyyy/MM/dd"),
+                    EndDate = animal.EndDate.HasValue ? TransformTime.UtcToLocalTime(animal.EndDate.Value).ToString("yyyy/MM/dd") : null,
                     Age = animal.Age,
-                    Date = animal.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    Date = TransformTime.UtcToLocalTime(animal.OperationInfo.Date).ToString("yyyy/MM/dd"),
                     UserDisplay = animal.OperationInfo.User.Display
                 }
             };
@@ -387,7 +388,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = r.Date.ToString("yyyy-MM-dd"),
+                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                 Account = r.Account
             })
             .ToList();
@@ -605,13 +606,13 @@ namespace PetAdopt.Logic
                     ClassId = data.ClassId,
                     SheltersId = sheltersId == 0 ? null : sheltersId,
                     Phone = data.Phone,
-                    StartDate = data.StartDate,
-                    EndDate = data.EndDate.HasValue ? data.EndDate.Value : data.StartDate.AddDays(12),
+                    StartDate = data.StartDate.ToUniversalTime(),
+                    EndDate = data.EndDate.HasValue ? data.EndDate.Value.ToUniversalTime() : data.StartDate.AddDays(12),
                     Age = data.Age,
                     StatusId = data.StatusId,
                     OperationInfo = new OperationInfo
                     {
-                        Date = data.StartDate != null ? data.StartDate : DateTime.Now,
+                        Date = data.StartDate != null ? data.StartDate.ToUniversalTime() : DateTime.UtcNow,
                         UserId = GetOperationInfo().UserId
                     }
                 });
@@ -717,8 +718,8 @@ namespace PetAdopt.Logic
                 animal.ClassId == data.ClassId &&
                 animal.SheltersId == sheltersId &&
                 animal.Phone == data.Phone &&
-                animal.StartDate == data.StartDate &&
-                animal.EndDate == data.EndDate &&
+                animal.StartDate == data.StartDate.ToUniversalTime() &&
+                animal.EndDate == (data.EndDate.HasValue ? TransformTime.UtcToLocalTime(data.EndDate.Value) : data.EndDate) &&
                 animal.Age == data.Age &&
                 animal.StatusId == data.StatusId)
                 return new IsSuccessResult();
@@ -733,8 +734,8 @@ namespace PetAdopt.Logic
                 animal.ClassId = data.ClassId;
                 animal.SheltersId = sheltersId == 0 ? null : sheltersId;
                 animal.Phone = data.Phone;
-                animal.StartDate = data.StartDate;
-                animal.EndDate = data.EndDate;
+                animal.StartDate = data.StartDate.ToUniversalTime();
+                animal.EndDate = (data.EndDate.HasValue ? TransformTime.UtcToLocalTime(data.EndDate.Value) : data.EndDate);
                 animal.Age = data.Age;
                 animal.StatusId = data.StatusId;
 
@@ -777,7 +778,7 @@ namespace PetAdopt.Logic
                     IsRead = false,
                     OperationInfo = new OperationInfo
                     {
-                        Date = DateTime.Now,
+                        Date = DateTime.UtcNow,
                         UserId = GetOperationInfo().UserId
                     }
                 });
@@ -826,7 +827,7 @@ namespace PetAdopt.Logic
         {
             var data = PetContext.Animals
                 .OrderByDescending(r => r.EndDate)
-                .Where(r => r.EndDate >= DateTime.Now)
+                .Where(r => r.EndDate >= DateTime.UtcNow)
                 .Select(r => new
                 {
                     r.Id,
@@ -903,7 +904,7 @@ namespace PetAdopt.Logic
                                 r.CoverPhoto.StartsWith("http://") ? r.CoverPhoto :
                                 r.CoverPhoto.StartsWith("https://") ? r.CoverPhoto :
                                 "../../Content/uploads/" + r.CoverPhoto,
-                        Title = "處死日：" + (r.EndDate.HasValue ? r.EndDate.Value.ToString("yyyy-MM-dd") : null),
+                        Title = "處死日：" + (r.EndDate.HasValue ? TransformTime.UtcToLocalTime(r.EndDate.Value).ToString("yyyy/MM/dd") : null),
                         Detail = "",
                         Alt = "即將安樂死動物",
                         Class = "item",
@@ -983,7 +984,7 @@ namespace PetAdopt.Logic
                         ClassId = animalClass.Id,
                         StatusId = statusId,
                         Address = item.animal_place,
-                        StartDate = Convert.ToDateTime(item.animal_createtime),
+                        StartDate = Convert.ToDateTime(item.animal_createtime).ToUniversalTime(),
                         Introduction = introduction
                     };
 
@@ -1006,7 +1007,7 @@ namespace PetAdopt.Logic
                             ClassId = animalClass.Id,
                             StatusId = statusId,
                             Address = item.animal_place,
-                            StartDate = Convert.ToDateTime(item.animal_createtime),
+                            StartDate = Convert.ToDateTime(item.animal_createtime).ToUniversalTime(),
                             Introduction = introduction
                         };
                         EditAnimal(editAnimal, GetOperationInfo().UserId);

@@ -1,6 +1,7 @@
 ﻿using PetAdopt.DTO;
 using PetAdopt.DTO.Shelters;
 using PetAdopt.Models;
+using PetAdopt.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -241,7 +242,7 @@ namespace PetAdopt.Logic
                     Address = shelters.Address,
                     Url = shelters.Url,
                     Phone = shelters.Phone,
-                    Date = shelters.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    Date = TransformTime.UtcToLocalTime(shelters.OperationInfo.Date).ToString("yyyy/MM/dd"),
                     UserDisplay = shelters.OperationInfo.User.Display
                 }
             };
@@ -285,7 +286,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = r.Date.ToString("yyyy-MM-dd"),
+                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                 Account = r.Account
             })
             .ToList();
@@ -480,7 +481,7 @@ namespace PetAdopt.Logic
                     Url = data.Url,
                     OperationInfo = new OperationInfo
                     {
-                        Date = DateTime.Now,
+                        Date = DateTime.UtcNow,
                         UserId = GetOperationInfo().UserId
                     }
                 });
@@ -609,7 +610,7 @@ namespace PetAdopt.Logic
                     IsRead = false,
                     OperationInfo = new OperationInfo
                     {
-                        Date = DateTime.Now,
+                        Date = DateTime.UtcNow,
                         UserId = GetOperationInfo().UserId
                     }
                 });

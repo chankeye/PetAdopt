@@ -4,9 +4,9 @@ using PetAdopt.Models;
 using PetAdopt.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
-using System.Data.Entity;
 using System.Text.RegularExpressions;
 
 namespace PetAdopt.Logic
@@ -92,7 +92,7 @@ namespace PetAdopt.Logic
                         Photo = r.CoverPhoto,
                         Title = r.Title,
                         Message = r.Message,
-                        Date = r.Date.ToString("yyyy/MM/dd"),
+                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                         Area = r.Word
                     })
                     .ToList();
@@ -153,7 +153,7 @@ namespace PetAdopt.Logic
                             Photo = r.CoverPhoto,
                             Title = r.Title,
                             Message = r.Message,
-                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                             Area = r.Word
                         })
                         .ToList();
@@ -211,7 +211,7 @@ namespace PetAdopt.Logic
                             Photo = r.CoverPhoto,
                             Title = r.Title,
                             Message = r.Message,
-                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                             Area = r.Word
                         })
                         .ToList();
@@ -256,7 +256,7 @@ namespace PetAdopt.Logic
                     AreaId = news.AreaId,
                     Area = news.AreaId.HasValue ? news.Area.Word : null,
                     Url = news.Url,
-                    Date = news.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    Date = TransformTime.UtcToLocalTime(news.OperationInfo.Date).ToString("yyyy/MM/dd"),
                     UserDisplay = news.OperationInfo.User.Display
                 }
             };
@@ -300,7 +300,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = r.Date.ToString("yyyy-MM-dd"),
+                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                 Account = r.Account
             })
             .ToList();
@@ -482,7 +482,7 @@ namespace PetAdopt.Logic
                     AreaId = data.AreaId,
                     OperationInfo = new OperationInfo
                     {
-                        Date = DateTime.Now,
+                        Date = DateTime.UtcNow,
                         UserId = GetOperationInfo().UserId
                     }
                 });
@@ -610,7 +610,7 @@ namespace PetAdopt.Logic
                     IsRead = false,
                     OperationInfo = new OperationInfo
                     {
-                        Date = DateTime.Now,
+                        Date = DateTime.UtcNow,
                         UserId = GetOperationInfo().UserId
                     }
                 });

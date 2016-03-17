@@ -233,7 +233,7 @@ namespace PetAdopt.Logic
                         Id = r.Id,
                         Account = r.Account,
                         IsDisable = r.IsDisable,
-                        Date = r.Date.ToString("yyyy/MM/dd")
+                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
                     })
                     .ToList();
 
@@ -267,7 +267,7 @@ namespace PetAdopt.Logic
                             Id = r.Id,
                             Account = r.Account,
                             IsDisable = r.IsDisable,
-                            Date = r.Date.ToString("yyyy/MM/dd")
+                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
                         })
                         .ToList();
 
@@ -298,7 +298,7 @@ namespace PetAdopt.Logic
                             Id = r.Id,
                             Account = r.Account,
                             IsDisable = r.IsDisable,
-                            Date = r.Date.ToString("yyyy/MM/dd")
+                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
                         })
                         .ToList();
 
@@ -422,7 +422,7 @@ namespace PetAdopt.Logic
                     Mobile = data.Mobile,
                     Email = data.Email,
                     IsAdmin = data.IsAdmin,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     IsDisable = false
                 });
                 PetContext.SaveChanges();
@@ -459,7 +459,7 @@ namespace PetAdopt.Logic
                     Mobile = "",
                     Email = data.Email,
                     IsAdmin = false,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     IsDisable = false
                 });
                 PetContext.SaveChanges();
@@ -608,7 +608,7 @@ namespace PetAdopt.Logic
                     Mobile = "Mobile",
                     Email = "Email",
                     IsAdmin = true,
-                    Date = DateTime.Now,
+                    Date = DateTime.UtcNow,
                     IsDisable = false
                 });
 

@@ -1,6 +1,7 @@
 ﻿using PetAdopt.DTO;
 using PetAdopt.DTO.Knowledge;
 using PetAdopt.Models;
+using PetAdopt.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -83,7 +84,7 @@ namespace PetAdopt.Logic
                     {
                         Id = r.Id,
                         Title = r.Title,
-                        Date = r.Date.ToString("yyyy/MM/dd"),
+                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                         Classes = r.Word
                     })
                     .ToList();
@@ -138,7 +139,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                             Classes = r.Word
                         })
                         .ToList();
@@ -190,7 +191,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = r.Date.ToString("yyyy/MM/dd"),
+                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                             Classes = r.Word
                         })
                         .ToList();
@@ -233,7 +234,7 @@ namespace PetAdopt.Logic
                     Message = knowledge.Message,
                     ClassId = knowledge.ClassId,
                     Class = knowledge.Class.Word,
-                    Date = knowledge.OperationInfo.Date.ToString("yyyy-MM-dd"),
+                    Date = TransformTime.UtcToLocalTime(knowledge.OperationInfo.Date).ToString("yyyy/MM/dd"),
                     UserDisplay = knowledge.OperationInfo.User.Display,
                 }
             };
@@ -277,7 +278,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = r.Date.ToString("yyyy-MM-dd"),
+                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
                 Account = r.Account
             })
             .ToList();
@@ -434,7 +435,7 @@ namespace PetAdopt.Logic
                     ClassId = data.ClassId,
                     OperationInfo = new OperationInfo
                     {
-                        Date = DateTime.Now,
+                        Date = DateTime.UtcNow,
                         UserId = GetOperationInfo().UserId
                     }
                 });
@@ -542,7 +543,7 @@ namespace PetAdopt.Logic
                     IsRead = false,
                     OperationInfo = new OperationInfo
                     {
-                        Date = DateTime.Now,
+                        Date = DateTime.UtcNow,
                         UserId = GetOperationInfo().UserId
                     }
                 });

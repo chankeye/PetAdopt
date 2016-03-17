@@ -75,7 +75,7 @@ namespace PetAdopt.Logic
         {
             return new OperationInfo
             {
-                Date = DateTime.Now,
+                Date = DateTime.UtcNow,
                 UserId = _operation.UserId
             };
         }

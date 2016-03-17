@@ -139,7 +139,7 @@ namespace PetAdopt.Controllers
             var ticket = new FormsAuthenticationTicket(
                 1,                      // ticket version
                 user.Account,           // authenticated username
-                DateTime.Now,           // issueDate
+                DateTime.UtcNow,        // issueDate
                 DateTime.MaxValue,      // expiryDate
                 false,                  // true to persist across browser sessions
                 userData                // can be used to store additional user data
@@ -192,7 +192,7 @@ namespace PetAdopt.Controllers
             var ticket = new FormsAuthenticationTicket(
                 1,                      // ticket version
                 user.Account,           // authenticated username
-                DateTime.Now,           // issueDate
+                DateTime.UtcNow,        // issueDate
                 DateTime.MaxValue,      // expiryDate
                 false,                  // true to persist across browser sessions
                 userData                // can be used to store additional user data

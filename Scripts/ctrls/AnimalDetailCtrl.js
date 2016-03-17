@@ -25,6 +25,10 @@
                 take: take
             }
         }).done(function (response) {
+            for (var i = 0; i < response.List.length; i++) {
+                var date = new Date(response.List[i].Date);
+                response.List[i].Date = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+            }
             self.responseMessage('');
             self.history(response.List);
             self.pagination(page, response.Count, take);
@@ -67,8 +71,10 @@ $(function () {
                         $('#coverPhoto').attr('src', "../../Content/uploads/" + photo);
                 }
                 $("#title").text(data.ReturnObject.Title);
-                $("#startDate").text(data.ReturnObject.StartDate);
-                $("#endDate").text(data.ReturnObject.EndDate);
+                var startdate = new Date(data.ReturnObject.StartDate);
+                $("#startDate").text(startdate.getFullYear() + '/' + (startdate.getMonth() + 1) + '/' + startdate.getDate());
+                var enddate = new Date(data.ReturnObject.EndDate);
+                $("#endDate").text(enddate.getFullYear() + '/' + (enddate.getMonth() + 1) + '/' + enddate.getDate());
                 $("#introduction").html(data.ReturnObject.Introduction.replace(/\n/g, "<br>"));
                 if (data.ReturnObject.Shelters == null) {
                     $("#phone").text(data.ReturnObject.Phone);
@@ -85,7 +91,8 @@ $(function () {
                 $("#selOptionsClasses").text(data.ReturnObject.Class);
                 $("#selOptionsStatuses").text(data.ReturnObject.Status);
                 $("#age").text(data.ReturnObject.Age);
-                $("#date").text(data.ReturnObject.Date);
+                var date = new Date(data.ReturnObject.Date);
+                $("#date").text(date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate());
                 $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {
                 alert(data.ErrorMessage);

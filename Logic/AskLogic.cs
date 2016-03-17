@@ -88,7 +88,7 @@ namespace PetAdopt.Logic
                     {
                         Id = r.Id,
                         Title = r.Title,
-                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                        Date = r.Date.ToString() + " UTC",
                         Classes = r.Word
                     })
                     .ToList();
@@ -143,7 +143,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                            Date = r.Date.ToString() + " UTC",
                             Classes = r.Word
                         })
                         .ToList();
@@ -195,7 +195,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                            Date = r.Date.ToString() + " UTC",
                             Classes = r.Word
                         })
                         .ToList();
@@ -238,7 +238,7 @@ namespace PetAdopt.Logic
                     Message = ask.Message,
                     ClassId = ask.ClassId,
                     Class = ask.Class.Word,
-                    Date = TransformTime.UtcToLocalTime(ask.OperationInfo.Date).ToString("yyyy/MM/dd"),
+                    Date = ask.OperationInfo.Date.ToString() + " UTC",
                     UserDisplay = ask.OperationInfo.User.Display
                 }
             };
@@ -282,7 +282,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                Date = r.Date.ToString() + " UTC",
                 Account = r.Account
             })
             .ToList();

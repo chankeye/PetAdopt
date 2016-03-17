@@ -233,7 +233,7 @@ namespace PetAdopt.Logic
                         Id = r.Id,
                         Account = r.Account,
                         IsDisable = r.IsDisable,
-                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
+                        Date = r.Date.ToString() + " UTC"
                     })
                     .ToList();
 
@@ -267,7 +267,7 @@ namespace PetAdopt.Logic
                             Id = r.Id,
                             Account = r.Account,
                             IsDisable = r.IsDisable,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
+                            Date = r.Date.ToString() + " UTC"
                         })
                         .ToList();
 
@@ -298,7 +298,7 @@ namespace PetAdopt.Logic
                             Id = r.Id,
                             Account = r.Account,
                             IsDisable = r.IsDisable,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
+                            Date = r.Date.ToString() + " UTC"
                         })
                         .ToList();
 

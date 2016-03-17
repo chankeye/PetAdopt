@@ -1,7 +1,6 @@
 ﻿using PetAdopt.DTO;
 using PetAdopt.DTO.Blog;
 using PetAdopt.Models;
-using PetAdopt.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -88,7 +87,7 @@ namespace PetAdopt.Logic
                     {
                         Id = r.Id,
                         Title = r.Title,
-                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                        Date = r.Date.ToString() + " UTC",
                         Classes = r.Word
                     })
                     .ToList();
@@ -143,7 +142,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                            Date = r.Date.ToString() + " UTC",
                             Classes = r.Word
                         })
                         .ToList();
@@ -195,7 +194,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                            Date = r.Date.ToString() + " UTC",
                             Classes = r.Word
                         })
                         .ToList();
@@ -239,7 +238,7 @@ namespace PetAdopt.Logic
                     ClassId = blog.ClassId,
                     Class = blog.Class.Word,
                     AnimalId = blog.AnimalId,
-                    Date = TransformTime.UtcToLocalTime(blog.OperationInfo.Date).ToString("yyyy/MM/dd"),
+                    Date = blog.OperationInfo.Date.ToString() + " UTC",
                     UserDisplay = blog.OperationInfo.User.Display,
                     Animal = blog.AnimalId.HasValue ? blog.Animal.Title : null
                 }
@@ -284,7 +283,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                Date = r.Date.ToString() + " UTC",
                 Account = r.Account
             })
             .ToList();

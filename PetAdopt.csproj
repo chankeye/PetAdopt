@@ -807,7 +807,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\Constant.cs" />
     <Compile Include="Utilities\Cryptography.cs" />
-    <Compile Include="Utilities\TransformTime.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

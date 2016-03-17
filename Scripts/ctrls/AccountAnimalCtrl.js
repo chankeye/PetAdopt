@@ -71,6 +71,10 @@
                 memberOnly: true
             }
         }).done(function (response) {
+            for (var i = 0; i < response.List.length; i++) {
+                var date = new Date(response.List[i].Date);
+                response.List[i].Date = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+            }
             self.responseMessage('');
             self.history(response.List);
             self.pagination(page, response.Count, take);

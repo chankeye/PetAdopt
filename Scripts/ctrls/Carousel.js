@@ -14,6 +14,10 @@
             data: {
             }
         }).done(function (response) {
+            for (var i = 0; i < response.length; i++) {
+                var date = new Date(response[i].EndDate);
+                response[i].EndDate = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+            }
             self.imgList(response);
         });
     };

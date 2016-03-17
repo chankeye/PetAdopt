@@ -84,7 +84,7 @@ namespace PetAdopt.Logic
                     {
                         Id = r.Id,
                         Title = r.Title,
-                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                        Date = r.Date.ToString() + " UTC",
                         Classes = r.Word
                     })
                     .ToList();
@@ -139,7 +139,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                            Date = r.Date.ToString() + " UTC",
                             Classes = r.Word
                         })
                         .ToList();
@@ -191,7 +191,7 @@ namespace PetAdopt.Logic
                         {
                             Id = r.Id,
                             Title = r.Title,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                            Date = r.Date.ToString() + " UTC",
                             Classes = r.Word
                         })
                         .ToList();
@@ -234,7 +234,7 @@ namespace PetAdopt.Logic
                     Message = knowledge.Message,
                     ClassId = knowledge.ClassId,
                     Class = knowledge.Class.Word,
-                    Date = TransformTime.UtcToLocalTime(knowledge.OperationInfo.Date).ToString("yyyy/MM/dd"),
+                    Date = knowledge.OperationInfo.Date.ToString() + " UTC",
                     UserDisplay = knowledge.OperationInfo.User.Display,
                 }
             };
@@ -278,7 +278,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                Date = r.Date.ToString() + " UTC",
                 Account = r.Account
             })
             .ToList();

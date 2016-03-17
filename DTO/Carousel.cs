@@ -20,6 +20,8 @@
         /// </summary>
         public string Title { get; set; }
 
+        public string EndDate { get; set; }
+
         /// <summary>
         /// 內文
         /// </summary>

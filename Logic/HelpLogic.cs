@@ -107,7 +107,7 @@ namespace PetAdopt.Logic
                         Message = r.Message,
                         Area = r.Area,
                         Classes = r.Classes,
-                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
+                        Date = r.Date.ToString() + " UTC"
                     })
                     .ToList();
 
@@ -178,7 +178,7 @@ namespace PetAdopt.Logic
                             Message = r.Message,
                             Area = r.Area,
                             Classes = r.Classes,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
+                            Date = r.Date.ToString() + " UTC"
                         })
                         .ToList();
 
@@ -246,7 +246,7 @@ namespace PetAdopt.Logic
                             Message = r.Message,
                             Area = r.Area,
                             Classes = r.Classes,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd")
+                            Date = r.Date.ToString() + " UTC"
                         })
                         .ToList();
 
@@ -293,7 +293,7 @@ namespace PetAdopt.Logic
                     Area = help.Area.Word,
                     ClassId = help.ClassId,
                     Class = help.Class.Word,
-                    Date = TransformTime.UtcToLocalTime(help.OperationInfo.Date).ToString("yyyy/MM/dd"),
+                    Date = help.OperationInfo.Date.ToString() + " UTC",
                     UserDisplay = help.OperationInfo.User.Display
                 }
             };
@@ -337,7 +337,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                Date = r.Date.ToString() + " UTC",
                 Account = r.Account
             })
             .ToList();

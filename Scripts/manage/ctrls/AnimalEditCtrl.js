@@ -53,6 +53,10 @@
                 take: take
             }
         }).done(function (response) {
+            for (var i = 0; i < response.List.length; i++) {
+                var date = new Date(response.List[i].Date);
+                response.List[i].Date = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+            }
             self.responseMessage('');
             self.history(response.List);
             self.pagination(page, response.Count, take);
@@ -109,21 +113,27 @@ $(function () {
                             $('#coverPhoto').attr('src', "../../../../Content/uploads/" + photo);
                     }
                     $("#title").val(data.ReturnObject.Title);
-                    $("#startDate").val(data.ReturnObject.StartDate),
-                        $("#endDate").val(data.ReturnObject.EndDate),
-                        $("#introduction").val(data.ReturnObject.Introduction),
-                        $("#shelters").val(data.ReturnObject.Shelters),
-                        $("#phone").val(data.ReturnObject.Phone),
-                        $("#address").val(data.ReturnObject.Address),
-                        $("#selOptionsAreas").children().each(function () {
-                            if ($(this).val() == data.ReturnObject.AreaId) {
-                                //jQuery給法
-                                $(this).attr("selected", true); //或是給"selected"也可
+                    var startdate = new Date(data.ReturnObject.StartDate);
+                    var startMonth = startdate.getMonth() + 1;
+                    var startDay = startdate.getDate();
+                    $("#startDate").val(startdate.getFullYear() + '-' + (startMonth < 10 ? '0' : '') + startMonth + '-' + (startDay < 10 ? '0' : '') + startDay);
+                    var enddate = new Date(data.ReturnObject.EndDate);
+                    var endMonth = enddate.getMonth() + 1;
+                    var endDay = enddate.getDate();
+                    $("#endDate").val(enddate.getFullYear() + '-' + (endMonth < 10 ? '0' : '') + endMonth + '-' + (endDay < 10 ? '0' : '') + endDay);
+                    $("#introduction").val(data.ReturnObject.Introduction);
+                    $("#shelters").val(data.ReturnObject.Shelters);
+                    $("#phone").val(data.ReturnObject.Phone);
+                    $("#address").val(data.ReturnObject.Address);
+                    $("#selOptionsAreas").children().each(function () {
+                        if ($(this).val() == data.ReturnObject.AreaId) {
+                            //jQuery給法
+                            $(this).attr("selected", true); //或是給"selected"也可
 
-                                //javascript給法
-                                this.selected = true;
-                            }
-                        });
+                            //javascript給法
+                            this.selected = true;
+                        }
+                    });
                     $("#selOptionsClasses").children().each(function () {
                         if ($(this).val() == data.ReturnObject.ClassId) {
                             //jQuery給法

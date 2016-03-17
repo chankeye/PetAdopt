@@ -30,7 +30,7 @@
                 <img data-bind="attr:{src: Photo, alt: Alt}" property="v:Title">
                 <div class="container">
                     <div class="carousel-caption">
-                        <h1><label data-bind="text: Title" property="v:Date"></label></h1>
+                        <h1><label data-bind="text: Title"></label><label data-bind="text: EndDate" property="v:Date"></label></h1>
                         <p><label data-bind="text: Detail"></label></p>
                         <p><a class="btn btn-lg btn-primary" href="#" data-bind="click: $root.detail" role="button"><label data-bind="text: ButtonText"></label></a></p>
                     </div>

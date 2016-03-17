@@ -242,7 +242,7 @@ namespace PetAdopt.Logic
                     Address = shelters.Address,
                     Url = shelters.Url,
                     Phone = shelters.Phone,
-                    Date = TransformTime.UtcToLocalTime(shelters.OperationInfo.Date).ToString("yyyy/MM/dd"),
+                    Date = shelters.OperationInfo.Date.ToString() + " UTC",
                     UserDisplay = shelters.OperationInfo.User.Display
                 }
             };
@@ -286,7 +286,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                Date = r.Date.ToString() + " UTC",
                 Account = r.Account
             })
             .ToList();

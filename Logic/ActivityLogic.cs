@@ -95,7 +95,7 @@ namespace PetAdopt.Logic
                         Photo = r.CoverPhoto,
                         Title = r.Title,
                         Message = r.Message,
-                        Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                        Date = r.Date.ToString() + " UTC",
                         Area = r.Word
                     })
                     .ToList();
@@ -156,7 +156,7 @@ namespace PetAdopt.Logic
                             Photo = r.CoverPhoto,
                             Title = r.Title,
                             Message = r.Message,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                            Date = r.Date.ToString() + " UTC",
                             Area = r.Word
                         })
                         .ToList();
@@ -214,7 +214,7 @@ namespace PetAdopt.Logic
                             Photo = r.CoverPhoto,
                             Title = r.Title,
                             Message = r.Message,
-                            Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                            Date = r.Date.ToString() + " UTC",
                             Area = r.Word
                         })
                         .ToList();
@@ -260,7 +260,7 @@ namespace PetAdopt.Logic
                     AreaId = activity.AreaId,
                     Area = activity.AreaId.HasValue ? activity.Area.Word : null,
                     Address = activity.Address,
-                    Date = TransformTime.UtcToLocalTime(activity.OperationInfo.Date).ToString("yyyy/MM/dd"),
+                    Date = activity.OperationInfo.Date.ToString() + " UTC",
                     UserDisplay = activity.OperationInfo.User.Display
                 }
             };
@@ -304,7 +304,7 @@ namespace PetAdopt.Logic
             {
                 Id = r.Id,
                 Message = r.Message,
-                Date = TransformTime.UtcToLocalTime(r.Date).ToString("yyyy/MM/dd"),
+                Date = r.Date.ToString() + " UTC",
                 Account = r.Account
             })
             .ToList();

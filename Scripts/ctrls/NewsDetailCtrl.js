@@ -25,6 +25,10 @@
                 take: take
             }
         }).done(function (response) {
+            for (var i = 0; i < response.List.length; i++) {
+                var date = new Date(response.List[i].Date);
+                response.List[i].Date = date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+            }
             self.responseMessage('');
             self.history(response.List);
             self.pagination(page, response.Count, take);
@@ -68,7 +72,8 @@ $(function () {
                 } else {
                     $("#source").hide();
                 }
-                $("#date").text(data.ReturnObject.Date);
+                var date = new Date(data.ReturnObject.Date);
+                $("#date").text(date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate());
                 $("#userDisplay").text(data.ReturnObject.UserDisplay);
             } else {
                 alert(data.ErrorMessage);

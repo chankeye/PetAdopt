@@ -2,12 +2,15 @@
 @using PetAdopt.DTO
 @{
     var authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
-    var userData = FormsAuthentication.Decrypt(authCookie.Value).UserData;
-
-    var loginInfo = JsonConvert.DeserializeObject<LoginInfo>(userData);
-    if (loginInfo.IsAdmin == false)
+    if (authCookie != null)
     {
-        Response.Redirect("/", true);
+        var userData = FormsAuthentication.Decrypt(authCookie.Value).UserData;
+
+        var loginInfo = JsonConvert.DeserializeObject<LoginInfo>(userData);
+        if (loginInfo.IsAdmin == false)
+        {
+            Response.Redirect("/", true);
+        }
     }
 }
 

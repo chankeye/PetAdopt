@@ -545,6 +545,10 @@ namespace PetAdopt.Logic
             if (ask == null)
                 return new IsSuccessResult("找不到此問題，暫時無法留言");
 
+            var userId = GetOperationInfo().UserId;
+            if (userId == 0)
+                return new IsSuccessResult("請先登入後再進行留言");
+
             try
             {
                 ask.Messages.Add(new Message
@@ -554,7 +558,7 @@ namespace PetAdopt.Logic
                     OperationInfo = new OperationInfo
                     {
                         Date = DateTime.UtcNow,
-                        UserId = GetOperationInfo().UserId
+                        UserId = userId
                     }
                 });
 

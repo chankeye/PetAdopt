@@ -75,6 +75,7 @@ namespace PetAdopt.Controllers
             return Json(result);
         }
 
+        [AllowAnonymous]
         public ActionResult AddMessage(int id, string message)
         {
             var result = NewsLogic.AddMessage(id, message);

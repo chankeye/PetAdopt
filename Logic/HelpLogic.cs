@@ -641,6 +641,10 @@ namespace PetAdopt.Logic
             if (help == null)
                 return new IsSuccessResult("找不到此救援文章，暫時無法留言");
 
+            var userId = GetOperationInfo().UserId;
+            if (userId == 0)
+                return new IsSuccessResult("請先登入後再進行留言");
+
             try
             {
                 help.Messages.Add(new Message
@@ -650,7 +654,7 @@ namespace PetAdopt.Logic
                     OperationInfo = new OperationInfo
                     {
                         Date = DateTime.UtcNow,
-                        UserId = GetOperationInfo().UserId
+                        UserId = userId
                     }
                 });
 

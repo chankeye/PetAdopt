@@ -1,21 +1,20 @@
-﻿<p>
-    <div id="selOptionsSearch" class="form-group">
+﻿<form class="form-horizontal">
+    <div id="selOptionsSearch" class="form-group col-sm-6">
         <div id="optionsAreas"></div>
         <div id="optionsClasses"></div>
         <div id="optionsStatuses"></div>
     </div>
-</p>
-<form class="form-inline">
-    <div class="form-group">
-        <div class="input-group">
+    <div class="form-group col-sm-6">
+        <div class="input-group ">
             <span class="glyphicon glyphicon-search input-group-addon"></span>
             <input id="search" class="form-control" name="search" type="search" placeholder="請輸入標題查詢" />
         </div>
+        <div class="checkbox">
+            <label>
+                <input id="checkAll" name="checkAll" type="checkbox"> 完全比對
+            </label>
+        </div>
     </div>
-    <div class="checkbox">
-        <label>
-            <input id="checkAll" name="checkAll" type="checkbox"> 完全比對
-        </label>
-    </div>
+    
     <button id="btn3" type="button" class="btn btn-default" data-loading-text="查詢中...">查詢</button>
 </form>

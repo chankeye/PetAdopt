@@ -829,8 +829,10 @@ namespace PetAdopt.Logic
         /// <returns></returns>
         public List<Carousel> GetCarouselList()
         {
+            var rnd = new Random();
+            int skip = rnd.Next(100);
+
             var data = PetContext.Animals
-                .OrderByDescending(r => r.EndDate)
                 .Where(r => r.EndDate >= DateTime.UtcNow)
                 .Select(r => new
                 {
@@ -839,6 +841,7 @@ namespace PetAdopt.Logic
                     r.EndDate,
                     r.Title
                 })
+                .Skip(skip)
                 .Take(5)
                 .ToList();
 

@@ -7,12 +7,14 @@
 }
 <div class="container">
     @Html.Partial("_Search")
+    <br />
     <div class="page-header">
         <h2 style="display:inline">帶牠回家</h2>
         <div class="navbar-right">
             <a href="/Animal/New" class="btn btn-primary">送養動物</a>
         </div>
     </div>
+
     <div data-bind="foreach: history">
         <div class="row warp">
             <div class="col-md-5 list-img">

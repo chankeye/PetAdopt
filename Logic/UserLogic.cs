@@ -596,24 +596,24 @@ namespace PetAdopt.Logic
         /// </summary>
         public void HasAnyUser()
         {
-            var isAny = PetContext.Users.Any();
+            //var isAny = PetContext.Users.Any();
 
-            if (isAny == false)
-            {
-                PetContext.Users.Add(new User
-                {
-                    Account = "admin",
-                    Password = Cryptography.EncryptBySHA1(Constant.DefaultPassword),
-                    Display = "管理者",
-                    Mobile = "Mobile",
-                    Email = "Email",
-                    IsAdmin = true,
-                    Date = DateTime.UtcNow,
-                    IsDisable = false
-                });
+            //if (isAny == false)
+            //{
+            //    PetContext.Users.Add(new User
+            //    {
+            //        Account = "admin",
+            //        Password = Cryptography.EncryptBySHA1(Constant.DefaultPassword),
+            //        Display = "管理者",
+            //        Mobile = "Mobile",
+            //        Email = "Email",
+            //        IsAdmin = true,
+            //        Date = DateTime.UtcNow,
+            //        IsDisable = false
+            //    });
 
-                PetContext.SaveChanges();
-            }
+            //    PetContext.SaveChanges();
+            //}
         }
     }
 }

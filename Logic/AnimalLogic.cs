@@ -971,14 +971,26 @@ namespace PetAdopt.Logic
                     if (animalClass == null)
                         animalClass = PetContext.Classes.Where(r => r.Word == "其他").SingleOrDefault();
 
+                    var sex = "公";
+                    if (item.animal_sex == "F")
+                        sex = "母";
+
+                    var sterilization = "是";
+                    if (item.animal_sterilization == "N")
+                        sterilization = "否";
+
+                    var bacterin = "是";
+                    if (item.animal_bacterin == "N")
+                        bacterin = "否";
+
                     // combine information
                     var introduction = "動物編號：" + item.animal_subid + " (請將此編號告知收容所，以便快速找到此浪浪)\n";
-                    introduction += "性別：" + item.animal_sex + "\n";
+                    introduction += "性別：" + sex + "\n";
                     introduction += "體型：" + item.animal_bodytype + "\n";
                     introduction += "毛色：" + item.animal_colour + "\n";
                     introduction += "年紀：" + item.animal_age + "\n";
-                    introduction += "是否已絕育：" + item.animal_sterilization + "\n";
-                    introduction += "是否已施打狂犬病疫苗：" + item.animal_bacterin + "\n";
+                    introduction += "是否已絕育：" + sterilization + "\n";
+                    introduction += "是否已施打狂犬病疫苗：" + bacterin + "\n";
                     introduction += "備註：" + item.animal_remark + "\n";
 
                     var newAnimal = new PetAdopt.DTO.Animal.CreateAnimal
@@ -1020,8 +1032,8 @@ namespace PetAdopt.Logic
                         };
                         EditAnimal(editAnimal, GetOperationInfo().UserId);
                     }
-
-                    newAnimalCount++;
+                    else
+                        newAnimalCount++;
                 }
                 catch (Exception)
                 { }

@@ -1,7 +1,6 @@
-# PetAdopt
-The PetAdopt web site
+# Adoptmart
+The Adopt mart web site
 
-¦ã»{¾i - 
-¤@­Ó¥H»{¾i¥N´ÀÁÊ¶R¡Aµ²²Ï¨ú¥N¼³±ş¬°·§©Àªººô¯¸¡A´Á³\¬°®ö®ö­Ì§ä¤@­Ó®a¡I
+è‰¾èªé¤Š - ä¸€å€‹ä»¥èªé¤Šä»£æ›¿è³¼è²·ï¼Œçµç´®å–ä»£æ’²æ®ºç‚ºæ¦‚å¿µçš„ç¶²ç«™ï¼ŒæœŸè¨±ç‚ºæµªæµªå€‘æ‰¾ä¸€å€‹å®¶ï¼
 
-http://adoptmart.com/
+http://adoptmart.somee.com/

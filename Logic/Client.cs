@@ -9,7 +9,7 @@ namespace PetAdopt.Logic
 {
     public class Client
     {
-        string ApiBaseUrl = "http://data.coa.gov.tw/Service/OpenData/AnimalOpenData.aspx";
+        string ApiBaseUrl = "http://data.coa.gov.tw/Service/OpenData/TransService.aspx?UnitId=QcbUEzN6E6DL";
         private RestClient _restClient;
 
         public Client()

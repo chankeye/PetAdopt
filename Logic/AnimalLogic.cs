@@ -831,7 +831,7 @@ namespace PetAdopt.Logic
         {
             var temp = PetContext.Animals
                 .OrderByDescending(r => r.Id)
-                .Where(r => r.EndDate >= DateTime.UtcNow)
+                .Take(100)
                 .Select(r => new
                 {
                     r.Id,
@@ -932,8 +932,8 @@ namespace PetAdopt.Logic
 
             var client = new Client();
             var animalList = client.GetAnimalInfo()
-                .Where(r => Convert.ToDateTime(r.animal_createtime) > DateTime.Now.AddMonths(-6))
-                .OrderBy(r => Convert.ToDateTime(r.animal_createtime));
+                .Where(r => (string.IsNullOrWhiteSpace(r.animal_createtime) ? DateTime.UtcNow : Convert.ToDateTime(r.animal_createtime)) > DateTime.UtcNow.AddMonths(-6))
+                .OrderBy(r => r.animal_createtime);
 
             foreach (var item in animalList)
             {
